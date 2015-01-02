@@ -1,14 +1,14 @@
 ############  R set-up
-options (digits = 2)
-library (ggplot2)
+# options (digits = 2)
+library(ggplot2)
 #install.packages("MASS")
 library (MASS)  # contains the "survey" dataset
 
 
 
 ############  get the data
-data (survey)
-? survey
+data(survey)
+?survey
 # RQ: Is exercise related to smoking habits? (Exercise is my DV here)
 
 

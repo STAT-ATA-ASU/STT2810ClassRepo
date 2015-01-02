@@ -2,7 +2,7 @@
 #  Tools -> Set Working Directory -> Choose Directory -> Select your folder
 
 # Load a built-in dataset, chickwts
-data(chickwts)
+# data(chickwts)
 # Look at the documentation
 help(chickwts)
 
@@ -20,7 +20,7 @@ summary(chick.aov)
 
 # Another example
 #  Load the built-in dataset airquality
-data(airquality)
+# data(airquality)
 help(airquality)
 #  H0: Ozone levels are the same across months
 #  Ha: Ozone levels are not the same for all months

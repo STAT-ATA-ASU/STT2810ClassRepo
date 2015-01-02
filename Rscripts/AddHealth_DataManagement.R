@@ -1,5 +1,10 @@
 # Load AddHealth Data
-load("P:/QAC/qac201/Studies/AddHealth/Data/AddHealth_pds.RData")
+# load("P:/QAC/qac201/Studies/AddHealth/Data/AddHealth_pds.RData")
+# DOWNLOAD FROM URL
+site <- "http://www1.appstate.edu/~arnholta/classes/PDS/DATAandCODEBOOKS/AddHealth/AddHealth_pds.RData"
+con <- url(site)
+load(con)
+head(AddHealth)
 
 H1GI4 <- as.numeric(as.character(AddHealth$H1GI4))
 H1GI6A <- as.numeric(as.character(AddHealth$H1GIA))

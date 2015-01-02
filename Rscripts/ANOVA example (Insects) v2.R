@@ -1,11 +1,11 @@
 ############  R set-up
-options (digits = 2)
-library (ggplot2)
+# options (digits = 2)
+library(ggplot2)
 
 
 ############  get the data
-data (InsectSprays)  # R has built in datasets that are good for examples
-? InsectSprays
+# data(InsectSprays)  # R has built in datasets that are good for examples
+?InsectSprays
 # RQ: Does the type of insect spray used affect the count of insects?
 
 
@@ -20,7 +20,7 @@ tapply (InsectSprays$count, InsectSprays$spray, length)
 ############  graphs
 # boxplot (showing variation in values) and mean
 # categorical IV with quantitative DV
-ggplot (InsectSprays[!is.na(InsectSprays$spray) & !is.na(InsectSprays$count),], 
+ggplot(InsectSprays[!is.na(InsectSprays$spray) & !is.na(InsectSprays$count),], 
         aes(x = spray, y = count)) + 
   geom_boxplot() +
   stat_summary(fun.y=mean, colour="darkred", geom="point", 
@@ -33,7 +33,7 @@ ggplot (InsectSprays[!is.na(InsectSprays$spray) & !is.na(InsectSprays$count),],
 
 # bargraph of means  NEW: ADDED +/- 1 standard deviation ERROR BARS
 # categorical IV with quantitative DV
-ggplot (InsectSprays[!is.na(InsectSprays$spray) & !is.na(InsectSprays$count),]
+ggplot(InsectSprays[!is.na(InsectSprays$spray) & !is.na(InsectSprays$count),]
         , aes(x = spray, y = count)) + 
   stat_summary(fun.y="mean", geom="bar", fill = "lightblue") +
   stat_summary(fun.y = mean,
@@ -41,7 +41,7 @@ ggplot (InsectSprays[!is.na(InsectSprays$spray) & !is.na(InsectSprays$count),]
                fun.ymax = function(x) mean(x) + sd(x), 
                geom = "pointrange",
                color = "blue") +
-  labs(x = "Spray", y = "Average # of Insects (+/- 1 SD") +
+  labs(x = "Spray", y = "Average # of Insects (+/- 1 SD)") +
   ggtitle ("Insect Counts with Different Sprays") + 
   theme_bw()
 
