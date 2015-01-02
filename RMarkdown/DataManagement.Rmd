@@ -1,0 +1,30 @@
+---
+title: "Data Management"
+author: "Alan T. Arnholt"
+date: "January 2, 2015"
+output: html_document
+---
+
+Start by loading your data set.  The url is broken up into two parts so that the 
+R code will fit on the page.  The function `paste0()` is used to concatenate two
+strings.
+
+```{r comment = NA}
+firstpart <- "http://www1.appstate.edu/~arnholta/classes/"
+secondpart <- "PDS/DATAandCODEBOOKS/NESARC/NESARC_pds.RData"
+site <-paste0(firstpart, secondpart) 
+con <- url(site)
+load(con)
+NESARC[1:6, 1:10] # show first six rows and first 10 columns
+```
+
+Renaming the variables `IDNUM`, `ETOTLCA2`, and `ETHRACE2A` to `UniqueID`, `EthanolConsumption`, and `Ethnicity`.  You will need to install `plyr` before you can use it if it is not installed on your machine.
+
+```{r comment = NA, message = FALSE}
+library(plyr)
+NESARC <- rename(NESARC, replace = c("IDNUM"="UniqueID", "ETOTLCA2"="EthanolConsumption", "ETHRACE2A"="Ethnicity"))
+NESARC[1:6, 1:5]
+```
+
+### Coding missing values
+Note that the variable `S3AQ3B1` uses a 9 to record `unknown` for smoking frequency.
