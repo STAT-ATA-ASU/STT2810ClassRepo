@@ -247,15 +247,37 @@ ggplot(data = NESARC, aes(x = AGE, y = ..density..)) +
 
 
 
-```{r comment = NA,fig.align='center'}
+```{r label = "Mini", comment = NA, fig.align = 'center'}
 MINI <- NESARC %>%
-  select(S1Q24FT, S1Q24IN, S1Q24LB) %>%
+  select(S1Q24FT, S1Q24IN, S1Q24LB, SEX) %>%
   filter(S1Q24FT < 99, S1Q24IN < 99, S1Q24LB < 999) %>%
-  mutate(Inches = (S1Q24FT*12 + S1Q24IN))
+  mutate(Inches = (S1Q24FT*12 + S1Q24IN), SEX = factor(SEX, labels =c("Male", "Female")))
 MINI
-ggplot(data = MINI, aes(x = Inches, y = S1Q24LB)) + 
-  geom_point(alpha = 0.1, color = "blue") + 
+```
+
+```{r label = "WtHist", comment = NA, fig.align = "center"}
+ggplot(data = MINI, aes(x = Inches)) + 
+  geom_histogram(binwidth = 1, fill = "peachpuff") + 
+  theme_bw()
+ggplot(data = MINI, aes(x = Inches)) + 
+  geom_density(aes(fill = SEX, color = SEX)) + 
+  theme_bw() + 
+  facet_grid(SEX ~ .) 
+tapply(MINI$Inches, MINI$SEX, median)  
+```
+
+### Some Bivariate Graphs with `ggplot2`
+
+```{r label = "LastTwo", comment = NA, fig.align = 'center'}
+ggplot(data = MINI, aes(x = Inches, y = S1Q24LB, color = SEX)) + 
+  geom_point(alpha = 0.1) + 
   stat_smooth(method = "lm") + 
+  theme_bw() + 
+  labs(y = "Weight (pounds)")
+ggplot(data = MINI, aes(x = Inches, y = S1Q24LB)) + 
+  geom_point(alpha = 0.1, aes(color = SEX)) +
+  stat_smooth(method = "lm", aes(color = SEX)) + 
+  facet_grid(SEX ~ .) + 
   theme_bw() + 
   labs(y = "Weight (pounds)")
 ```
