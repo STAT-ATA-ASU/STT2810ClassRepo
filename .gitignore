@@ -11,3 +11,5 @@
 .Rproj.user/
 .Rproj.user
 STT2810ClassRepoSP15.Rproj
+*cache/
+*files/
