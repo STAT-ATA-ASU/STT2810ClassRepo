@@ -192,21 +192,70 @@ xtabs(~NumDepSym, data = NESARC)
 ```
 
 ### Subsetting Your Data
-Three different approaches to subsetting data will be given.  The first approach is to use the `dplyr` function `filter`, the second approach is to use indices, and the third approach is to use the function `subset`.
+Three different approaches to subsetting data will be given.  The first approach is to use the `dplyr` function `filter`; the second approach is to use indices; and the third approach is to use the function `subset`.  Consider creating a subset of the `NESARC` data set where a person indicates
 
+1. He/she has smoked over 100 cigarettes (`S3AQ1A == 1`)
+2. He/she has smoked in the past year (`CHECK321 == 1`)
+3. He/she has typically smoked every day over the last year (`S3AQ3B1 == 1`)
+4. He/she is less than or equal to 25 years old (`AGE <= 25`)
+
+
+The first approach uses the `filter` function with the `%>%` function.
 ```{r comment = NA}
 NESARCsub1 <- NESARC %>%
   filter(S3AQ1A == 1 & CHECK321 == 1 & S3AQ3B1 == "Every Day" & AGE <= 25)
 dim(NESARCsub1)
 ```
 
-
+The second approach uses standard indexing.
 ```{r comment = NA}
 NESARCsub2 <- NESARC[NESARC$S3AQ1A == 1 & NESARC$CHECK321 == 1 & NESARC$S3AQ3B1 == "Every Day" & NESARC$AGE <= 25  & !is.na(NESARC$S3AQ1A == 1 & NESARC$CHECK321 == 1 & NESARC$S3AQ3B1 == "Every Day" & NESARC$AGE <= 25), ]
 dim(NESARCsub2)
 ```
 
+The third approach uses the `subset` function.
 ```{r comment = NA}
 NESARCsub3 <- subset(NESARC, subset = S3AQ1A == 1 & CHECK321 == 1 & S3AQ3B1 == "Every Day" & AGE <= 25)
 dim(NESARCsub3)
+```
+
+### ANOVA example
+
+More examples to appear soon...
+
+```{r comment = NA,fig.align='center'}
+my.aov <- aov(S3AQ3C1 ~ TAB12MDX, data = subset(NESARC, S3AQ3C1 < 99)) # Note S3AQ3C1 == 99 is NA
+summary(my.aov)     
+TukeyHSD(my.aov)
+plot(TukeyHSD(my.aov))
+```
+
+### Graphing a Numeric Variable with `ggplot2`
+
+```{r comment = NA,fig.align='center'}
+ggplot(data = NESARC, aes(x = AGE)) + 
+  geom_histogram(binwidth = 5, fill = "lightgray") + 
+  theme_bw()  
+ggplot(data = NESARC, aes(x = AGE, y = ..density..)) + 
+  geom_histogram(binwidth = 5, fill = "lightgray") + 
+  theme_bw()  
+ggplot(data = NESARC, aes(x = AGE, y = ..density..)) + 
+  geom_histogram(binwidth = 5, fill = "lightgray") + 
+  theme_bw() + 
+  geom_density(fill = "yellow", alpha = 0.2)
+```
+
+
+
+```{r comment = NA,fig.align='center'}
+MINI <- NESARC %>%
+  select(S1Q24FT, S1Q24IN, S1Q24LB) %>%
+  filter(S1Q24FT < 99, S1Q24IN < 99, S1Q24LB < 999) %>%
+  mutate(Inches = (S1Q24FT*12 + S1Q24IN))
+MINI
+ggplot(data = MINI, aes(x = Inches, y = S1Q24LB)) + 
+  geom_point(alpha = 0.1, color = "blue") + 
+  stat_smooth(method = "lm") + 
+  theme_bw() + 
+  labs(y = "Weight (pounds)")
 ```
