@@ -448,12 +448,13 @@ Male       18159   43.59       43.59
 Female     23495   56.41      100.00
 Total      41654  100.00            </code></pre>
 <pre class="r"><code>library(xtable) # Must be loaded to call xtable
-print(xtable(freq(ordered(MINI$Sex), plot = FALSE), caption = &quot;Frequency Table of `Sex`&quot;), type = &quot;html&quot;, caption.placement = &quot;top&quot;)</code></pre>
+T1 &lt;- xtable(freq(ordered(MINI$Sex), plot = FALSE), caption = &quot;Table 1: Frequency Table of `Sex`&quot;)
+print(T1, type = &quot;html&quot;, caption.placement = &quot;top&quot;, html.table.attributes = 1)</code></pre>
 <!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
-<!-- Sun Jan  4 06:55:50 2015 -->
-<table border="1">
+<!-- Sun Jan  4 08:15:09 2015 -->
+<table 1>
 <caption align="top"> 
-Frequency Table of <code>Sex</code>
+Table 1: Frequency Table of <code>Sex</code>
 </caption>
 <tr> <th>  </th> <th> 
 Frequency
@@ -490,6 +491,111 @@ Total
    </table>
 
 
+<pre class="r"><code>library(knitr)
+kable(freq(ordered(MINI$Sex), plot = FALSE), format = &quot;markdown&quot;, digits = 2, padding = 0)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Frequency</th>
+<th align="right">Percent</th>
+<th align="right">Cum Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Male</td>
+<td align="right">18159</td>
+<td align="right">43.59</td>
+<td align="right">43.59</td>
+</tr>
+<tr class="even">
+<td align="left">Female</td>
+<td align="right">23495</td>
+<td align="right">56.41</td>
+<td align="right">100.00</td>
+</tr>
+<tr class="odd">
+<td align="left">Total</td>
+<td align="right">41654</td>
+<td align="right">100.00</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>library(knitr)
+kable(freq(ordered(MINI$Sex), plot = FALSE), format = &quot;html&quot;, digits = 2, caption = &quot;Table 2: Frequency Table of `Sex`&quot;)</code></pre>
+<table>
+<caption>
+Table 2: Frequency Table of <code>Sex</code>
+</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> 
+Frequency
+</th>
+   <th style="text-align:right;"> 
+Percent
+</th>
+   <th style="text-align:right;"> 
+Cum Percent
+</th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 
+Male
+</td>
+   <td style="text-align:right;"> 
+18159
+</td>
+   <td style="text-align:right;"> 
+43.59
+</td>
+   <td style="text-align:right;"> 
+43.59
+</td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 
+Female
+</td>
+   <td style="text-align:right;"> 
+23495
+</td>
+   <td style="text-align:right;"> 
+56.41
+</td>
+   <td style="text-align:right;"> 
+100.00
+</td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 
+Total
+</td>
+   <td style="text-align:right;"> 
+41654
+</td>
+   <td style="text-align:right;"> 
+100.00
+</td>
+   <td style="text-align:right;"> 
+NA
+</td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+<div id="section" class="section level3">
+<h3></h3>
+</div>
+<div id="section-1" class="section level3">
+<h3></h3>
+<p>This work is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">CC BY-NC 3.0 Creative Commons License</a>.</p>
 </div>
 
 

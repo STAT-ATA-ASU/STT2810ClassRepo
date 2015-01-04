@@ -318,5 +318,21 @@ freq(ordered(MINI$Sex), plot = TRUE, col = c("blue","pink"), main = "Barplot of 
 
 ```{r echo = TRUE, results = 'asis'}
 library(xtable) # Must be loaded to call xtable
-print(xtable(freq(ordered(MINI$Sex), plot = FALSE), caption = "Frequency Table of `Sex`"), type = "html", caption.placement = "top")
+T1 <- xtable(freq(ordered(MINI$Sex), plot = FALSE), caption = "Table 1: Frequency Table of `Sex`")
+print(T1, type = "html", caption.placement = "top", html.table.attributes = 1)
 ```
+
+```{r echo = TRUE, results = 'asis'}
+library(knitr)
+kable(freq(ordered(MINI$Sex), plot = FALSE), format = "markdown", digits = 2, padding = 0)
+```
+
+```{r echo = TRUE, results = 'asis'}
+library(knitr)
+kable(freq(ordered(MINI$Sex), plot = FALSE), format = "html", digits = 2, caption = "Table 2: Frequency Table of `Sex`")
+```
+
+###
+###
+
+This work is licensed under the [CC BY-NC 3.0 Creative Commons License](http://creativecommons.org/licenses/by-nc/3.0/).
