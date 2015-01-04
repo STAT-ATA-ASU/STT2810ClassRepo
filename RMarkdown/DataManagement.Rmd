@@ -9,7 +9,7 @@ Start by loading your data set.  The url is broken up into two parts so that the
 R code will fit on the page.  The function `paste0()` is used to concatenate two
 strings.
 
-```{r comment = NA, cache=TRUE}
+```{r label = "READIN", comment = NA, cache = TRUE}
 firstpart <- "http://www1.appstate.edu/~arnholta/classes/"
 secondpart <- "PDS/DATAandCODEBOOKS/NESARC/NESARC_pds.RData"
 site <-paste0(firstpart, secondpart) 
@@ -20,12 +20,12 @@ NESARC[1:6, 1:10] # show first six rows and first 10 columns
 
 ### Using the `dplyr` package
 The package `dplyr` must first be installed before it can be used.  There are two ways one can install the package.  The easiest way to install `dplyr`, is to type 
-```{r eval=FALSE}
+```{r eval = FALSE}
 install.packages("dplyr")
 ```
 at the `R` prompt.  If you want the lastest version of `dplyr`, you can install the development version from GitHub provided you have the required tools to build `R` packages installed on your machine (`Rtools` for Windows users, `XCode` for Mac users, etc.).  
 
-```{r eval=FALSE}
+```{r eval = FALSE}
 if (packageVersion("devtools") < 1.6) {
   install.packages("devtools")
 }
@@ -36,7 +36,7 @@ devtools::install_github("hadley/dplyr")
 ### Renaming Variables
 Renaming the variables `IDNUM`, `ETOTLCA2`, and `ETHRACE2A` to `UniqueID`, `EthanolConsumption`, and `Ethnicity` is done with the `rename` function.  Although it is not a requirement, the data frame `NESARC` is converted to a `data frame tbl` per the advice given in the `dplyr` vignette.  The `rename` function takes a data frame or data frame tbl as its first argument while the syntax `new_name = old_name` is used as the second argument.
 
-```{r comment = NA, message = FALSE}
+```{r label = "RENAME", comment = NA, message = FALSE}
 library(dplyr)
 # Create a data frame tbl see ?tbl_df
 NESARCtbl <- tbl_df(NESARC)
@@ -47,7 +47,7 @@ NESARC[1:6, 1:5]
 ### Coding missing values
 Note that the variable `S3AQ3B1` uses a 9 to record `unknown` for smoking frequency.
 
-```{r comment = NA}
+```{r label = "CodeMissing", comment = NA}
 NESARC$S3AQ3B1[NESARC$S3AQ3B1 == 9] <- NA
 summary(NESARC$S3AQ3B1)  # Note that 9 still appears
 NESARC$S3AQ3B1 <- factor(NESARC$S3AQ3B1)[, drop = TRUE]
@@ -56,7 +56,7 @@ summary(NESARC$S3AQ3B1)  # Unused level no longer appears
 
 I hate to look back at the code book to figure out what the heck the numbers represent in this case!  One of the great things about the `R` language is how it handles a wide variety of data types.  In this case, the variable `S3AQ3B1` is a factor with numeric labels for the levels of the factor.  To change the numeric labels to text type the following:
 
-```{r comment = NA}
+```{r label = "Freq", comment = NA}
 NESARC$S3AQ3B1 <- factor(NESARC$S3AQ3B1, labels = c("Every Day", "5 to 6 Days/week", "3 to 4 Days/week", "1 to 2 Days/week", "2 to 3 Days/month", "Once a month or less"))
 summary(NESARC$S3AQ3B1)
 xtabs(~S3AQ3B1, data = NESARC) # Note how the NA's are not printed
@@ -64,7 +64,7 @@ xtabs(~S3AQ3B1, data = NESARC) # Note how the NA's are not printed
 
 The following `ggplot2` code is used to graph the values in `S3AQ3B1`.
 
-```{r message = FALSE, fig.width = 10, fig.wdith = 5}
+```{r label = "ggSmoke", message = FALSE, fig.width = 10, fig.wdith = 5, cache = TRUE}
 library(ggplot2)
 ggplot(data = NESARC, aes(x = S3AQ3B1)) + 
   geom_bar(fill = "lightgray") + 
@@ -73,7 +73,7 @@ ggplot(data = NESARC, aes(x = S3AQ3B1)) +
 ```
 
 If you do not wnat to see the `NA`'s use
-```{r message = FALSE, fig.width = 10, fig.wdith = 5}
+```{r label = "ggSmoke2", message = FALSE, fig.width = 10, fig.wdith = 5, cache = TRUE}
 ggplot(data = na.omit(NESARC[ , "S3AQ3B1", drop = FALSE]), aes(x = S3AQ3B1)) + 
   geom_bar(fill = "lightgray") + 
   labs(x = "Smoking Frequency") +
@@ -82,12 +82,12 @@ ggplot(data = na.omit(NESARC[ , "S3AQ3B1", drop = FALSE]), aes(x = S3AQ3B1)) +
 
 The variable `S4AQ4A1` represents unknown values with a 9, `No` values with a 2, and `Yes` values with a 1.  
 
-```{r comment = NA}
+```{r label = "Summary1", comment = NA}
 summary(NESARC$S4AQ4A1)
 ```
 
 To recode the NA's as `No` enter
-```{r comment = NA}
+```{r label = "recodeNO", comment = NA}
 NESARC$S4AQ4A1[is.na(NESARC$S4AQ4A1)] <- 2
 summary(NESARC$S4AQ4A1)
 NESARC$S4AQ4A1 <- factor(NESARC$S4AQ4A1)
@@ -97,7 +97,7 @@ summary(NESARC$S4AQ4A1)
 ### Collapsing Categories
 Consider the varaible `S1Q6A` with 14 levels recording the highest level of education of the participant.  To collapse the categories in to dichotomous variable indicating the presence of a high school degree use the `ifelse` function. The levels `1`, `2`, `3`, `4`, `5`, `6`, and `7` of the variable `S1Q6A` correspond to education levels less than completing high school.
 
-```{r comment = NA}
+```{r label = "CollapseHS", comment = NA, cache = TRUE}
 NESARC$HS_DEGREE <- factor(ifelse(NESARC$S1Q6A %in% c("1", "2", "3", "4", "5", "6", "7"), "No", "Yes"))
 summary(NESARC$HS_DEGREE)
 ```
@@ -105,14 +105,14 @@ summary(NESARC$HS_DEGREE)
 ### Creating a Factor from a Numeric Vector
 To create a factor with three levels (young adults, adults, older adults) using the variable `AGE` (a numeric vector) use the function `cut`.
 
-```{r comment = NA}
+```{r label = "CUT1", comment = NA, cache = TRUE}
 NESARC$AGEfac <- cut(NESARC$AGE, breaks = c(18, 30, 50, Inf), labels = c("Young Adult", "Adult", "Older Adult"), include.lowest = TRUE)
 summary(NESARC$AGEfac)
 ```
 
 Consider collapsing the numeric vector `S3AQ3C1` (usual quantity when cigarettes smoked) into a categorical variable with 5 levels.
 
-```{r comment = NA}
+```{r label = "CUT2", comment = NA, cache = TRUE}
 NESARC$S3AQ3C1fac <- cut(NESARC$S3AQ3C1, breaks = c(0, 5, 10, 15, 20, 100), include.lowest = TRUE)
 summary(NESARC$S3AQ3C1fac)
 ```
@@ -120,21 +120,21 @@ summary(NESARC$S3AQ3C1fac)
 ### Aggregating Variables using `ifelse`
 Consider creating a new variable `DepressLife` which is `Yes` if the variable `MAJORLIFE` is a 1 or if `DYSLIFE` is a 1.
 
-```{r comment = NA}
+```{r label = "Agg1", comment = NA}
 NESARC$DepressLife <- factor(ifelse( (NESARC$MAJORDEPLIFE == 1 | NESARC$DYSLIFE == 1), "Yes", "No"))
 summary(NESARC$DepressLife)
 ```
 
 As another example, consider creating a variable `PPpanic` for past and present panic disorders.  The variables `APANDX12` and `APANDXP12` record a panic disorder within the last 12 months and prior to the last 12 months with agoraphobia, respectively.  The variables `PANDX12` and `PANDXP12` record a panic disorder within the last 12 months and prior to the last 12 months without agoraphobia, respectively.
 
-```{r comment = NA}
+```{r label = "PANIC", comment = NA}
 NESARC$PPpanic <- factor(ifelse( (NESARC$APANDX12 == 1 | NESARC$APANDXP12 == 1 | NESARC$PANDX12 == 1 | NESARC$PANDXP12 == 1 ), "Yes", "No"))
 summary(NESARC$PPpanic)
 ```
 
 Consider a new variable `AllDeprSymp` that records whether a subject exhibits all depression symptoms or not.  There are 19 depression symptoms recorded in the variables `S4AQ4A1` - `S4AQ4A19`.  Note that the logical operator `&` is used to test if all depression symptoms are present.
 
-```{r comment = NA}
+```{r label = "DEPsym", comment = NA}
 NESARC$AllDeprSymp <- factor(ifelse( (NESARC$S4AQ4A1 == 1 & NESARC$S4AQ4A2 == 1 & NESARC$S4AQ4A3 == 1 & NESARC$S4AQ4A4 == 1 & NESARC$S4AQ4A5 == 1 & NESARC$S4AQ4A6 == 1 & NESARC$S4AQ4A7 == 1 & NESARC$S4AQ4A8 == 1 & NESARC$S4AQ4A9 == 1 & NESARC$S4AQ4A10 == 1 & NESARC$S4AQ4A11 == 1 & NESARC$S4AQ4A12 == 1 & NESARC$S4AQ4A13 == 1 & NESARC$S4AQ4A14 == 1 & NESARC$S4AQ4A15 == 1 & NESARC$S4AQ4A16 == 1 & NESARC$S4AQ4A17 == 1 & NESARC$S4AQ4A18 == 1 & NESARC$S4AQ4A19 == 1), "Yes", "No"))
 summary(NESARC$AllDeprSymp)
 ```
@@ -143,7 +143,7 @@ summary(NESARC$AllDeprSymp)
 
 To create a variable `NumDepSym` that records the number of depression symptoms among the variables `S4AQ4A1` - `S4AQ4A19`, create numeric variables from the factors `S4AQ4A1` - `S4AQ4A19` and store the results in `S4AQ4A1num` - `S4AQ4A19num`.  Next, recode the levels of `No` (2) and `Unknown` (3) to 0s for varaibles `S4AQ4A1num` - `S4AQ4A19num`.  The code is rather lengthy and I welcome other approaches.  The template given in the PDS IBook link will not work with this data because the variables are factors not numeric vectors.  You can not add factors!
 
-```{r comment = NA}
+```{r label = "CompositeFactor", comment = NA, cache = TRUE}
 summary(NESARC$S4AQ4A1)
 levels(NESARC$S4AQ4A1)
 table(as.numeric(NESARC$S4AQ4A1))
@@ -201,27 +201,27 @@ Three different approaches to subsetting data will be given.  The first approach
 
 
 The first approach uses the `filter` function with the `%>%` function.
-```{r comment = NA}
+```{r label = "SUB1", comment = NA, cache = TRUE}
 NESARCsub1 <- NESARC %>%
   filter(S3AQ1A == 1 & CHECK321 == 1 & S3AQ3B1 == "Every Day" & AGE <= 25)
 dim(NESARCsub1)
 ```
 
 The second approach uses standard indexing.
-```{r comment = NA}
+```{r label = "SUB2", comment = NA, cache = TRUE}
 NESARCsub2 <- NESARC[NESARC$S3AQ1A == 1 & NESARC$CHECK321 == 1 & NESARC$S3AQ3B1 == "Every Day" & NESARC$AGE <= 25  & !is.na(NESARC$S3AQ1A == 1 & NESARC$CHECK321 == 1 & NESARC$S3AQ3B1 == "Every Day" & NESARC$AGE <= 25), ]
 dim(NESARCsub2)
 ```
 
 The third approach uses the `subset` function.
-```{r comment = NA}
+```{r label = "SUB3", comment = NA, cache = TRUE}
 NESARCsub3 <- subset(NESARC, subset = S3AQ1A == 1 & CHECK321 == 1 & S3AQ3B1 == "Every Day" & AGE <= 25)
 dim(NESARCsub3)
 ```
 
 ### Graphing a Numeric Variable with `ggplot2`
 
-```{r comment = NA,fig.align='center'}
+```{r label = "ggNV", comment = NA, fig.align='center', cache = TRUE}
 ggplot(data = NESARC, aes(x = AGE)) + 
   geom_histogram(binwidth = 5, fill = "lightgray") + 
   theme_bw()  
@@ -247,7 +247,7 @@ MINI
 
 Some more `ggplot2` graphs.
 
-```{r label = "WtHist", comment = NA, fig.align = "center"}
+```{r label = "WtHist", comment = NA, fig.align = "center", cache = TRUE}
 ggplot(data = MINI, aes(x = Inches)) + 
   geom_histogram(binwidth = 1, fill = "peachpuff") + 
   theme_bw()
@@ -260,7 +260,7 @@ tapply(MINI$Inches, MINI$Sex, median)
 
 ### Some Bivariate Graphs with `ggplot2`
 
-```{r label = "LastTwo", comment = NA, fig.align = 'center'}
+```{r label = "LastTwo", comment = NA, fig.align = 'center', cache = TRUE}
 ggplot(data = MINI, aes(x = Inches, y = Weight, color = Sex)) + 
   geom_point(alpha = 0.1) + 
   stat_smooth(method = "lm") + 
@@ -276,7 +276,7 @@ ggplot(data = MINI, aes(x = Inches, y = Weight)) +
 
 ### ANOVA Example
 
-```{r comment = NA,fig.align='center'}
+```{r label = "ANOVAexp", comment = NA, fig.align = 'center', cache = TRUE}
 my.aov <- aov(S3AQ3C1 ~ TAB12MDX, data = subset(NESARC, S3AQ3C1 < 99)) # Note S3AQ3C1 == 99 is NA
 summary(my.aov)     
 TukeyHSD(my.aov)
@@ -285,24 +285,38 @@ plot(TukeyHSD(my.aov))
 
 A plot of the residuals indicates problems with this model.
 
-```{r comment = NA, fig.align='center', message=FALSE}
+```{r label = "qqP1",comment = NA, fig.align='center', message=FALSE, cache = TRUE}
 library(car)
 qqPlot(my.aov)
 ```
 
 ### Regression Example
 
-```{r comment = NA}
+```{r label = "REGexp", comment = NA, cache = TRUE}
 my.lm <- lm(Weight ~ Inches, data = MINI)
 summary(my.lm)
-confint(my.lm)  # Problems here...
+confint(my.lm)  # Do not use this until you know your model is appropriate
 my.lm2 <- lm(Weight ~ Inches + Sex + Inches:Sex, data = MINI)
 summary(my.lm2)
 ```
 
 Plots of the residuals indicate problems with both `my.lm` and `my.lm2`.
 
-```{r comment = NA, fig.align='center', message=FALSE}
+```{r label = "qqP2", comment = NA, fig.align = 'center', message = FALSE, cache = TRUE}
 qqPlot(my.lm)
 qqPlot(my.lm2)
+```
+
+### Displaying a Table
+
+First, the code and output is shown for a table.  Then the `xtable` function from the `xtable` package is used to create and display the table in the document.
+
+```{r comment = NA, fig.align = 'center'}
+library(descr)
+freq(ordered(MINI$Sex), plot = TRUE, col = c("blue","pink"), main = "Barplot of Gender")
+```
+
+```{r echo = TRUE, results = 'asis'}
+library(xtable) # Must be loaded to call xtable
+print(xtable(freq(ordered(MINI$Sex), plot = FALSE), caption = "Frequency Table of `Sex`"), type = "html", caption.placement = "top")
 ```
