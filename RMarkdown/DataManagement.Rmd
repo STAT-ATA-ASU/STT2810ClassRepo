@@ -219,17 +219,6 @@ NESARCsub3 <- subset(NESARC, subset = S3AQ1A == 1 & CHECK321 == 1 & S3AQ3B1 == "
 dim(NESARCsub3)
 ```
 
-### ANOVA example
-
-More examples to appear soon...
-
-```{r comment = NA,fig.align='center'}
-my.aov <- aov(S3AQ3C1 ~ TAB12MDX, data = subset(NESARC, S3AQ3C1 < 99)) # Note S3AQ3C1 == 99 is NA
-summary(my.aov)     
-TukeyHSD(my.aov)
-plot(TukeyHSD(my.aov))
-```
-
 ### Graphing a Numeric Variable with `ggplot2`
 
 ```{r comment = NA,fig.align='center'}
@@ -245,7 +234,7 @@ ggplot(data = NESARC, aes(x = AGE, y = ..density..)) +
   geom_density(fill = "yellow", alpha = 0.2)
 ```
 
-
+Creating a `MINI` data frame tbl.
 
 ```{r label = "Mini", comment = NA, fig.align = 'center'}
 MINI <- NESARC %>%
@@ -255,6 +244,8 @@ MINI <- NESARC %>%
   select(Sex, Inches, Weight)
 MINI
 ```
+
+Some more `ggplot2` graphs.
 
 ```{r label = "WtHist", comment = NA, fig.align = "center"}
 ggplot(data = MINI, aes(x = Inches)) + 
@@ -283,3 +274,35 @@ ggplot(data = MINI, aes(x = Inches, y = Weight)) +
   labs(y = "Weight (pounds)")
 ```
 
+### ANOVA Example
+
+```{r comment = NA,fig.align='center'}
+my.aov <- aov(S3AQ3C1 ~ TAB12MDX, data = subset(NESARC, S3AQ3C1 < 99)) # Note S3AQ3C1 == 99 is NA
+summary(my.aov)     
+TukeyHSD(my.aov)
+plot(TukeyHSD(my.aov))
+```
+
+A plot of the residuals indicates problems with this model.
+
+```{r comment = NA, fig.align='center', message=FALSE}
+library(car)
+qqPlot(my.aov)
+```
+
+### Regression Example
+
+```{r comment = NA}
+my.lm <- lm(Weight ~ Inches, data = MINI)
+summary(my.lm)
+confint(my.lm)  # Problems here...
+my.lm2 <- lm(Weight ~ Inches + Sex + Inches:Sex, data = MINI)
+summary(my.lm2)
+```
+
+Plots of the residuals indicate problems with both `my.lm` and `my.lm2`.
+
+```{r comment = NA, fig.align='center', message=FALSE}
+qqPlot(my.lm)
+qqPlot(my.lm2)
+```
