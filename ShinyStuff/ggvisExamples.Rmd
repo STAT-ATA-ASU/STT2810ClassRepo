@@ -1,0 +1,81 @@
+---
+title: "Some ggvis Graphs"
+author: "Arnholt, Alan"
+date: "January 4, 2015"
+output: html_document
+runtime: shiny
+---
+
+Start by loading your data set.  The url is broken up into two parts so that the 
+R code will fit on the page.  The function `paste0()` is used to concatenate two
+strings.
+
+```{r comment = NA, cache=TRUE}
+firstpart <- "http://www1.appstate.edu/~arnholta/classes/"
+secondpart <- "PDS/DATAandCODEBOOKS/NESARC/NESARC_pds.RData"
+site <-paste0(firstpart, secondpart) 
+con <- url(site)
+load(con)
+NESARC[1:6, 1:10] # show first six rows and first 10 columns
+```
+
+### Using the `dplyr` package
+The package `dplyr` must first be installed before it can be used.  There are two ways one can install the package.  The easiest way to install `dplyr`, is to type 
+```{r eval=FALSE}
+install.packages("dplyr")
+```
+at the `R` prompt.  If you want the lastest version of `dplyr`, you can install the development version from GitHub provided you have the required tools to build `R` packages installed on your machine (`Rtools` for Windows users, `XCode` for Mac users, etc.).  
+
+```{r eval=FALSE}
+if (packageVersion("devtools") < 1.6) {
+  install.packages("devtools")
+}
+devtools::install_github("hadley/lazyeval")
+devtools::install_github("hadley/dplyr")
+```
+
+```{r comment = NA, message = FALSE}
+library(dplyr)
+# Create a data frame tbl see ?tbl_df
+NESARC <- tbl_df(NESARC)
+NESARC[1:6, 1:5]
+```
+
+```{r label = "Mini", comment = NA, fig.align = 'center'}
+MINI <- NESARC %>%
+  select(S1Q24FT, S1Q24IN, S1Q24LB, SEX) %>%
+  filter(S1Q24FT < 99, S1Q24IN < 99, S1Q24LB < 999) %>%
+  mutate(Inches = (S1Q24FT*12 + S1Q24IN), Sex = factor(SEX, labels =c("Male", "Female")), Weight = S1Q24LB) %>%
+  select(Sex, Inches, Weight)
+MINI
+```
+
+
+### Graphing with `ggvis`
+
+Move the mouse over a point in the next graph to get information on that point.  This will only work when there is an `R` process running.
+
+```{r comment = NA, message = FALSE, warning = FALSE, fig.align='center'}
+all_values <- function(x) {
+  if(is.null(x)) return(NULL)
+  paste0(names(x), ": ", format(x), collapse = "<br />")
+}
+library(ggvis)
+MINI %>%
+  ggvis(~Inches, ~Weight, fill = ~Sex) %>%
+  layer_points() %>%
+  group_by(Sex) %>%
+  layer_model_predictions(formula = Weight ~ Inches, model = "lm", se = TRUE) %>%
+  add_tooltip(all_values, "hover")
+```
+
+
+
+```{r}
+MINI %>%
+ ggvis(~Weight, fill = ~Sex) %>%
+ group_by(Sex) %>%
+ layer_densities(stroke = ~Sex, fill = ~Sex,   adjust = input_slider(0.1, 5, label = "Hold Down the Mouse and Move Me"))
+```
+
+

@@ -1,9 +1,8 @@
 ---
 title: "Data Management"
 author: "Alan T. Arnholt"
-date: "January 2, 2015"
+date: "January 4, 2015"
 output: html_document
-runtime: shiny
 ---
 
 Start by loading your data set.  The url is broken up into two parts so that the 
@@ -284,27 +283,3 @@ ggplot(data = MINI, aes(x = Inches, y = Weight)) +
   labs(y = "Weight (pounds)")
 ```
 
-### Graphing with `ggvis`
-
-Move the mouse over a point in the next graph to get information on that point.  This will only work when there is an `R` process running.
-
-```{r comment = NA, message = FALSE, warning = FALSE, fig.align='center'}
-all_values <- function(x) {
-  if(is.null(x)) return(NULL)
-  paste0(names(x), ": ", format(x), collapse = "<br />")
-}
-library(ggvis)
-MINI %>%
-  ggvis(~Inches, ~Weight, fill = ~Sex) %>%
-  layer_points() %>%
-  group_by(Sex) %>%
-  layer_model_predictions(formula = Weight ~ Inches, model = "lm", se = TRUE) %>%
-  add_tooltip(all_values, "hover")
-```
-
-```{r}
-MINI %>%
- ggvis(~Weight, fill = ~Sex) %>%
- group_by(Sex) %>%
- layer_densities(stroke = ~Sex, fill = ~Sex,   adjust = input_slider(0.1, 5, label = "Hold Down the Mouse and Move Me"))
-```
