@@ -240,8 +240,8 @@ Creating a `MINI` data frame tbl.
 MINI <- NESARC %>%
   select(S1Q24FT, S1Q24IN, S1Q24LB, SEX) %>%
   filter(S1Q24FT < 99, S1Q24IN < 99, S1Q24LB < 999) %>%
-  mutate(Inches = (S1Q24FT*12 + S1Q24IN), Sex = factor(SEX, labels =c("Male", "Female")), Weight = S1Q24LB) %>%
-  select(Sex, Inches, Weight)
+  mutate(Inches = (S1Q24FT*12 + S1Q24IN), Sex = factor(SEX,  labels =c("Male", "Female"))) %>%
+  rename(Weight = S1Q24LB)
 MINI
 ```
 

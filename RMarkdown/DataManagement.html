@@ -310,23 +310,23 @@ dim(NESARCsub3)</code></pre>
 <pre class="r"><code>MINI &lt;- NESARC %&gt;%
   select(S1Q24FT, S1Q24IN, S1Q24LB, SEX) %&gt;%
   filter(S1Q24FT &lt; 99, S1Q24IN &lt; 99, S1Q24LB &lt; 999) %&gt;%
-  mutate(Inches = (S1Q24FT*12 + S1Q24IN), Sex = factor(SEX, labels =c(&quot;Male&quot;, &quot;Female&quot;)), Weight = S1Q24LB) %&gt;%
-  select(Sex, Inches, Weight)
+  mutate(Inches = (S1Q24FT*12 + S1Q24IN), Sex = factor(SEX,  labels =c(&quot;Male&quot;, &quot;Female&quot;))) %&gt;%
+  rename(Weight = S1Q24LB)
 MINI</code></pre>
-<pre><code>Source: local data frame [41,654 x 3]
+<pre><code>Source: local data frame [41,654 x 6]
 
-      Sex Inches Weight
-1    Male     67    195
-2  Female     61    127
-3  Female     64    185
-4    Male     67    180
-5    Male     73    220
-6  Female     65    140
-7    Male     69    160
-8  Female     64    120
-9  Female     64    140
-10 Female     70    150
-..    ...    ...    ...</code></pre>
+   S1Q24FT S1Q24IN Weight SEX Inches    Sex
+1        5       7    195   1     67   Male
+2        5       1    127   2     61 Female
+3        5       4    185   2     64 Female
+4        5       7    180   1     67   Male
+5        6       1    220   1     73   Male
+6        5       5    140   2     65 Female
+7        5       9    160   1     69   Male
+8        5       4    120   2     64 Female
+9        5       4    140   2     64 Female
+10       5      10    150   2     70 Female
+..     ...     ...    ... ...    ...    ...</code></pre>
 <p>Some more <code>ggplot2</code> graphs.</p>
 <pre class="r"><code>ggplot(data = MINI, aes(x = Inches)) + 
   geom_histogram(binwidth = 1, fill = &quot;peachpuff&quot;) + 
@@ -451,7 +451,7 @@ Total      41654  100.00            </code></pre>
 T1 &lt;- xtable(freq(ordered(MINI$Sex), plot = FALSE), caption = &quot;Table 1: Frequency Table of `Sex`&quot;)
 print(T1, type = &quot;html&quot;, caption.placement = &quot;top&quot;, html.table.attributes = 1)</code></pre>
 <!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
-<!-- Sun Jan  4 08:15:09 2015 -->
+<!-- Sun Jan  4 11:55:40 2015 -->
 <table 1>
 <caption align="top"> 
 Table 1: Frequency Table of <code>Sex</code>
