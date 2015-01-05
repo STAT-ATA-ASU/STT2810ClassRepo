@@ -23,7 +23,7 @@ The package `dplyr` must first be installed before it can be used.  There are tw
 ```{r eval = FALSE}
 install.packages("dplyr")
 ```
-at the `R` prompt.  If you want the lastest version of `dplyr`, you can install the development version from GitHub provided you have the required tools to build `R` packages installed on your machine (`Rtools` for Windows users, `XCode` for Mac users, etc.).  
+at the `R` prompt.  If you want the latest version of `dplyr`, you can install the development version from GitHub provided you have the required tools to build `R` packages installed on your machine (`Rtools` for Windows users, `XCode` for Mac users, etc.).  
 
 ```{r eval = FALSE}
 if (packageVersion("devtools") < 1.6) {
@@ -72,7 +72,7 @@ ggplot(data = NESARC, aes(x = S3AQ3B1)) +
   theme_bw() 
 ```
 
-If you do not wnat to see the `NA`'s use
+If you do not want to see the `NA`'s use
 ```{r label = "ggSmoke2", message = FALSE, fig.width = 10, fig.wdith = 5, cache = TRUE}
 ggplot(data = na.omit(NESARC[ , "S3AQ3B1", drop = FALSE]), aes(x = S3AQ3B1)) + 
   geom_bar(fill = "lightgray") + 
@@ -88,14 +88,17 @@ summary(NESARC$S4AQ4A1)
 
 To recode the NA's as `No` enter
 ```{r label = "recodeNO", comment = NA}
-NESARC$S4AQ4A1[is.na(NESARC$S4AQ4A1)] <- 2
-summary(NESARC$S4AQ4A1)
-NESARC$S4AQ4A1 <- factor(NESARC$S4AQ4A1)
-summary(NESARC$S4AQ4A1)
+NESARCre <- NESARC
+NESARCre$S4AQ4A1[is.na(NESARCre$S4AQ4A1)] <- 2
+summary(NESARCre$S4AQ4A1)
+NESARCre$S4AQ4A1 <- factor(NESARCre$S4AQ4A1)
+summary(NESARCre$S4AQ4A1)
+rm(NESARCre)  # remove NESARCre and newly created S4AQ4A1
 ```
 
+
 ### Collapsing Categories
-Consider the varaible `S1Q6A` with 14 levels recording the highest level of education of the participant.  To collapse the categories in to dichotomous variable indicating the presence of a high school degree use the `ifelse` function. The levels `1`, `2`, `3`, `4`, `5`, `6`, and `7` of the variable `S1Q6A` correspond to education levels less than completing high school.
+Consider the variable `S1Q6A` with 14 levels recording the highest level of education of the participant.  To collapse the categories in to dichotomous variable indicating the presence of a high school degree use the `ifelse` function. The levels `1`, `2`, `3`, `4`, `5`, `6`, and `7` of the variable `S1Q6A` correspond to education levels less than completing high school.
 
 ```{r label = "CollapseHS", comment = NA, cache = TRUE}
 NESARC$HS_DEGREE <- factor(ifelse(NESARC$S1Q6A %in% c("1", "2", "3", "4", "5", "6", "7"), "No", "Yes"))
@@ -142,20 +145,18 @@ summary(NESARC$AllDeprSymp)
 
 ### Creating a Composite Factor
 
-I think this will do the trick...
+The following code selects the 19 variables that deal with depression using the `selects` function from `dplyr`.  Next, the values of the factors are converted to character strings; then, the character strings are converted to numeric values.  The function `myfix` is constructed to convert values 2 and 9 to 0.  The function `myfix` is applied to `sdf`, and the result is saved in the matrix `nsd`.  The matrix `nsd` is converted to a data frame `nsd`, and the function `apply` is used to find the number of depression symptoms and store the result in the variable `NDS`.  
 
 ```{r comment = NA}
 sdf <- NESARC %>%
   select(contains("S4AQ4A"))
 sdf[] <- lapply(sdf, as.character)
 sdf[] <- lapply(sdf, as.numeric)
-sdfm <- as.matrix(sdf, ncol = 19)
 myfix <- function(x){ifelse(x %in% c(2, 9), 0, ifelse(x == 1, 1, NA))}
-sdfm <- apply(sdfm, 2, myfix)
-sdfm <- data.frame(sdfm)
-nsdf <- cbind(sdfm, NDS = apply(sdfm, 1, sum, na.rm = FALSE))
-nsdf[11000:11005, 14:20]
-xtabs(~NDS, data = nsdf)
+nsd <- apply(sdf, 2, myfix)
+nsd <- as.data.frame(nsd)
+nsd$NDS <- apply(nsd, 1, sum, na.rm = FALSE)
+xtabs(~NDS, data = nsd)
 ```
 
 To create a variable `NumDepSym` that records the number of depression symptoms among the variables `S4AQ4A1` - `S4AQ4A19`, create numeric variables from the factors `S4AQ4A1` - `S4AQ4A19` and store the results in `S4AQ4A1num` - `S4AQ4A19num`.  Next, recode the levels of `No` (2) and `Unknown` (3) to 0s for variables `S4AQ4A1num` - `S4AQ4A19num`.  The code is rather lengthy and other approaches such as the first one are encouraged.  The template given in the PDS IBook link will not work with this data because the variables are factors not numeric vectors.  You can not add factors!
