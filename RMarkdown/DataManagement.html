@@ -221,7 +221,22 @@ xtabs(~NDS, data = nsd)</code></pre>
 1125  716  840  874  997 1032 1056 1043  970  981  940  824  737  586  413 
   15   16   17   18   19 
  295  181   97   31   15 </code></pre>
-<p>To create a variable <code>NumDepSym</code> that records the number of depression symptoms among the variables <code>S4AQ4A1</code> - <code>S4AQ4A19</code>, create numeric variables from the factors <code>S4AQ4A1</code> - <code>S4AQ4A19</code> and store the results in <code>S4AQ4A1num</code> - <code>S4AQ4A19num</code>. Next, recode the levels of <code>No</code> (2) and <code>Unknown</code> (3) to 0s for variables <code>S4AQ4A1num</code> - <code>S4AQ4A19num</code>. The code is rather lengthy and other approaches such as the first one are encouraged. The template given in the PDS IBook link will not work with this data because the variables are factors not numeric vectors. You can not add factors!</p>
+<p>Another approach:</p>
+<pre class="r"><code>mysum &lt;- function(x){sum(x == 1)}
+myadd &lt;- function(x){apply(x, 1, mysum)}
+ndf &lt;- NESARC %&gt;%
+  select(contains(&quot;S4AQ4A&quot;))
+nDS &lt;- myadd(ndf)
+ndf &lt;- cbind(ndf, nDS)
+xtabs(~nDS, data = ndf)    </code></pre>
+<pre><code>nDS
+   0    1    2    3    4    5    6    7    8    9   10   11   12   13   14 
+1125  716  840  874  997 1032 1056 1043  970  981  940  824  737  586  413 
+  15   16   17   18   19 
+ 295  181   97   31   15 </code></pre>
+<div id="convert-a-factor-to-numeric" class="section level4">
+<h4>Convert a factor to numeric</h4>
+<p>Be careful when converting a factor to a vector of numeric values based on the factor labels. One may be tempted to use <code>as.numeric</code> to convert a factor to a numeric vector. However, using <code>as.numeric(my_factor)</code> returns a numeric vector of the index levels not the actual values.</p>
 <pre class="r"><code>summary(NESARC$S4AQ4A1)</code></pre>
 <pre><code>    1     2     9  NA's 
  4650  8712   391 29340 </code></pre>
@@ -231,52 +246,72 @@ xtabs(~NDS, data = nsd)</code></pre>
 <pre><code>
    1    2    3 
 4650 8712  391 </code></pre>
-<pre class="r"><code>NESARC$S4AQ4A1num &lt;- as.numeric(NESARC$S4AQ4A1)
-xtabs(~S4AQ4A1num, data = NESARC)</code></pre>
-<pre><code>S4AQ4A1num
+<p>To get the actual values of the factor use <code>as.numeric(levels(my_factor))[my_factor]</code>.</p>
+<pre class="r"><code>summary(NESARC$S4AQ4A1)</code></pre>
+<pre><code>    1     2     9  NA's 
+ 4650  8712   391 29340 </code></pre>
+<pre class="r"><code>levels(NESARC$S4AQ4A1)</code></pre>
+<pre><code>[1] &quot;1&quot; &quot;2&quot; &quot;9&quot;</code></pre>
+<pre class="r"><code>table(as.numeric(levels(NESARC$S4AQ4A1))[NESARC$S4AQ4A1])</code></pre>
+<pre><code>
+   1    2    9 
+4650 8712  391 </code></pre>
+<p>To create a variable <code>NumDepSym</code> that records the number of depression symptoms among the variables <code>S4AQ4A1</code> - <code>S4AQ4A19</code>, create numeric variables from the factors <code>S4AQ4A1</code> - <code>S4AQ4A19</code> and store the results in <code>S4AQ4A1num</code> - <code>S4AQ4A19num</code>. Next, recode the levels of <code>No</code> (2) and <code>Unknown</code> (9) to 0s for variables <code>S4AQ4A1num</code> - <code>S4AQ4A19num</code>. The code is rather lengthy and other approaches such as the first two are encouraged. The template given in the PDS IBook link will not work with this data because the variables are factors not numeric vectors. You can not add factors!</p>
+<pre class="r"><code>summary(NESARC$S4AQ4A1)</code></pre>
+<pre><code>    1     2     9  NA's 
+ 4650  8712   391 29340 </code></pre>
+<pre class="r"><code>levels(NESARC$S4AQ4A1)</code></pre>
+<pre><code>[1] &quot;1&quot; &quot;2&quot; &quot;9&quot;</code></pre>
+<pre class="r"><code>table(as.numeric(NESARC$S4AQ4A1))</code></pre>
+<pre><code>
    1    2    3 
 4650 8712  391 </code></pre>
-<pre class="r"><code>NESARC$S4AQ4A1num[NESARC$S4AQ4A1num == 2 | NESARC$S4AQ4A1num == 3] &lt;- 0
+<pre class="r"><code>NESARC$S4AQ4A1num &lt;- as.numeric(levels(NESARC$S4AQ4A1))[NESARC$S4AQ4A1]
+xtabs(~S4AQ4A1num, data = NESARC)</code></pre>
+<pre><code>S4AQ4A1num
+   1    2    9 
+4650 8712  391 </code></pre>
+<pre class="r"><code>NESARC$S4AQ4A1num[NESARC$S4AQ4A1num == 2 | NESARC$S4AQ4A1num == 9] &lt;- 0
 xtabs(~S4AQ4A1num, data = NESARC)</code></pre>
 <pre><code>S4AQ4A1num
    0    1 
 9103 4650 </code></pre>
-<pre class="r"><code>NESARC$S4AQ4A2num &lt;- as.numeric(NESARC$S4AQ4A2)
-NESARC$S4AQ4A2num[NESARC$S4AQ4A2num == 2 | NESARC$S4AQ4A2num == 3] &lt;- 0
-NESARC$S4AQ4A3num &lt;- as.numeric(NESARC$S4AQ4A3)
-NESARC$S4AQ4A3num[NESARC$S4AQ4A3num == 2 | NESARC$S4AQ4A3num == 3] &lt;- 0
-NESARC$S4AQ4A4num &lt;- as.numeric(NESARC$S4AQ4A4)
-NESARC$S4AQ4A4num[NESARC$S4AQ4A4num == 2 | NESARC$S4AQ4A4num == 3] &lt;- 0
-NESARC$S4AQ4A5num &lt;- as.numeric(NESARC$S4AQ4A5)
-NESARC$S4AQ4A5num[NESARC$S4AQ4A5num == 2 | NESARC$S4AQ4A5num == 3] &lt;- 0
-NESARC$S4AQ4A6num &lt;- as.numeric(NESARC$S4AQ4A6)
-NESARC$S4AQ4A6num[NESARC$S4AQ4A6num == 2 | NESARC$S4AQ4A6num == 3] &lt;- 0
-NESARC$S4AQ4A7num &lt;- as.numeric(NESARC$S4AQ4A7)
-NESARC$S4AQ4A7num[NESARC$S4AQ4A7num == 2 | NESARC$S4AQ4A7num == 3] &lt;- 0
-NESARC$S4AQ4A8num &lt;- as.numeric(NESARC$S4AQ4A8)
-NESARC$S4AQ4A8num[NESARC$S4AQ4A8num == 2 | NESARC$S4AQ4A8num == 3] &lt;- 0
-NESARC$S4AQ4A9num &lt;- as.numeric(NESARC$S4AQ4A9)
-NESARC$S4AQ4A9num[NESARC$S4AQ4A9num == 2 | NESARC$S4AQ4A9num == 3] &lt;- 0
-NESARC$S4AQ4A10num &lt;- as.numeric(NESARC$S4AQ4A10)
-NESARC$S4AQ4A10num[NESARC$S4AQ4A10num == 2 | NESARC$S4AQ4A10num == 3] &lt;- 0
-NESARC$S4AQ4A11num &lt;- as.numeric(NESARC$S4AQ4A11)
-NESARC$S4AQ4A11num[NESARC$S4AQ4A11num == 2 | NESARC$S4AQ4A11num == 3] &lt;- 0
-NESARC$S4AQ4A12num &lt;- as.numeric(NESARC$S4AQ4A12)
-NESARC$S4AQ4A12num[NESARC$S4AQ4A12num == 2 | NESARC$S4AQ4A12num == 3] &lt;- 0
-NESARC$S4AQ4A13num &lt;- as.numeric(NESARC$S4AQ4A13)
-NESARC$S4AQ4A13num[NESARC$S4AQ4A13num == 2 | NESARC$S4AQ4A13num == 3] &lt;- 0
-NESARC$S4AQ4A14num &lt;- as.numeric(NESARC$S4AQ4A14)
-NESARC$S4AQ4A14num[NESARC$S4AQ4A14num == 2 | NESARC$S4AQ4A14num == 3] &lt;- 0
-NESARC$S4AQ4A15num &lt;- as.numeric(NESARC$S4AQ4A15)
-NESARC$S4AQ4A15num[NESARC$S4AQ4A15num == 2 | NESARC$S4AQ4A15num == 3] &lt;- 0
-NESARC$S4AQ4A16num &lt;- as.numeric(NESARC$S4AQ4A16)
-NESARC$S4AQ4A16num[NESARC$S4AQ4A16num == 2 | NESARC$S4AQ4A16num == 3] &lt;- 0
-NESARC$S4AQ4A17num &lt;- as.numeric(NESARC$S4AQ4A17)
-NESARC$S4AQ4A17num[NESARC$S4AQ4A17num == 2 | NESARC$S4AQ4A17num == 3] &lt;- 0
-NESARC$S4AQ4A18num &lt;- as.numeric(NESARC$S4AQ4A18)
-NESARC$S4AQ4A18num[NESARC$S4AQ4A18num == 2 | NESARC$S4AQ4A18num == 3] &lt;- 0
-NESARC$S4AQ4A19num &lt;- as.numeric(NESARC$S4AQ4A19)
-NESARC$S4AQ4A19num[NESARC$S4AQ4A19num == 2 | NESARC$S4AQ4A19num == 3] &lt;- 0
+<pre class="r"><code>NESARC$S4AQ4A2num &lt;- as.numeric(levels(NESARC$S4AQ4A2))[NESARC$S4AQ4A2]
+NESARC$S4AQ4A2num[NESARC$S4AQ4A2num == 2 | NESARC$S4AQ4A2num == 9] &lt;- 0
+NESARC$S4AQ4A3num &lt;- as.numeric(levels(NESARC$S4AQ4A3))[NESARC$S4AQ4A3]
+NESARC$S4AQ4A3num[NESARC$S4AQ4A3num == 2 | NESARC$S4AQ4A3num == 9] &lt;- 0
+NESARC$S4AQ4A4num &lt;- as.numeric(levels(NESARC$S4AQ4A4))[NESARC$S4AQ4A4]
+NESARC$S4AQ4A4num[NESARC$S4AQ4A4num == 2 | NESARC$S4AQ4A4num == 9] &lt;- 0
+NESARC$S4AQ4A5num &lt;- as.numeric(levels(NESARC$S4AQ4A5))[NESARC$S4AQ4A5]
+NESARC$S4AQ4A5num[NESARC$S4AQ4A5num == 2 | NESARC$S4AQ4A5num == 9] &lt;- 0
+NESARC$S4AQ4A6num &lt;- as.numeric(levels(NESARC$S4AQ4A6))[NESARC$S4AQ4A6]
+NESARC$S4AQ4A6num[NESARC$S4AQ4A6num == 2 | NESARC$S4AQ4A6num == 9] &lt;- 0
+NESARC$S4AQ4A7num &lt;- as.numeric(levels(NESARC$S4AQ4A7))[NESARC$S4AQ4A7]
+NESARC$S4AQ4A7num[NESARC$S4AQ4A7num == 2 | NESARC$S4AQ4A7num == 9] &lt;- 0
+NESARC$S4AQ4A8num &lt;- as.numeric(levels(NESARC$S4AQ4A8))[NESARC$S4AQ4A8]
+NESARC$S4AQ4A8num[NESARC$S4AQ4A8num == 2 | NESARC$S4AQ4A8num == 9] &lt;- 0
+NESARC$S4AQ4A9num &lt;- as.numeric(levels(NESARC$S4AQ4A9))[NESARC$S4AQ4A9]
+NESARC$S4AQ4A9num[NESARC$S4AQ4A9num == 2 | NESARC$S4AQ4A9num == 9] &lt;- 0
+NESARC$S4AQ4A10num &lt;- as.numeric(levels(NESARC$S4AQ4A10))[NESARC$S4AQ4A10]
+NESARC$S4AQ4A10num[NESARC$S4AQ4A10num == 2 | NESARC$S4AQ4A10num == 9] &lt;- 0
+NESARC$S4AQ4A11num &lt;- as.numeric(levels(NESARC$S4AQ4A11))[NESARC$S4AQ4A11]
+NESARC$S4AQ4A11num[NESARC$S4AQ4A11num == 2 | NESARC$S4AQ4A11num == 9] &lt;- 0
+NESARC$S4AQ4A12num &lt;- as.numeric(levels(NESARC$S4AQ4A12))[NESARC$S4AQ4A12]
+NESARC$S4AQ4A12num[NESARC$S4AQ4A12num == 2 | NESARC$S4AQ4A12num == 9] &lt;- 0
+NESARC$S4AQ4A13num &lt;- as.numeric(levels(NESARC$S4AQ4A13))[NESARC$S4AQ4A13]
+NESARC$S4AQ4A13num[NESARC$S4AQ4A13num == 2 | NESARC$S4AQ4A13num == 9] &lt;- 0
+NESARC$S4AQ4A14num &lt;- as.numeric(levels(NESARC$S4AQ4A14))[NESARC$S4AQ4A14]
+NESARC$S4AQ4A14num[NESARC$S4AQ4A14num == 2 | NESARC$S4AQ4A14num == 9] &lt;- 0
+NESARC$S4AQ4A15num &lt;- as.numeric(levels(NESARC$S4AQ4A15))[NESARC$S4AQ4A15]
+NESARC$S4AQ4A15num[NESARC$S4AQ4A15num == 2 | NESARC$S4AQ4A15num == 9] &lt;- 0
+NESARC$S4AQ4A16num &lt;- as.numeric(levels(NESARC$S4AQ4A16))[NESARC$S4AQ4A16]
+NESARC$S4AQ4A16num[NESARC$S4AQ4A16num == 2 | NESARC$S4AQ4A16num == 9] &lt;- 0
+NESARC$S4AQ4A17num &lt;- as.numeric(levels(NESARC$S4AQ4A17))[NESARC$S4AQ4A17]
+NESARC$S4AQ4A17num[NESARC$S4AQ4A17num == 2 | NESARC$S4AQ4A17num == 9] &lt;- 0
+NESARC$S4AQ4A18num &lt;- as.numeric(levels(NESARC$S4AQ4A18))[NESARC$S4AQ4A18]
+NESARC$S4AQ4A18num[NESARC$S4AQ4A18num == 2 | NESARC$S4AQ4A18num == 9] &lt;- 0
+NESARC$S4AQ4A19num &lt;- as.numeric(levels(NESARC$S4AQ4A19))[NESARC$S4AQ4A19]
+NESARC$S4AQ4A19num[NESARC$S4AQ4A19num == 2 | NESARC$S4AQ4A19num == 9] &lt;- 0
 NESARC$NumDepSym &lt;- NESARC$S4AQ4A1num + NESARC$S4AQ4A2num + NESARC$S4AQ4A3num + NESARC$S4AQ4A4num + NESARC$S4AQ4A5num + NESARC$S4AQ4A6num + NESARC$S4AQ4A7num + NESARC$S4AQ4A8num + NESARC$S4AQ4A9num + NESARC$S4AQ4A10num + NESARC$S4AQ4A11num + NESARC$S4AQ4A12num + NESARC$S4AQ4A13num + NESARC$S4AQ4A14num + NESARC$S4AQ4A15num + NESARC$S4AQ4A16num + NESARC$S4AQ4A17num + NESARC$S4AQ4A18num + NESARC$S4AQ4A19num
 xtabs(~NumDepSym, data = NESARC)</code></pre>
 <pre><code>NumDepSym
@@ -284,6 +319,7 @@ xtabs(~NumDepSym, data = NESARC)</code></pre>
 1125  716  840  874  997 1032 1056 1043  970  981  940  824  737  586  413 
   15   16   17   18   19 
  295  181   97   31   15 </code></pre>
+</div>
 </div>
 <div id="subsetting-your-data" class="section level3">
 <h3>Subsetting Your Data</h3>
