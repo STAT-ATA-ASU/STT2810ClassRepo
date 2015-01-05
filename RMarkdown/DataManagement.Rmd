@@ -120,14 +120,14 @@ summary(NESARC$S3AQ3C1fac)
 ### Aggregating Variables using `ifelse`
 Consider creating a new variable `DepressLife` which is `Yes` if the variable `MAJORLIFE` is a 1 or if `DYSLIFE` is a 1.
 
-```{r label = "Agg1", comment = NA}
+```{r label = "Agg1", comment = NA, cache = TRUE}
 NESARC$DepressLife <- factor(ifelse( (NESARC$MAJORDEPLIFE == 1 | NESARC$DYSLIFE == 1), "Yes", "No"))
 summary(NESARC$DepressLife)
 ```
 
 As another example, consider creating a variable `PPpanic` for past and present panic disorders.  The variables `APANDX12` and `APANDXP12` record a panic disorder within the last 12 months and prior to the last 12 months with agoraphobia, respectively.  The variables `PANDX12` and `PANDXP12` record a panic disorder within the last 12 months and prior to the last 12 months without agoraphobia, respectively.
 
-```{r label = "PANIC", comment = NA}
+```{r label = "PANIC", comment = NA, cache = TRUE}
 NESARC$PPpanic <- factor(ifelse( (NESARC$APANDX12 == 1 | NESARC$APANDXP12 == 1 | NESARC$PANDX12 == 1 | NESARC$PANDXP12 == 1 ), "Yes", "No"))
 summary(NESARC$PPpanic)
 ```
@@ -139,9 +139,26 @@ NESARC$AllDeprSymp <- factor(ifelse( (NESARC$S4AQ4A1 == 1 & NESARC$S4AQ4A2 == 1 
 summary(NESARC$AllDeprSymp)
 ```
 
+
 ### Creating a Composite Factor
 
-To create a variable `NumDepSym` that records the number of depression symptoms among the variables `S4AQ4A1` - `S4AQ4A19`, create numeric variables from the factors `S4AQ4A1` - `S4AQ4A19` and store the results in `S4AQ4A1num` - `S4AQ4A19num`.  Next, recode the levels of `No` (2) and `Unknown` (3) to 0s for varaibles `S4AQ4A1num` - `S4AQ4A19num`.  The code is rather lengthy and I welcome other approaches.  The template given in the PDS IBook link will not work with this data because the variables are factors not numeric vectors.  You can not add factors!
+I think this will do the trick...
+
+```{r comment = NA}
+sdf <- NESARC %>%
+  select(contains("S4AQ4A"))
+sdf[] <- lapply(sdf, as.character)
+sdf[] <- lapply(sdf, as.numeric)
+sdfm <- as.matrix(sdf, ncol = 19)
+myfix <- function(x){ifelse(x %in% c(2, 9), 0, ifelse(x == 1, 1, NA))}
+sdfm <- apply(sdfm, 2, myfix)
+sdfm <- data.frame(sdfm)
+nsdf <- cbind(sdfm, NDS = apply(sdfm, 1, sum, na.rm = FALSE))
+nsdf[11000:11005, 14:20]
+xtabs(~NDS, data = nsdf)
+```
+
+To create a variable `NumDepSym` that records the number of depression symptoms among the variables `S4AQ4A1` - `S4AQ4A19`, create numeric variables from the factors `S4AQ4A1` - `S4AQ4A19` and store the results in `S4AQ4A1num` - `S4AQ4A19num`.  Next, recode the levels of `No` (2) and `Unknown` (3) to 0s for variables `S4AQ4A1num` - `S4AQ4A19num`.  The code is rather lengthy and other approaches such as the first one are encouraged.  The template given in the PDS IBook link will not work with this data because the variables are factors not numeric vectors.  You can not add factors!
 
 ```{r label = "CompositeFactor", comment = NA, cache = TRUE}
 summary(NESARC$S4AQ4A1)
@@ -190,6 +207,8 @@ NESARC$S4AQ4A19num[NESARC$S4AQ4A19num == 2 | NESARC$S4AQ4A19num == 3] <- 0
 NESARC$NumDepSym <- NESARC$S4AQ4A1num + NESARC$S4AQ4A2num + NESARC$S4AQ4A3num + NESARC$S4AQ4A4num + NESARC$S4AQ4A5num + NESARC$S4AQ4A6num + NESARC$S4AQ4A7num + NESARC$S4AQ4A8num + NESARC$S4AQ4A9num + NESARC$S4AQ4A10num + NESARC$S4AQ4A11num + NESARC$S4AQ4A12num + NESARC$S4AQ4A13num + NESARC$S4AQ4A14num + NESARC$S4AQ4A15num + NESARC$S4AQ4A16num + NESARC$S4AQ4A17num + NESARC$S4AQ4A18num + NESARC$S4AQ4A19num
 xtabs(~NumDepSym, data = NESARC)
 ```
+
+
 
 ### Subsetting Your Data
 Three different approaches to subsetting data will be given.  The first approach is to use the `dplyr` function `filter`; the second approach is to use indices; and the third approach is to use the function `subset`.  Consider creating a subset of the `NESARC` data set where a person indicates

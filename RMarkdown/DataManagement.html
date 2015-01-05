@@ -204,7 +204,31 @@ summary(NESARC$AllDeprSymp)</code></pre>
 </div>
 <div id="creating-a-composite-factor" class="section level3">
 <h3>Creating a Composite Factor</h3>
-<p>To create a variable <code>NumDepSym</code> that records the number of depression symptoms among the variables <code>S4AQ4A1</code> - <code>S4AQ4A19</code>, create numeric variables from the factors <code>S4AQ4A1</code> - <code>S4AQ4A19</code> and store the results in <code>S4AQ4A1num</code> - <code>S4AQ4A19num</code>. Next, recode the levels of <code>No</code> (2) and <code>Unknown</code> (3) to 0s for varaibles <code>S4AQ4A1num</code> - <code>S4AQ4A19num</code>. The code is rather lengthy and I welcome other approaches. The template given in the PDS IBook link will not work with this data because the variables are factors not numeric vectors. You can not add factors!</p>
+<p>I think this will do the trick…</p>
+<pre class="r"><code>sdf &lt;- NESARC %&gt;%
+  select(contains(&quot;S4AQ4A&quot;))
+sdf[] &lt;- lapply(sdf, as.character)
+sdf[] &lt;- lapply(sdf, as.numeric)
+sdfm &lt;- as.matrix(sdf, ncol = 19)
+myfix &lt;- function(x){ifelse(x %in% c(2, 9), 0, ifelse(x == 1, 1, NA))}
+sdfm &lt;- apply(sdfm, 2, myfix)
+sdfm &lt;- data.frame(sdfm)
+nsdf &lt;- cbind(sdfm, NDS = apply(sdfm, 1, sum, na.rm = FALSE))
+nsdf[11000:11005, 14:20]</code></pre>
+<pre><code>      S4AQ4A14 S4AQ4A15 S4AQ4A16 S4AQ4A17 S4AQ4A18 S4AQ4A19 NDS
+11000       NA       NA       NA       NA       NA       NA  NA
+11001        1        0        0        1        1        0   8
+11002        1        1        0        1        1        1  10
+11003        1        0        0        0        1        1   9
+11004       NA       NA       NA       NA       NA       NA  NA
+11005       NA       NA       NA       NA       NA       NA  NA</code></pre>
+<pre class="r"><code>xtabs(~NDS, data = nsdf)</code></pre>
+<pre><code>NDS
+   0    1    2    3    4    5    6    7    8    9   10   11   12   13   14 
+1125  716  840  874  997 1032 1056 1043  970  981  940  824  737  586  413 
+  15   16   17   18   19 
+ 295  181   97   31   15 </code></pre>
+<p>To create a variable <code>NumDepSym</code> that records the number of depression symptoms among the variables <code>S4AQ4A1</code> - <code>S4AQ4A19</code>, create numeric variables from the factors <code>S4AQ4A1</code> - <code>S4AQ4A19</code> and store the results in <code>S4AQ4A1num</code> - <code>S4AQ4A19num</code>. Next, recode the levels of <code>No</code> (2) and <code>Unknown</code> (3) to 0s for variables <code>S4AQ4A1num</code> - <code>S4AQ4A19num</code>. The code is rather lengthy and other approaches such as the first one are encouraged. The template given in the PDS IBook link will not work with this data because the variables are factors not numeric vectors. You can not add factors!</p>
 <pre class="r"><code>summary(NESARC$S4AQ4A1)</code></pre>
 <pre><code>    1     2     9 
  4650 38052   391 </code></pre>
@@ -451,7 +475,7 @@ Total      41654  100.00            </code></pre>
 T1 &lt;- xtable(freq(ordered(MINI$Sex), plot = FALSE), caption = &quot;Table 1: Frequency Table of `Sex`&quot;)
 print(T1, type = &quot;html&quot;, caption.placement = &quot;top&quot;, html.table.attributes = 1)</code></pre>
 <!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
-<!-- Sun Jan  4 11:55:40 2015 -->
+<!-- Sun Jan  4 19:21:53 2015 -->
 <table 1>
 <caption align="top"> 
 Table 1: Frequency Table of <code>Sex</code>
