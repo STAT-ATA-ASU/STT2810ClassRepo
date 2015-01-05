@@ -339,7 +339,7 @@ freq(ordered(MINI$Sex), plot = TRUE, col = c("blue","pink"), main = "Barplot of 
 ```{r echo = TRUE, results = 'asis'}
 library(xtable) # Must be loaded to call xtable
 T1 <- xtable(freq(ordered(MINI$Sex), plot = FALSE), caption = "Table 1: Frequency Table of `Sex`")
-print(T1, type = "html", caption.placement = "top", html.table.attributes = 1)
+print(T1, type = "html", caption.placement = "top", html.table.attributes = 1, timestamp = NULL)
 ```
 
 ```{r echo = TRUE, results = 'asis'}

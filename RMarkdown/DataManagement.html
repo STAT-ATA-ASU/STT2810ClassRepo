@@ -466,9 +466,8 @@ Female     23495   56.41      100.00
 Total      41654  100.00            </code></pre>
 <pre class="r"><code>library(xtable) # Must be loaded to call xtable
 T1 &lt;- xtable(freq(ordered(MINI$Sex), plot = FALSE), caption = &quot;Table 1: Frequency Table of `Sex`&quot;)
-print(T1, type = &quot;html&quot;, caption.placement = &quot;top&quot;, html.table.attributes = 1)</code></pre>
+print(T1, type = &quot;html&quot;, caption.placement = &quot;top&quot;, html.table.attributes = 1, timestamp = NULL)</code></pre>
 <!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
-<!-- Mon Jan  5 07:37:18 2015 -->
 <table 1>
 <caption align="top"> 
 Table 1: Frequency Table of <code>Sex</code>
