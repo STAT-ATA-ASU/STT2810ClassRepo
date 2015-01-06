@@ -1,0 +1,2051 @@
+
+---
+title: "QAC 201 - R"
+author: "Li Zhong"
+date: "December 30, 2014"
+output: html_document
+---
+
+This is a summary of essential **R** codes for the QAC 201 course. 
+
+In this document you will be able to look up **R** codes for *basic operations, data management, graphing (ggplot), various hypothesis tests, and linear and logistic regressions.* 
+
+Most of the codes would be presented based on data sets most suitable for the specific technique at hand and explanations. Please remember to customize the codes (data set, personalized subsets, constructed regressions, graphs and etc.) to the need of your assignments and research projects.
+
+
+
+
+
+
+
+
+##  **Section 1: Basic R**
+
+
+This script takes you from loading a previously saved dataframe, to 
+examining your variables, to classes of variables, to basic indexing,
+and then to frequency tables. There are other little things included as well.
+
+
+
+
+### **1. Caling in/Loading A Data Set**
+
+ The dataset is either a workspace or a .Rda file.
+ You can load a dataset in one of three ways:
+ 
+ a) using *syntax*.  The command below uses the folder structure on a PC.  
+    It will be different on a mac.
+    
+ b) using the working directory as shown in the video (Session > Set Working 
+    Directory > browse to folder) and then by opening the data file shown in 
+    the files tab in one of the windows in RStudio.
+    
+ c) By navigating to the file in the folder structure outside of R Studio, 
+    opening it, and if necessary, selecting the program (R Studio) to use.
+
+For example:
+
+**load("P:/QAC/qac201/Studies/Caterpillar/Data/Caterpillar.RData")**
+
+**load("P:/QAC/qac201/Studies/MarsCrater/Data/marscrater_pds.RData")**
+
+Since you might want to make changes to your data set in future, it makes sense to  back up your original data set:
+
+- for example, to make a copy of a built-in data set *ChickWeight* in R:
+
+```{r}
+Original_Chick <- ChickWeight
+```
+
+- In case you want to know more about the data set *ChickWeight", use the following command:
+
+```{r}
+? ChickWeight
+```
+
+------
+
+### **2. Examine Your Variables**
+
+
+#### A. Get to know your data set
+FYI, in R, there is a **maximum number of rows** that will be output to the screen - so at this point, with all the variables still in the file, you won't see everything.  Nor will you see all the rows when you do `View(dataFrameName)` because there are more observations than R will display there.
+
+- To  visualize your data set:
+
+'View(name_of_data_set)'
+
+For example:
+
+> View(ChickWeight)
+
+**Caveat: view of dataset doesn't update on its own, so please close tab and re-run command after changing any of the variables.**
+
+- To see the names of the varietals:
+```{r}
+names (ChickWeight)
+```
+
+- the number of variables:
+```{r}
+length (ChickWeight) 
+```
+
+- the number of observations:
+```{r}                 
+nrow (ChickWeight)           
+```
+
+
+#### B. The summary function
+
+When we want R to tell us more information about the landscape of our categorical and quantitative variables, we use `summary(dataFrameName)`.
+
+- For example:
+```{r}
+summary(ChickWeight)
+```
+
+For **factors (aka, categorical variables)**, R outputs the number of observations in each category.
+
+For quantitative variables, it gives you the minimum, mean, and maximum, along w the 25th, 50th (mode), and 75th percentiles.  Those are the values on the variable for which 25% (or 50 or 75%) of the other observations are below. For character strings, this function gives you the number of valid (i.e., not missing) observations on that variable.
+
+For all of these classes, the output also gives the number of observations that are missing, but the Orange dataset doesn't seem to have any missing values.
+
+- Run the summary function on a quantitative variable from your dataset
+
+```{r}
+summary(ChickWeight$weight)
+```
+
+- You might need to turn **character variables (values of variables are words such as "red","divorced", and etc.)** into factors where needed:
+
+```{r}
+summary(ChickWeight$Diet)
+summary(as.factor(ChickWeight$Diet))
+```
+
+- Note that here Diet is already factor in ChickWeight, so results from the two commands are not different.
+
+  Otherwise, if you're using the Caterpillar data, please try the function on the variable *host2*:
+
+
+> summary(Caterpillar$host2)
+
+> summary(as.factor(Caterpillar$host2))
+
+
+Note also that here we only temporarily used Tree as factor in this single command `summary(as.factor(ChickWeight$Diet))`. 
+
+
+- To change a character variable into a factor permanently:
+
+```{r}
+ChickWeight$Diet <- as.factor(ChickWeight$Diet)
+```
+
+Here, we are telling R to take what is on the RHS (right-hand-side) and store it in the variable named on the LHS (left-hand-side).  In this case, it is **OVERWRITING** what was originally there.
+
+*This is a situation that you would usually want to avoid when re-coding variables.  (But that's also why you have a record of your code and a back-up copy of the original dataframe.)*
+
+Now you might want to run a summary of your data set and see how this overwriting has changed the values of your variables.
+
+
+------
+
+
+### **3. Subsetting Your Data**
+
+ Here, the goal is to reduce the number of columns that are in your dataframe.
+ Because you have a record of all your code, you can always re-run all the following
+ steps later if/WHEN you decide that you need to have more variables.
+ 
+ 
+- The general function for subsetting a data set is:
+ 
+> var.keep <- c(“VAR1”, “VAR2”, “VAR3”)
+
+> title_of_new_data_set <- new.data[,var.keep]
+
+- **VAR denotes "variable"**"
+- **Give a new name for your subset as "title_of_new_date_set"**
+- **`[, var.keep]` tells R that your subset keeps all the rows of the columns selected**
+
+You should be able to see your subset with `summary(title_of_new_data_set)`
+
+
+------
+
+
+### **4. Factor Variable and Labels**
+
+Big picture: Many statistics programs require dummy coding (in which, for example, Diet, would become 4 separate variables: 1, 2, 3, and 4, and each of those variables would be coded as 0 or 1, with a 1 indicating that a student was in that particular year.)  
+
+**R is able to do that invisibly behind the scenes.** Thus in R, you would use **ONE** variable, titled YearInSchool.  It would be a factor and it would have 5 different values (1, 2, 3, 4) In R, you can actually use strings in *quotation marks* as the values of a factor. This makes the analyses and data management much more intuitive, but it does add some extra steps.
+ 
+ 
+- If you'd like to re-label factor levels into characters, follow 3 steps with an example where we would change the values in Diet into labels W, X, Y, and Z:
+
+ 1. Find out the existing levels of the variables.  (This won't work if the variable is not a factor)
+
+```{r}
+levels (ChickWeight$Diet)
+```
+
+ 2. The new levels must be in the same order as the previously existing levels.
+
+ 3. Use the **assignment operator** to assign a new vector of strings `(your new labels)` to `levels(VAR1)`.
+
+```{r}
+levels(ChickWeight$Diet) = c("W", "X", "Y", "Z")
+```
+
+Then run `summary(ChickWeight$Diet)` we will see
+
+```{r}
+summary(ChickWeight$Diet)
+```
+
+
+Now labels W, X, Y, and Z have substituted "1","2","3","4" as values of Diet. This would make more intuitive sense if W, X, Y, and Z are names of diets for chicks.
+
+
+------
+
+
+### **5. Sorting the Data**
+
+- When you want to put your observations in order according to the unique identifier, the following general function might be useful:
+
+> title_of_data_set <- title_of_data_set[order(title_of_data_set$unique_id,decreasing=F),]
+
+
+------
+
+
+### **6. Basic Indexing**
+
+**Basic takeaway from lecture and online resource:**
+
+- `ChickWeight$weight` 
+
+refers to this one variable in the dataframe
+
+- `ChickWeight [,1]`
+
+also refers to this one variable (weight) in the dataframe
+       
+- `ChickWeight [2,3]`    
+
+refers to the single value in the 2nd row, 3rd column (chick) value
+
+- `ChickWeight$weight [2]`
+
+gives the 2nd value of the variable weight in the dataframe ChickWeight
+
+- `ChickWeight [2,]`       
+
+refers to the 2nd row in the dataframe, *all variables*
+
+- `ChickWeight [2:3, 1:4]`  
+
+gives you the 2nd and 3rd rows in the data frame, with the 1st, 2nd, 3rd, and 4th variables for each
+
+
+**It is more helpful to use variable names because those won't change when you add or remove columns and when you re-sort the data.**
+
+- `ChickWeight [c(2,4), c("Time", "Diet")]`
+
+gives you Time and Diet of the 2nd and 4th rows in the dataframe
+
+
+**If you're using the Caterpillar data,** 
+
+- `myCat [myCat$ID == "C611-114", ]`
+
+gives you all variables for the ID C611-114
+
+
+When working with indexing, you have to remember that you need to specify which rows you want and which columns you want - those are two separate things.  Figuring out how to specify the rows that you want and how to specify the columns that you want is dealing with the logic of what you want from your data. That's the important [and tricky] part here.
+
+
+------
+
+
+### **7. Print Your Frequency Table**
+
+- We only need to install a package on a computer once. 
+
+> install.packages("descr") 
+
+
+- If R can't find the library, run this line
+       
+
+> install.packages("Hmisc")
+
+- The general function for printing frequency tables is: 
+
+> library(descr)
+> freq(as.ordered(title_of_data_set$VAR1))
+
+- I would usually have put library statements at beginning of script.
+  To keep the results concise, we have used `head()` to display only the first 10 lines of the table generated for 'ChickWeight$weight':
+
+```{r, message=FALSE}
+library (descr)                    
+library(Hmisc)
+ 
+head(freq(ChickWeight$weight), n=10L)
+freq(as.ordered(ChickWeight$Time))
+```
+
+if cumulative percentages don't make sense, don't use `as.ordered ()`
+
+- To label the graph:
+
+```{r}
+freq(as.ordered(ChickWeight$Time), xlab = "Time", ylab = "Frequency") 
+```
+
+
+
+*******
+
+-------
+
+
+##  **Section 2: Data Management**
+
+
+
+
+
+### 8. Rename A Variable
+
+
+- First, to put this line ONCE at the beginning of your script. You need it to use the rename () function:
+
+> install.packages("plyr")
+
+```{r, message=FALSE}
+library (plyr)
+```
+
+- Syntax: 
+
+> dataFrameName <- rename (dataFrameName, c("OldColName" = "newColName))
+
+- For example, to rename "weight" into "mass" in ChickWeight, we write:
+
+```{r}
+ChickWeight <- rename (ChickWeight, c("weight" = "mass")) 
+```
+
+
+------
+
+### 9. Convert A Character Vector into A Factor with Meaningful Labels
+
+Please refer to **syntax 4** in Section 1 for a general idea of vectors and factors.
+A fuller set of operations:
+
+- For example, to convert Diet from levels of "W","X","Y","Z" into a factor of values "light","medium","heavy","super", we should follow the operations below:
+
+```{r}
+levels(as.factor(ChickWeight$Diet))
+        summary(as.factor(ChickWeight$Diet))
+        ChickWeight$Diet <- factor(ChickWeight$Diet, levels = c("W","X","Y","Z"), labels = c("light","medium","heavy","super"))    
+```
+
+The **levels** you put here are the levels that are currently there. 
+The **labels** are whatever you want to call it.
+
+```{r}
+        levels(ChickWeight$Diet)
+        summary(ChickWeight$Diet)     
+```
+
+You should see the same distribution across the values as their was before making the conversion.
+
+
+------
+
+
+### 10. Convert Blanks or White Space to NA to Represent Missing Values
+
+
+- First, this function `class(dataFrame$VAR1)` shows you the variable starts as a factor. If it didn't (and if you didn't need to work with levels or labels), use `dataFrame$VAR1 <- as.factor((dataFrame$VAR1))`
+
+For example:
+```{r}
+class(ChickWeight$Diet)
+```
+
+- If you have a variable where some of the subjects did not have a response to some questions or some observations are missing, `summary()` will be able to demonstrate that fact:
+
+> summary(dataFrame$VAR1)                           
+
+- To code blank spaces (coded as "" in R) into an NA level, if this dataset had a blank (not even whitespace) to represent missing
+
+> dataFrame$VAR1[dataFrame$VAR1 == ""] <- NA  
+
+- If your dataset had the character sequence 99 to represent missing, replace "" with 99 or "99"
+
+> dataFrame$VAR1[dataFrame$VAR1 == 99] <- NA
+
+- To **drop the unused levels** after converting missing data into NA (NA still shows up as a level):
+
+>  dataFrame$VAR1 <- droplevels(dataFrame$VAR1)      
+
+
+- **Compare**: Now we can see that after the conversion, we have the function `levels()` not showing NAs, while `summary()` does show how many NA values there are in your variable
+
+
+>  levels(dataFrame$VAR1)   
+
+>  summary(dataFrame$VAR1)   
+
+
+- **SIDE DISCUSSION OF LEGITIMATE SKIPS**:
+
+  What do I do have a variable is missing and it is missing because the question *was not asked*? 
+  (e.g., How many packs do you smoke a week? is not asked if the person said they have never smoked)
+              
+  Two possible decisions:
+  
+  A) Recode their NA to say it was as if they answered that they smoked 0 packs a week.
+  
+> dataframeName$varName [is.na(dataframeName$varName)] <- "0"   
+  
+  B) Leave it as NA.  When you report your analyses, say that these are looking at participants who smoked. 
+     
+     Simply leave the values as NA and R automatically excludes them from most analyses
+     
+     
+- **Make your decision based on what your research question is and what analyses you are doing.**
+      
+
+------
+
+
+### 11. Combine Multiple Variables into a New Variable
+
+
+- To take the average of several variables, the syntax is:
+
+```{r, eval=FALSE}
+
+dataframeName$Avg_varName <- (dataframeName$var1+dataframeName$var2+dataframeName$var3)/ 3
+
+```
+
+
+
+  For `dataframeName$Avg_varName`, you can assign any name to replace `Avg_varName`
+  
+
+- Below is is summary of basic arithmetic operations in R. You can substitute average with anything like aggregation, difference, rates, and etc,:
+
+Operation | R codes 
+------------- | -------------
+Equal to | ==
+Larger than or equal to | >=
+Less than or equal to | <=
+Strictly greater than | >
+Strictly less than | <
+Not equal to | !=
+
+
+- We can also use `options( digits = N)` to specify that we only want N digits for that variable before any printing command. 
+
+
+------
+
+
+### 12. Collapsing Categories (i.e., levels) within A Variable (into a new variable)
+
+
+
+- The general syntax for collapsing categories with a variable is:
+
+
+> New_VarName <- rep(NA, # of observations)
+
+
+**Here, we are creating a new variable and its name is `New_VarName`. In this new variable, we assign value NA to each obervations. Since we are collapsing an existing variable in our dataset, we want the new variable to have exactly the same number of obervations as the old one.**
+
+
+```{r, eval=FALSE}
+
+> New_VarName [title_of_data_set$Old_VAR == 1 | title_of_data_set$Old_VAR == 2 | title_of_data_set$Old_VAR == 3 | title_of_data_set$Old_VAR == 5 | title_of_data_set$Old_VAR == 6] <- 1
+
+
+> New_VarName [title_of_data_set$Old_VAR == 4 | title_of_data_set$Old_VAR == 7 | title_of_data_set$Old_VAR == 8 | title_of_data_set$Old_VAR == 9] <- 2
+
+```
+
+
+**We have successfully collapsed the 9 categories in `Old_VAR` (supposedly we have this) into 2 categories. Specifically, we have combined categories 1, 2, 3, 5, and 6 of `Ola_VAR` into category 1 of in `New_VarName`, and categories 4, 7, 8, 9 into category 2.**
+
+**Note that `|` means the logic connection "OR" here, and `&` means "AND".**
+
+
+- Similarly, we can do the same for quantitative variables. For example, to categorize `mass` into 5 categories by specifying thresholds, we can write:
+
+
+```{r}
+
+Mass_cat <- rep(NA, 578)
+
+Mass_cat [ChickWeight$mass < 60] <- 1
+Mass_cat [ChickWeight$mass >= 60 & ChickWeight$mass < 120 ] <- 2
+Mass_cat [ChickWeight$mass >= 120 & ChickWeight$mass < 180 ] <- 3 
+Mass_cat [ChickWeight$mass >= 180 & ChickWeight$mass < 240 ] <- 4
+Mass_cat [ChickWeight$mass >= 240 ] <- 5
+
+summary(as.factor(Mass_cat))
+
+```
+
+**Remember to convert the newly created variable into a categorical variable with `as.factor()`**
+
+
+- To attach the new variable to our dataset:
+
+```{r}
+ChickWeight$Mass_cat <- as.factor(Mass_cat)
+summary(ChickWeight)
+```
+
+------
+
+------
+
+
+##  Section 3: Grapging and ggplot2
+
+- Basic setup:
+
+> install.packages("ggplot2")
+
+```{r, message=FALSE}
+
+library (descr)
+library (ggplot2)
+options (digits = 2)
+```
+
+
+Before we get the graphing codes, we'll need to create some sample data to work with:
+
+```{r}
+
+ID <- 1:12
+year <- c("junior", "senior", "senior", "junior", "junior", "senior", 
+          "junior", "senior", "senior", "junior", "junior", "senior")
+taskInterest <- c(4,4,1,1,2,5,4,3,3,5,5,NA)
+topicInterest <- c(5,5,2,2,3,2,2,1,4,4,4,4)
+taskInterestChange <- c("stay the same", "decrease", "increase", "increase", "increase", 
+            "decrease", "stay the same", "stay the same", "decrease", 
+            "increase", "increase", NA)
+
+d <- data.frame (ID, year, taskInterest, topicInterest, taskInterestChange)
+
+```
+
+- This sample data set has 12 subjects (ID column has their unique identifiers).  
+
+- They are in either their junior or senior year of school.
+
+- They rated their interest level on both a task and the task's topic area. 
+
+- Their interest ratings are going to be treated quantitatively here, with higher 
+  scores indicating higher levels of interest.
+  
+- They indicated if they thought their interest level in the task would decrease, 
+  increase, or stay the same. This is a categorical factor with 3 levels.
+
+```{r}
+summary(d)
+```
+
+
+------
+
+### 13. ggplot2 Graphics
+
+- Frequency distributions for a categorical OR quantitative variable:
+
+```{r}
+
+ggplot(d, aes(x=taskInterest)) + 
+  geom_bar(stat="bin", binwidth = 1)
+
+```
+
+`d` is the name of the dataset we just constructed. `ase()` specifies the axes in our output.
+`geom_bar()` tells R to generate rectangles with bases on x-axis, while `binwidth` tells the width of each bar.
+
+**To understand the commands in details and more associated arguments, please click on "ggplot2" in packages and find the command you want.**
+
+
+- For two and more variables:
+
+ **Put your DV on the y-axis and your IV on the x-axis.**
+ The third variable can be named under fill (other options exist).
+
+- Plotting two quantitative variables:
+
+```{r}
+ggplot(d, aes(x=taskInterest, y=topicInterest)) +
+  geom_point(shape=1, size = 4)
+```
+
+
+
+- Plotting means of a quantitative DV with a categorical IV
+
+```{r}
+
+ggplot(d, aes(x=taskInterestChange, y=taskInterest)) + 
+  stat_summary(fun.y="mean", geom="bar")
+
+```
+
+In `stat_summary()` we used `fun.y="mean"` to tell ggplot2 to take the means of our dependent variable. `geom()` is used to specify the geometric objects that display the data.
+
+
+- Multivariate plotting in different panels:
+
+```{r}
+
+ggplot(d, aes(x=taskInterestChange, y=taskInterest)) + 
+  facet_wrap(~ year) +
+  stat_summary(fun.y="mean", geom="bar")
+
+```
+
+Different distribution by `d$year`. 
+
+
+- Multivariate plotting in the same graph:
+
+```{r}
+ggplot(d, aes(x=taskInterestChange, y=taskInterest, fill = year)) + 
+  stat_summary( fun.y="mean", geom="bar", position = "dodge")
+
+```
+
+Different distribution by `d$year` but the two panels are merged into one with two colors assigned to differentiate the juniors from the seniors.
+
+------
+
+### 14. EXAMPLES OF SOME OF THE FORMATTING POSSIBILITIES IN GGPLOT2
+
+ -This section is only to show you some possible ways to play with ggplot2:
+ 
+
+```{r}
+ggplot(na.omit(d[,c("taskInterestChange", "taskInterest", "year")]), 
+               aes(x=taskInterestChange, y=taskInterest, fill = year)) + 
+  stat_summary( fun.y="mean", geom="bar", position = "dodge") +
+  labs(x = "Prediction of Change in Interest", y = "Mean Task Interest") +
+  ggtitle ("Interest Ratings by Year and Predicted Change") + 
+  theme_classic () + scale_fill_manual(values=c("red", "green"))
+```
+
+- **Here, `na.omit()` tells ggplot2 to plot without missing data. We have chosen here, by indexing, only to plot three variables, namely, "taskInterestChange", "taskInterest", and "year". `position=("dodge")` is to adjust position by dodging overlaps to the side.**
+
+- `Theme_classic`: A classic-looking theme, with x and y axis lines and no gridlines. We can also choose `theme_light`, `theme_minimal`, and etc. Please see Help to get a full list of choices.
+
+- To create your own discrete scale, we use `scale_fill_manual(values= c("color_of_x_axis", "color_of_y_axis"))`. Similarly available arguments are `scale_size_manual()', `scale_shape_manual()'...
+
+
+------
+
+###15. Base R Graphs
+
+Basic R graphs that use built-in tools from descr. 
+
+#### A. Frequency distributions:
+
+- `freq()` produces a bar graph, it will run on both quantitative and categorical variables but is most appropriate for categorical variables from the package descr:
+
+```{r}
+freq(d$taskInterestChange)
+```
+
+
+- `hist()` produces a histogram will only run on quantitative variables:
+
+```{r, eval=FALSE}
+hist(d$taskInterestChange)
+```
+
+`hist()` only runs on quantitative variables:
+
+```{r}
+hist(d$topicInterest)
+```
+
+
+#### B. Plotting two quantitative variables:
+
+```{r}
+plot (taskInterest ~ topicInterest, data = d)   
+```
+
+
+Putting taskInterest before the tilde tells R to treat it as the DV and put it on the y-axis. Note how basic (and unlabeled!) the graph is. because we name the dataset as an argument to the function, you don't need the $ notation.
+
+#### C.  Plotting Frequency Distribution WITHIN different categories/Two-way crosstabs 
+
+Here, your y-axis is the **proportion** of responses on your DV that are falling into a specific level of the DV for that level of the IV.  LOOK AT THE OUTPUT TO PARSE THIS.
+
+
+My example treats the different levels of taskInterest as categorical here even though it could also be treated as a quantitative variable. With this syntax, R makes it categorical.
+
+I'm breaking the command down into steps.
+- TIP: By breaking down code into steps like this, it is easier to debug.
+- It is also easier to update the code when it is in steps rather than one long, complicated line.
+
+- A **crosstab**, a two-dimensional frequency table, with categorical IV and categorical DV. It is typical to put the DV first and the IV second:
+
+```{r}
+
+interestChangeTable <- table(d$taskInterest, d$taskInterestChange) 
+interestChangeTable
+
+```
+
+It shows the values the variables takes even when it is a quantitative variable. By assigning the TABLE OUTPUT to a variable, we can use it without repeating the syntax to create the table.
+
+From this example, we see that 2 students with a rating of 1 said they would increase.
+
+- A follow-up example is to find the column percentages in this crosstab. We can do so by using a value of 2 for the `margin` argument.  Check that this is what you wanted.
+
+```{r}
+interestChangeTableProp2 <- prop.table(interestChangeTable, margin = 2)  
+
+```
+
+Here, it shows us that 67% of people who said they would stay the same had a rating of 4.
+
+The margin you select depends on the order you originally used in your initial table command and what your question is.  Put the DV is first in the table command (putting it values in the rows) and then you use the column (2) percentages.
+
+```{r}
+barplot(interestChangeTableProp2[])
+```
+
+This shows the column percentages in barplots.
+
+-  We could have also done this with nested command:
+
+```{r, eval=FALSE}
+barplot(prop.table(table(d$taskInterest, d$taskInterestChange), 2))
+```
+
+**Choose the one that works better for your assignment/research.**
+
+
+#### D. Plotting Means of DV WITHIN different categories: Quantitative DV and Categorical IV  
+
+- Because you are plotting the means (and not raw data), you have to find the means first:
+
+```{r}
+grpMeans <- by(d$topicInterest, d$taskInterestChange, mean, rm.na = TRUE)
+
+grpMeans <- tapply (d$topicInterest, d$taskInterestChange, mean, rm.na = TRUE)
+
+```
+
+Either output can go directly into the barplot command (or could nest the rhs syntax)
+
+What this command says: apply the function `mean` to the DV topicInterest for **EACH** of the levels in the IV taskInterestChange
+
+- To visualize the means by categories of taskInteresChange:
+
+```{r}
+
+barplot(grpMeans)
+
+```
+
+Here, the example actually shows that people who said their interest would decrease were the ones who had the highest mean interest rating in the task.
+
+
+#### E. Multivariate Graphing:
+
+- BECAUSE it has 3 variables here, nesting the `by` syntax within the function `ftable` is what makes the output readable:
+
+```{r}
+grpMeansNew <- ftable(by(d$taskInterest, list(d$year, d$taskInterestChange), mean))
+```
+
+
+- Nested command:
+
+```{r}
+barplot(ftable(by(d$taskInterest, list(d$year, d$taskInterestChange), mean)), beside = TRUE)
+```
+
+Please note that argument `beside` is important because it tells R to line up the bars side by side instead of stacking them up.
+
+- Another way to do multivariate graphing, is to use *logical subsetting* and give the graphing command a subsetted dataset each time. (This might be easier to think through)
+
+------
+
+### 16. More examples on ggplot2 Graphing
+
+  
+
+#### A. Univariate graphs
+
+These are frequency distributions.  
+These work for a categorical variable or a quantitative variable.
+
+ - 1. Frequency distributions for a categorical OR quantitative variable:
+
+```{r}
+ggplot(d, aes(x=taskInterest)) + 
+  geom_bar(stat="bin", binwidth = 1)            
+```
+
+
+ - 2. If it had been a categorical variable, the output would look different:
+
+```{r}
+ggplot(d, aes(x=as.factor(taskInterest))) + 
+  geom_bar(stat="bin", binwidth = 1)            
+
+```
+
+
+ - 3. If you don't want to plot NAs, use `na.omit(dataframeName)`
+
+```{r}
+
+ggplot(na.omit(d), aes(x=as.factor(taskInterest))) + 
+  geom_bar(stat="bin", binwidth = 1)   
+
+```
+
+
+ - 4. Let's reformat some:
+
+```{r}
+ggplot(na.omit(d), aes(x=as.factor(taskInterest))) + 
+  geom_bar(stat="bin", binwidth = 1) +
+  labs(x = "Level of Task Interest (5 = extremely interested)", y = "Frequency") +
+  ggtitle ("Frequency Distribution of Task Interest") +
+  theme_bw()
+```
+
+  
+
+ - 5. Change colors:
+
+```{r}
+ggplot(na.omit(d), aes(x=as.factor(taskInterest))) + 
+  geom_bar(stat="bin", binwidth = 1, fill = "navy") +
+  labs(x = "Level of Task Interest (5 = extremely interested)", y = "Frequency") +
+  ggtitle ("Frequency Distribution of Task Interest") +
+  theme_bw()
+```
+
+**Use `fill = "color"` arugment in the function `geom_bar()` to change color.**
+
+  
+
+ - 6. Change where the bins are located for a quantitative variable using `breaks = seq()` argument overrides binwidth argument:
+
+```{r}
+ggplot(na.omit(d), aes(x=taskInterest)) + 
+  geom_bar(stat="bin", breaks = seq(.5, 5.5, 1), fill = "grey") +    
+  labs(x = "Level of Task Interest (5 = extremely interested)", y = "Frequency") +
+  ggtitle ("Frequency Distribution of Task Interest") +
+  theme_bw()
+```
+
+
+------
+
+#### B. Bivariate graphs
+
+ Remember: Put your DV (response var) on the y-axis and put your IV(explanatory var) on the x-axis.
+
+ - **1. Plotting two quantitative variables = a scatterplot**
+ 
+```{r, warning=FALSE}
+ggplot(d, aes(x=taskInterest, y=topicInterest)) +
+  geom_point(shape=1, size = 4)
+```
+
+`geom_point()` is used to create scatterplot.
+
+ - What shapes can I use?
+ 
+> ? shape            
+
+ Run the example code at the bottom of the help file. (count L->R from bottom)
+
+
+ - **2. Cleaning it up some**:
+ 
+```{r, warning=FALSE}
+ggplot(d, aes(x=taskInterest, y=topicInterest)) +
+  geom_point(shape=16, size = 4, color = "red") +   
+  labs(x = "Level of Task Interest (5 = high)", y = "Level of Topic Interest (5 = high)") +
+  ggtitle ("Relationship between Task Interest and Topic Interest") +
+  theme_bw()
+```
+
+ - **3. Adding a line of best fit**:
+ 
+```{r, warning =FALSE}
+ggplot(d, aes(x=taskInterest, y=topicInterest)) +
+  geom_point(shape=16, size = 4, color = "red") +   
+  stat_smooth(method="lm", se=FALSE) +
+  labs(x = "Level of Task Interest (5 = high)", y = "Level of Topic Interest (5 = high)") +
+  ggtitle ("Relationship between Task Interest and Topic Interest") +
+  theme_bw()
+```
+
+`stat_smooth(method = "lm")` tells ggplot2 to draw a best fit line (linear regression) to aid the eye in seeing patterns in the presence of overplotting.  
+
+ - **4. Fixing overlapping points**:
+ 
+```{r, warning=FALSE}
+ggplot(d, aes(x=jitter(taskInterest), y=topicInterest)) +
+  geom_point(shape=16, size = 4, color = "red") +   
+  stat_smooth(method="lm", se=FALSE) +
+  labs(x = "Level of Task Interest (5 = high)", y = "Level of Topic Interest (5 = high)") +
+  ggtitle ("Relationship between Task Interest and Topic Interest") +
+  theme_bw()
+```
+
+`x=jitter(taskInterest)` doesn't change anything in the data. It merely jitters the points of the same value so that we can see the points better.
+
+Jittering is more appropriate in scatterplot than other graphs.
+
+ - You can also choose the level of jittering:
+ 
+```{r, warning=FALSE}
+ggplot(d, aes(x=jitter(taskInterest,.9), y=jitter(topicInterest,.2))) +
+  geom_point(shape=16, size = 4, color = "red") +   
+  stat_smooth(method="lm", se=FALSE) +
+  labs(x = "Level of Task Interest (5 = high)", y = "Level of Topic Interest (5 = high)") +
+  ggtitle ("Relationship between Task Interest and Topic Interest") +
+  theme_bw()
+```
+
+
+ - **5. Plotting means of different groups: a categorical IV and quantitative DV.**
+ 
+Plotting means of a quantitative DV with a categorical IV:
+ 
+```{r, warning=FALSE}
+ggplot(d, aes(x=taskInterestChange, y=taskInterest)) + 
+  stat_summary(fun.y="mean", geom="bar")
+ 
+```
+
+a little bit of clean up:
+
+```{r, warning=FALSE}
+ggplot(na.omit(d), aes(x=taskInterestChange, y=taskInterest)) + 
+  stat_summary(fun.y="mean", geom="bar", color = "red", fill = "pink")
+```
+
+ - **6. Plotting frequency distributions of different groups: both IV and DV le are categorical**
+ 
+ We deal with IV and DV that have more than 2 levels. In fact, the IV can be quantitative or categorical here, but if quantitative, bin it.
+ 
+ stacked bar chart - COUNTS within each group:
+
+```{r, warning=FALSE}
+ggplot(na.omit(d), aes(x=year, fill=as.factor(taskInterest))) +
+  geom_bar(stat = "bin", position = "stack") +   
+  labs(x = "Year", y = "Frequency") +
+  ggtitle ("Relationship between Task Interest and Year") +
+  theme_bw()
+```
+
+
+ grouped bar chart:
+ 
+```{r, warning=FALSE}
+ggplot(na.omit(d), aes(x=year, fill=as.factor(taskInterest))) +
+  geom_bar(stat = "bin", position = "dodge") +   
+  labs(x = "Year", y = "Frequency") +
+  ggtitle ("Relationship between Task Interest and Year") +
+  theme_bw()
+```
+
+ stacked bar chart - PROPORTIONS within each group
+ (with groups that have different numbers of observations, USE **PROPORTIONS**)
+
+```{r, warning=FALSE}
+ggplot(na.omit(d), aes(x=year, fill=as.factor(taskInterest))) +
+  geom_bar(stat = "bin", position = "fill") +   
+  labs(x = "Year", y = "Proportion of Group") +
+  ggtitle ("Relationship between Task Interest and Year") +
+  theme_bw()
+```
+
+ANOTHER WAY TO PLOT distributions when BOTH variables are categorical:
+
+```{r, warning=FALSE}
+ggplot(na.omit(d), aes(x = taskInterestChange)) +
+  facet_wrap (~ year) + 
+  geom_bar(stat = "bin") +   
+  labs(x = "Task Interest Change", y = "Frequency") +
+  ggtitle ("Relationship between Task Interest and Year") +
+  theme_bw()
+```
+
+Example: quantitative variable on x-axis and categorical variable 
+(again, not a useful graph with this limited dataset):
+
+```{r, warning=FALSE}
+ggplot(na.omit(d), aes(x = taskInterest)) +
+  facet_wrap (~ year) + 
+  geom_bar(stat = "bin", breaks = seq(.5, 5.5, 1)) +   
+  labs(x = "Task Interest", y = "Frequency") +
+  ggtitle ("Relationship between Task Interest and Year") +
+  theme_bw()
+```
+
+
+ - **7. One possible example: a categorical DV (two levels) and quantitative IV**:
+ 
+We make the categorical DV into two categories.
+
+Use 0 = no and 1 = yes, since doing this (0 = no, 1 = yes) lets the mean of the variable EQUAL the proportion of 'yes' responses in the variable.
+
+line graph of taskInterestChange = increase across taskInterest (quantitative)
+
+```{r}
+d$interestIncreased <- NA
+d$interestIncreased[d$taskInterestChange == "increase"] <- 1
+d$interestIncreased[d$taskInterestChange == "decrease" |
+                      d$taskInterestChange == "stay the same"] <- 0
+
+ggplot(na.omit(d), aes(x=taskInterest, y = interestIncreased)) +
+  stat_summary(fun.y="mean", geom="point", color = "red", size = 4) +
+  geom_line ()
+```
+
+Comment: Here, the plotted point is the percentage of observations in that level of taskInterest who said that their interest would increase.
+
+------
+
+
+#### C. Multivariate graphing:
+
+
+Using `facet` or assigning a variable to `fill` or to `color` works for scatterplots, line graphs, bar graphs, etc.
+
+You can also assign the 3rd variable to shape or size of points.
+
+ - Remember that we had the following syntax from item 13 of this section:
+
+```{r, eval=FALSE}
+
+# multivariate plotting in THE SAME GRAPH:
+
+ggplot(na.omit(d), aes(x=year, y=taskInterest, fill = taskInterestChange)) + 
+  stat_summary( fun.y="mean", geom="bar", position = "dodge")
+
+# multivariate plotting in DIFFERENT PANELS:
+
+ggplot(na.omit(d), aes(x=taskInterestChange, y=taskInterest)) + 
+  facet_wrap(~ year) +
+  stat_summary(fun.y="mean", geom="bar")
+```
+
+
+
+ - WITH FOUR VARIABLES: this example isn't useful with this data, but shows how the syntax would work
+ 
+```{r}
+ggplot(na.omit(d), aes(x=topicInterest, y=taskInterest)) + 
+  facet_wrap(~ year + taskInterestChange) +
+  stat_summary(fun.y="mean", geom="bar")
+```
+
+
+------
+
+
+### 17.  Other Useful Tips for Your Plots
+
+#### A. Before plotting: 
+
+ - Set the levels of your factor SO that it stays in the order you want. 
+ - Compare the following plots (same code, but changed variable order in between):
+
+```{r}
+ggplot(na.omit(d), aes(x=taskInterestChange, y=taskInterest)) + 
+  stat_summary(fun.y="mean", geom="bar", color = "red", fill = "pink")
+```
+
+In this graph we set the order of the levels of our factor first using `c=()`:
+
+```{r}
+d$taskInterestChange <- factor(d$taskInterestChange, 
+                               levels = c("decrease", "stay the same", "increase"))
+ggplot(na.omit(d), aes(x=taskInterestChange, y=taskInterest)) + 
+  stat_summary(fun.y="mean", geom="bar", color = "red", fill = "pink")
+
+```
+
+#### B. Add to the plotted graph:
+
+
+ - `coord_flip()` would switch which variable is on which axis
+
+ - More formatting options:
+
+
+```{r}
+ggplot(na.omit(d), 
+       aes(x=taskInterestChange, y=taskInterest, fill = year)) + 
+  stat_summary( fun.y="mean", geom="bar", position = "dodge") +
+  labs(x = "Prediction of Change in Interest", y = "Mean Task Interest") +
+  ggtitle ("Interest Ratings by Year and Predicted Change") + 
+  theme_classic () + scale_fill_manual(values=c("red", "green"))
+```
+
+
+ - It is unlikely that you will have a group that has no observations, but if you do, look at `expand.grid()`
+ 
+
+#### C. After plotting:
+
+ - If not all of your labels show up in the plot window, make the window bigger before you click export and copy the graph to the clipboard.
+
+ - When you click export, and choose to copy the graph, you can change the size of the graph. Select to maintain the ratio, and then use the lower right-hand shaded triangle to make the plotted area smaller. This will make the fonts relatively larger.
+ 
+------
+
+------
+
+
+## Section 4: Analysis of Variance - ANOVA (Quantitative DV and Categorical IV)
+
+ - Before we introduce ANOVA, we need to first have some understanding of our dataset by using descriptive statistics and graphs. In this section, we'll use a built-in dataset `InsectSprays`. It is very good for our demonstration of how to use ANOVA to approach your research questions. 
+ 
+```{r, eval=FALSE}
+? InsectSprays
+```
+ 
+ - Research Question of `InsectSprays`: Does the type of insect spray used affect the count of insects?
+ 
+ 
+```{r}
+############  R set-up
+options (digits = 2)
+library (ggplot2)
+
+############  get the data
+data (InsectSprays) 
+```
+
+ 
+ - Descriptive statistics:
+ 
+```{r}
+summary(InsectSprays)
+tapply (InsectSprays$count, InsectSprays$spray, mean)
+tapply (InsectSprays$count, InsectSprays$spray, sd)
+tapply (InsectSprays$count, InsectSprays$spray, length)
+```
+
+We can see that the data frame has 72 observations n 2 variables, one quantitative and the other categorical.
+
+ - Boxplot (showing variation in values) and mean: here we have categorical IV with quantitative DV:
+ 
+```{r}
+ggplot (InsectSprays[!is.na(InsectSprays$spray) & !is.na(InsectSprays$count),], 
+        aes(x = spray, y = count)) + 
+  geom_boxplot() +
+  stat_summary(fun.y=mean, colour="darkred", geom="point", 
+               shape=18, size=4) + 
+  labs(x = "Spray", y = "Average # of Insects") +
+  ggtitle ("Insect Counts with Different Sprays") + 
+  theme_bw()
+```
+
+- Bargraph of means  NEW: ADDED +/- 1 standard deviation ERROR BARS: categorical IV with quantitative DV:
+
+```{r}
+ggplot (InsectSprays[!is.na(InsectSprays$spray) & !is.na(InsectSprays$count),]
+        , aes(x = spray, y = count)) + 
+  stat_summary(fun.y="mean", geom="bar", fill = "lightblue") +
+  stat_summary(fun.y = mean,
+               fun.ymin = function(x) mean(x) - sd(x), 
+               fun.ymax = function(x) mean(x) + sd(x), 
+               geom = "pointrange",
+               color = "blue") +
+  labs(x = "Spray", y = "Average # of Insects (+/- 1 SD") +
+  ggtitle ("Insect Counts with Different Sprays") + 
+  theme_bw()
+```
+
+**Please pay attention to new arguments in our graphing demand and look for possible values in HELP.**
+
+------
+
+### 18. One-way ANOVA
+
+
+ - Unless you have sample sizes that are very small and have other violations, ANOVA is fairly robust against violations of normality
+
+
+#### A. Bartlett test of homogeneity of variances
+
+ - First, we need to check homogeneity of variance assumption
+     + null hypothesis here is variances are **all equal**
+     + if the test returns p value > 0.05 (**not significant**), we are good to go because it suggests we do not have robust evidence to reject the null hypothesis that variances are all equal, thus running ANOVA on this data frame makes sense.
+     
+ - Bartlett test of homogeneity of variances:
+ 
+ 
+> bartlett.test(Quantitative_DV ~ Categorical_IV, data=your_data_frame) 
+ 
+ 
+```{r}
+bartlett.test(count ~ spray, data=InsectSprays) 
+```
+
+ - Interpretation
+     + This data set **VIOLATED** homogeneity of variance assumption: p-value = 9.085e-05 < 0.05
+     + HERE THOUGH, I've chosen to proceed DESPITE having violated the assumption!
+     + That is **NOT** how you should proceed with your analyses
+
+
+#### B. ANOVA
+
+ - One-way ANOVA:
+ 
+ 
+```{r}
+aov.out <- aov(count ~ spray, data=InsectSprays)
+summary(aov.out)
+```
+
+ - Discussion:
+     + `aov.out` is the name we assigned to our ANOVA here, but you are free to choose!
+     + General syntax: `aov.name <- aov(Quantitative_DV ~ Categorical_IV, data=your_data_frame)`
+     
+ - Interpretation: There are significant differences among the different samples, given our field units, F(5,66) = 34.7, and p < .001.
+ 
+#### C. Tukey multiple comparisons of means
+
+ - To see which groups have significantly different means from the others, we use 'TurkeyHSD(aov.name)':
+ 
+```{r}
+TukeyHSD (aov.out)
+```
+
+ - Interpretation:
+     + The count of insects in Groups A, B, and F were each significantly different from that of Groups C, D, and E (Tukey's HSD, p < .001), but Groups A, B, and F did not differ from one another (p > .05).  (This would be accompanied by a graph or table showing means and SD. With only a few groups, those numbers could be reported in the text.)
+     + The reported p values are already adjusted to control for multiple comparisons.
+     
+     
+#### D. Moderation and/or Interaction
+
+ - To attach a new randomly generated variable to our data frame InsectSprays, by putting in a randomly selected whole number in range 1-2, 72 times for each of the 72 observations in the original dataset. Then we change the variable into a factor and assign meaningful labels to the values "1" and "2":
+ 
+ 
+```{r}
+InsectSprays$thirdVar <- sample(1:2,72, replace = TRUE)
+     
+InsectSprays$thirdVar <- factor(InsectSprays$thirdVar, levels = c(1,2), labels = c("Group A", "Group B"))
+summary(InsectSprays)
+```
+
+ Caveat: YOUR ACTUAL VALUES WILL DIFFER BECAUSE IT IS A **RANDOM** SAMPLE!!
+ 
+ ---
+ 
+ - 1. *subsetting* approach:
+
+```{r}
+aovA.out <- aov(count ~ spray, data=InsectSprays[InsectSprays$thirdVar == "Group A",])
+aovB.out <- aov(count ~ spray, data=InsectSprays[InsectSprays$thirdVar == "Group B",])
+
+summary(aovA.out)
+summary(aovB.out)
+```
+
+ - Discussion:
+     + look at means to see if the direction of the effects (and strength) is the same (same = no moderation) to interpret same or different significant levels
+     + we can also check moderation/interpretation with `by()` approach. The big picture here is to see if different levels of the third variable(s) would result in different associations between (the means of) your quantitative DV and (the levels of) your categorical IV
+
+ ---
+  
+ - 2. `by` approach
+ 
+ General syntax:
+ 
+> by(title_of_dataset, title_of_dataset$ThirdVariable, function(x)
+
+> list(aov(QuantitativeResponse ~ CategoricalExplanatory, data=x),
+
+> summary(aov(Quantitative Response~ CategoricalExplanatory, data=x))))
+ 
+ For example:
+ 
+```{r}
+by(InsectSprays, InsectSprays$thirdVar, function(x)
+  summary(aov(count ~ spray, data = x)))
+```
+
+
+ To get results from TukeyHSD posthoc tests for each level of gender:
+ 
+```{r}
+by(InsectSprays, InsectSprays$thirdVar, function(x)
+  list(summary(aov(count ~ spray, data = x)),
+       TukeyHSD(aov(count ~ spray, data = x))))
+```
+
+ A more statistically-correct approach:
+ 
+ 
+```{r}
+aovInt.out <- aov(count ~ spray * thirdVar, data=InsectSprays)
+summary(aovInt.out)
+```
+
+
+ - Discussion:
+     + This lets us answer more questions about the relationships among these three variables.We will get to this later in the course.
+     + `thirdVar` is the **interaction effect**: if this is significant, then do follow-up tests (one-way ANOVA simple effects analyses (control alpha) and/or pairwise comparisons (control alpha)), and you know if spray has a significant main effect or not.  
+     + then you will also find out if there is a significant main effect of `thirdVar` (that is, does `thirdVar` have an effect independent of spray)
+     + the ouput here tells other that `thirdVar` is not independent and the iteration terms is not significant.
+
+
+*******
+
+*******
+
+
+
+## Section 5: Chi-squre Test of Independence 
+## (Categorical DV and Categorical IV)
+
+ - As we did in section 4, we need to first have some understanding of our dataset by using descriptive statistics and graphs. In this section, we'll use a built-in dataset `survey`.
+
+```{r}
+options (digits = 2)
+library (ggplot2)
+library (MASS)
+library(descr)
+
+############  get the data
+data (survey)
+? survey
+```
+
+ - **Research Question: Is exercise related to smoking habits? (Exercise is my DV here)**
+ 
+ -  Initial data management:
+ 
+```{r}
+
+# telling R what order the factor levels should be in (for output)
+survey$Smoke <- factor(survey$Smoke, 
+                       levels = c("Never", "Occas", "Regul", "Heavy"))
+survey$Exer <- factor(survey$Exer,
+                      levels = c("None", "Some", "Freq"))
+```
+
+
+ － Descriptive statistics of the categorical variables we are using here:
+ 
+```{r, eval=TRUE}
+summary(survey)
+
+# frequency distribution (with proportions and graphs then tables)
+freq(survey$Smoke)
+freq(survey$Exer)
+
+table(survey$Smoke)
+table(survey$Exer)
+```
+
+ - Contingency table:
+
+```{r}
+table(survey$Smoke, survey$Exer)
+```
+
+ - Discussion: Smoke is my IV and is on the x-axis. FYI: if you have three categorical variables: 
+   use `ftable` as the function name for better formatting:
+     
+```{r}
+ftable(survey$Smoke, survey$Exer, survey$Sex, survey$Fold)
+```
+
+------
+
+
+### 19. Conditional Percentages: 
+###     probability of the levels of DV within each level of IV
+
+ - Syntax for generating conditional percentages:
+
+```{r}
+prop.table(table(survey$Smoke, survey$Exer),1)
+```
+
+ - Interpretation: My IV is Smoking. I want to know the distribution of exercise within each level of smoking.  So for Smoking = Never, I see that the different exercise possibilities **sum to 100%** of the never smoked. (compare to proportion bar graph)
+
+#### A. Stacked bar chart - **COUNTS** within each group:
+ 
+```{r}
+ggplot(survey[!is.na(survey$Smoke) & !is.na(survey$Exer),],
+       aes(x=Smoke, fill=as.factor(Exer))) +
+  geom_bar(stat = "bin", position = "stack") +   
+  labs(x = "Smoking", y = "Frequency") +
+  ggtitle ("Relationship between Smoking and Exercise") +
+  theme_bw()
+```
+
+
+#### B. Stacked bar chart: **PROPORTIONS** within each group 
+
+ - With groups that have different numbers of observations, USE PROPORTIONS BUT need to make it clear if some groups have very different sample sizes than others!
+ 
+```{r}
+ggplot(survey[!is.na(survey$Smoke) & !is.na(survey$Exer),],
+       aes(x=Smoke, fill=as.factor(Exer))) +
+  geom_bar(stat = "bin", position = "fill") +   
+  labs(x = "Smoking", y = "Frequency") +
+  ggtitle ("Relationship between Smoking and Exercise") +
+  theme_bw()
+```
+
+#### C. Facetted bar graphs:
+ 
+ - One panel for each level of faceted variable:
+
+```{r}
+ggplot(survey[!is.na(survey$Smoke) & !is.na(survey$Exer),],
+       aes(x=Exer)) +
+  facet_wrap (~ Smoke) + 
+  geom_bar(stat = "bin") +   
+  labs(x = "Exercise", y = "Frequency") +
+  ggtitle ("Relationship between Smoking and Exercise") +
+  theme_bw()
+```
+
+------
+
+### 20. Chi-Square Test of Independence
+
+ - Syntax:
+
+```{r, eval=FALSE}
+> chi.name <- chisq.test(title_of_data_set$DV, title_of_data_set$IV)
+```
+
+ - For example:
+ 
+```{r}
+chi.out <- chisq.test(survey$Exer, survey$Smoke)
+
+chi.out
+```
+
+ - Discussions: 
+     + **Warning**: Chi-squared approximation may be incorrect (expected n are too small here)
+     + Interpretation: Exercise and smoking are independent of (aka, not related to), CHI_SQUARE_SYMBOL(6) = 5.5, p = .48.
+     
+ - **Each cell's expected count = (row total * col total) / total N**:
+ 
+```{r}
+summary(chi.out)
+chi.out$observed 
+
+chi.out$expected
+
+chi.out$residuals 
+```
+
+ - Discussions:
+     + `chi.out$residuals` tells you which cells are significantly different than expected by chance in a 2x2 design, residuals > |1.96| indicate that cell has an observed number of cases that is **significantly different from what would be expected by chance**
+     + But looking at residuals does **NOT** tell you which levels of the categorical variable are different
+     + Here, we conclude that no cases are significantly different from their **EXPECTED VALUES**
+
+
+------
+
+
+### 21. Post hoc Chi-square tests and Moderation:
+
+
+#### A. Bonferroni Adjustment to Significance Level: 
+
+ - Divide alpha by number of possible comparisons (note that it is **possible comparisons** and not just the number you run). IF you had a **significant** chi-square test, you would follow this up with post hoc tests.
+ 
+ - Post Hoc Tests: look at subsets of your data. To be most interpretable, need to just have two levels to response variable BUT this depends on exactly what you want to say. 
+     + E.g., is proportion of *frequent vs. not frequent exercisers* different for never vs. heavy smokers subset to look at one pair of groups for a binary response at a time?
+
+
+#### B. Post Hoc Tests of pairwise comparisons:
+
+ - IF AND ONLY IF (i.e., IFF) your Chi-Square is **significant**, do this post hoc test.
+ 
+ - Here, you would compare the distribution of exercise for Never vs. Occas, Never vs. Regul, Never vs. Occassional, Never vs. Heavy, Occas vs. Regul, Occas vs. Heavy, Regul vs. Heavy
+ 
+ - To control for your *Type I Error* Rate, apply the **Bonferroni correction** to your alpha level divide your original alpha by the number of possible pairwise comparisons
+ 
+ - Here, if using alpha = .05, the new significance level to use is .05 / 7 = .007, the observed p value for our pairwise comparisons (based on subsetted chi squares) must be < .007 to be significant
+
+
+ - Note that we subset both variables (so they have the same number of rows), and we apply the **logical indexing** to the rows. The column is already given so don't need that added inside the brackets also.
+   Example:
+ 
+```{r}
+chi.out1 <- chisq.test(survey$Exer[survey$Smoke == "Never" | survey$Smoke == "Occas"], 
+                      survey$Smoke[survey$Smoke == "Never" | survey$Smoke == "Occas"])
+chi.out1
+chi.out1$observed
+```
+
+ - Discussion: Here, you could indicate whether or not exercise patterns were different **for never smoked vs occasional smoked.** Note that because there are three levels of the dependent variable, we do not know exactly where the difference lies.  Depending on your RQ, you may not need that.
+ 
+ - Another example:
+ 
+```{r}
+chi.out2 <- chisq.test(survey$Exer[survey$Smoke == "Never" | survey$Smoke == "Heavy"], 
+                       survey$Smoke[survey$Smoke == "Never" | survey$Smoke == "Heavy"])
+chi.out2
+chi.out2$observed
+```
+
+ - Here we're comparing if exercise patterns were different for never smoked vs. heavy smoked.
+
+
+#### C. Moderation
+
+ - Moderation question: **Is the relationship between smoking and exercise (DV) different for different sexes (3rd var)?**
+ 
+ - 1. *Subsetting* approach:
+ 
+```{r, warning=FALSE}
+# both of these next lines are equivalent (just two different syntaxes)
+chisq.test(survey[survey$Sex == "Male","Exer"], survey[survey$Sex == "Male", "Smoke"])
+chisq.test(survey[survey$Sex == "Male",]$Exer, survey[survey$Sex == "Male",]$Smoke)
+
+chisq.test(survey[survey$Sex == "Female",]$Exer, survey[survey$Sex == "Female",]$Smoke)
+chisq.test(survey[survey$Sex == "Female","Exer"], survey[survey$Sex == "Female", "Smoke"])
+```
+
+
+ - 2. *`by` approach*: **the "x" stays as it is.**  --- Put in your `title_of_dataset` and variables
+ 
+  Syntax:
+ 
+```{r, eval=FALSE}
+by(title_of_dataset, title_of_dataset$ThirdVariable, function(x)
+  list(chisq.test(x$Categorical_DV, x$Categorial_IV),
+       chisq.test(x$Categorical_DV,
+                  x$Categorical_IV)$residuals))  
+```
+
+  For example:
+ 
+```{r, warning=FALSE}
+by(survey, survey$Sex, function(x)
+  chisq.test(x$Exer, x$Smoke))
+```
+
+  Want to run more than 2 functions?
+
+```{r, warning=FALSE}
+by(survey, survey$Sex, function(x)
+  list(
+    chisq.test(x$Exer, x$Smoke),
+    chisq.test(x$Exer, x$Smoke)$residuals))  
+```
+
+-------
+
+-------
+
+
+## Section 6. Pearson Correlation
+##            Quantitative DV and Quantitative IV
+
+ - In this section we'll use the "survey" dataset from the MASS library. First, we need to set up the basics and familiarize ourselves with the data.
+
+ - If you have not installed the "MASS" library, use `install.packages("MASS")`
+ 
+ Set-up:
+ 
+```{r}
+options (digits = 2)
+library (ggplot2)
+
+library (MASS) 
+
+
+
+############  get the data
+data (survey) 
+? survey
+```
+
+ - RQ: Is a person's height related to their pulse? (PULSE is my DV here, and both of the variables are quantitative)
+
+ - Descriptive statistics:
+
+```{r}
+summary(survey)
+summary(survey$Height)
+summary(survey$Pulse)
+```
+
+ - Graph:
+ 
+```{r}
+ggplot(survey[!is.na(survey$Height) & !is.na(survey$Pulse),],
+       aes(x=Height, y=Pulse)) +
+  geom_point(shape=16, size = 4, color = "red") +   
+  stat_smooth(method="lm", se=FALSE) +
+  labs(x = "Height (cm)", y = "Pulse (beats per min)") +
+  ggtitle ("Relationship between Pulse and Height") +
+  theme_bw()
+```
+
+ - We can also jitter the points because the points are overlapping. The use of alpha here controls transparency (It is NOT the significance level). With alpha, darker sections have more points plotted on top of each other. With a small amount of jitter (random noise), points are **near where they actually are.** Play around with different values of alpha and jitter for your data:
+ 
+ 
+```{r}
+ggplot(survey[!is.na(survey$Height) & !is.na(survey$Pulse),],
+       aes(x=jitter(Height, 0), y=jitter(Pulse,0))) +        # turned off jitter by set to 0   
+  geom_point(shape=16, size = 2, color = "red", alpha = .3) +   
+  #stat_smooth(method="lm", se=FALSE) +
+  labs(x = "Height (cm)", y = "Pulse (beats per min)") +
+  ggtitle ("Relationship between Pulse and Height") +
+  theme_bw()
+```
+
+
+  
+### 22. Pearson Correlation
+
+ - Syntax:
+
+```{r, eval=FALSE}
+cor.test(title_of_data_set$DV, title_of_data_set$IV)
+```
+
+ 
+ - For example:
+ 
+```{r}
+cor.test (survey$Height, survey$Pulse)
+```
+
+ - Interpretation: Height and pulse were not significantly correlated, r(169) = -.08, p = .28.
+
+------
+
+### 23. Moderation in Pearson Correlation Test:
+
+#### A. `by` approach
+
+>  by(title_of_dataset, title_of_dataset$ThirdVariable,
+>    function(x) cor.test(~ Quantitaitve_DV +
+>                           Quantitative_IV, data=x))
+
+ - Note the different syntax used within the `cor.test` function
+
+ - For example:
+
+```{r}
+by(survey, survey$Sex, function(x)
+  cor.test (~ Height + Pulse, data = x))
+```
+
+ - Interpretation: We conclude that the moderation `Sex` is not significant.
+
+### B. Subsetting approach:
+
+ - Here would have to handle NAs first, and then it could work. We can handle the NAs most easily by making a temporary copy of the dataset using `!is.na` on the variables you are analyzing with that temporary dataset.
+
+
+
+*******
+
+*******
+
+
+## Section 7. Linear Regression
+
+ - Big idea: a linear regression looks for associations between your independent variables, quantitative or categorical, and your **quantitative** dependent variables.
+ 
+
+### 24. (Multiple) Linear Regression
+
+ - Set-up:
+ 
+```{r}
+library (ggplot2)
+library (MASS)   # for the pairs function
+
+# Load mtcars data and look at the documentation
+data(mtcars)
+help(mtcars)
+```
+
+ - Research question: I am interested in what characteristics of a car are associated with lower gas mileage.
+   
+ - Syntax:
+ 
+```{r, eval=FALSE}
+summary(lm(DV ~ IV, data=title_of_data_set))
+```
+
+ - Comments: Here you can actually add more than one IVs and connect them with `+`.
+ 
+ 
+#### A. Bivariate
+ 
+ - A bi variate example with a quantitative IV:
+ 
+```{r}
+car.wt.lm <- lm(mpg ~ wt, data=mtcars)
+summary(car.wt.lm)
+```
+
+ - Interpretation: weight is significantly associated with mpg, as we have a very significant p value (very small, almost 0). From the estimated coefficient of `wt` we know that, for every one unit increase in weight, mpg does **down** by 5.344 units. To visualize the regression:
+ 
+```{r}
+ggplot (mtcars, aes(x = wt, y = mpg)) + 
+  geom_point (shape = 1) +
+  geom_smooth (method = lm, se = FALSE)     # remove ", se = FALSE" to show 95% confidence region
+```
+
+ 
+ - Another bivariate example with a categorical IV: `am` is a binary categorical variable
+ 
+```{r}
+car.trans.lm <- lm(mpg ~ am, data=mtcars)
+summary(car.trans.lm)
+```
+
+ - Interpretation: transmission is significantly associated with mpg, as we have a very significant p value (0.00029). From the estimated coefficient of `am` we know that, from level "0" to level "1", mpg goes **up** by 7.24 units. To visualize the regression:
+ 
+```{r}
+ggplot (mtcars, aes(x = am, y = mpg)) + 
+  stat_summary(fun.y="mean", geom="bar", color = "red", fill = "pink") +
+  stat_summary(fun.data = mean_cl_normal, aes(width = 0.2), geom="errorbar", mult = 1.96, color = "red") +   # uses Hmisc
+  geom_smooth (method = lm, aes (group = 1), se = FALSE, color = "red")   
+```
+
+ - Instead of +/- 1 SD, now we can plot **confidence intervals (if mult = 1.96)** or **standard error bars (if mult = 1)**. 
+     + In a normal distribution, 95% of the values are within 1.96 standard errors of the population mean
+     + Please mention type of error bar in your graph or axes titles
+     + Use EITHER confidence interval band for regression line **OR** standard error bars (NOT both)
+     + We usually do NOT see regression lines on bar graphs
+     
+#### B. Multivariate cases
+
+ - We can include multiple IV's, and they can be quantitative, categorical, or a mixture of each. But first we'd like to plot the variables:
+ 
+```{r}
+pairs (mtcars[,c("mpg", "wt", "am")])  
+```
+
+- Syntax is essentially the same as in bivariate case. For example:
+ 
+```{r}
+car.mult.lm <- lm(mpg ~ wt + am, data=mtcars)
+summary(car.mult.lm)
+```
+
+OR
+
+```{r}
+car.mult.lm2 <- lm(mpg ~ wt + am + hp, data=mtcars)
+summary(car.mult.lm2)
+```
+
+ - Interpretation: the same as in bivariate cases, but now we have an coefficient for each variable. Please note the different types of interpretations for quantitative and categorical variables.
+ 
+#### C. Compare the models
+
+ - To compare two multivariate models, we do the following operations. The model with the **smaller** AIC (here, car.mult.lm2) is the 'better' model.
+
+ - Syntax: 
+ 
+```{r}
+anova(car.mult.lm, car.mult.lm2, test = "Chisq")
+AIC(car.mult.lm)   
+AIC(car.mult.lm2)  
+```
+
+ - **This tells us that it was good to have added hp to our model.**
+
+ - Another question: Was it good to have added am?  (am was non-significant,  but it also shows that same overall information using model comparison)
+
+```{r}
+anova(car.wt.lm, car.mult.lm, test = "Chisq")
+```
+
+ - Interpretation(answer): No - this is not significant so the two models are not different from one another, so choose the one with the **smaller** number of predictors
+ 
+ - Results of interest in regressions: **Coefficient estimate, standard error, p-value, adjusted R^2**
+     + *standard error*: In a regression line, the **smaller** the standard error of the estimate is, the more accurate the predictions are. 
+     + *p-value*: the probability of obtaining the observed sample results (or a more extreme result) when the null hypothesis is **actually true**.
+     + *adjusted R^2(R-square)*: a more accurate measure of the explanatory power of your regression model
+
+
+------
+
+******
+
+
+## Section 8. Logistic Regression
+## Categorical Binary DV
+
+ - In this section we use `infertility` data to demonstrate the use and interpretation of logistic regression.
+
+ - Load the data:
+ 
+```{r}
+data(infert)
+help(infert)
+```
+
+ - I am interested in what factors are associated with infertility.
+
+### 25. Logistic Regression
+
+ - First, since we need a binary DV for logistic regressions, we categorize the number of spontaneous abortions to 0 vs. any:
+ 
+```{r}
+infert$spon.bin <- 1
+infert$spon.bin[infert$spontaneous==0] <- 0
+```
+
+#### A. Bivariate case:
+
+ - Is age associated with infertility?
+ 
+ - We can't use a linear regression because there is **not** a linear relationship between infertility and age, as infertility is a binary variable after our previous operation. We can visualize the relationship from a plot:
+ 
+```{r}
+ggplot(infert, aes(x = age, y = spon.bin)) +
+  geom_point (shape = 1) +
+  stat_smooth(method="glm", family="binomial", se = FALSE)  
+```
+
+ - Problems with using a linear regression with a binary DV:
+     + Seriously violates assumptions of a linear model (normality of residuals)
+     + Predicted values for DV can be outside of the possible values 0 and 1 (See video from Chapter 17)
+     + Solution: Use logistic regression to model the log odds of DV being 1
+
+ - Syntax:
+ 
+```{r, eval=FALSE}
+name_of_logistic_regression <- glm(DV ~ IV, data = name_of_data_frame, family = "binomial")
+```
+
+ - Logistic regression of one quantitative IV:
+ 
+```{r}
+infert.glm1 <- glm(spon.bin ~ age, data=infert, family="binomial")
+summary(infert.glm1)
+
+
+exp(coef(infert.glm1)) # exponentiated coefficients
+exp(confint(infert.glm1)) # 95% CI for exponentiated coefficients
+```
+ 
+ - Discussions:
+ 
+     + We need to use `coef()` to obtain **odds ratios** of our independent variables.
+     + Interpretation: Age is significant associated with infertility; with a 1 year increase in age, the estimated odds of spontaneous abortion decrease by a factor of 0.945, 95% OR[.90, .99]. **That is, the relative odds of a spontaneous abortion are about 5% less for each one year increase in age.**
+     + To interpret odds ratios in logistic regressions, please refer to this [link](http://www.ats.ucla.edu/stat/stata/faq/oratio.htm).
+     + We can also report the 95% confidence interval of the exponentiated coefficients instead of a single estimate number.
+
+
+#### B. Multivariate cases
+
+##### 1. Two quantitative IVs:
+ 
+```{r}
+infert.glm2 <- glm(spon.bin ~ age + induced, data=infert, family="binomial")
+summary(infert.glm2)
+
+exp(coef(infert.glm2))
+exp(confint(infert.glm2))
+```
+
+ - Interpretation: Controlling for induced, a 1 year increase in age reduces the relative odds of an abortion by approximately 7%, OR = .93, 95% CI[0.88, 0.98], p = .007.  **An increase in the number of prior induced abortions (you'd probably want this variable to have been a factor instead) decreases the relative odds of an abortion by a factor of 0.45.**
+
+ - If you wanted to see if there is a different effect of age for different levels of induced abortion, you would use an interaction in your model.
+ 
+ 
+##### 2. Two quantitative and one categorical (with 3 levels) IVs
+
+ - Two see the three levels of `education`:
+```{r}
+summary (infert$education) 
+```
+ 
+ - logistic regression:
+
+```{r}
+infert.glm3 <- glm(spon.bin ~ age + induced + education, data=infert, family="binomial")
+summary(infert.glm3)
+
+exp(coef(infert.glm3))
+exp(confint(infert.glm3))   
+```
+
+ - Interpretations:
+     + neither `6-11` or `12+ years of education` are significantly different from 0-5 years of education
+     + notice that the 95% CIs of `6-11` and `12+ years of education` now include the value of 1, and this indicates that they are not significant
+     + all coefficients of different levels of factors are comparing **the level they stand for** against **the base level**
+     
+##### 3. one categorical IV
+
+ - syntax:
+ 
+```{r}
+infert$case <- factor(infert$case, levels = c(0,1), labels = c("control", "case"))  # from codebook
+
+infert.glm4 <- glm(spon.bin ~  case, data=infert, family="binomial")
+summary(infert.glm4)
+
+exp(coef(infert.glm4))
+exp(confint(infert.glm4))   
+
+```
+
+  - Interpretations:
+      + as you go from control to case, the change in log odds is 1.45
+      + The odds of a spontaneous abortion for individuals with case status are 4.27 times the odds of a spontaneous abortion for individuals in the control group, 95%CI[2.46, 7.56]
+      
+      
+
+#### C. Compare models:
+
+##### Is glm2 significantly better than glm1?  Adding parameters can come at a cost:
+ 
+```{r}
+anova (infert.glm1, infert.glm2, test = "Chisq")
+
+AIC(infert.glm1)   
+AIC(infert.glm2)
+```
+
+ - Interpretation: extremely small p-value tells us that there is a significant difference between the two models, and the model with the **smaller** AIC (here, infert.glm2) is the 'better' model.
+ 
+ - This tells us that it was good to have added `induced` to our model
+
+
+##### Another example: comapring glm2 to glm3: did adding the variable education overall make a difference (i.e., improve the fit)? 
+ 
+```{r}
+anova (infert.glm2, infert.glm1, test = "Chisq")   # compare two models that differ by only one term
+
+AIC(infert.glm2)   
+AIC(infert.glm3) 
+```
+
+ - Conclusions: 
+     + since the model with the **smaller AIC** (here, infert.glm2) is better, we know that adding `education` did **not** help improve the overall fit of our model
+     + BUT, notice that the effects of age and induced have changed slightly. If this were a "large enough" change, then we would know that education was a confound
+
+
+******
+
+******
+
+
+## Section 9. Confounding and Moderation
+
+
+### 26. Condounding
+
+ - From [wikipedia page](http://en.wikipedia.org/wiki/Confounding): a confounding variable (also confounding factor, a confound, or confounder) is an extraneous variable in a statistical model that correlates (directly or inversely) with **both the dependent variable and the independent variable**. A perceived relationship between an independent variable and a dependent variable that has been misestimated due to the failure to account for a confounding factor is termed a spurious relationship, and the presence of misestimation for this reason is termed omitted-variable bias.
+
+ - Basic R set-up:
+ 
+```{r}
+library(ggplot2)
+
+data(mtcars)
+mtcars$am <- as.factor(mtcars$am)
+```
+
+ - I am examining whether `car weight` is a **confounder** of the relationship between `transmission type` and `gas mileage`.
+ 
+ - First we test whether the bivariate association is significant:
+ 
+```{r}
+trans.lm <- lm(mpg ~ am, data=mtcars)
+summary(trans.lm)
+```
+
+ - Now test the confounder:
+ 
+```{r}
+trans.wt.lm <- lm(mpg ~ am + wt, data=mtcars)
+summary(trans.wt.lm)
+```
+
+ - Since:
+     + 1) `transmission type` was associated with mpg in the bivariate case
+     + 2) it did not remain significant in the multivariate case after controlling for weight
+   We conclude that weight is a confounder **WHEN** your **research question** was about the relationship between transmission type and gas mileage.
+   
+
+------
+
+### 27. Moderation
+
+ - From Wikipedia: In statistics and regression analysis, moderation occurs when the relationship between two variables depends on a third variable. The third variable is referred to as the moderator variable or simply the moderator. The effect of a moderating variable is characterized statistically as an interaction; that is, a qualitative (e.g., sex, race, class) or quantitative (e.g., level of reward) variable **that affects the direction and/or strength of the relation between dependent and independent variables.** Specifically within a correlational analysis framework, a moderator is a third variable that affects the zero-order correlation between two other variables, or the value of the slope of the dependent variable on the independent variable. In analysis of variance (ANOVA) terms, a basic moderator effect can be represented as an interaction between a focal independent variable and a factor that specifies the appropriate conditions for its operation.
+ 
+ - **As opposed to the confounding case, the item added to our model (the third variable) is not an existing variable, nut one that we created to go with our research interest.**
+ 
+ - We are here examining `gas mileage` as a function of `transmission type`, `weight`, and **the interaction between transmission type and weight.**
+ 
+ - Syntax:
+  
+```{r}
+cars.mod.lm <- lm(mpg ~ am * wt, data=mtcars)
+summary(cars.mod.lm)
+```
+
+ - Interpretation:
+     + Main terms show that manual transmissions have higher gas mileage, and heavier cars have lower gas mileage
+     + The interaction term indicates that, among automatic cars, weight is more strongly associated with lower gas mileage
+     +  WITH AN INTERACTION,  WE CAN'T INTERPRET OTHER TERMS IN THE SAME WAY ANYMORE --- WE NEED TO LOOK AT THE **GRAPH** to interpret the interaction.
+     
+ - To plot this interaction/moderation scenario (Quantitative DV, Quantitative IV, categorical 3rd variable
+ means that I follow Q-Q-C plotting):
+ 
+```{r}
+ggplot (mtcars, aes(x = wt, y = mpg, group = am, color = am)) +          
+  # put the quantitative variable in the group placeholder 
+  
+  geom_point (shape = 1) +
+  geom_smooth (method = lm, se = FALSE) 
+```
+
+ - Discussion: from the graph, you see that the association between weight and gas mileage is stronger (i.e. more negative) for manual cars than for automatic cars 
+
+
