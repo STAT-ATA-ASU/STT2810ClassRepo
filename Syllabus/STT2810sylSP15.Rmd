@@ -10,11 +10,15 @@ Instructor:  Alan T. Arnholt
 Email: arnholtat@appstate.edu
 Office: Walker Hall 340
 Office Hours: 10-12 Monday, 12-2 Wednesday, 8-10 Friday
+
 ```
 
 Make an appointment to see me by clicking https://arnholtat.youcanbook.me/
 
-Teaching Assistants: Erin Kreiling and Brian Pham
+**Teaching Assistants:** 
+
+Erin Kreiling office hour TBA   
+Brian Pham office hour TBA
 
 **Course Description:**  
 
@@ -59,5 +63,5 @@ If you have a reasonably new laptop, I highly recommend you bring it to class fo
 
 **How To Get Unstuck**
 
-Consider creating an issue on the course repository if you have a question before posting to external forums.  Your classmates may have the same question or may answer your question before I can provide an answer.  Well constructed questions will elicit answers more rapidly than poorly constructed questions.  This [video](https://www.youtube.com/watch?v=ZFaWxxzouCY&list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ&index=3) provides some background on asking questions.  This stackoverflow thread details how to create a [minimal R reproducible example](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example/5963610#5963610). Read 
+Consider creating an issue on the course repository if you have a question before posting to external forums.  Your classmates may have the same question or may answer your question before either a TA or I can provide an answer.  Well constructed questions will elicit answers more rapidly than poorly constructed questions.  This [video](https://www.youtube.com/watch?v=ZFaWxxzouCY&list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ&index=3) provides some background on asking questions.  This stackoverflow thread details how to create a [minimal R reproducible example](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example/5963610#5963610). Read 
 [How To Ask Questions The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html) by Eric Raymond and Rick Moen.
