@@ -1,0 +1,38 @@
+---
+title: "STT 2810 Syllabus"
+author: "Alan T. Arnholt"
+date: "Spring 2015"
+output: html_document
+---
+
+
+**Course Description:**  
+
+This course covers data management, descriptive statistics,
+inferential statistics including testing one and two sample procedures, ANOVA, 
+Chi-Square tests, simple and multiple regression.  All of the topics will be 
+addressed through a student selected research question that will be answered 
+using one of four large data sets.
+
+**Course Objectives:**
+
+1.  Teach students to use a reproducible research work flow.
+2.  Improve the technology expertise of all students.
+3.  Students will learn to work with large data sets.
+4.  Students will learn to create and present graphs for both univariate and multivariate data.
+5.  Students will learn how to construct and test hypotheses.
+
+**Course Text:**
+
+The course will rely primarily on the text _Passion Driven Statistics_  by Lisa Dierker.  
+The text may be downloaded as a pdf from the course repository.
+
+**Course Grading:**
+
+There will be roughly 15 graded assignments (one per week). 15% of the course grade will be for a research proposal. Eleven of the graded assignments will be peer evaluated via http://www.crowdgrader.org.  Your grade for a peer evaluated assignment will be a combination of peer evaluations and an evaluation of your peer grading.  Specific rubrics and directions for each assignment will be provided on the course repository.  Peer evaluations will account for 50% of the course grade.  15% of the course grade will be for a poster each student will create and present during the final exam period of the course.  The remaining 20% of the course will be for participation.  Details for how to maximize participation points are provided on the course repository.  25% of the participation grade will be for the completion of a pre-course and post-course survey.     
+
+**University Policies**
+
+This course conforms with all Appalachian State University policies with respect to
+academic integrity, disability services, and class attendance.  The details of the policies may be found at
+http://academicaffairs.appstate.edu/resources/syllabi.
