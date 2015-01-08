@@ -5,12 +5,22 @@ date: "Spring 2015"
 output: html_document
 ---
 
+```
+Instructor:  Alan T. Arnholt
+Email: arnholtat@appstate.edu
+Office: Walker Hall 340
+Office Hours: 10-12 Monday, 12-2 Wednesday, 8-10 Friday
+```
+
+Make an appointment to see me by clicking https://arnholtat.youcanbook.me/
+
+Teaching Assistants: Erin Kreiling and Brian Pham
 
 **Course Description:**  
 
 This course covers data management, descriptive statistics,
 inferential statistics including testing one and two sample procedures, ANOVA, 
-Chi-Square tests, simple and multiple regression.  All of the topics will be 
+Chi-Square tests, simple regression, and multiple regression.  All of the topics will be 
 addressed through a student selected research question that will be answered 
 using one of four large data sets.
 
@@ -24,15 +34,30 @@ using one of four large data sets.
 
 **Course Text:**
 
-The course will rely primarily on the text _Passion Driven Statistics_  by Lisa Dierker.  
-The text may be downloaded as a pdf from the course repository.
+The course will rely primarily on the text [_Passion Driven Statistics_](https://github.com/STT2810-SP15/STT2810ClassRepoSP15/blob/master/Book/PDS-SPRING2015alanASU.pdf?raw=true)  by Lisa Dierker.  
+The text may be downloaded from the course repository.  Students may find the excellent 
+text [_Reproducible Research with R and RStudio_](http://christophergandrud.github.io/RepResR-RStudio/) by Christopher Gandrud helpful.
 
 **Course Grading:**
 
-There will be roughly 15 graded assignments (one per week). 15% of the course grade will be for a research proposal. Eleven of the graded assignments will be peer evaluated via http://www.crowdgrader.org.  Your grade for a peer evaluated assignment will be a combination of peer evaluations and an evaluation of your peer grading.  Specific rubrics and directions for each assignment will be provided on the course repository.  Peer evaluations will account for 50% of the course grade.  15% of the course grade will be for a poster each student will create and present during the final exam period of the course.  The remaining 20% of the course will be for participation.  Details for how to maximize participation points are provided on the course repository.  25% of the participation grade will be for the completion of a pre-course and post-course survey.     
+There will be roughly 15 graded assignments (one per week). 15% of the course grade will be for a research proposal. Eleven of the graded assignments will be peer evaluated via http://www.crowdgrader.org.  Your grade for a peer evaluated assignment will be a combination of peer evaluations and an evaluation of your peer grading.  Grading rubrics and directions for each assignment will be provided on the course repository.  Peer evaluations will account for 50% of the course grade.  15% of the course grade will be for a poster each student will create and present during the final exam period of the course.  The remaining 20% of the course will be for participation.  Details for how to maximize participation points are provided on the course repository.  25% of the participation grade will be for the completion of a pre-course and post-course survey.     
 
 **University Policies**
 
 This course conforms with all Appalachian State University policies with respect to
 academic integrity, disability services, and class attendance.  The details of the policies may be found at
 http://academicaffairs.appstate.edu/resources/syllabi.
+
+**Typical Class Period**
+
+The first 30% of class will generally be lecture oriented where I will present material to supplement the reading and video assignments.  To maximize your understanding of the lecture portion of class, please read the material assigned and watch the videos assigned before coming to class.  The next 50%-60% of the class students will work on their individual projects. The last 20%-30% of class will be a recap of day's material.  
+
+**Computers and Software**
+
+If you have a reasonably new laptop, I highly recommend you bring it to class for your personal use instead of using the lab computers.  Students will need to install several programs on their personal computer to complete course assignments including [R](http://cran.r-project.org), [Git](http://git-scm.com/downloads), [RStudio](http://www.rstudio.com/products/rstudio/download/), [zotero](https://www.zotero.org), and optionally [$LaTeX$](http://www.ctan.org/starter).
+
+
+**How To Get Unstuck**
+
+Consider creating an issue on the course repository if you have a question before posting to external forums.  Your classmates may have the same question or may answer your question before I can provide an answer.  Well constructed questions will elicit answers more rapidly than poorly constructed questions.  This [video](https://www.youtube.com/watch?v=ZFaWxxzouCY&list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ&index=3) provides some background on asking questions.  This stackoverflow thread details how to create a [minimal R reproducible example](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example/5963610#5963610). Read 
+[How To Ask Questions The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html) by Eric Raymond and Rick Moen.
