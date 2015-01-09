@@ -24,7 +24,7 @@ This course covers data management, descriptive statistics,
 inferential statistics including testing one and two sample procedures, ANOVA, 
 Chi-Square tests, simple regression, and multiple regression.  All of the topics will be 
 addressed through a student selected research question that will be answered 
-using one of four large data sets.
+using one of [four large data sets](http://www1.appstate.edu/~arnholta/classes/PDS/DATAandCODEBOOKS/).
 
 **Course Objectives:**
 
