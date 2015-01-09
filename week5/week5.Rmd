@@ -1,0 +1,13 @@
+---
+title: "week5"
+author: 
+date: 
+output: html_document
+---
+
+* Read/review pages 26-32 PDS as needed.
+* This week you will "work with data".
+* Watch the [Working with Data video](https://www.youtube.com/watch?v=d9TgAspq9bA&index=52&list=PLDEF0B9CBD27AD37E) (41 min)
+* Watch the [Data Management video](https://www.youtube.com/watch?v=thGk4CUEXQ8&list=PLDEF0B9CBD27AD37E&index=53) (39 min)
+* Complete you peer grading evaluations for the **Research Plan Assignment** NLT 5 PM February 13.
+* Submit via [http://www.crowdgrader.org](http://www.crowdgrader.org) the **Working with Data** assignment NLT 5 PM February 13.  Further directions and grading rubric will appear in this folder.

@@ -1,0 +1,12 @@
+---
+title: "week4"
+author: 
+date: 
+output: html_document
+---
+
+* Work on **Research Plan Assignment** page 26 PDS.
+* Peer reviews for **Citation Assignment** due NLT 5 PM February 6.
+* **Research Plan Assignment** see page 26 PDS due NLT 5 PM February 6.  Submit assignment
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  Further directions and grading rubric to appear in this folder. 
+* Read/review pages 18-26 PDS as needed.
