@@ -1,0 +1,16 @@
+---
+title: "week3"
+author: 
+date: 
+output: html_document
+---
+
+Integrating [zotero](www.zotero.com) with [RMarkdown](http://rmarkdown.rstudio.com) will be discussed during the first part of the week.  Example document will be stored in this folder.
+
+Please read pages 13-25 in PDS and take notes as needed.
+
+Students will continue to work on the citation assignment.
+
+Submit the citation assignment to [www.crowdgrader.com](www.crowdgrader.com) no later than 5 pm January 30.
+
+Directions for submitting assignment and grading rubric....write them here.
