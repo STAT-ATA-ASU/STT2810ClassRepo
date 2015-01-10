@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{DE12}
+Elizabeth Davison and Jessica Eatman.
+\newblock An ecological examination of north carolina's amendment one vote to
+  ban same sex marriage.
+\newblock 2013.
+
+\bibitem{JF09}
+Trevor Hastie, Robert Tibshirani, and Jerome Friedman.
+\newblock {\em The elements of statistical learning}, volume~2.
+\newblock Springer, 2009.
+
+\bibitem{AL02}
+Andy Liaw and Matthew Wiener.
+\newblock Classification and regression by {randomForest}.
+\newblock {\em R news}, 2(3):18--22, 2002.
+
+\bibitem{R-base}
+{R Core Team}.
+\newblock {\em R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria, 2014.
+
+\end{thebibliography}
