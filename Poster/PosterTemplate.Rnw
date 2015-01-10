@@ -12,7 +12,7 @@
 \beamertemplategridbackground[1cm]
 
 %-- Header and footer information ----------------------------------
-\newcommand{\footright}{\href{https://github.com/alanarnholt/STT3851-SP2015-Arnholt-Alan}{https://github.com/alanarnholt/STT3851-SP2015-Arnholt-Alan}}
+\newcommand{\footright}{\href{https://github.com/STT2810-SP15/STT2810ClassRepoSP15}{https://github.com/STT2810-SP15/STT2810ClassRepoSP15}}
 \newcommand{\footleft}{\href{mailto:arnholtat@appstate.edu}{Faculty Advisor: Alan Arnholt}}
 
 \def\conference{16\textsuperscript{th} Annual Celebration of Student Research and Creative Endeavors}
