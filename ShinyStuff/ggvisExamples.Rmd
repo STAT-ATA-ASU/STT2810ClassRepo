@@ -10,7 +10,7 @@ Start by loading your data set.  The url is broken up into two parts so that the
 R code will fit on the page.  The function `paste0()` is used to concatenate two
 strings.
 
-```{r comment = NA, cache=TRUE}
+```{r comment = NA}
 firstpart <- "http://www1.appstate.edu/~arnholta/classes/"
 secondpart <- "PDS/DATAandCODEBOOKS/NESARC/NESARC_pds.RData"
 site <-paste0(firstpart, secondpart) 
