@@ -5,8 +5,8 @@ date:
 output: html_document
 ---
 
-Using zotero will be covered the first part of the week.
+* Using zotero will be covered the first part of the week.
 
-This week you will work on your personal Code Book.  You will show the instructor your folder in class on **Thursday, 20 January**.  The instructor will record your folder in the grade book as either a GO or NOGO.  
+* This week you will work on your personal Code Book.  You will show the instructor your folder in class on **Thursday, 20 January**.  The instructor will record your folder in the grade book as either a GO or NOGO.  
 
-This week you will work on the citation assignment from page 18 of PDS.
+* This week you will work on the citation assignment from page 18 of PDS.
