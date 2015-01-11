@@ -9,7 +9,7 @@ Start by loading your data set.  The url is broken up into two parts so that the
 R code will fit on the page.  The function `paste0()` is used to concatenate two
 strings.
 
-```{r label = "READIN", comment = NA, cache = TRUE}
+```{r label = "READIN", comment = NA}
 firstpart <- "http://www1.appstate.edu/~arnholta/classes/"
 secondpart <- "PDS/DATAandCODEBOOKS/NESARC/NESARC_pds.RData"
 site <-paste0(firstpart, secondpart) 
@@ -64,7 +64,7 @@ xtabs(~S3AQ3B1, data = NESARC) # Note how the NA's are not printed
 
 The following `ggplot2` code is used to graph the values in `S3AQ3B1`.
 
-```{r label = "ggSmoke", message = FALSE, fig.width = 10, fig.wdith = 5, cache = TRUE}
+```{r label = "ggSmoke", message = FALSE, fig.width = 10, fig.wdith = 5}
 library(ggplot2)
 ggplot(data = NESARC, aes(x = S3AQ3B1)) + 
   geom_bar(fill = "lightgray") + 
@@ -73,7 +73,7 @@ ggplot(data = NESARC, aes(x = S3AQ3B1)) +
 ```
 
 If you do not want to see the `NA`'s use
-```{r label = "ggSmoke2", message = FALSE, fig.width = 10, fig.wdith = 5, cache = TRUE}
+```{r label = "ggSmoke2", message = FALSE, fig.width = 10, fig.wdith = 5}
 ggplot(data = na.omit(NESARC[ , "S3AQ3B1", drop = FALSE]), aes(x = S3AQ3B1)) + 
   geom_bar(fill = "lightgray") + 
   labs(x = "Smoking Frequency") +
@@ -100,7 +100,7 @@ rm(NESARCre)  # remove NESARCre and newly created S4AQ4A1
 ### Collapsing Categories
 Consider the variable `S1Q6A` with 14 levels recording the highest level of education of the participant.  To collapse the categories in to dichotomous variable indicating the presence of a high school degree use the `ifelse` function. The levels `1`, `2`, `3`, `4`, `5`, `6`, and `7` of the variable `S1Q6A` correspond to education levels less than completing high school.
 
-```{r label = "CollapseHS", comment = NA, cache = TRUE}
+```{r label = "CollapseHS", comment = NA}
 NESARC$HS_DEGREE <- factor(ifelse(NESARC$S1Q6A %in% c("1", "2", "3", "4", "5", "6", "7"), "No", "Yes"))
 summary(NESARC$HS_DEGREE)
 ```
@@ -108,14 +108,14 @@ summary(NESARC$HS_DEGREE)
 ### Creating a Factor from a Numeric Vector
 To create a factor with three levels (young adults, adults, older adults) using the variable `AGE` (a numeric vector) use the function `cut`.
 
-```{r label = "CUT1", comment = NA, cache = TRUE}
+```{r label = "CUT1", comment = NA}
 NESARC$AGEfac <- cut(NESARC$AGE, breaks = c(18, 30, 50, Inf), labels = c("Young Adult", "Adult", "Older Adult"), include.lowest = TRUE)
 summary(NESARC$AGEfac)
 ```
 
 Consider collapsing the numeric vector `S3AQ3C1` (usual quantity when cigarettes smoked) into a categorical variable with 5 levels.
 
-```{r label = "CUT2", comment = NA, cache = TRUE}
+```{r label = "CUT2", comment = NA}
 NESARC$S3AQ3C1fac <- cut(NESARC$S3AQ3C1, breaks = c(0, 5, 10, 15, 20, 100), include.lowest = TRUE)
 summary(NESARC$S3AQ3C1fac)
 ```
@@ -123,14 +123,14 @@ summary(NESARC$S3AQ3C1fac)
 ### Aggregating Variables using `ifelse`
 Consider creating a new variable `DepressLife` which is `Yes` if the variable `MAJORLIFE` is a 1 or if `DYSLIFE` is a 1.
 
-```{r label = "Agg1", comment = NA, cache = TRUE}
+```{r label = "Agg1", comment = NA}
 NESARC$DepressLife <- factor(ifelse( (NESARC$MAJORDEPLIFE == 1 | NESARC$DYSLIFE == 1), "Yes", "No"))
 summary(NESARC$DepressLife)
 ```
 
 As another example, consider creating a variable `PPpanic` for past and present panic disorders.  The variables `APANDX12` and `APANDXP12` record a panic disorder within the last 12 months and prior to the last 12 months with agoraphobia, respectively.  The variables `PANDX12` and `PANDXP12` record a panic disorder within the last 12 months and prior to the last 12 months without agoraphobia, respectively.
 
-```{r label = "PANIC", comment = NA, cache = TRUE}
+```{r label = "PANIC", comment = NA}
 NESARC$PPpanic <- factor(ifelse( (NESARC$APANDX12 == 1 | NESARC$APANDXP12 == 1 | NESARC$PANDX12 == 1 | NESARC$PANDXP12 == 1 ), "Yes", "No"))
 summary(NESARC$PPpanic)
 ```
@@ -192,7 +192,7 @@ table(as.numeric(levels(NESARC$S4AQ4A1))[NESARC$S4AQ4A1])
 
 To create a variable `NumDepSym` that records the number of depression symptoms among the variables `S4AQ4A1` - `S4AQ4A19`, create numeric variables from the factors `S4AQ4A1` - `S4AQ4A19` and store the results in `S4AQ4A1num` - `S4AQ4A19num`.  Next, recode the levels of `No` (2) and `Unknown` (9) to 0s for variables `S4AQ4A1num` - `S4AQ4A19num`.  The code is rather lengthy and other approaches such as the first two are encouraged.  The template given in the PDS IBook link will not work with this data because the variables are factors not numeric vectors.  You can not add factors!
 
-```{r label = "CompositeFactor", comment = NA, cache = TRUE}
+```{r label = "CompositeFactor", comment = NA}
 summary(NESARC$S4AQ4A1)
 levels(NESARC$S4AQ4A1)
 table(as.numeric(NESARC$S4AQ4A1))
@@ -252,27 +252,27 @@ Three different approaches to subsetting data will be given.  The first approach
 
 
 The first approach uses the `filter` function with the `%>%` function.
-```{r label = "SUB1", comment = NA, cache = TRUE}
+```{r label = "SUB1", comment = NA}
 NESARCsub1 <- NESARC %>%
   filter(S3AQ1A == 1 & CHECK321 == 1 & S3AQ3B1 == "Every Day" & AGE <= 25)
 dim(NESARCsub1)
 ```
 
 The second approach uses standard indexing.
-```{r label = "SUB2", comment = NA, cache = TRUE}
+```{r label = "SUB2", comment = NA}
 NESARCsub2 <- NESARC[NESARC$S3AQ1A == 1 & NESARC$CHECK321 == 1 & NESARC$S3AQ3B1 == "Every Day" & NESARC$AGE <= 25  & !is.na(NESARC$S3AQ1A == 1 & NESARC$CHECK321 == 1 & NESARC$S3AQ3B1 == "Every Day" & NESARC$AGE <= 25), ]
 dim(NESARCsub2)
 ```
 
 The third approach uses the `subset` function.
-```{r label = "SUB3", comment = NA, cache = TRUE}
+```{r label = "SUB3", comment = NA}
 NESARCsub3 <- subset(NESARC, subset = S3AQ1A == 1 & CHECK321 == 1 & S3AQ3B1 == "Every Day" & AGE <= 25)
 dim(NESARCsub3)
 ```
 
 ### Graphing a Numeric Variable with `ggplot2`
 
-```{r label = "ggNV", comment = NA, fig.align='center', cache = TRUE}
+```{r label = "ggNV", comment = NA, fig.align='center'}
 ggplot(data = NESARC, aes(x = AGE)) + 
   geom_histogram(binwidth = 5, fill = "lightgray") + 
   theme_bw()  
@@ -298,7 +298,7 @@ MINI
 
 Some more `ggplot2` graphs.
 
-```{r label = "WtHist", comment = NA, fig.align = "center", cache = TRUE}
+```{r label = "WtHist", comment = NA, fig.align = "center"}
 ggplot(data = MINI, aes(x = Inches)) + 
   geom_histogram(binwidth = 1, fill = "peachpuff") + 
   theme_bw()
@@ -311,7 +311,7 @@ tapply(MINI$Inches, MINI$Sex, median)
 
 ### Some Bivariate Graphs with `ggplot2`
 
-```{r label = "LastTwo", comment = NA, fig.align = 'center', cache = TRUE}
+```{r label = "LastTwo", comment = NA, fig.align = 'center'}
 ggplot(data = MINI, aes(x = Inches, y = Weight, color = Sex)) + 
   geom_point(alpha = 0.1) + 
   stat_smooth(method = "lm") + 
@@ -327,7 +327,7 @@ ggplot(data = MINI, aes(x = Inches, y = Weight)) +
 
 ### ANOVA Example
 
-```{r label = "ANOVAexp", comment = NA, fig.align = 'center', cache = TRUE}
+```{r label = "ANOVAexp", comment = NA, fig.align = 'center'}
 my.aov <- aov(S3AQ3C1 ~ TAB12MDX, data = subset(NESARC, S3AQ3C1 < 99)) # Note S3AQ3C1 == 99 is NA
 summary(my.aov)     
 TukeyHSD(my.aov)
@@ -336,14 +336,14 @@ plot(TukeyHSD(my.aov))
 
 A plot of the residuals indicates problems with this model.
 
-```{r label = "qqP1",comment = NA, fig.align='center', message=FALSE, cache = TRUE}
+```{r label = "qqP1",comment = NA, fig.align='center', message=FALSE}
 library(car)
 qqPlot(my.aov)
 ```
 
 ### Regression Example
 
-```{r label = "REGexp", comment = NA, cache = TRUE}
+```{r label = "REGexp", comment = NA}
 my.lm <- lm(Weight ~ Inches, data = MINI)
 summary(my.lm)
 confint(my.lm)  # Do not use this until you know your model is appropriate
@@ -353,7 +353,7 @@ summary(my.lm2)
 
 Plots of the residuals indicate problems with both `my.lm` and `my.lm2`.
 
-```{r label = "qqP2", comment = NA, fig.align = 'center', message = FALSE, cache = TRUE}
+```{r label = "qqP2", comment = NA, fig.align = 'center', message = FALSE}
 qqPlot(my.lm)
 qqPlot(my.lm2)
 ```
