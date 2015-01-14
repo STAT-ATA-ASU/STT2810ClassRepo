@@ -1,5 +1,5 @@
 ---
-title: "Literature Review: RMarkdown and Zotero"
+title: "Literature Review Template Using [RMarkdown](http://rmarkdown.rstudio.com) and [Zotero](www.zotero.org)"
 author: "Alan Arnholt"
 date: "Spring 2015"
 output: html_document
@@ -16,7 +16,7 @@ During your literature review, you should:
 4. Identify replicated and equivocal findings in order to generate a more focused question that may add to the literature. Give special attention to the “future research” sections of the articles that you read
 5. Based on the literature, select additional questions/items/ variables that may help you to understand the association of interest. In doing so, further refine your research question. Add relevant documentation (i.e. code book pages) to your personal codebook.
 
-**Example:**
+##Example:
 
 Given the association that I have decided to examine, I use such keywords as _nicotine dependence_, _tobacco dependence_, and _smoking_. After reading through several titles and abstracts, I notice that there has been relatively little attention in the research literature to the association between smoking exposure and nicotine dependence. I expand a bit to include other substance use that provides relevant background as well.
 
