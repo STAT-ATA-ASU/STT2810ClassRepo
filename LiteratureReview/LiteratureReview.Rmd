@@ -1,0 +1,35 @@
+---
+title: "Literature Review: RMarkdown and Zotero"
+author: "Alan Arnholt"
+date: "Spring 2015"
+output: html_document
+bibliography: LiteratureReview.bib
+nocite: | 
+  @riggs_adolescent_2007, @hu_developmental_2008, @caraballo_linking_2009, @rose_nicotine_2010, @van_de_ven_patterns_2010, @chen_relationships_1997, @dierker_association_2007, @dierker_importance_2008
+---
+
+During your literature review, you should:
+
+1. Identify primary source articles that address the association that you have decided to examine
+2. Download relevant articles.
+3. Read the articles that seem to test the association most directly.
+4. Identify replicated and equivocal findings in order to generate a more focused question that may add to the literature. Give special attention to the “future research” sections of the articles that you read
+5. Based on the literature, select additional questions/items/ variables that may help you to understand the association of interest. In doing so, further refine your research question. Add relevant documentation (i.e. code book pages) to your personal codebook.
+
+**Example:**
+
+Given the association that I have decided to examine, I use such keywords as _nicotine dependence_, _tobacco dependence_, and _smoking_. After reading through several titles and abstracts, I notice that there has been relatively little attention in the research literature to the association between smoking exposure and nicotine dependence. I expand a bit to include other substance use that provides relevant background as well.
+
+Based on my reading of the articles in the **References** as well as others, I have noted a few common and interesting themes:
+
+1. While it is true that smoking exposure is an ecessary requirement for nicotine dependence, frequency and quantity of smoking are markedly imperfect indices for determining an individual’s probability of exhibiting nicotine dependence (this is true for other drugs as well)
+
+2. The association may differ based on ethnicity, age, and gender (although there is little work on this)
+
+3. One of the most potent risk factors consistently implicated in the etiology of smoking behavior and nicotine dependence is depression
+
+
+I have decided to further focus my question by examining whether the association between nicotine dependence and depression differs based on how much a person smokes. I am wondering if at low levels of smoking compared to high levels, nicotine dependence is more common among individuals with major depression than those without major depression.  I add relevant depression questions/items/variables to my personal codebook as well as several demographic measures (age, gender, ethnicity, etc.) and any other variables I may wish to consider.
+
+
+# References
