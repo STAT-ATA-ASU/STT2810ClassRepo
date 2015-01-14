@@ -1,0 +1,39 @@
+---
+title: "Research Proposal Template Using [RMarkdown](http://rmarkdown.rstudio.com) and [Zotero](www.zotero.org)"
+author: "Alan Arnholt"
+date: "Spring 2015"
+output: html_document
+bibliography: ResearchProposal.bib
+---
+
+# Introduction:
+
+One of the most potent risk factors consistently implicated in both the etiology of smoking behavior as well as the subsequent development of nicotine dependence is major depression. Evidence for this association comes from longitudinal investigations in which depression has been shown to increase risk of later smoking [@breslau_major_1998; @dierker_association_2001].   This temporal ordering suggests the possibility of a causal relationship. In fact, the vast majority of research to date has focused on the role of major depression in increasing the probability and amount of smoking [@dierker_defining_2004; @rohde_psychiatric_2004 ; @rohde_psychiatric_2003].
+
+
+While it is true that smoking exposure is a necessary requirement for nicotine dependence, frequency and quantity of smoking are markedly imperfect indices for determining an individual’s probability of developing nicotine dependence [@kandel_extent_2000; @stanton_antecedents_1995]. For example, a substantial number of individuals reporting daily and/or heavy smoking do not meet criteria for nicotine dependence [@kandel_extent_2000]. Conversely, nicotine dependence has been seen among population subgroups reporting relatively low levels of daily and non daily smoking [@kandel_extent_2000].
+
+A complementary or alternate role that major depression may play is as a cause or signal of greater sensitivity to nicotine dependence, over and above an individual’s level of smoking exposure. While major depression has been shown to increase an individual’s probability of smoking initiation, regular use and nicotine dependence, it remains unclear whether it may signal greater sensitivity for nicotine dependence regardless of smoking quantity.
+
+The present study will examine young adults from the National Epidemiologic Survey of Alcohol and Related Conditions (NESARC). The goals of the analysis will include 1) establishing the relationship between major depression and nicotine dependence; and 2) determining whether or not the relationship between major depression and nicotine dependence exists above and beyond smoking quantity.
+￼
+
+# Methods:
+
+## Sample
+
+The sample from the first wave of the National Epidemiologic Survey on Alcohol and Related Conditions (NESARC) represents the civilian, non-institutionalized adult population of the United States, and includes persons living in households, military personnel living off base, and persons residing in the following group quarters: boarding or rooming houses, non-transient hotels and motels, shelters, facilities for housing workers, college quarters, and group homes. The NESARC included over sampling of Blacks, Hispanics and young adults aged 18 to 24 years. The sample included 43,093 participants.
+
+## Procedure
+
+One adult was selected for interview in each household, and face-to- face computer assisted interviews were conducted in respondents’ homes following informed consent procedures.
+
+## Measures
+
+Lifetime major depression (i.e. those experienced in the past 12 months and prior to the past 12 months) were assessed using the NIAAA, Alcohol Use Disorder and Associated Disabilities Interview Schedule – DSM-IV (AUDADIS-IV) [@grant_alcohol_2003; @grant_alcohol_1995].  The tobacco module of the AUDADIS-IV contains detailed questions on the frequency, quantity, and patterning of tobacco use as well as symptom criteria for DSM- IV nicotine dependence. Current smoking was evaluated through both smoking frequency ("About how often did you usually smoke in the past year?") coded dichotomously in terms of the presence or absence of daily smoking, and quantity ("On the days that you smoked in the last year, about how many cigarettes did you usually smoke?")
+
+## Implications:
+
+While chronic use is a key feature in the development of dependence, the present study will evaluate whether individual differences in nicotine dependence exist above and beyond level of exposure. If individuals with major depression are more sensitive to the development of nicotine dependence regardless of how much they smoke, they would represent an important population subgroup for targeted smoking intervention programs.
+
+# References
