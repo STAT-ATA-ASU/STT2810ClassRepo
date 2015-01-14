@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc} 
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage[round]{natbib}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue, linktocpage=true, breaklinks=true]{hyperref}
+
+
+\begin{document}
+
+\title{Using \texttt{\textcolor{red}{z}otero} with \texttt{knitr}}
+\author{Alan T. Arnholt}
+\date{Spring 2015}
+\maketitle
+
+
+
+
+The only references from your \verb|Items.bib| file that will appear at the end of a document are those that have been cited in the text.  You can use \verb|nocite| to get a full bibliography but we will not discuss that further here.  You can use the following template to create your \verb|*.Rnw| file.
+<<SETUP, engine = "bash", eval = FALSE>>=
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc} 
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage[round]{natbib}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, 
+            urlcolor=blue, linktocpage=true, breaklinks=true]{hyperref}
+
+
+\begin{document}
+\title{Your Title Here}
+\author{Your Name Here}
+\maketitle
+
+Whatever you have to say...say it here.
+
+\bibliographystyle{chicago}
+
+\bibliography{Items}
+\end{document}
+@
+
+\noindent
+To create an \verb|Items.bib|, 
+
+\begin{itemize}
+\item First, highlight the titles you want to select in \href{https://www.zotero.org}{\texttt{\textcolor{red}{z}otero}}.  
+\item Second, for Windows users, right click on the highlighted items; for Mac users, Control-click on the highlighted items. 
+\item Third, select \textbf{Export Items}.  Use the drop down menu to select \textbf{Bib\TeX} not \textbf{Bib\LaTeX} as the format. 
+\item Fourth, click \verb|OK|.  Change the name of the file to \verb|Items.bib| in the \textbf{Save As:} box. 
+\item Fifth, click \textbf{Save}.
+\end{itemize}
+
+For examples of how to cite articles with \texttt{natbib}, see the reference sheet
+\href{http://ftp.math.purdue.edu/mirrors/ctan.org/macros/latex/contrib/natbib/natnotes.pdf}{natnotes.pdf}.
+I can really talk according to \citet{beck2014} and \citet{dean2014}.
+The mean is 28 for YUMMIES \citep{murp2012}. \citet{rich2013} defines a YUMMIE as a GIDGO.
+
+\nocite{*}
+\bibliographystyle{chicago}  % or chicago I like jss
+\bibliography{Items,Rpkgs}
+\end{document}

@@ -13,3 +13,8 @@
 STT2810ClassRepoSP15.Rproj
 *cache/
 *files/
+*.bbl
+*.aux
+*.blg
+*.log
+*.out
