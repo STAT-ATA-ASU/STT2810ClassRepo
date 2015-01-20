@@ -1,0 +1,98 @@
+---
+title: "Class Outline"
+author: "Alan T. Arnholt"
+date: "January 20, 2015"
+output: html_document
+---
+
+1. Zotero --- Introduce --- If Git is working start using Zotero and prepare notebook based on directions in PDS (pg. 13) for Thursday.
+
+2. If you want to listen to videos during class please bring headphones.
+
+3. Friday I learned a little about the MAC setup...
+
+```{r engine = 'bash', comment = NA}
+git version
+```
+
+First check that students have told Git who they are.  Run the following command at the shell:
+
+```{r engine = 'bash', comment = NA}
+git config --list
+```
+
+Must have at a minimum a `user.name` and `user.email`.  If this is not set up, run the following and make sure the email the student used to register  with GitHub is the email specified in the `user.email`.
+
+```{r engine = 'bash', comment = NA, eval = FALSE}
+git config --global user.name "Student Name"
+git config --global user.email "student@appstate.edu"
+```
+
+When the `user.name` and `user.email` are entered run
+
+```{r engine = 'bash', comment = NA, eval = FALSE}
+git config --list
+```
+
+## Turn on the credential helper
+
+**Do not do this on the lab machines!** This is only for your personal machines.
+
+### Windows
+In the shell, type
+```{r engine = 'bash', eval = FALSE}
+git config --global credential.helper wincred
+```
+
+### MAC
+In the terminal, type
+```{r engine ="bash", comment = NA, eval = FALSE}
+git config --global credential.helper osxkeychain
+```
+
+## Trigger a username / password challenge
+
+Fork the repo https://github.com/alanarnholt/STT3530 to your public repository (@username).  Change or add something to the README file.  Once the file has been changed, enter the following in the shell:
+
+```{r engine = 'bash', eval = FALSE}
+git add .
+git commit -m"Some message"
+git push
+```
+
+You will be asked one last time for your username and password.  
+
+## See if RStudio works now
+
+Make another change (say to the README) stage and commit the changes using RStudio.  Make sure to write a commit message then push your changes to your public repository.  
+
+## Last 15 Minutes of Class
+
+* Fork the repository https://github.com/STT2810-SP15/STT2810ClassRepoSP15 to your public repository.
+* Clone the repository to your local machine using RStudio by following these instructions:
+1. Copy the clone URL to the clipboard.
+2. Click `File > New Project > Version Control > Git`
+3. Paste the clone URL (`https://github.com/YourUSERNAME/STT2810ClassRepoSP15.git`) in the `Repository URL:` box.
+4. Type a name (suggestion `UserNameSTT2810`) in the `Project directory name:` box.
+5. Change if needed the location in the `Create project as subdirectory of:` box.
+6. Click the `Create Project` box.  You should now have a local copy of the forked repository on your local machine.  Congratulations!  
+
+* Set the upstream remote in your fork to this repository with the command
+```{r engine = "bash", eval = FALSE, comment = NA}
+git remote add upstream https://github.com/STT2810-SP15/STT2810ClassRepoSP15.git
+```
+
+* Verify with
+```{r engine = 'bash', eval = FALSE}
+git remote -v      
+origin  https://github.com/alanarnholt/STT2810ClassRepoSP15.git (fetch)    
+origin	https://github.com/alanarnholt/STT2810ClassRepoSP15.git (push)    
+upstream	https://github.com/STT2810-SP15/STT2810ClassRepoSP15.git (fetch)     
+upstream	https://github.com/STT2810-SP15/STT2810ClassRepoSP15.git (push)
+
+```
+* To obtain updates from the upstream repository type
+```
+git pull upstream master
+```
+* If there are conflicts you will need to resolve them before proceeding.
