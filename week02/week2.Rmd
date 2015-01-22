@@ -29,7 +29,7 @@ git remote add upstream https://github.com/STT2810-SP15/STT2810ClassRepoSP15.git
 ```
 * Verify with
 ```
-git repo -v
+git remote -v
 ```
 * To obtain updates from the upstream repository type
 ```
