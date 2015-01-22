@@ -24,7 +24,7 @@ output: html_document
 * [Install R and RStudio on Windows (5 min)](https://www.youtube.com/watch?v=eD07NznguA4)         
 * [Creating RStudio projects from Github Repos (5 min)](https://www.youtube.com/watch?v=YxZ8J2rqhEM)    
 * [Basics of Git and GitHub (51 min)](https://www.youtube.com/watch?v=U8GBXvdmHT4)      
-* [RStudio Reproducible Reporting (60 minutes)](https://www.youtube.com/watch?v=U8GBXvdmHT4) 
+* [RStudio Reproducible Reporting (60 minutes)](http://www.rstudio.com/resources/webinars/) 
 
 * Read pages 1-25 in Passion Driven Statistics (PDS) and watch all linked videos in PDS.
 
