@@ -1,0 +1,17 @@
+---
+title: "Your Informative Title"
+author: "Alan T. Arnholt"
+date: "January 23, 2015"
+output: html_document
+bibliography: KCV.bib
+---
+
+@searls_utilization_1964 showed that when the coefficient of variation is
+known, the sample mean is dominated with respect to mean squared error
+by an improved estimator that makes use of that coefficient. 
+@gleser_estimating_1976 illustrate how knowing the proportionality
+constant is equivalent to knowing the population coefficient of variation.
+@arnholt_estimating_1995 showed the result from @searls_utilization_1964
+holds for a general class of estimators.
+
+# References
