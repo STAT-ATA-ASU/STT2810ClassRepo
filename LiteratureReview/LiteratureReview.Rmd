@@ -5,7 +5,7 @@ date: "Spring 2015"
 output: html_document
 bibliography: LiteratureReview.bib
 nocite: | 
-  @riggs_adolescent_2007, @hu_developmental_2008, @caraballo_linking_2009, @rose_nicotine_2010, @van_de_ven_patterns_2010, @chen_relationships_1997, @dierker_association_2007, @dierker_importance_2008
+ @riggs_adolescent_2007, @hu_developmental_2008, @caraballo_linking_2009, @rose_nicotine_2010, @van_de_ven_patterns_2010, @chen_relationships_1997, @dierker_association_2007, @dierker_importance_2008
 ---
 
 During your literature review, you should:
