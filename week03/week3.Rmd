@@ -7,6 +7,8 @@ output: html_document
 
 * Integrating [zotero](www.zotero.com) with [RMarkdown](http://rmarkdown.rstudio.com) will be discussed during the first part of the week.  Example document will be stored in this folder.
 
+* You may find these [videos helpful.](https://www.youtube.com/watch?v=dto4gARbsi0&list=PLJBNI3mCp9g0wsSDK111qgimqVF1dwPXO) 
+
 * Please read pages 13-25 in PDS and take notes as needed.
 
 * Students will continue to work on the citation assignment.
