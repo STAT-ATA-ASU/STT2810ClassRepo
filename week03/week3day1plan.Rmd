@@ -1,0 +1,26 @@
+---
+title: "week3Day1Plan"
+author: "Alan T. Arnholt"
+date: "January 27, 2015"
+output: html_document
+---
+
+* Introduce *.Rmd (default file)
+* Introduce crowdgrader
+
+For the students, the main benefits are two:
+
+1)  They usually get far more feedback on their work, than they would get from over-worked teaching assistants/faculty.
+2)	They get to see what other students are doing, and they
+ can learn from the work of others. 
+
+In exchange for this, they need to put in some amount of work in reviewing the work of others. 
+
+It is important students understand that their final grade is determined both by the quality of their work, and by the precision of the grades they give, and the helpfulness of the reviews they write.
+
+Practice with: 
+[https://www.crowdgrader.org/crowdgrader/venues/view_venue/762](https://www.crowdgrader.org/crowdgrader/venues/view_venue/762)
+
+Go/NoGo – Must be checked off by me by the end of office hours Friday or they will become zeros.
+
+Friday – Literature Review / Citation Assignment is due.
