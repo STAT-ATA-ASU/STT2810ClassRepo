@@ -11,7 +11,7 @@ output: html_document
 **Office:** Walker Hall 340      
 **Office Hours:** 10-12 Monday, 12-2 Wednesday, 8-10 Friday   
 
-Make an appointment to see me by clicking https://arnholtat.youcanbook.me/
+Make an appointment to see me by clicking https://alan-arnholt.youcanbook.me/
 
 **Teaching Assistants:** 
 
