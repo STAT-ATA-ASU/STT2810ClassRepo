@@ -1,7 +1,7 @@
 ---
 title: "Data Management"
 author: "Alan T. Arnholt"
-date: "January 4, 2015"
+date: "Spring 2015"
 output: html_document
 ---
 
@@ -364,7 +364,7 @@ First, the code and output is shown for a table.  Then the `xtable` function fro
 
 ```{r comment = NA, fig.align = 'center'}
 library(descr)
-freq(ordered(MINI$Sex), plot = TRUE, col = c("blue","pink"), main = "Barplot of Gender")
+freq(ordered(MINI$Sex), plot = TRUE, col = c("blue", "pink"), main = "Barplot of Gender")
 ```
 
 ```{r echo = TRUE, results = 'asis'}
