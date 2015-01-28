@@ -21,6 +21,7 @@ If you would like to render an `.html` file you find in this repo, click on the 
 * [An Introduction to R](http://cran.r-project.org/doc/manuals/r-release/R-intro.html)
 * [*Advanced R Development* by Hadley Wickham](http://adv-r.had.co.nz/)
 * [Free Code School intro R Course](https://www.codeschool.com/courses/try-r)
+* [swirl](swirlstat.com) "swirl teaches you R programming and data science interactively, at your own pace, and right in the R console"
 
 ## Graphics
 
