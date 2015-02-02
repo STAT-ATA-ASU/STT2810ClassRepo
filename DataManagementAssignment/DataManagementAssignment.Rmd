@@ -32,21 +32,21 @@ ggplot(data = AddHealth, aes(x = H1SU1, fill = H1SU1)) +
 ```
 
 
-Question `H1SU2` asks the 821 repondents from `H1SU1` "how many times did you attempt suicide?"  Responses of
-6, 7, and 8 should be recoded to `NA`.
+Question `H1SU2` asks the 821 repondents from `H1SU1` "how many times did you attempt suicide?"  Response of
+a 7 should be recoded to `NA`.
 
 ```{r}
 xtabs(~H1SU2, data = AddHealth)
-AddHealth$H1SU2[AddHealth$H1SU2==6 | AddHealth$H1SU2==7 | AddHealth$H1SU2==8] <- NA
+AddHealth$H1SU2[AddHealth$H1SU2==7] <- NA
 xtabs(~H1SU2, data = AddHealth)
 AddHealth$H1SU2 <- factor(AddHealth$H1SU2)[, drop = TRUE]
 xtabs(~H1SU2, data = AddHealth)
-AddHealth$H1SU2 <- factor(AddHealth$H1SU2, labels = c("0 times", "1 time", "2 or 3 times", "4 or 5 times", ">= 6 times"))
+AddHealth$H1SU2 <- factor(AddHealth$H1SU2, labels = c("0 times", "1 time", "2 or 3 times", "4 or 5 times", ">= 6 times", "refused", "don't know"))
 summary(AddHealth$H1SU2)
 xtabs(~H1SU2, data = AddHealth)
-NAS <- sum(xtabs(~H1SU2, data = AddHealth)[-1])  # number that actually attempted suicide
+NAS <- sum(xtabs(~H1SU2, data = AddHealth)[2:5])  # number that actually attempted suicide
 NAS
-freq(AddHealth$H1SU2)
+freq(AddHealth$H1SU2, main = "How many times did you actually attempt suicide?")
 ggplot(data = AddHealth, aes(x = H1SU2)) + 
   geom_bar(fill = "maroon") + 
   labs(title = "How many times did you actually attempt suicide?", x= "") +
@@ -67,7 +67,7 @@ Question `H1SU3` asks of the `r NAS` that attempted suicide if they had to be tr
 AddHealth$H1SU3[AddHealth$H1SU3 == 7] <- NA
 AddHealth$H1SU3 <- factor(AddHealth$H1SU3, labels = c("No", "Yes"))[, drop = TRUE]
 xtabs(~H1SU3, data = AddHealth)
-freq(AddHealth$H1SU3)
+freq(AddHealth$H1SU3, main = "Did you require treatment by either a nurse of doctor?")
 ggplot(data = na.omit(AddHealth[ , "H1SU3", drop = FALSE]), aes(x = H1SU3, fill = H1SU3)) + 
   geom_bar() + 
   labs(title = "Did you require treatment by either a nurse of doctor?", x = "") +
