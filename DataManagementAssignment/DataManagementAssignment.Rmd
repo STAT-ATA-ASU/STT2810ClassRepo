@@ -12,8 +12,8 @@ library(ggplot2)
 library(descr)
 ```
 
-We will consider several variables from the `AddHealth` data set.  Looking in the code book
-for `H1SU1` suggest responses of 6, 8, and 9 should be recoded to `NA`.
+We will consider variables `H1SU1-H1SU3` from the `AddHealth` data set.  We will recode
+responses of 6, 8, and 9 for `H1SU1` as `NA`. (Discuss whether this is appropriate)
 
 ```{r}
 library(PDS)
@@ -76,4 +76,34 @@ ggplot(data = na.omit(AddHealth[ , "H1SU3", drop = FALSE]), aes(x = H1SU3, fill 
   geom_bar() + 
   labs(title = "Did you require treatment by either a nurse of doctor?", x = "") +
   theme_bw() 
+```
+
+## Managed Numeric Variables
+
+Imagine one wants to study GDP and military personnel.  The gapminder codebook indicates the variable
+`armedforcesrate` measures the military personnel as a percentage of the total labor force.  However, no date is given for the data collection.  Using the `WDI` package we decide to run the following:
+
+```{r}
+library(WDI)
+WDIsearch("armed forces")
+WDIsearch("GDP")
+AFP <- WDI(country = "all", indicator = c("MS.MIL.TOTL.TF.ZS", "NY.GDP.PCAP.PP.KD"),
+    start = 2005, end = 2005, extra = FALSE, cache = NULL)
+head(AFP)
+GAP <- inner_join(x = gapminder, y = AFP)
+GAP <- GAP %>%
+  rename(AFR2005 = MS.MIL.TOTL.TF.ZS, GDP2005 = NY.GDP.PCAP.PP.KD) %>%
+  select(armedforcesrate, AFR2005, country, GDP2005)
+head(GAP)
+ggplot(data = GAP, aes(x = AFR2005)) + 
+  geom_density(fill = "pink") + 
+  theme_bw()
+ggplot(data = GAP, aes(x = GDP2005)) + 
+  geom_density(fill = "pink") + 
+  theme_bw()
+ggplot(data = GAP, aes(log(AFR2005), log(GDP2005))) + 
+  geom_point(color = "red") + 
+  theme_bw() +
+  labs(x = "log-Armed Forces Rate (2005)", y = "log-Gross Domestic Product (2005) per Capita")
+cor(log(GAP$AFR2005), log(GAP$GDP2005), use = "complete.obs")
 ```
