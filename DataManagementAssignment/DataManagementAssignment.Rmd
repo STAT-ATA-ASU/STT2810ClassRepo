@@ -1,12 +1,12 @@
 ---
 title: "Data Management Assignment"
 author: "Spring 2015"
-date: "February 2, 2015"
+date: ""
 output: html_document
 ---
 
 ```{r, echo = FALSE, message = FALSE}
-knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align='center')
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
 library(dplyr)
 library(ggplot2)
 library(descr)
@@ -24,7 +24,8 @@ AddHealth$H1SU1 <- factor(AddHealth$H1SU1, labels = c("No", "Yes"))[, drop = TRU
 xtabs(~H1SU1, data = AddHealth)
 summary(AddHealth$H1SU1)
 freq(AddHealth$H1SU1)
-freq(AddHealth$H1SU1, main = "Did you ever seriously think about committing suicide?", col = c("skyblue", "gray"))
+freq(AddHealth$H1SU1, main = "Did you ever seriously think about committing suicide?", 
+     col = c("skyblue", "gray"))
 ggplot(data = AddHealth, aes(x = H1SU1, fill = H1SU1)) + 
   geom_bar() + 
   labs(title = "Did you ever seriously think about committing suicide?", x = "") +
@@ -41,10 +42,13 @@ AddHealth$H1SU2[AddHealth$H1SU2==7] <- NA
 xtabs(~H1SU2, data = AddHealth)
 AddHealth$H1SU2 <- factor(AddHealth$H1SU2)[, drop = TRUE]
 xtabs(~H1SU2, data = AddHealth)
-AddHealth$H1SU2 <- factor(AddHealth$H1SU2, labels = c("0 times", "1 time", "2 or 3 times", "4 or 5 times", ">= 6 times", "refused", "don't know"))
+AddHealth$H1SU2 <- factor(AddHealth$H1SU2, 
+                          labels = c("0 times", "1 time", "2 or 3 times", 
+                                     "4 or 5 times", ">= 6 times", "refused", 
+                                     "don't know"))
 summary(AddHealth$H1SU2)
 xtabs(~H1SU2, data = AddHealth)
-NAS <- sum(xtabs(~H1SU2, data = AddHealth)[2:5])  # number that actually attempted suicide
+NAS <- sum(xtabs(~H1SU2, data = AddHealth)[2:5])  # number that attempted suicide
 NAS
 freq(AddHealth$H1SU2, main = "How many times did you actually attempt suicide?")
 ggplot(data = AddHealth, aes(x = H1SU2)) + 

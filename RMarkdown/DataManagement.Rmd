@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r, echo = FALSE, message = FALSE}
-knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align='center')
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
 library(dplyr)
 library(ggplot2)
 ```
@@ -84,8 +84,9 @@ Renaming the variables `IDNUM`, `ETOTLCA2`, and `ETHRACE2A` to `UniqueID`, `Etha
 library(dplyr)
 # Create a data frame tbl see ?tbl_df
 NESARCtbl <- tbl_df(NESARC)
-NESARC <- rename(NESARCtbl, UniqueID = IDNUM, EthanolConsumption = ETOTLCA2, Ethnicity = ETHRACE2A)
-NESARC[1:6, 1:5]
+NESARC <- rename(NESARCtbl, UniqueID = IDNUM, EthanolConsumption = ETOTLCA2, 
+                 Ethnicity = ETHRACE2A)
+NESARC[1:5, 1:5]
 ```
 
 ### Coding missing values
@@ -101,7 +102,10 @@ summary(NESARC$S3AQ3B1)  # Unused level no longer appears
 I hate to look back at the code book to figure out what the heck the numbers represent in this case!  One of the great things about the `R` language is how it handles a wide variety of data types.  In this case, the variable `S3AQ3B1` is a factor with numeric labels for the levels of the factor.  To change the numeric labels to text type the following:
 
 ```{r label = "Freq"}
-NESARC$S3AQ3B1 <- factor(NESARC$S3AQ3B1, labels = c("Every Day", "5 to 6 Days/week", "3 to 4 Days/week", "1 to 2 Days/week", "2 to 3 Days/month", "Once a month or less"))
+NESARC$S3AQ3B1 <- factor(NESARC$S3AQ3B1, 
+                         labels = c("Every Day", "5 to 6 Days/week", 
+                                    "3 to 4 Days/week", "1 to 2 Days/week", 
+                                    "2 to 3 Days/month", "Once a month or less"))
 summary(NESARC$S3AQ3B1)
 xtabs(~S3AQ3B1, data = NESARC) # Note how the NA's are not printed
 ```
@@ -145,7 +149,8 @@ rm(NESARCre)  # remove NESARCre and newly created S4AQ4A1
 Consider the variable `S1Q6A` with 14 levels recording the highest level of education of the participant.  To collapse the categories in to dichotomous variable indicating the presence of a high school degree use the `ifelse` function. The levels `1`, `2`, `3`, `4`, `5`, `6`, and `7` of the variable `S1Q6A` correspond to education levels less than completing high school.
 
 ```{r label = "CollapseHS"}
-NESARC$HS_DEGREE <- factor(ifelse(NESARC$S1Q6A %in% c("1", "2", "3", "4", "5", "6", "7"), "No", "Yes"))
+NESARC$HS_DEGREE <- factor(ifelse(NESARC$S1Q6A %in% c("1", "2", "3", "4", "5", "6", "7"), 
+                                  "No", "Yes"))
 summary(NESARC$HS_DEGREE)
 ```
 
@@ -153,14 +158,17 @@ summary(NESARC$HS_DEGREE)
 To create a factor with three levels (young adults, adults, older adults) using the variable `AGE` (a numeric vector) use the function `cut`.
 
 ```{r label = "CUT1"}
-NESARC$AGEfac <- cut(NESARC$AGE, breaks = c(18, 30, 50, Inf), labels = c("Young Adult", "Adult", "Older Adult"), include.lowest = TRUE)
+NESARC$AGEfac <- cut(NESARC$AGE, breaks = c(18, 30, 50, Inf), 
+                     labels = c("Young Adult", "Adult", "Older Adult"), 
+                     include.lowest = TRUE)
 summary(NESARC$AGEfac)
 ```
 
 Consider collapsing the numeric vector `S3AQ3C1` (usual quantity when cigarettes smoked) into a categorical variable with 5 levels.
 
 ```{r label = "CUT2"}
-NESARC$S3AQ3C1fac <- cut(NESARC$S3AQ3C1, breaks = c(0, 5, 10, 15, 20, 100), include.lowest = TRUE)
+NESARC$S3AQ3C1fac <- cut(NESARC$S3AQ3C1, breaks = c(0, 5, 10, 15, 20, 100), 
+                         include.lowest = TRUE)
 summary(NESARC$S3AQ3C1fac)
 ```
 
@@ -168,21 +176,33 @@ summary(NESARC$S3AQ3C1fac)
 Consider creating a new variable `DepressLife` which is `Yes` if the variable `MAJORLIFE` is a 1 or if `DYSLIFE` is a 1.
 
 ```{r label = "Agg1"}
-NESARC$DepressLife <- factor(ifelse( (NESARC$MAJORDEPLIFE == 1 | NESARC$DYSLIFE == 1), "Yes", "No"))
+NESARC$DepressLife <- factor(ifelse( (NESARC$MAJORDEPLIFE == 1 | NESARC$DYSLIFE == 1), 
+                                     "Yes", "No"))
 summary(NESARC$DepressLife)
 ```
 
 As another example, consider creating a variable `PPpanic` for past and present panic disorders.  The variables `APANDX12` and `APANDXP12` record a panic disorder within the last 12 months and prior to the last 12 months with agoraphobia, respectively.  The variables `PANDX12` and `PANDXP12` record a panic disorder within the last 12 months and prior to the last 12 months without agoraphobia, respectively.
 
 ```{r label = "PANIC"}
-NESARC$PPpanic <- factor(ifelse( (NESARC$APANDX12 == 1 | NESARC$APANDXP12 == 1 | NESARC$PANDX12 == 1 | NESARC$PANDXP12 == 1 ), "Yes", "No"))
+NESARC$PPpanic <- factor(ifelse( (NESARC$APANDX12 == 1 | NESARC$APANDXP12 == 1 | 
+                                    NESARC$PANDX12 == 1 | NESARC$PANDXP12 == 1 ), 
+                                 "Yes", "No"))
 summary(NESARC$PPpanic)
 ```
 
 Consider a new variable `AllDeprSymp` that records whether a subject exhibits all depression symptoms or not.  There are 19 depression symptoms recorded in the variables `S4AQ4A1` - `S4AQ4A19`.  Note that the logical operator `&` is used to test if all depression symptoms are present.
 
 ```{r label = "DEPsym"}
-NESARC$AllDeprSymp <- factor(ifelse( (NESARC$S4AQ4A1 == 1 & NESARC$S4AQ4A2 == 1 & NESARC$S4AQ4A3 == 1 & NESARC$S4AQ4A4 == 1 & NESARC$S4AQ4A5 == 1 & NESARC$S4AQ4A6 == 1 & NESARC$S4AQ4A7 == 1 & NESARC$S4AQ4A8 == 1 & NESARC$S4AQ4A9 == 1 & NESARC$S4AQ4A10 == 1 & NESARC$S4AQ4A11 == 1 & NESARC$S4AQ4A12 == 1 & NESARC$S4AQ4A13 == 1 & NESARC$S4AQ4A14 == 1 & NESARC$S4AQ4A15 == 1 & NESARC$S4AQ4A16 == 1 & NESARC$S4AQ4A17 == 1 & NESARC$S4AQ4A18 == 1 & NESARC$S4AQ4A19 == 1), "Yes", "No"))
+NESARC$AllDeprSymp <- factor(ifelse( (NESARC$S4AQ4A1 == 1 & NESARC$S4AQ4A2 == 1 & 
+                                        NESARC$S4AQ4A3 == 1 & NESARC$S4AQ4A4 == 1 & 
+                                        NESARC$S4AQ4A5 == 1 & NESARC$S4AQ4A6 == 1 & 
+                                        NESARC$S4AQ4A7 == 1 & NESARC$S4AQ4A8 == 1 & 
+                                        NESARC$S4AQ4A9 == 1 & NESARC$S4AQ4A10 == 1 & 
+                                        NESARC$S4AQ4A11 == 1 & NESARC$S4AQ4A12 == 1 & 
+                                        NESARC$S4AQ4A13 == 1 & NESARC$S4AQ4A14 == 1 & 
+                                        NESARC$S4AQ4A15 == 1 & NESARC$S4AQ4A16 == 1 & 
+                                        NESARC$S4AQ4A17 == 1 & NESARC$S4AQ4A18 == 1 & 
+                                        NESARC$S4AQ4A19 == 1), "Yes", "No"))
 summary(NESARC$AllDeprSymp)
 ```
 
@@ -280,7 +300,11 @@ NESARC$S4AQ4A18num <- as.numeric(levels(NESARC$S4AQ4A18))[NESARC$S4AQ4A18]
 NESARC$S4AQ4A18num[NESARC$S4AQ4A18num == 2 | NESARC$S4AQ4A18num == 9] <- 0
 NESARC$S4AQ4A19num <- as.numeric(levels(NESARC$S4AQ4A19))[NESARC$S4AQ4A19]
 NESARC$S4AQ4A19num[NESARC$S4AQ4A19num == 2 | NESARC$S4AQ4A19num == 9] <- 0
-NESARC$NumDepSym <- NESARC$S4AQ4A1num + NESARC$S4AQ4A2num + NESARC$S4AQ4A3num + NESARC$S4AQ4A4num + NESARC$S4AQ4A5num + NESARC$S4AQ4A6num + NESARC$S4AQ4A7num + NESARC$S4AQ4A8num + NESARC$S4AQ4A9num + NESARC$S4AQ4A10num + NESARC$S4AQ4A11num + NESARC$S4AQ4A12num + NESARC$S4AQ4A13num + NESARC$S4AQ4A14num + NESARC$S4AQ4A15num + NESARC$S4AQ4A16num + NESARC$S4AQ4A17num + NESARC$S4AQ4A18num + NESARC$S4AQ4A19num
+NESARC$NumDepSym <- NESARC$S4AQ4A1num + NESARC$S4AQ4A2num + NESARC$S4AQ4A3num + 
+  NESARC$S4AQ4A4num + NESARC$S4AQ4A5num + NESARC$S4AQ4A6num + NESARC$S4AQ4A7num + 
+  NESARC$S4AQ4A8num + NESARC$S4AQ4A9num + NESARC$S4AQ4A10num + NESARC$S4AQ4A11num + 
+  NESARC$S4AQ4A12num + NESARC$S4AQ4A13num + NESARC$S4AQ4A14num + NESARC$S4AQ4A15num + 
+  NESARC$S4AQ4A16num + NESARC$S4AQ4A17num + NESARC$S4AQ4A18num + NESARC$S4AQ4A19num
 xtabs(~NumDepSym, data = NESARC)
 ```
 
@@ -304,13 +328,17 @@ dim(NESARCsub1)
 
 The second approach uses standard indexing.
 ```{r label = "SUB2"}
-NESARCsub2 <- NESARC[NESARC$S3AQ1A == 1 & NESARC$CHECK321 == 1 & NESARC$S3AQ3B1 == "Every Day" & NESARC$AGE <= 25  & !is.na(NESARC$S3AQ1A == 1 & NESARC$CHECK321 == 1 & NESARC$S3AQ3B1 == "Every Day" & NESARC$AGE <= 25), ]
+NESARCsub2 <- NESARC[NESARC$S3AQ1A == 1 & NESARC$CHECK321 == 1 & 
+                       NESARC$S3AQ3B1 == "Every Day" & NESARC$AGE <= 25  & 
+                       !is.na(NESARC$S3AQ1A == 1 & NESARC$CHECK321 == 1 & 
+                       NESARC$S3AQ3B1 == "Every Day" & NESARC$AGE <= 25), ]
 dim(NESARCsub2)
 ```
 
 The third approach uses the `subset` function.
 ```{r label = "SUB3"}
-NESARCsub3 <- subset(NESARC, subset = S3AQ1A == 1 & CHECK321 == 1 & S3AQ3B1 == "Every Day" & AGE <= 25)
+NESARCsub3 <- subset(NESARC, subset = S3AQ1A == 1 & CHECK321 == 1 & 
+                       S3AQ3B1 == "Every Day" & AGE <= 25)
 dim(NESARCsub3)
 ```
 
@@ -335,7 +363,8 @@ Creating a `MINI` data frame tbl.
 MINI <- NESARC %>%
   select(S1Q24FT, S1Q24IN, S1Q24LB, SEX) %>%
   filter(S1Q24FT < 99, S1Q24IN < 99, S1Q24LB < 999) %>%
-  mutate(Inches = (S1Q24FT*12 + S1Q24IN), Sex = factor(SEX,  labels =c("Male", "Female"))) %>%
+  mutate(Inches = (S1Q24FT*12 + S1Q24IN), 
+         Sex = factor(SEX,  labels =c("Male", "Female"))) %>%
   rename(Weight = S1Q24LB)
 MINI
 ```
@@ -413,18 +442,22 @@ freq(ordered(MINI$Sex), plot = TRUE, col = c("blue","pink"), main = "Barplot of 
 
 ```{r echo = TRUE, results = 'asis'}
 library(xtable) # Must be loaded to call xtable
-T1 <- xtable(freq(ordered(MINI$Sex), plot = FALSE), caption = "Table 1: Frequency Table of `Sex`")
-print(T1, type = "html", caption.placement = "top", html.table.attributes = 1, timestamp = NULL)
+T1 <- xtable(freq(ordered(MINI$Sex), plot = FALSE), 
+             caption = "Table 1: Frequency Table of `Sex`")
+print(T1, type = "html", caption.placement = "top", html.table.attributes = 1, 
+      timestamp = NULL)
 ```
 
 ```{r echo = TRUE, results = 'asis'}
 library(knitr)
-kable(freq(ordered(MINI$Sex), plot = FALSE), format = "markdown", digits = 2, padding = 0)
+kable(freq(ordered(MINI$Sex), plot = FALSE), format = "markdown", 
+      digits = 2, padding = 0)
 ```
 
 ```{r echo = TRUE, results = 'asis'}
 library(knitr)
-kable(freq(ordered(MINI$Sex), plot = FALSE), format = "html", digits = 2, caption = "Table 2: Frequency Table of `Sex`")
+kable(freq(ordered(MINI$Sex), plot = FALSE), format = "html", digits = 2, 
+      caption = "Table 2: Frequency Table of `Sex`")
 ```
 
 ###
