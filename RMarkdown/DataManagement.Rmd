@@ -5,17 +5,61 @@ date: "Spring 2015"
 output: html_document
 ---
 
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align='center')
+library(dplyr)
+library(ggplot2)
+```
+
 Start by loading your data set.  The url is broken up into two parts so that the 
 R code will fit on the page.  The function `paste0()` is used to concatenate two
 strings.
 
-```{r label = "READIN", comment = NA}
+```{r label = "READIN"}
 firstpart <- "http://www1.appstate.edu/~arnholta/classes/"
 secondpart <- "PDS/DATAandCODEBOOKS/NESARC/NESARC_pds.RData"
 site <-paste0(firstpart, secondpart) 
 con <- url(site)
 load(con)
 NESARC[1:6, 1:10] # show first six rows and first 10 columns
+rm(NESARC) # removing NESARC
+```
+
+Creating a connection, loading the connection, and knowing the actual name of the data set is a little too much!  So, I wrote an `R` package (`PDS`) that has the four data sets from *Passion Driven Statistics* that should make accessing the data a little easier.  You may download the most recent version of `PDS` using the [devtools](http://github.com/hdaley/devtools) function `install_github()` to install `PDS` in `R`.
+
+However, you need to make sure you're set up to develop packages. This is platform specific:
+
+* On Windows, download and install [Rtools](http://http://cran.r-project.org/bin/windows/Rtools/).
+* On the Mac, make sure you have [Xcode](https://developer.apple.com/xcode/) installed.
+* On Linux, make sure you have the R-dev packages installed.
+
+You can check everything is installed correctly with the `has_devel()` function from the `devtools` package. Type the following at 
+the `R` prompt:
+
+```{r eval = FALSE}
+install.packages("devtools", dependencies = TRUE)    
+devtools::has_devel()
+```
+
+If everything is installed correctly, the function will print some output and then return **TRUE**.
+
+To install the `PDS` package, type the following at the `R` prompt:
+
+
+```{r eval = FALSE}
+devtools::install_github('alanarnholt/PDS')
+```
+
+Once the `PDS` package is installed, you will need to load the package using the `library` function.   
+
+```{r}
+library(PDS)
+```
+
+Now it is possible to access the data in the four data sets by typing the name of the data frame at the `R` prompt.  For example, to see the first five values in the variable `incomeperperson` from the `gapminder` data frame enter
+
+```{r}
+gapminder[1:5, 'incomeperperson']
 ```
 
 ### Using the `dplyr` package
@@ -36,7 +80,7 @@ devtools::install_github("hadley/dplyr")
 ### Renaming Variables
 Renaming the variables `IDNUM`, `ETOTLCA2`, and `ETHRACE2A` to `UniqueID`, `EthanolConsumption`, and `Ethnicity` is done with the `rename` function.  Although it is not a requirement, the data frame `NESARC` is converted to a `data frame tbl` per the advice given in the `dplyr` vignette.  The `rename` function takes a data frame or data frame tbl as its first argument while the syntax `new_name = old_name` is used as the second argument.
 
-```{r label = "RENAME", comment = NA, message = FALSE}
+```{r label = "RENAME"}
 library(dplyr)
 # Create a data frame tbl see ?tbl_df
 NESARCtbl <- tbl_df(NESARC)
@@ -47,7 +91,7 @@ NESARC[1:6, 1:5]
 ### Coding missing values
 Note that the variable `S3AQ3B1` uses a 9 to record `unknown` for smoking frequency.
 
-```{r label = "CodeMissing", comment = NA}
+```{r label = "CodeMissing"}
 NESARC$S3AQ3B1[NESARC$S3AQ3B1 == 9] <- NA
 summary(NESARC$S3AQ3B1)  # Note that 9 still appears
 NESARC$S3AQ3B1 <- factor(NESARC$S3AQ3B1)[, drop = TRUE]
@@ -56,7 +100,7 @@ summary(NESARC$S3AQ3B1)  # Unused level no longer appears
 
 I hate to look back at the code book to figure out what the heck the numbers represent in this case!  One of the great things about the `R` language is how it handles a wide variety of data types.  In this case, the variable `S3AQ3B1` is a factor with numeric labels for the levels of the factor.  To change the numeric labels to text type the following:
 
-```{r label = "Freq", comment = NA}
+```{r label = "Freq"}
 NESARC$S3AQ3B1 <- factor(NESARC$S3AQ3B1, labels = c("Every Day", "5 to 6 Days/week", "3 to 4 Days/week", "1 to 2 Days/week", "2 to 3 Days/month", "Once a month or less"))
 summary(NESARC$S3AQ3B1)
 xtabs(~S3AQ3B1, data = NESARC) # Note how the NA's are not printed
@@ -64,7 +108,7 @@ xtabs(~S3AQ3B1, data = NESARC) # Note how the NA's are not printed
 
 The following `ggplot2` code is used to graph the values in `S3AQ3B1`.
 
-```{r label = "ggSmoke", message = FALSE, fig.width = 10, fig.wdith = 5}
+```{r label = "ggSmoke", fig.width = 10, fig.wdith = 5}
 library(ggplot2)
 ggplot(data = NESARC, aes(x = S3AQ3B1)) + 
   geom_bar(fill = "lightgray") + 
@@ -73,7 +117,7 @@ ggplot(data = NESARC, aes(x = S3AQ3B1)) +
 ```
 
 If you do not want to see the `NA`'s use
-```{r label = "ggSmoke2", message = FALSE, fig.width = 10, fig.wdith = 5}
+```{r label = "ggSmoke2", fig.width = 10, fig.wdith = 5}
 ggplot(data = na.omit(NESARC[ , "S3AQ3B1", drop = FALSE]), aes(x = S3AQ3B1)) + 
   geom_bar(fill = "lightgray") + 
   labs(x = "Smoking Frequency") +
@@ -82,12 +126,12 @@ ggplot(data = na.omit(NESARC[ , "S3AQ3B1", drop = FALSE]), aes(x = S3AQ3B1)) +
 
 The variable `S4AQ4A1` represents unknown values with a 9, `No` values with a 2, and `Yes` values with a 1.  
 
-```{r label = "Summary1", comment = NA}
+```{r label = "Summary1"}
 summary(NESARC$S4AQ4A1)
 ```
 
 To recode the NA's as `No` enter
-```{r label = "recodeNO", comment = NA}
+```{r label = "recodeNO"}
 NESARCre <- NESARC
 NESARCre$S4AQ4A1[is.na(NESARCre$S4AQ4A1)] <- 2
 summary(NESARCre$S4AQ4A1)
@@ -100,7 +144,7 @@ rm(NESARCre)  # remove NESARCre and newly created S4AQ4A1
 ### Collapsing Categories
 Consider the variable `S1Q6A` with 14 levels recording the highest level of education of the participant.  To collapse the categories in to dichotomous variable indicating the presence of a high school degree use the `ifelse` function. The levels `1`, `2`, `3`, `4`, `5`, `6`, and `7` of the variable `S1Q6A` correspond to education levels less than completing high school.
 
-```{r label = "CollapseHS", comment = NA}
+```{r label = "CollapseHS"}
 NESARC$HS_DEGREE <- factor(ifelse(NESARC$S1Q6A %in% c("1", "2", "3", "4", "5", "6", "7"), "No", "Yes"))
 summary(NESARC$HS_DEGREE)
 ```
@@ -108,14 +152,14 @@ summary(NESARC$HS_DEGREE)
 ### Creating a Factor from a Numeric Vector
 To create a factor with three levels (young adults, adults, older adults) using the variable `AGE` (a numeric vector) use the function `cut`.
 
-```{r label = "CUT1", comment = NA}
+```{r label = "CUT1"}
 NESARC$AGEfac <- cut(NESARC$AGE, breaks = c(18, 30, 50, Inf), labels = c("Young Adult", "Adult", "Older Adult"), include.lowest = TRUE)
 summary(NESARC$AGEfac)
 ```
 
 Consider collapsing the numeric vector `S3AQ3C1` (usual quantity when cigarettes smoked) into a categorical variable with 5 levels.
 
-```{r label = "CUT2", comment = NA}
+```{r label = "CUT2"}
 NESARC$S3AQ3C1fac <- cut(NESARC$S3AQ3C1, breaks = c(0, 5, 10, 15, 20, 100), include.lowest = TRUE)
 summary(NESARC$S3AQ3C1fac)
 ```
@@ -123,21 +167,21 @@ summary(NESARC$S3AQ3C1fac)
 ### Aggregating Variables using `ifelse`
 Consider creating a new variable `DepressLife` which is `Yes` if the variable `MAJORLIFE` is a 1 or if `DYSLIFE` is a 1.
 
-```{r label = "Agg1", comment = NA}
+```{r label = "Agg1"}
 NESARC$DepressLife <- factor(ifelse( (NESARC$MAJORDEPLIFE == 1 | NESARC$DYSLIFE == 1), "Yes", "No"))
 summary(NESARC$DepressLife)
 ```
 
 As another example, consider creating a variable `PPpanic` for past and present panic disorders.  The variables `APANDX12` and `APANDXP12` record a panic disorder within the last 12 months and prior to the last 12 months with agoraphobia, respectively.  The variables `PANDX12` and `PANDXP12` record a panic disorder within the last 12 months and prior to the last 12 months without agoraphobia, respectively.
 
-```{r label = "PANIC", comment = NA}
+```{r label = "PANIC"}
 NESARC$PPpanic <- factor(ifelse( (NESARC$APANDX12 == 1 | NESARC$APANDXP12 == 1 | NESARC$PANDX12 == 1 | NESARC$PANDXP12 == 1 ), "Yes", "No"))
 summary(NESARC$PPpanic)
 ```
 
 Consider a new variable `AllDeprSymp` that records whether a subject exhibits all depression symptoms or not.  There are 19 depression symptoms recorded in the variables `S4AQ4A1` - `S4AQ4A19`.  Note that the logical operator `&` is used to test if all depression symptoms are present.
 
-```{r label = "DEPsym", comment = NA}
+```{r label = "DEPsym"}
 NESARC$AllDeprSymp <- factor(ifelse( (NESARC$S4AQ4A1 == 1 & NESARC$S4AQ4A2 == 1 & NESARC$S4AQ4A3 == 1 & NESARC$S4AQ4A4 == 1 & NESARC$S4AQ4A5 == 1 & NESARC$S4AQ4A6 == 1 & NESARC$S4AQ4A7 == 1 & NESARC$S4AQ4A8 == 1 & NESARC$S4AQ4A9 == 1 & NESARC$S4AQ4A10 == 1 & NESARC$S4AQ4A11 == 1 & NESARC$S4AQ4A12 == 1 & NESARC$S4AQ4A13 == 1 & NESARC$S4AQ4A14 == 1 & NESARC$S4AQ4A15 == 1 & NESARC$S4AQ4A16 == 1 & NESARC$S4AQ4A17 == 1 & NESARC$S4AQ4A18 == 1 & NESARC$S4AQ4A19 == 1), "Yes", "No"))
 summary(NESARC$AllDeprSymp)
 ```
@@ -148,7 +192,7 @@ summary(NESARC$AllDeprSymp)
 
 The following code selects the 19 variables that deal with depression using the `selects` function from `dplyr`.  Next, the values of the factors are converted to character strings; then, the character strings are converted to numeric values.  The function `myfix` is constructed to convert values 2 and 9 to 0.  The function `myfix` is applied to `sdf`, and the result is saved in the matrix `nsd`.  The matrix `nsd` is converted to a data frame `nsd`, and the function `apply` is used to find the number of depression symptoms and store the result in the variable `NDS`.  
 
-```{r comment = NA}
+```{r}
 sdf <- NESARC %>%
   select(contains("S4AQ4A"))
 sdf[] <- lapply(sdf, as.character)
@@ -162,7 +206,7 @@ xtabs(~NDS, data = nsd)
 
 Another approach:
 
-```{r comment = NA}
+```{r}
 mysum <- function(x){sum(x == 1)}
 myadd <- function(x){apply(x, 1, mysum)}
 ndf <- NESARC %>%
@@ -176,7 +220,7 @@ xtabs(~nDS, data = ndf)
 
 Be careful when converting a factor to a vector of numeric values based on the factor labels.  One may be tempted to use `as.numeric` to convert a factor to a numeric vector.  However, using `as.numeric(my_factor)` returns a numeric vector of the index levels not the actual values.
 
-```{r comment = NA}
+```{r}
 summary(NESARC$S4AQ4A1)
 levels(NESARC$S4AQ4A1)
 table(as.numeric(NESARC$S4AQ4A1))
@@ -184,7 +228,7 @@ table(as.numeric(NESARC$S4AQ4A1))
 
 To get the actual values of the factor use `as.numeric(levels(my_factor))[my_factor]`.
 
-```{r comment = NA}
+```{r}
 summary(NESARC$S4AQ4A1)
 levels(NESARC$S4AQ4A1)
 table(as.numeric(levels(NESARC$S4AQ4A1))[NESARC$S4AQ4A1])
@@ -192,7 +236,7 @@ table(as.numeric(levels(NESARC$S4AQ4A1))[NESARC$S4AQ4A1])
 
 To create a variable `NumDepSym` that records the number of depression symptoms among the variables `S4AQ4A1` - `S4AQ4A19`, create numeric variables from the factors `S4AQ4A1` - `S4AQ4A19` and store the results in `S4AQ4A1num` - `S4AQ4A19num`.  Next, recode the levels of `No` (2) and `Unknown` (9) to 0s for variables `S4AQ4A1num` - `S4AQ4A19num`.  The code is rather lengthy and other approaches such as the first two are encouraged.  The template given in the PDS IBook link will not work with this data because the variables are factors not numeric vectors.  You can not add factors!
 
-```{r label = "CompositeFactor", comment = NA}
+```{r label = "CompositeFactor"}
 summary(NESARC$S4AQ4A1)
 levels(NESARC$S4AQ4A1)
 table(as.numeric(NESARC$S4AQ4A1))
@@ -252,27 +296,27 @@ Three different approaches to subsetting data will be given.  The first approach
 
 
 The first approach uses the `filter` function with the `%>%` function.
-```{r label = "SUB1", comment = NA}
+```{r label = "SUB1"}
 NESARCsub1 <- NESARC %>%
   filter(S3AQ1A == 1 & CHECK321 == 1 & S3AQ3B1 == "Every Day" & AGE <= 25)
 dim(NESARCsub1)
 ```
 
 The second approach uses standard indexing.
-```{r label = "SUB2", comment = NA}
+```{r label = "SUB2"}
 NESARCsub2 <- NESARC[NESARC$S3AQ1A == 1 & NESARC$CHECK321 == 1 & NESARC$S3AQ3B1 == "Every Day" & NESARC$AGE <= 25  & !is.na(NESARC$S3AQ1A == 1 & NESARC$CHECK321 == 1 & NESARC$S3AQ3B1 == "Every Day" & NESARC$AGE <= 25), ]
 dim(NESARCsub2)
 ```
 
 The third approach uses the `subset` function.
-```{r label = "SUB3", comment = NA}
+```{r label = "SUB3"}
 NESARCsub3 <- subset(NESARC, subset = S3AQ1A == 1 & CHECK321 == 1 & S3AQ3B1 == "Every Day" & AGE <= 25)
 dim(NESARCsub3)
 ```
 
 ### Graphing a Numeric Variable with `ggplot2`
 
-```{r label = "ggNV", comment = NA, fig.align='center'}
+```{r label = "ggNV"}
 ggplot(data = NESARC, aes(x = AGE)) + 
   geom_histogram(binwidth = 5, fill = "lightgray") + 
   theme_bw()  
@@ -287,7 +331,7 @@ ggplot(data = NESARC, aes(x = AGE, y = ..density..)) +
 
 Creating a `MINI` data frame tbl.
 
-```{r label = "Mini", comment = NA, fig.align = 'center'}
+```{r label = "Mini"}
 MINI <- NESARC %>%
   select(S1Q24FT, S1Q24IN, S1Q24LB, SEX) %>%
   filter(S1Q24FT < 99, S1Q24IN < 99, S1Q24LB < 999) %>%
@@ -298,7 +342,7 @@ MINI
 
 Some more `ggplot2` graphs.
 
-```{r label = "WtHist", comment = NA, fig.align = "center"}
+```{r label = "WtHist"}
 ggplot(data = MINI, aes(x = Inches)) + 
   geom_histogram(binwidth = 1, fill = "peachpuff") + 
   theme_bw()
@@ -311,7 +355,7 @@ tapply(MINI$Inches, MINI$Sex, median)
 
 ### Some Bivariate Graphs with `ggplot2`
 
-```{r label = "LastTwo", comment = NA, fig.align = 'center'}
+```{r label = "LastTwo"}
 ggplot(data = MINI, aes(x = Inches, y = Weight, color = Sex)) + 
   geom_point(alpha = 0.1) + 
   stat_smooth(method = "lm") + 
@@ -327,7 +371,7 @@ ggplot(data = MINI, aes(x = Inches, y = Weight)) +
 
 ### ANOVA Example
 
-```{r label = "ANOVAexp", comment = NA, fig.align = 'center'}
+```{r label = "ANOVAexp"}
 my.aov <- aov(S3AQ3C1 ~ TAB12MDX, data = subset(NESARC, S3AQ3C1 < 99)) # Note S3AQ3C1 == 99 is NA
 summary(my.aov)     
 TukeyHSD(my.aov)
@@ -336,14 +380,14 @@ plot(TukeyHSD(my.aov))
 
 A plot of the residuals indicates problems with this model.
 
-```{r label = "qqP1",comment = NA, fig.align='center', message=FALSE}
+```{r label = "qqP1"}
 library(car)
 qqPlot(my.aov)
 ```
 
 ### Regression Example
 
-```{r label = "REGexp", comment = NA}
+```{r label = "REGexp"}
 my.lm <- lm(Weight ~ Inches, data = MINI)
 summary(my.lm)
 confint(my.lm)  # Do not use this until you know your model is appropriate
@@ -353,7 +397,7 @@ summary(my.lm2)
 
 Plots of the residuals indicate problems with both `my.lm` and `my.lm2`.
 
-```{r label = "qqP2", comment = NA, fig.align = 'center', message = FALSE}
+```{r label = "qqP2"}
 qqPlot(my.lm)
 qqPlot(my.lm2)
 ```
@@ -362,9 +406,9 @@ qqPlot(my.lm2)
 
 First, the code and output is shown for a table.  Then the `xtable` function from the `xtable` package is used to create and display the table in the document.
 
-```{r comment = NA, fig.align = 'center'}
+```{r}
 library(descr)
-freq(ordered(MINI$Sex), plot = TRUE, col = c("blue", "pink"), main = "Barplot of Gender")
+freq(ordered(MINI$Sex), plot = TRUE, col = c("blue","pink"), main = "Barplot of Gender")
 ```
 
 ```{r echo = TRUE, results = 'asis'}
