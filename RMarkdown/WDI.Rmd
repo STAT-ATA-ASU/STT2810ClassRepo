@@ -5,10 +5,15 @@ date: "Spring 2015"
 output: html_document
 ---
 
-```{r comment = NA, message = FALSE, warning = FALSE}
-library(ggplot2)
-library(WDI)
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
 library(dplyr)
+library(ggplot2)
+```
+
+
+```{r}
+library(WDI)
 library(PDS)
 WDIsearch("CO2")
 MOJ <- WDI(country = "all", indicator = c("EN.ATM.CO2E.PC", "EG.USE.COMM.GD.PP.KD"),
@@ -32,22 +37,33 @@ MOJleft <- MOJleft %>%
 head(MOJleft)
 ```
 
-```{r comment = NA}
+```{r}
 MOJO <- WDI(country = "all", indicator = c("EN.ATM.CO2E.PC", "EG.USE.COMM.GD.PP.KD"),
     start = 1900, end = 2015, extra = FALSE, cache = NULL)
 head(MOJO)
 tail(MOJO)
-ggplot(data = MOJO, aes(x = year, y = EN.ATM.CO2E.PC, color = country)) + geom_point(alpha = 0.8) + theme_bw() + guides(color = FALSE) + labs(y = "CO2 emissions (metric tons per capita)")
+ggplot(data = MOJO, aes(x = year, y = EN.ATM.CO2E.PC, color = country)) + 
+  geom_point(alpha = 0.8) + 
+  theme_bw() + 
+  guides(color = FALSE) + 
+  labs(y = "CO2 emissions (metric tons per capita)")
 ```
 
-```{r comment = NA}
+```{r}
 MOJOusa <- subset(MOJO, country == "North America")
-ggplot(data = MOJOusa, aes(x = year, y = EN.ATM.CO2E.PC)) + geom_point(alpha = 0.8) + theme_bw() + guides(color = FALSE) + labs(y = "CO2 emissions (metric tons per capita)")
+ggplot(data = MOJOusa, aes(x = year, y = EN.ATM.CO2E.PC)) + 
+  geom_point(alpha = 0.8) + 
+  theme_bw() + 
+  guides(color = FALSE) + 
+  labs(y = "CO2 emissions (metric tons per capita)")
 ```
 
-```{r comment = NA, warning = FALSE, message = FALSE}
+```{r}
 MOJOmini <- MOJO %>%
   filter(country == c("China", "United States", "Spain"))
 head(MOJOmini)
-ggplot(data = MOJOmini, aes(x = year, y = EN.ATM.CO2E.PC, color = country)) + geom_point(alpha = 0.8) + theme_bw() + labs(y = "CO2 emissions (metric tons per capita)")
+ggplot(data = MOJOmini, aes(x = year, y = EN.ATM.CO2E.PC, color = country)) + 
+  geom_point(alpha = 0.8) + 
+  theme_bw() + 
+  labs(y = "CO2 emissions (metric tons per capita)")
 ```
