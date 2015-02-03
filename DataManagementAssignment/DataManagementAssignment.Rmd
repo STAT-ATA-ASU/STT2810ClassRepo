@@ -33,7 +33,7 @@ ggplot(data = AddHealth, aes(x = H1SU1, fill = H1SU1)) +
 ```
 
 
-Question `H1SU2` asks the 821 repondents from `H1SU1` "how many times did you attempt suicide?"  Response of
+Question `H1SU2` asks the 821 respondents from `H1SU1` "how many times did you attempt suicide?"  Response of
 a 7 should be recoded to `NA`.
 
 ```{r}
@@ -80,7 +80,7 @@ ggplot(data = na.omit(AddHealth[ , "H1SU3", drop = FALSE]), aes(x = H1SU3, fill 
 
 ## Managed Numeric Variables
 
-Imagine one wants to study GDP and military personnel.  The gapminder codebook indicates the variable
+Imagine one wants to study GDP and military personnel.  The gapminder code-book indicates the variable
 `armedforcesrate` measures the military personnel as a percentage of the total labor force.  However, no date is given for the data collection.  Using the `WDI` package we decide to run the following:
 
 ```{r}

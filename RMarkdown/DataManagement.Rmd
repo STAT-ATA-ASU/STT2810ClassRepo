@@ -11,7 +11,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
-Start by loading your data set.  The url is broken up into two parts so that the 
+Start by loading your data set.  The URL is broken up into two parts so that the 
 R code will fit on the page.  The function `paste0()` is used to concatenate two
 strings.
 
