@@ -5,7 +5,7 @@ date: "Thursday, February 05, 2015"
 output: html_document
 ---
 
-Here are some quick way to format text in your Rmd file. To make *italicized* font we use \*(text)\*,  to make *bold* font we use \*\*(text)\*\*.
+Here are some quick ways to format text in your Rmd file. To make an *italicized* font we use \*(text)\*,  to make a *bold* font use \*\*(text)\*\*.
 
 For headers, use \#(text) for level 1, \#\#(text) for level 2, and \#\#\#(text) for level 3. For example
 
