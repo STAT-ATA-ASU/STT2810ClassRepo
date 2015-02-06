@@ -16,7 +16,7 @@ During your literature review, you should:
 4. Identify replicated and equivocal findings in order to generate a more focused question that may add to the literature. Give special attention to the “future research” sections of the articles that you read
 5. Based on the literature, select additional questions/items/ variables that may help you to understand the association of interest. In doing so, further refine your research question. Add relevant documentation (i.e. code book pages) to your personal codebook.
 
-##Example:
+## Example:
 
 Given the association that I have decided to examine, I use such keywords as _nicotine dependence_, _tobacco dependence_, and _smoking_. After reading through several titles and abstracts, I notice that there has been relatively little attention in the research literature to the association between smoking exposure and nicotine dependence. I expand a bit to include other substance use that provides relevant background as well.
 
@@ -32,4 +32,4 @@ Based on my reading of the articles in the **References** as well as others, I h
 I have decided to further focus my question by examining whether the association between nicotine dependence and depression differs based on how much a person smokes. I am wondering if at low levels of smoking compared to high levels, nicotine dependence is more common among individuals with major depression than those without major depression.  I add relevant depression questions/items/variables to my personal codebook as well as several demographic measures (age, gender, ethnicity, etc.) and any other variables I may wish to consider.
 
 
-# References
+## References
