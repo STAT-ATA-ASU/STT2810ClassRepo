@@ -1,0 +1,45 @@
+---
+title: "Set Up"
+author: "Brian"
+date: "Thursday, February 05, 2015"
+output: html_document
+---
+
+Here are some quick ways to format text in your Rmd file. To make an *italicized* font we use \*(text)\*,  to make a *bold* font use \*\*(text)\*\*.
+
+For headers, use \#(text) for level 1, \#\#(text) for level 2, and \#\#\#(text) for level 3. For example
+
+# Header 1
+
+## Header 2
+
+### Header 3
+
+To make a bulleted list, follow the example:
+
+\* Item 1
+
+ \+ Item 1a
+  
+  to create
+       
+* Item 1
+* Item 2
+    + Item 2a
+    + Item 2b
+
+For a numbered list, just simply number each line as follows
+
+\01. Item 1
+
+\02. Item 2
+
+\+ Item 2a
+
+to create
+
+1. Item 1
+
+2.Item 2
+
++ Item 2a
