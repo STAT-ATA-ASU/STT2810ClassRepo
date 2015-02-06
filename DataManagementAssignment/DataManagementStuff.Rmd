@@ -1,7 +1,7 @@
 ---
-title: "Data Management Assignment"
-author: "Spring 2015"
-date: ""
+title: "Data Management Stuff"
+author: ""
+date: "Spring 2015"
 output: html_document
 ---
 

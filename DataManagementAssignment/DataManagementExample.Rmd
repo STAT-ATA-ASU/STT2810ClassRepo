@@ -1,0 +1,96 @@
+---
+title: "Data Management Example"
+author: ""
+date: "Spring 2015"
+output: html_document
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+
+library(ggplot2)
+library(descr)
+
+```
+
+Three categorical variables relevant to *student health* are `H1SU1-H1SU3` from the `AddHealth` data set.  The `AddHealth` data set is loaded from the `PDS` package.  Using the `dplyr` package, a new data frame `NDF` containing only `H1SU1-H1SU3` and renaming `H1SU1-H1SU3` to `ConsideredSuicide`, `TimesAttemptedSuicide`, `TreatedByDoctor` is created.
+
+
+```{r}
+library(PDS)
+library(dplyr)
+NDF <- AddHealth %>%
+  rename(ConsideredSuicide = H1SU1, TimesAttemptedSuicide = H1SU2, TreatedByDoctor = H1SU3) %>%
+  select(ConsideredSuicide, TimesAttemptedSuicide, TreatedByDoctor)
+head(NDF)
+```
+
+Responses of `9` for question `ConsideredSuicide` are recoded to `NA`. 
+
+```{r}
+xtabs(~ConsideredSuicide, data = NDF)
+NDF$ConsideredSuicide[NDF$ConsideredSuicide == 9] <- NA
+xtabs(~ConsideredSuicide, data = NDF)
+NDF$ConsideredSuicide <- factor(NDF$ConsideredSuicide, labels = c("No", "Yes", "Refused", "Don't Know"))[, drop = TRUE]
+xtabs(~ConsideredSuicide, data = NDF)
+summary(NDF$ConsideredSuicide)
+freq(NDF$ConsideredSuicide)
+freq(NDF$ConsideredSuicide, main = "Did you ever seriously think about committing suicide?")
+ggplot(data = NDF, aes(x = ConsideredSuicide, fill = ConsideredSuicide)) + 
+  geom_bar() + 
+  labs(title = "Did you ever seriously think about committing suicide?", x = "") +
+  theme_bw() +
+  guides(fill = guide_legend(title = "Have You\nConsidered\nSuicide?"))
+```
+
+Question `TimesAttemptedSuicide` asks the 821 respondents from `ConsideredSuicide` "how many times did you attempt suicide?"  Responses of 7 are recoded to `NA`.
+
+```{r}
+xtabs(~TimesAttemptedSuicide, data = NDF)
+NDF$TimesAttemptedSuicide[NDF$TimesAttemptedSuicide==7] <- NA
+xtabs(~TimesAttemptedSuicide, data = NDF)
+NDF$TimesAttemptedSuicide <- factor(NDF$TimesAttemptedSuicide)[, drop = TRUE]
+xtabs(~TimesAttemptedSuicide, data = NDF)
+NDF$TimesAttemptedSuicide <- factor(NDF$TimesAttemptedSuicide, 
+                          labels = c("0 times", "1 time", "2 or 3 times", 
+                                     "4 or 5 times", ">= 6 times", "refused", 
+                                     "don't know"))
+```
+
+
+
+```{r}
+summary(NDF$TimesAttemptedSuicide)
+xtabs(~TimesAttemptedSuicide, data = NDF)
+NAS <- sum(xtabs(~TimesAttemptedSuicide, data = NDF)[2:5])  # number that attempted suicide
+NAS
+freq(NDF$TimesAttemptedSuicide, main = "How many times did you actually attempt suicide?")
+ggplot(data = NDF, aes(x = TimesAttemptedSuicide)) + 
+  geom_bar(fill = "maroon") + 
+  labs(title = "How many times did you actually attempt suicide?", x= "") +
+  theme_bw() 
+ggplot(data = na.omit(NDF[ , "TimesAttemptedSuicide", drop = FALSE]), aes(x = TimesAttemptedSuicide)) + 
+  geom_bar(fill = "plum") + 
+  labs(title = "How many times did you actually attempt suicide?", x = "") +
+  theme_bw() 
+ggplot(data = na.omit(NDF[ , "TimesAttemptedSuicide", drop = FALSE]), 
+       aes(x = TimesAttemptedSuicide, fill = TimesAttemptedSuicide)) + 
+  geom_bar() + 
+  labs(title = "How many times did you actually attempt suicide?", x = "") +
+  theme_bw() +
+  guides(fill = guide_legend(title = "Number of Times\nSuicide Attempted"))
+```
+
+Question `TreatedByDoctor` asks of the `r NAS` that attempted suicide if they had to be treated by either a nurse or doctor.  The response of 7 should be recoded to `NA`.
+
+```{r}
+NDF$TreatedByDoctor[NDF$TreatedByDoctor == 7] <- NA
+NDF$TreatedByDoctor <- factor(NDF$TreatedByDoctor, labels = c("No", "Yes"))[, drop = TRUE]
+xtabs(~TreatedByDoctor, data = NDF)
+freq(NDF$TreatedByDoctor, main = "Did you require treatment by either a nurse of doctor?")
+ggplot(data = na.omit(NDF[ , "TreatedByDoctor", drop = FALSE]), aes(x = TreatedByDoctor, fill = TreatedByDoctor)) + 
+  geom_bar() + 
+  labs(title = "Did you require treatment by either a nurse of doctor?", x = "") +
+  theme_bw() +
+  guides(fill = guide_legend(title = "Treated by Doctor\n or Nurse"))
+```
