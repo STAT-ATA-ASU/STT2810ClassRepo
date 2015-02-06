@@ -11,7 +11,7 @@ library(ggplot2)
 library(descr)
 ```
 
-Three categorical variables relevant to *student health* are `H1SU1-H1SU3` from the `AddHealth` data set.  The `AddHealth` data set is loaded from the `PDS` package.  Using the `dplyr` package, a new data frame `NDF` containing only `H1SU1-H1SU3` and renaming `H1SU1-H1SU3` to `ConsideredSuicide`, `TimesAttemptedSuicide`, `TreatedByDoctor` is created.
+Three categorical variables relevant to *student health* are `H1SU1-H1SU3` from the `AddHealth` data set.  The `AddHealth` data set is loaded from the `PDS` package.  Using the `dplyr` package, a new data frame `NDF` containing only three variables after renaming `H1SU1-H1SU3` to `ConsideredSuicide`, `TimesAttemptedSuicide`, and `TreatedByDoctor` is created.
 
 
 ```{r}
@@ -98,7 +98,7 @@ ggplot(data = na.omit(NDF[ , "TimesAttemptedSuicide", drop = FALSE]),
   guides(fill = guide_legend(title = "Number of Times\nSuicide Attempted"))
 ```
 
-Question `TreatedByDoctor` asks of the `r NAS` that attempted suicide if they had to be treated by either a nurse or doctor.  The response of 7 should be recoded to `NA`.
+Question `TreatedByDoctor` asks of the `r NAS` that attempted suicide "Did you require treatment by either a nurse or doctor?"  A response of 7 should be recoded to `NA`.
 
 ```{r}
 NDF$TreatedByDoctor[NDF$TreatedByDoctor == 7] <- NA
