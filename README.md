@@ -30,6 +30,7 @@ If you would like to render an `.html` file you find in this repo, click on the 
 * [`ggplot2` Book](http://ggplot2.org/book/)
 * [Cookbook for R](http://www.cookbook-r.com/Graphs/)
 * [Lattice: Multivariate Data Visualization with R - Figures and code](http://lmdvr.r-forge.r-project.org/figures/figures.html)
+* [Graph Catalog `ggplot2`](http://shinyapps.stat.ubc.ca/r-graph-catalog/)
 
 ## Reproducible Analysis
 
