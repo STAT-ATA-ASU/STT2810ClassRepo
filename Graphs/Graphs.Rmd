@@ -1,0 +1,62 @@
+---
+title: "More Data Management and Graphs"
+author: ""
+date: "Spring 2015"
+output: html_document
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+library(dplyr)
+library(ggplot2)
+```
+
+
+```{r label = "Missing"}
+library(PDS)
+NESARC$S3AQ3B1[NESARC$S3AQ3B1 == 9] <- NA
+summary(NESARC$S3AQ3B1)  # Note that 9 still appears
+NESARC$S3AQ3B1 <- factor(NESARC$S3AQ3B1)[, drop = TRUE]
+summary(NESARC$S3AQ3B1)  # Unused level no longer appears
+NESARC$S3AQ3B1 <- factor(NESARC$S3AQ3B1, 
+                         labels = c("Every Day", "5 to 6 Days/week", 
+                                    "3 to 4 Days/week", "1 to 2 Days/week", 
+                                    "2 to 3 Days/month", "Once a month or less"))
+summary(NESARC$S3AQ3B1)
+xtabs(~S3AQ3B1, data = NESARC) # Note how the NA's are not printed
+```
+
+Subsetting the data to individuals who have smoke over 100 cigarettes (`S3AQ1A ==1`), have smoked cigarettes in the past 12 months (`CHECK321 == 1`), indicated they are daily smokers (`S3AQ3B1 == "Every Day"`), and are between the ages of 18 and 25 (`AGE <= 25` & `AGE >= 18`).
+
+```{r, label = "Subsetting"}
+NESARCsub1 <- NESARC %>%
+  filter(S3AQ1A == 1 & CHECK321 == 1 & S3AQ3B1 == "Every Day" & AGE <= 25 & AGE >= 18)
+dim(NESARCsub1) 
+```
+
+Creating a 5 level factor out of the numeric variable `S3AQ3C1` which records the number of cigarettes smoked per day.
+```{r}
+NESARCsub1$S3AQ3C1[NESARCsub1$S3AQ3C1==99] <- NA
+summary(NESARCsub1$S3AQ3C1)
+NESARCsub1$S3AQ3C1fac <- cut(NESARCsub1$S3AQ3C1, breaks = c(1, 5, 10, 15, 20, 98))
+summary(NESARCsub1$S3AQ3C1fac)
+```
+
+## Creating Bar Charts
+
+```{r}
+# No frills bar chart
+ggplot(data = NESARCsub1, aes(x = S3AQ3C1fac)) + geom_bar()
+# Similar to book
+ggplot(data = na.omit(NESARCsub1[ , "S3AQ3C1fac", drop = FALSE]), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)))) + 
+  geom_bar(fill = "blue") +
+  theme_bw() + 
+  labs(x = "Number of cigarettes smoked/day", y = "Percent")
+###
+NESARCsub1$SEX <- factor(NESARCsub1$SEX, labels = c("Male", "Female")) 
+ggplot(data = na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX"), drop = FALSE]), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
+  geom_bar(position = "dodge") +
+  theme_bw() + 
+  labs(x = "Number of cigarettes smoked/day", y = "Percent")
+```
+
