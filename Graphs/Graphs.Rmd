@@ -40,68 +40,133 @@ NESARCsub1$S3AQ3C1[NESARCsub1$S3AQ3C1 == 99] <- NA
 summary(NESARCsub1$S3AQ3C1)
 NESARCsub1$S3AQ3C1fac <- cut(NESARCsub1$S3AQ3C1, breaks = c(1, 5, 10, 15, 20, 98))
 summary(NESARCsub1$S3AQ3C1fac)
+NESARCsub1$SEX <- factor(NESARCsub1$SEX, labels = c("Male", "Female")) 
+NESARCsub1$ETHRACE2A <- factor(NESARCsub1$ETHRACE2A, labels = c("Caucasian", "African American", "American Indian", "Asian", "Hispanic")) 
+```
+
+```{r}
+C1 <- with(data = NESARCsub1, table(S3AQ3C1fac))
+C1
+PC1 <- prop.table(C1)
+PC1
+T1 <- with(data = NESARCsub1, ftable(SEX, S3AQ3C1fac, ETHRACE2A))
+T1
+prop.table(T1, 2)
+apply(prop.table(T1, 2), 2, sum)
+T2 <- with(data = NESARCsub1, ftable(ETHRACE2A, SEX, S3AQ3C1fac))
+T2
+PT3 <- prop.table(T2, 1)
+PT3
 ```
 
 ## Creating Bar Charts
 
 ```{r}
-# No frills bar chart
+# No frills (base) bar chart
+barplot(C1)
+# No frills (ggplot2) bar chart
 ggplot(data = NESARCsub1, aes(x = S3AQ3C1fac)) + geom_bar()
-# Similar to book
-ggplot(data = na.omit(NESARCsub1[ , "S3AQ3C1fac", drop = FALSE]), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)))) + 
+# Similar to book (base)
+barplot(PC1, col = "blue", xlab = "Number of cigarettes smoked/day", ylab = "Percent")
+# Similar to book (ggplot2)
+ggplot(data = na.omit(NESARCsub1[ ,"S3AQ3C1fac", drop = FALSE]), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)))) + 
   geom_bar(fill = "blue") +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent")
+```
+
 # Explain what is happening in this graph
-NESARCsub1$SEX <- factor(NESARCsub1$SEX, labels = c("Male", "Female")) 
-NESARCsub1$ETHRACE2A <- factor(NESARCsub1$ETHRACE2A, labels = c("Caucasian", "African American", "American Indian", "Asian", "Hispanic")) 
+
+```{r}
 ggplot(data = na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
   geom_bar(position = "dodge") +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent") + 
   facet_grid(ETHRACE2A ~ .)
-# Compare these
-# White
+```
+
+# Caucasians now (explain what is going on)
+```{r}
 ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "Caucasian"), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
   geom_bar(position = "dodge") +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent")
-# Black
+# Comapre to
+ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "Caucasian"), aes(x = S3AQ3C1fac, y = ..density.., fill = SEX, group = SEX)) + 
+  geom_bar(position = "dodge") +
+  theme_bw() + 
+  labs(x = "Number of cigarettes smoked/day", y = "Percent")
+```
+
+# African Americans
+
+```{r}
 ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "African American"), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
   geom_bar(position = "dodge") +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent")
-# Indian
+# Compare to
+ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "African American"), aes(x = S3AQ3C1fac, y = ..density.., fill = SEX, group = SEX)) + 
+  geom_bar(position = "dodge") +
+  theme_bw() + 
+  labs(x = "Number of cigarettes smoked/day", y = "Percent")
+```
+
+# American Indians
+
+```{r}
 ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "American Indian"), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
   geom_bar(position = "dodge") +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent")
+## Compare to
+ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "American Indian"), aes(x = S3AQ3C1fac, y = ..density.., fill = SEX, group = SEX)) + 
+  geom_bar(position = "dodge") +
+  theme_bw() + 
+  labs(x = "Number of cigarettes smoked/day", y = "Percent")
+```
+
 # Asian
+
+```{r}
 ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "Asian"), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
   geom_bar(position = "dodge") +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent")
+## Compare to
+ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "Asian"), aes(x = S3AQ3C1fac, y = ..density.., fill = SEX, group = SEX)) + 
+  geom_bar(position = "dodge") +
+  theme_bw() + 
+  labs(x = "Number of cigarettes smoked/day", y = "Percent")
+```
+
 # Hispanic
+
+```{r}
 ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "Hispanic"), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
   geom_bar(position = "dodge") +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent")
-########
-with(data = NESARCsub1, ftable(S3AQ3C1fac, SEX, ETHRACE2A))
-T1 <- with(data = NESARCsub1, prop.table(ftable(S3AQ3C1fac, SEX, ETHRACE2A), 2))
-T1
-apply(T1, 2, sum)
-barplot(T1, beside = TRUE, col = c("blue", "pink"), names.arg = c("White", "Black", "Indian", "Asian", "Hispanic"))
+###
+ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "Hispanic"), aes(x = S3AQ3C1fac, y = ..density.., fill = SEX, group = SEX)) + 
+  geom_bar(position = "dodge") +
+  theme_bw() + 
+  labs(x = "Number of cigarettes smoked/day", y = "Percent")
 ```
 
-This is almost the graph we want. 
+# Is this the graph we want? 
 
 ```{r fig.width = 8, fig.height = 12}
-ggplot(data = NESARCsub1, aes(x = S3AQ3C1fac, group = SEX)) + 
-  geom_bar(position = "dodge", aes(y = ..density.., fill = SEX), color = "black") +
+PT3
+DFM <- na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A")])
+dim(DFM)
+ggplot(data = DFM, aes(x = S3AQ3C1fac)) +  
+  geom_bar(position = "dodge", aes(y = ..density.., group = SEX, fill = SEX)) + 
+  facet_grid(ETHRACE2A ~ .) +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent") + 
-  facet_grid(ETHRACE2A ~ .) + 
   scale_fill_manual(values = c("blue", "pink")) +
-  guides(fill = guide_legend(title = "Gender"))
+  guides(fill = guide_legend(title = "Gender")) 
 ```
+
+
