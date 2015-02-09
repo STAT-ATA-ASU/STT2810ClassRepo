@@ -11,6 +11,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
+This is not ready for public consumption yet!!!!
 
 ```{r label = "Missing"}
 library(PDS)
@@ -78,7 +79,7 @@ ggplot(data = na.omit(NESARCsub1[ ,"S3AQ3C1fac", drop = FALSE]), aes(x = S3AQ3C1
 # Explain what is happening in this graph
 
 ```{r}
-ggplot(data = na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
+ggplot(data = na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A")]), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
   geom_bar(position = "dodge") +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent") + 
@@ -87,7 +88,7 @@ ggplot(data = na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = 
 
 # Caucasians now (explain what is going on)
 ```{r}
-ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "Caucasian"), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
+ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A")]), ETHRACE2A == "Caucasian"), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
   geom_bar(position = "dodge") +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent")
@@ -161,7 +162,7 @@ PT3
 DFM <- na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A")])
 dim(DFM)
 ggplot(data = DFM, aes(x = S3AQ3C1fac)) +  
-  geom_bar(position = "dodge", aes(y = ..density.., group = SEX, fill = SEX)) + 
+  geom_bar(position = "dodge", aes(y =..density.. , group = SEX, fill = SEX)) + 
   facet_grid(ETHRACE2A ~ .) +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent") + 
@@ -169,16 +170,3 @@ ggplot(data = DFM, aes(x = S3AQ3C1fac)) +
   guides(fill = guide_legend(title = "Gender")) 
 ```
 
-```{r}
-set.seed(13)
-fac1 <- factor(sample(letters[1:5], 500, replace = TRUE))
-fac2 <- factor(sample(LETTERS[1:5], 500, replace = TRUE))
-sex <- factor(sample(c("Male", "Female"), 500, replace = TRUE))
-DF <- data.frame(fac1, fac2, sex)
-rm(fac1, fac2, sex)
-head(DF)
-ftable(DF$fac2, DF$sex, DF$fac1)
-prop.table(ftable(DF$fac2, DF$sex, DF$fac1), 1)
-###
-ggplot(data = DF, aes(fac1)) + geom_bar(position = "dodge", aes(y = ..density.., fill = sex, group = sex)) + facet_grid(fac2~.)
-```
