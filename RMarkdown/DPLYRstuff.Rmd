@@ -1,0 +1,71 @@
+---
+title: "Data Management Introduction"
+author: "Alan T. Arnholt"
+date: "February 9, 2015"
+output: html_document
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+library(dplyr)
+library(ggplot2)
+library(PASWR2)
+```
+
+```{r}
+str(EPIDURAL)
+epi <- EPIDURAL %>%
+  rename(Doctor = doctor, Weight = kg, Height = cm, Ease = ease, Treatment = treatment, OC = oc) %>%
+  mutate(BMI = Weight/(Height/100)^2) %>%
+  select(Doctor, Ease, Treatment, OC, BMI)
+head(epi)
+```
+
+## Return rows with matching conditions (filter)
+
+```{r}
+epiAB <- epi %>%
+  filter(BMI <= 30 & (Doctor == "Dr. A" | Doctor == "Dr. B"))
+epiAB
+epiCD <- epi %>%
+  filter(BMI <= 30 & !(Doctor == "Dr. A" | Doctor == "Dr. B"))
+epiCD
+```
+
+How many patients have a `BMI` between 20 and 25 inclusive and were treated by `Dr. A`?
+
+```{r}
+epiN <- epi %>%
+  filter(BMI <= 25 & BMI >= 20 & Doctor == "Dr. A")
+epiN
+DN <- dim(epiN)
+DN
+```
+
+There are `r DN[1]` patients that have a `BMI` between 20 and 25 inclusive and 
+were treated by `Dr. A`.
+
+## Problems
+
+Use the data frame `quine` from the `MASS` package to answer all questions.
+
+1.  How many aboriginal average learning females in grade "F0" have missed more than
+5 days of school? (4)
+2.  How many non-aboriginal males in grade "F0" have never missed any school? (2)
+3.  What is the average number of missed school days for non-aboriginal average learning males? (14.71429)
+
+Use the following code to create the data frame `DF`.
+
+```{r}
+set.seed(37)
+fac1 <- factor(sample(letters[1:4], 100, replace = TRUE))
+fac2 <- factor(sample(LETTERS[1:2], 100, replace = TRUE))
+sex <- factor(sample(c("Male", "Female"), 100, replace = TRUE))
+DF <- data.frame(fac1, fac2, sex)
+rm(fac1, fac2, sex)
+head(DF)
+```
+
+4.  What percent of level `B` (`fac2`) are `Female`? (53.65854%)
+
+
