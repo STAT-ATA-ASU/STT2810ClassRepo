@@ -169,4 +169,16 @@ ggplot(data = DFM, aes(x = S3AQ3C1fac)) +
   guides(fill = guide_legend(title = "Gender")) 
 ```
 
-
+```{r}
+set.seed(13)
+fac1 <- factor(sample(letters[1:5], 500, replace = TRUE))
+fac2 <- factor(sample(LETTERS[1:5], 500, replace = TRUE))
+sex <- factor(sample(c("Male", "Female"), 500, replace = TRUE))
+DF <- data.frame(fac1, fac2, sex)
+rm(fac1, fac2, sex)
+head(DF)
+ftable(DF$fac2, DF$sex, DF$fac1)
+prop.table(ftable(DF$fac2, DF$sex, DF$fac1), 1)
+###
+ggplot(data = DF, aes(fac1)) + geom_bar(position = "dodge", aes(y = ..density.., fill = sex, group = sex)) + facet_grid(fac2~.)
+```
