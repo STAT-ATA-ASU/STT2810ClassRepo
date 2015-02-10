@@ -214,7 +214,8 @@ qu</code></pre>
 <pre class="r"><code>MeanDays &lt;- mean(qu$Days)
 MeanDays</code></pre>
 <pre><code>[1] 13.36364</code></pre>
-<pre class="r"><code>tapply(quine$Days, list(quine$Eth, quine$Lrn, quine$Sex), mean)</code></pre>
+<pre class="r"><code>TT &lt;- tapply(quine$Days, list(quine$Eth, quine$Lrn, quine$Sex), mean)
+TT</code></pre>
 <pre><code>, , F
 
         AL       SL
@@ -226,6 +227,8 @@ N 13.14286  7.00000
         AL   SL
 A 22.28571 20.2
 N 13.36364 17.0</code></pre>
+<pre class="r"><code>TT[, , &quot;M&quot;][2, 1]</code></pre>
+<pre><code>[1] 13.36364</code></pre>
 <p>The average number of missed school days for non-aboriginal average learning males is 13.3636364.</p>
 <p>Use the following code to create the data frame <code>DF</code>.</p>
 <pre class="r"><code>set.seed(37)
@@ -245,6 +248,22 @@ head(DF)</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>What percent of level <code>B</code> (<code>fac2</code>) are <code>Female</code>? (53.65854%)</li>
 </ol>
+<pre class="r"><code>T1 &lt;- xtabs(~ fac2 + sex, data = DF)
+T1</code></pre>
+<pre><code>    sex
+fac2 Female Male
+   A     32   27
+   B     22   19</code></pre>
+<pre class="r"><code>prop.table(T1, 1)</code></pre>
+<pre><code>    sex
+fac2    Female      Male
+   A 0.5423729 0.4576271
+   B 0.5365854 0.4634146</code></pre>
+<pre class="r"><code># or in one line
+ans &lt;- round(prop.table(xtabs(~ fac2 + sex, data = DF), 1)[2, 1]*100, 2)
+ans</code></pre>
+<pre><code>[1] 53.66</code></pre>
+<p>53.66% of level <code>B</code> (<code>fac2</code>) are <code>Female</code>.</p>
 </div>
 
 

@@ -85,7 +85,9 @@ qu <- quine %>%
 qu
 MeanDays <- mean(qu$Days)
 MeanDays
-tapply(quine$Days, list(quine$Eth, quine$Lrn, quine$Sex), mean)
+TT <- tapply(quine$Days, list(quine$Eth, quine$Lrn, quine$Sex), mean)
+TT
+TT[, , "M"][2, 1]
 ```
 
 The average number of missed school days for non-aboriginal average learning males is `r MeanDays`.
@@ -104,4 +106,13 @@ head(DF)
 
 4.  What percent of level `B` (`fac2`) are `Female`? (53.65854%)
 
+```{r}
+T1 <- xtabs(~ fac2 + sex, data = DF)
+T1
+prop.table(T1, 1)
+# or in one line
+ans <- round(prop.table(xtabs(~ fac2 + sex, data = DF), 1)[2, 1]*100, 2)
+ans
+```
 
+`r round(ans, 2)`% of level `B` (`fac2`) are `Female`.
