@@ -50,9 +50,45 @@ were treated by `Dr. A`.
 Use the data frame `quine` from the `MASS` package to answer all questions.
 
 1.  How many aboriginal average learning females in grade "F0" have missed more than
-5 days of school? (4)
+5 days of school? (3)
+
+```{r}
+library(dplyr)
+library(MASS)
+qu <- quine %>%
+  filter(Eth == "A" & Sex == "F" & Age == "F0" & Lrn == "AL" & Days > 5)
+qu
+n <- dim(qu)[1]
+n
+```
+
+There are `r n`  aboriginal average learning females in grade "F0" have missed more than
+5 days of school.
+
 2.  How many non-aboriginal males in grade "F0" have never missed any school? (2)
-3.  What is the average number of missed school days for non-aboriginal average learning males? (14.71429)
+
+```{r}
+qu <- quine %>%
+  filter(Eth == "N" & Sex == "M" & Age == "F0" & Days == 0)
+qu
+n <- dim(qu)[1]
+n
+```
+
+There are `r n` non-aboriginal males in grade "F0" that have never missed any school.
+
+3.  What is the average number of missed school days for non-aboriginal average learning males? (13.36364)
+
+```{r}
+qu <- quine %>%
+  filter(Eth == "N" & Lrn == "AL" & Sex == "M")
+qu
+MeanDays <- mean(qu$Days)
+MeanDays
+tapply(quine$Days, list(quine$Eth, quine$Lrn, quine$Sex), mean)
+```
+
+The average number of missed school days for non-aboriginal average learning males is `r MeanDays`.
 
 Use the following code to create the data frame `DF`.
 
