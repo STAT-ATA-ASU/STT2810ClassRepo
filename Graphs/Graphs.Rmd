@@ -11,7 +11,6 @@ library(dplyr)
 library(ggplot2)
 ```
 
-This is not ready for public consumption yet!!!!
 
 ```{r label = "Missing"}
 library(PDS)
@@ -45,6 +44,8 @@ NESARCsub1$SEX <- factor(NESARCsub1$SEX, labels = c("Male", "Female"))
 NESARCsub1$ETHRACE2A <- factor(NESARCsub1$ETHRACE2A, labels = c("Caucasian", "African American", "American Indian", "Asian", "Hispanic")) 
 ```
 
+## Talk about the results here
+
 ```{r}
 C1 <- with(data = NESARCsub1, table(S3AQ3C1fac))
 C1
@@ -52,12 +53,13 @@ PC1 <- prop.table(C1)
 PC1
 T1 <- with(data = NESARCsub1, ftable(SEX, S3AQ3C1fac, ETHRACE2A))
 T1
-prop.table(T1, 2)
-apply(prop.table(T1, 2), 2, sum)
+PT1 <- prop.table(T1, 2)
+PT1
+apply(PT1, 2, sum)
 T2 <- with(data = NESARCsub1, ftable(ETHRACE2A, SEX, S3AQ3C1fac))
 T2
-PT3 <- prop.table(T2, 1)
-PT3
+PT2 <- prop.table(T2, 1)
+PT2
 ```
 
 ## Creating Bar Charts
@@ -86,87 +88,34 @@ ggplot(data = na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A")]), aes(x
   facet_grid(ETHRACE2A ~ .)
 ```
 
-# Caucasians now (explain what is going on)
+# Caucasians now (explain what is going on)  
+The graph is of the first column (Caucasian)
+of `PT1`. 
+
 ```{r}
 ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A")]), ETHRACE2A == "Caucasian"), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
   geom_bar(position = "dodge") +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent")
-# Comapre to
-ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "Caucasian"), aes(x = S3AQ3C1fac, y = ..density.., fill = SEX, group = SEX)) + 
-  geom_bar(position = "dodge") +
-  theme_bw() + 
-  labs(x = "Number of cigarettes smoked/day", y = "Percent")
 ```
 
-# African Americans
+## The appropriate graph
+We really want to use the values in `PT2` ... why?
 
-```{r}
-ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "African American"), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
-  geom_bar(position = "dodge") +
-  theme_bw() + 
-  labs(x = "Number of cigarettes smoked/day", y = "Percent")
-# Compare to
-ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "African American"), aes(x = S3AQ3C1fac, y = ..density.., fill = SEX, group = SEX)) + 
-  geom_bar(position = "dodge") +
-  theme_bw() + 
-  labs(x = "Number of cigarettes smoked/day", y = "Percent")
-```
-
-# American Indians
-
-```{r}
-ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "American Indian"), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
-  geom_bar(position = "dodge") +
-  theme_bw() + 
-  labs(x = "Number of cigarettes smoked/day", y = "Percent")
-## Compare to
-ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "American Indian"), aes(x = S3AQ3C1fac, y = ..density.., fill = SEX, group = SEX)) + 
-  geom_bar(position = "dodge") +
-  theme_bw() + 
-  labs(x = "Number of cigarettes smoked/day", y = "Percent")
-```
-
-# Asian
-
-```{r}
-ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "Asian"), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
-  geom_bar(position = "dodge") +
-  theme_bw() + 
-  labs(x = "Number of cigarettes smoked/day", y = "Percent")
-## Compare to
-ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "Asian"), aes(x = S3AQ3C1fac, y = ..density.., fill = SEX, group = SEX)) + 
-  geom_bar(position = "dodge") +
-  theme_bw() + 
-  labs(x = "Number of cigarettes smoked/day", y = "Percent")
-```
-
-# Hispanic
-
-```{r}
-ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "Hispanic"), aes(x = S3AQ3C1fac, y = (..count..)/(sum(..count..)), fill = SEX)) + 
-  geom_bar(position = "dodge") +
-  theme_bw() + 
-  labs(x = "Number of cigarettes smoked/day", y = "Percent")
-###
-ggplot(data = subset(na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A"), drop = FALSE]), ETHRACE2A == "Hispanic"), aes(x = S3AQ3C1fac, y = ..density.., fill = SEX, group = SEX)) + 
-  geom_bar(position = "dodge") +
-  theme_bw() + 
-  labs(x = "Number of cigarettes smoked/day", y = "Percent")
-```
-
-# Is this the graph we want? 
-
-```{r fig.width = 8, fig.height = 12}
-PT3
-DFM <- na.omit(NESARCsub1[ , c("S3AQ3C1fac", "SEX", "ETHRACE2A")])
-dim(DFM)
-ggplot(data = DFM, aes(x = S3AQ3C1fac)) +  
-  geom_bar(position = "dodge", aes(y =..density.. , group = SEX, fill = SEX)) + 
-  facet_grid(ETHRACE2A ~ .) +
+```{r, fig.width = 8, fig.height = 10}
+Eth <- rep(rep(c("Caucasian", "African American", "American Indian", "Asian", "Hispanic"), each = 2), 5)
+Sex <- rep(c("Male", "Female"), 25)
+Qcig <- factor(rep(c("(1,5]","(5,10]","(10,15]","(15,20]","(20,98]"), each = 10), levels = c("(1,5]","(5,10]","(10,15]","(15,20]","(20,98]"))
+perc <- matrix(PT2, nrow = 50)
+NDF <- data.frame(Eth, Sex, Qcig, perc)
+rm(Eth, Sex, Qcig,perc)
+head(NDF)
+ggplot(data = NDF, aes(x = Qcig, y = perc, fill = Sex)) + 
+  geom_bar(position = "dodge", stat = "identity", aes(y = perc, fill = Sex)) +
+  facet_grid(Eth ~.) +
   theme_bw() + 
   labs(x = "Number of cigarettes smoked/day", y = "Percent") + 
-  scale_fill_manual(values = c("blue", "pink")) +
-  guides(fill = guide_legend(title = "Gender")) 
+  scale_fill_manual(values = c("pink", "blue")) 
 ```
+
 

@@ -1,0 +1,83 @@
+---
+title: "More Graphs"
+author: "Alan Arnholt"
+date: "Spring 2015"
+output: html_document
+---
+
+I am trying to create side-by-side comparisons using `geom_bar` while conditioning on one and two factors.  Below I simulate the data frame `DF`.
+
+```{r}
+library(ggplot2)
+set.seed(13)
+fac1 <- factor(sample(letters[1:5], 500, replace = TRUE))
+fac2 <- factor(sample(LETTERS[1:3], 500, replace = TRUE))
+sex <- factor(sample(c("Male", "Female"), 500, replace = TRUE))
+DF <- data.frame(fac1, fac2, sex)
+rm(fac1, fac2, sex)
+head(DF)
+```
+
+When there is a single factor, I get what I would expect with the code below.
+
+```{r}
+T1 <- xtabs(~ fac1, data = DF)
+PT1 <- prop.table(T1)
+PT1
+ggplot(data = DF, aes(x = fac1)) + 
+  geom_bar(aes(y = ..count../sum(..count..)), fill = "lightblue") +
+  geom_hline(y = PT1[1], linetype = "dashed") + 
+  theme_bw() + 
+  labs(y = "Percent")
+```
+
+I want to create barplots on the first factor (`fac1`) while conditioning on the second factor (`fac2`). Specifically, I expected the height of the bars for each level of `fac2` to sum to 1 for each of the three `facets`.  
+
+```{r}
+T2 <- ftable(DF$fac2, DF$fac1)
+PT2 <- prop.table(T2, 1)
+PT2
+apply(PT2, 1, sum) # quick check that sum is 1
+#
+library(dplyr)
+NT <- DF %>%
+  count(fac1, fac2)
+NT
+perc <- matrix(PT2, nrow = 15)
+SN <- cbind(NT, perc)
+rm(perc)
+SN
+ggplot(data = SN, aes(x = fac1)) + 
+  geom_bar(stat = "identity", aes(y = perc), fill = "lightblue") + 
+  facet_grid(fac2~.) + 
+  theme_bw() +
+  labs(y = "Percent")
+# Similar type graph...but not quite as it is harder to read
+ggplot(DF, aes(x = fac2, fill = fac1)) +
+   theme_bw() +
+   geom_bar(position = "fill") +
+   ylab("Proportion")
+```
+
+I would like to create barplots conditioning on both `fac2` and `sex` such that the height of the bars would agree with the values in `PT3`.  The heights of the bars for `Male` and `Female` in each `facet` sum to 1.
+
+```{r}
+T3 <- ftable(DF$fac2, DF$sex, DF$fac1)
+PT3 <- prop.table(T3, 1)
+PT3
+apply(PT3, 1, sum) # quick check that all sums to 1
+NS <- DF %>% 
+  count(fac1, fac2, sex)
+NS
+perc2 <- matrix(PT3, nrow=30)
+NDF <- cbind(NS, perc2)
+rm(perc2)
+head(NDF)
+### 
+ggplot(data = NDF, aes(x = fac1)) +
+  facet_grid(fac2 ~.) +
+  geom_bar(position = "dodge", stat = "identity", aes(y = perc2, fill = sex)) +
+  theme_bw() +
+  labs(y = "Percent") +
+  scale_fill_manual(values = c("blue", "pink"))  
+```
