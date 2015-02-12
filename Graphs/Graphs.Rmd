@@ -1,6 +1,6 @@
 ---
 title: "More Data Management and Graphs"
-author: ""
+author: "Alan Arnholt"
 date: "Spring 2015"
 output: html_document
 ---

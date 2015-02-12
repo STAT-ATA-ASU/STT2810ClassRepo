@@ -5,6 +5,10 @@ date: "Spring 2015"
 output: html_document
 ---
 
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+```
+
 I am trying to create side-by-side comparisons using `geom_bar` while conditioning on one and two factors.  Below I simulate the data frame `DF`.
 
 ```{r}
