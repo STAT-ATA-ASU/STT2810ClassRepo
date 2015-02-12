@@ -18,7 +18,7 @@ output: html_document
 * Clone the repository to your local machine using RStudio by following these instructions:
 1. Copy the clone URL to the clipboard.
 2. Click `File > New Project > Version Control > Git`
-3. Paste the clone URL (`https://github.com/STT2810-SP15/STT2810ClassRepoSP15.git`) in the `Repository URL:` box.
+3. Paste the clone URL (`https://github.com/YourUserName/STT2810-SP15/STT2810ClassRepoSP15.git`) in the `Repository URL:` box.
 4. Type a name (suggestion `UserNameSTT2810`) in the `Project directory name:` box.
 5. Change if needed the location in the `Create project as subdirectory of:` box.
 6. Click the `Create Project` box.  You should now have a local copy of the forked repository on your local machine.  Congratulations!  
