@@ -2,11 +2,13 @@
 # load("P:/QAC/qac201/Studies/Gapminder/Data/gapminder_pds.RData")
 # There are erros in this script....ATA 1/02/15
 # What follow is for downloading from a url
-site <- "http://www1.appstate.edu/~arnholta/classes/PDS/DATAandCODEBOOKS/GapMinder/gapminder.RData"
-con <- url(site)
-load(con)
-head(gapminder)
 
+# site <- "http://www1.appstate.edu/~arnholta/classes/PDS/DATAandCODEBOOKS/GapMinder/gapminder.RData"
+# con <- url(site)
+# load(con)
+# head(gapminder)
+
+library(PDS)
 #################################################################################
 # DATA MANAGEMENT
 library(descr)

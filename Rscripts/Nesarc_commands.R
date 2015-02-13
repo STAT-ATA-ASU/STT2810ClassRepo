@@ -1,8 +1,8 @@
 #################################################################################
 # LOAD DATASET
 #################################################################################
-load("P:/QAC/qac201/Studies/NESARC/Data/NESARC_pds.RData")
-
+# load("P:/QAC/qac201/Studies/NESARC/Data/NESARC_pds.RData")
+library(PDS)  # Load the PDS package
 #################################################################################
 # CREATING A DATA SUBSET FOR MY OWN PROJECT
 #################################################################################
@@ -304,3 +304,4 @@ barplot(prop.table(table(nesarc.subset$TAB12MDX, nesarc.subset$USQUAN),2)[2,],
 by(nesarc.subset, nesarc.subset$MAJORDEPLIFE, function(x) 
         list(chisq.test(x$TAB12MDX, x$USQUAN), 
           chisq.test(x$TAB12MDX, x$USQUAN)$residuals))
+

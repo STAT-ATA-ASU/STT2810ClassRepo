@@ -1,0 +1,71 @@
+---
+title: "NESARC Commands"
+author: "Alan T. Arnholt"
+date: "February 13, 2015"
+output: html_document
+---
+
+```{r, label = "Setup", echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+library(dplyr)
+library(ggplot2)
+```
+
+Start by loading the `PDS` package.
+
+```{r}
+library(PDS)
+```
+
+Create a subset of people 25 or younger who smoked in the last 12 months.
+
+```{r}
+library(dplyr)
+nesarc.sub <- NESARC %>% 
+  filter(!is.na(CHECK321) & !is.na(AGE) & CHECK321 ==1 & AGE <= 25)
+dim(nesarc.sub)
+#
+nesarc.sub$TAB12MDX <- factor(nesarc.sub$TAB12MDX, 
+                         labels = c("No Nicotine Dependence", "Nicotine Dependence"))
+# OR using standard indexing (more painful)
+nesarc.subset <- NESARC[!is.na(NESARC$CHECK321)  & !is.na(NESARC$AGE) &
+                          NESARC$CHECK321 == 1 & NESARC$AGE <=25, ]
+dim(nesarc.subset)
+```
+
+### Coding missing values
+Note that the variable `S3AQ3B1` uses a 9 to record `unknown` for smoking frequency.
+
+
+```{r label = "CodeMissing"}
+nesarc.sub$S3AQ3B1[nesarc.sub$S3AQ3B1 == 9] <- NA
+summary(nesarc.sub$S3AQ3B1)  # Note that 9 still appears
+nesarc.sub$S3AQ3B1 <- factor(nesarc.sub$S3AQ3B1)[, drop = TRUE]
+summary(nesarc.sub$S3AQ3B1)  # Unused level no longer appears
+nesarc.sub$S3AQ3C1[nesarc.sub$S3AQ3C1 == 99] <- NA
+summary(nesarc.sub$S3AQ3C1)
+library(Hmisc)
+label(nesarc.sub$TAB12MDX) <- "Tobacco Dependence past 12 Months"
+label(nesarc.sub$CHECK321) <- "Smoked Cigarettes in the Past 12 Months"
+label(nesarc.sub$S3AQ3B1) <- "Usual Smoking Quantity"
+label(nesarc.sub$S3AQ3C1) <- "Usual Smoking Frequency"
+nesarc.sub$S3AQ3B1 <- factor(nesarc.sub$S3AQ3B1, 
+                         labels = c("Every Day", "5 to 6 Days/week", 
+                                    "3 to 4 Days/week", "1 to 2 Days/week", 
+                                    "2 to 3 Days/month", "Once a month or less"))
+```
+
+
+
+```{r}
+xtabs(~TAB12MDX, data = nesarc.sub)
+library(descr)
+freq(nesarc.sub$TAB12MDX)
+freq(nesarc.sub$S3AQ3B1)
+```
+
+```{r}
+library(ggplot2)
+ggplot(data = nesarc.sub, aes(x = S3AQ3C1)) + 
+  geom_density(fill = "lightgray") + 
+  theme_bw()
