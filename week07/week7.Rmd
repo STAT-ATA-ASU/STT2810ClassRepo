@@ -1,0 +1,11 @@
+---
+title: "week7"
+output: html_document
+---
+
+* Read Chapter 8 PDS
+* Watch [Graphing 1 Video](https://www.youtube.com/watch?v=7_b6Rd9Vad8&list=PLDEF0B9CBD27AD37E&index=54)
+* Work on **Univariate Graphing Assignment** page 46 PDS
+* **Univariate Graphing Assignment** see page 46 PDS due NLT 5 PM February 27.  Submit assignment
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (Create the crowdgrader assignment and post here).
+   
