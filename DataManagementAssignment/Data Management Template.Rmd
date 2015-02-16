@@ -1,0 +1,109 @@
+---
+title: "Data Management Template"
+author: "Spring 2015"
+date: "February 16, 2015"
+output: html_document
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+```
+
+### Purpose of Study: (Note: This is the last paragraph of the research proposal used to remind the reader of the research objectives.)
+
+The present study will examine young adults from the National Epidemiologic Survey of Alcohol and Related Conditions (NESARC). The goals of the analysis will include 1) establishing the relationship between major depression and nicotine dependence; and 2) determining whether or not the relationship between major depression and nicotine dependence exists above and beyond smoking quantity. 
+
+### Variables:
+
+Variables from NESARC that will be used include: `MAJORDEPLIFE` (has subject experienced a major depression?), `CHECK321` (has subject smoked cigarettes in past 12 months?), `AGE` (age of subject), `TAB12MDX` (tobaco dependence past 12 months), `S3AQ3B1` (usual frequency when cigarettes smoked), `ETHRACE2A` (ethnicity of subject), `SEX` (gender of subject), and `S3AQ3C1` (usual smoking quantity of cigarettes when smoked).  ￼
+
+### Data Management
+
+First, the data is placed on the search path using the `PDS` package.
+Next, a subset of people 25 or younger who smoked in the last 12 months is created using the `filter` function from `dplyr`. Note that `CHECK321 == 1` is used to see if subject has smoked in the past 12 months and `!is.na()` is used to make sure the subset does not contain `NA`s for the chosen variables.  Last, the variables of interest are selected and stored in the data frame `nesarc.sub` using the `select` function from the `dplyr` package.
+
+```{r}
+library(PDS)
+library(dplyr)
+nesarc.sub <- NESARC %>% 
+  filter(!is.na(CHECK321) & !is.na(AGE) & CHECK321 ==1 & AGE <= 25)
+dim(nesarc.sub)
+nesarc.sub <- nesarc.sub %>% 
+  select(MAJORDEPLIFE, CHECK321, AGE, TAB12MDX, S3AQ3B1, S3AQ3C1, ETHRACE2A, SEX)
+dim(nesarc.sub)
+summary(nesarc.sub)
+```
+
+Running `summary` on the `nesarc.sub` reveals some non-obvious categories for the factors `CHECK321` and `S3AQ3B1`.  Reviewing the Code Book (HINT: Inside a pdf use `shift F` (Windows) or `command F` (Mac) then type the variable name inside the box to find the variable in the pdf), it is noted that a 9 is used to indicate missing values for `S3AQ3B1` and a 99 is used to indicate missing values for `S3AQ3C1`.
+
+### Coding missing values
+
+The variable `S3AQ3B1` uses a 9 to record `unknown` for smoking frequency and a 99 is used to record `unknown` for `S3AQ3C1`.
+
+
+```{r label = "CodeMissing"}
+nesarc.sub$S3AQ3B1[nesarc.sub$S3AQ3B1 == 9] <- NA
+summary(nesarc.sub$S3AQ3B1)  # Note that 9 still appears
+nesarc.sub$S3AQ3B1 <- factor(nesarc.sub$S3AQ3B1)[, drop = TRUE]
+summary(nesarc.sub$S3AQ3B1)  # Unused level no longer appears
+nesarc.sub$S3AQ3C1[nesarc.sub$S3AQ3C1 == 99] <- NA
+summary(nesarc.sub$S3AQ3C1)
+summary(nesarc.sub)
+```
+
+### Creating New Variables
+
+To estimate the total number of cigarettes a subject smokes per month,  convert the `S3AQ3B1` variable (a factor with 6 levels) to a numeric variable using `as.numeric`.  The new variable `DaysSmoke` estimates the days per month a subject smokes.  The variable `TotalCigsSmoked` estimates the monthly number of cigarettes a subject smokes per month by multiplying `DaysSmoke` times `S3AQ3C1` (the usual quantity smoked in a given day).  The numeric variable `TotalCigsSmoked` is converted into a factor with roughly equivalent numbers stored in each level of the factor `CigsSmokedFac` using the `cut` function.
+
+```{r}
+nesarc.sub$DaysSmoke <- as.numeric(nesarc.sub$S3AQ3B1)
+nesarc.sub$DaysSmoke[nesarc.sub$DaysSmoke == 1] <- 30
+nesarc.sub$DaysSmoke[nesarc.sub$DaysSmoke == 2] <- 4*5.5
+nesarc.sub$DaysSmoke[nesarc.sub$DaysSmoke == 3] <- 4*3.5
+nesarc.sub$DaysSmoke[nesarc.sub$DaysSmoke == 4] <- 4*1.5
+nesarc.sub$DaysSmoke[nesarc.sub$DaysSmoke == 5] <- 2.5
+nesarc.sub$DaysSmoke[nesarc.sub$DaysSmoke == 6] <- 1
+# Using dplyr again
+nesarc.sub <- nesarc.sub %>% 
+  mutate(TotalCigsSmoked = DaysSmoke*S3AQ3C1)
+proportions <- quantile(nesarc.sub$TotalCigsSmoked, na.rm = TRUE)
+proportions
+nesarc.sub$CigsSmokedFac <- cut(nesarc.sub$TotalCigsSmoked, breaks = proportions, include.lowest = TRUE)
+head(nesarc.sub)
+```
+
+### Labeling Variables
+
+```{r}
+library(Hmisc)
+label(nesarc.sub$TAB12MDX) <- "Tobacco Dependence past 12 Months"
+label(nesarc.sub$CHECK321) <- "Smoked Cigarettes in the Past 12 Months"
+label(nesarc.sub$S3AQ3B1) <- "Usual Smoking Frequency"
+label(nesarc.sub$S3AQ3C1) <- "Usual Smoking Quantity"
+nesarc.sub$S3AQ3B1 <- factor(nesarc.sub$S3AQ3B1, 
+                         labels = c("Every Day", "5 to 6 Days/week", 
+                                    "3 to 4 Days/week",   "1 to 2 Days/week", "2 to 3 Days/month", 
+                                    "Once a month or less"))
+nesarc.sub$S3AQ3B1 <- factor(nesarc.sub$S3AQ3B1, 
+                         levels = c("Once a month or less", "2 to 3 Days/month", "1 to 2 Days/week",  "3 to 4 Days/week", "5 to 6 Days/week", "Every Day"))
+nesarc.sub$TAB12MDX <- factor(nesarc.sub$TAB12MDX, 
+                         labels = c("No Nicotine Dependence", "Nicotine Dependence"))
+nesarc.sub$TAB12MDX <- factor(nesarc.sub$TAB12MDX, 
+                         levels = c("Nicotine Dependence", "No Nicotine Dependence"))
+
+table(nesarc.sub$TAB12MDX)
+nesarc.sub$ETHRACE2A <- factor(nesarc.sub$ETHRACE2A, labels = c("Caucasian", "African American", "Native American", "Asian", "Hispanic"))
+nesarc.sub$SEX <- factor(nesarc.sub$SEX, labels = c("Male", "Female"))
+table(nesarc.sub$SEX)
+nesarc.sub$SEX <- factor(nesarc.sub$SEX, levels = c("Female", "Male"))
+table(nesarc.sub$SEX)
+```
+
+### Renaming Variables
+
+```{r}
+nesarc.sub <- nesarc.sub %>% 
+  rename(TobacoDependence = TAB12MDX, SmokingFreq = S3AQ3B1, DailyCigsSmoked = S3AQ3C1, Ethnicity = ETHRACE2A, Sex = SEX, Age = AGE)
+head(nesarc.sub)
+```
+
