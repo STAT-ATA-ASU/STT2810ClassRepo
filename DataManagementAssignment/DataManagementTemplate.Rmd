@@ -15,7 +15,7 @@ The present study will examine young adults from the National Epidemiologic Surv
 
 ### Variables:
 
-Variables from NESARC that will be used include: `MAJORDEPLIFE` (has subject experienced a major depression?), `CHECK321` (has subject smoked cigarettes in past 12 months?), `AGE` (age of subject), `TAB12MDX` (tobaco dependence past 12 months), `S3AQ3B1` (usual frequency when cigarettes smoked), `ETHRACE2A` (ethnicity of subject), `SEX` (gender of subject), and `S3AQ3C1` (usual smoking quantity of cigarettes when smoked).  ￼
+Variables from NESARC that will be used include: `MAJORDEPLIFE` (has subject experienced a major depression?), `CHECK321` (has subject smoked cigarettes in past 12 months?), `AGE` (age of subject), `TAB12MDX` (tobacco dependence past 12 months), `S3AQ3B1` (usual frequency when cigarettes smoked), `ETHRACE2A` (ethnicity of subject), `SEX` (gender of subject), and `S3AQ3C1` (usual smoking quantity of cigarettes when smoked).  ￼
 
 ### Data Management
 
