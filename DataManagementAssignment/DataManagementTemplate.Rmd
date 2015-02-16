@@ -107,19 +107,19 @@ summary(nesarc.sub)
 
 ```{r}
 nesarc.sub <- nesarc.sub %>% 
-  rename(Depression = MAJORDEPLIFE, TobacoDependence = TAB12MDX, SmokingFreq = S3AQ3B1, DailyCigsSmoked = S3AQ3C1, Ethnicity = ETHRACE2A, Sex = SEX, Age = AGE)
+  rename(Depression = MAJORDEPLIFE, TobaccoDependence = TAB12MDX, SmokingFreq = S3AQ3B1, DailyCigsSmoked = S3AQ3C1, Ethnicity = ETHRACE2A, Sex = SEX, Age = AGE)
 head(nesarc.sub)
 ```
 
 ### Creating Tables
 
-Basic tables can be created using the functions `table` or `xtabs`. Frequency tables are created for the variables `TobacoDependence`,  `CigsSmokedFac`, and `SmokingFreq`.
+Basic tables can be created using the functions `table` or `xtabs`. Frequency tables are created for the variables `TobaccoDependence`,  `CigsSmokedFac`, and `SmokingFreq`.
 
 ```{r}
-T1 <- xtabs(~TobacoDependence, data = nesarc.sub)
+T1 <- xtabs(~TobaccoDependence, data = nesarc.sub)
 T2 <- xtabs(~CigsSmokedFac, data = nesarc.sub)
 T3 <- xtabs(~SmokingFreq, data = nesarc.sub)
-table(nesarc.sub$TobacoDependence)
+table(nesarc.sub$TobaccoDependence)
 T1
 T2
 T3
@@ -133,7 +133,7 @@ The barplots are all created with the package `ggplot2`.  The barplots start wit
 
 ```{r}
 library(ggplot2)
-g1 <- ggplot(data = nesarc.sub, aes(x = TobacoDependence)) + 
+g1 <- ggplot(data = nesarc.sub, aes(x = TobaccoDependence)) + 
   geom_bar() 
 g1
 g2 <- ggplot(data = na.omit(nesarc.sub), aes(x = CigsSmokedFac)) +
@@ -145,4 +145,12 @@ g3 <- ggplot(data = na.omit(nesarc.sub), aes(SmokingFreq)) +
   theme_bw() + 
   theme(axis.text.x  = element_text(angle = 75, vjust = 0.5)) 
 g3
+```
+
+### Some Statistics (We have not discussed this yet)
+
+```{r results='asis', echo = TRUE}
+library(moonBook)
+out <- mytable(Depression + TobaccoDependence ~  Age + SmokingFreq + DailyCigsSmoked + Ethnicity + Sex +DaysSmoke + TotalCigsSmoked + CigsSmokedFac , data = nesarc.sub)
+myhtml(out)
 ```
