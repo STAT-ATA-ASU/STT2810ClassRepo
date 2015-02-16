@@ -1,6 +1,6 @@
 ---
 title: "Data Management Template"
-author: "Spring 2015"
+author: "Alan T. Arnholt"
 date: "February 16, 2015"
 output: html_document
 ---
@@ -48,12 +48,14 @@ nesarc.sub$S3AQ3B1 <- factor(nesarc.sub$S3AQ3B1)[, drop = TRUE]
 summary(nesarc.sub$S3AQ3B1)  # Unused level no longer appears
 nesarc.sub$S3AQ3C1[nesarc.sub$S3AQ3C1 == 99] <- NA
 summary(nesarc.sub$S3AQ3C1)
+nesarc.sub$CHECK321[nesarc.sub$CHECK321 == 9] <- NA
+nesarc.sub$CHECK321 <- factor(nesarc.sub$CHECK321)[ , drop = TRUE]
 summary(nesarc.sub)
 ```
 
 ### Creating New Variables
 
-To estimate the total number of cigarettes a subject smokes per month,  convert the `S3AQ3B1` variable (a factor with 6 levels) to a numeric variable using `as.numeric`.  The new variable `DaysSmoke` estimates the days per month a subject smokes.  The variable `TotalCigsSmoked` estimates the monthly number of cigarettes a subject smokes per month by multiplying `DaysSmoke` times `S3AQ3C1` (the usual quantity smoked in a given day).  The numeric variable `TotalCigsSmoked` is converted into a factor with roughly equivalent numbers stored in each level of the factor `CigsSmokedFac` using the `cut` function.
+To estimate the total number of cigarettes a subject smokes per month,  convert `S3AQ3B1` (a factor with 6 levels) to a numeric variable using `as.numeric`.  `DaysSmoke` estimates the days per month a subject smokes.  The variable `TotalCigsSmoked` estimates the monthly number of cigarettes a subject smokes per month by multiplying `DaysSmoke` times `S3AQ3C1` (the usual quantity smoked per day).  The numeric variable `TotalCigsSmoked` is converted into a factor with roughly equivalent numbers stored in each level of the factor `CigsSmokedFac` using the `cut` function.
 
 ```{r}
 nesarc.sub$DaysSmoke <- as.numeric(nesarc.sub$S3AQ3B1)
@@ -74,12 +76,16 @@ head(nesarc.sub)
 
 ### Labeling Variables
 
+In the next section of code, variables are labeled and levels of factors are given informative labels.  The order of the levels is also rearranged for the variables `S3AQ3B1`, `TAB12MDX`, and `SEX`. 
+
 ```{r}
 library(Hmisc)
 label(nesarc.sub$TAB12MDX) <- "Tobacco Dependence past 12 Months"
 label(nesarc.sub$CHECK321) <- "Smoked Cigarettes in the Past 12 Months"
 label(nesarc.sub$S3AQ3B1) <- "Usual Smoking Frequency"
 label(nesarc.sub$S3AQ3C1) <- "Usual Smoking Quantity"
+nesarc.sub$MAJORDEPLIFE <- factor(nesarc.sub$MAJORDEPLIFE, 
+                              labels = c("No Depression", "Yes Depression"))
 nesarc.sub$S3AQ3B1 <- factor(nesarc.sub$S3AQ3B1, 
                          labels = c("Every Day", "5 to 6 Days/week", 
                                     "3 to 4 Days/week",   "1 to 2 Days/week", "2 to 3 Days/month", 
@@ -90,20 +96,53 @@ nesarc.sub$TAB12MDX <- factor(nesarc.sub$TAB12MDX,
                          labels = c("No Nicotine Dependence", "Nicotine Dependence"))
 nesarc.sub$TAB12MDX <- factor(nesarc.sub$TAB12MDX, 
                          levels = c("Nicotine Dependence", "No Nicotine Dependence"))
-
-table(nesarc.sub$TAB12MDX)
 nesarc.sub$ETHRACE2A <- factor(nesarc.sub$ETHRACE2A, labels = c("Caucasian", "African American", "Native American", "Asian", "Hispanic"))
 nesarc.sub$SEX <- factor(nesarc.sub$SEX, labels = c("Male", "Female"))
 table(nesarc.sub$SEX)
 nesarc.sub$SEX <- factor(nesarc.sub$SEX, levels = c("Female", "Male"))
-table(nesarc.sub$SEX)
+summary(nesarc.sub)
 ```
 
 ### Renaming Variables
 
 ```{r}
 nesarc.sub <- nesarc.sub %>% 
-  rename(TobacoDependence = TAB12MDX, SmokingFreq = S3AQ3B1, DailyCigsSmoked = S3AQ3C1, Ethnicity = ETHRACE2A, Sex = SEX, Age = AGE)
+  rename(Depression = MAJORDEPLIFE, TobacoDependence = TAB12MDX, SmokingFreq = S3AQ3B1, DailyCigsSmoked = S3AQ3C1, Ethnicity = ETHRACE2A, Sex = SEX, Age = AGE)
 head(nesarc.sub)
 ```
 
+### Creating Tables
+
+Basic tables can be created using the functions `table` or `xtabs`. Frequency tables are created for the variables `TobacoDependence`,  `CigsSmokedFac`, and `SmokingFreq`.
+
+```{r}
+T1 <- xtabs(~TobacoDependence, data = nesarc.sub)
+T2 <- xtabs(~CigsSmokedFac, data = nesarc.sub)
+T3 <- xtabs(~SmokingFreq, data = nesarc.sub)
+table(nesarc.sub$TobacoDependence)
+T1
+T2
+T3
+```
+
+In the data frame `nesarc.sub`, there are `r T1[1]` nicotine dependent subjects and `r T1[2]` subjects that are not nicotine dependent.  A small number of smokers (`r T2[4]`) smoke over 600 cigarettes per month. Most of the subjects in `nesarc.sub` are daily smokers (`r T3[6]`) with the remainder distributed uniformly across the first five levels of `SmokingFreq`.
+
+### Graphing Frequency Tables
+
+The barplots are all created with the package `ggplot2`.  The barplots start with the defaults for the `geom_bar` and add more detail to the plot with each graph.
+
+```{r}
+library(ggplot2)
+g1 <- ggplot(data = nesarc.sub, aes(x = TobacoDependence)) + 
+  geom_bar() 
+g1
+g2 <- ggplot(data = na.omit(nesarc.sub), aes(x = CigsSmokedFac)) +
+  geom_bar(fill = "brown")
+g2
+g3 <- ggplot(data = na.omit(nesarc.sub), aes(SmokingFreq)) +
+  geom_bar(fill = "gray") +
+  labs(x = "", y = "Total Number", title = "Smoking Frequency for Young Adults") +
+  theme_bw() + 
+  theme(axis.text.x  = element_text(angle = 75, vjust = 0.5)) 
+g3
+```
