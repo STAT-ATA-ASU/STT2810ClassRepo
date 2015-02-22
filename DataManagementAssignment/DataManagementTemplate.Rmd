@@ -1,7 +1,7 @@
 ---
 title: "Data Management Template"
 author: "Alan T. Arnholt"
-date: "February 16, 2015"
+date: "February 22, 2015"
 output: html_document
 ---
 
@@ -146,6 +146,51 @@ g3 <- ggplot(data = na.omit(nesarc.sub), aes(SmokingFreq)) +
   theme(axis.text.x  = element_text(angle = 75, vjust = 0.5)) 
 g3
 ```
+
+### Graphing Numeric Variables
+
+One popular way to graph a continuous variable is to use a histogram.  `R` has the base function `hist` which can be used for this purpose.  We will also use the package `ggplot2` to create histograms.  We start with a basic histogram of the variable `TotalCigsSmoked`.
+
+```{r}
+hist(nesarc.sub$TotalCigsSmoked)
+```
+
+Experiment with the code in the previous code chunk to change the color, the title, and if needed the labels on the $x$- and $y$-axes.
+
+```{r}
+ggplot(data = nesarc.sub, aes(x = TotalCigsSmoked)) +
+  geom_histogram(binwidth = 200, fill = "gray") + 
+  labs(x = "Estimated Cigarettes Smoked per Month") +
+  theme_bw()
+```  
+
+### Creating Density Plots
+
+```{r}
+ggplot(data = nesarc.sub, aes(x = TotalCigsSmoked)) +
+  geom_density(fill = "sienna") + 
+  labs(x = "Estimated Cigarettes Smoked per Month") +
+  theme_bw()
+```  
+
+```{r}
+ggplot(data = nesarc.sub, aes(x = DailyCigsSmoked)) +
+  geom_density(fill = "slategrey") + 
+  labs(x = "Reported Cigarettes Smoked per Day") +
+  theme_bw()
+```  
+
+### The 3 S's
+
+```{r}
+summary(nesarc.sub$TotalCigsSmoked)
+fivenum(nesarc.sub$TotalCigsSmoked)
+median(nesarc.sub$TotalCigsSmoked, na.rm = TRUE)
+IQR(nesarc.sub$TotalCigsSmoked, na.rm = TRUE)
+```
+
+The `shape` of the distribution for the estimated cigarettes smoked per month is skewed to the right.  The `center` (median) of the distribution is `r median(nesarc.sub$TotalCigsSmoked, na.rm = TRUE)` and the `spread` (interquartile range) for the distribution is `r IQR(nesarc.sub$TotalCigsSmoked, na.rm = TRUE)`.
+
 
 ### Some Statistics (We have not discussed this yet)
 
