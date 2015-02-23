@@ -15,10 +15,16 @@ via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link f
 
 ## Grading Rubric
 
-1. Does the document open without problems?  Is the grammar and punctuation acceptable? Is the title a concise statement of the main topic?  Does the title identify the actual variables under investigation and the relationship between them? 0/1
-
-2.  Does the introduction describe the question the author intends to investigate and how their research relates to other work in the field?  Does the literature review justify the proposed research by identifying a hole in existing scholarship?  Does the introduction build to and conclude with the research questions or study objectives the author proposes to address?  Is the literature review supported with at least five citations? 0/1
-
-3. Is there a **Methods** section which describes how the research was conducted?  The **Methods** section should include a discussion of the _sample_, _measures_, and _procedures_.  Is there an **Implications/Predicted Results** section that discusses real implications linked to possible results? 0/1
+1.	Does the document open without problems?  (0.25)
+2.	Is the grammar and punctuation acceptable?  (0.25)
+3.	Is the title a concise statement of the main topic?  (0.25)
+4.	Does the title identify the actual variables under investigation and the relationship between them? (0.25)
+5.	 Does the introduction describe the question the author intends to investigate and how their research relates to other work in the field?  (0.25)
+6.	Does the literature review justify the proposed research by identifying a hole in existing scholarship?  (0.25)
+7.	Does the introduction build to and conclude with the research questions or study objectives the author proposes to address?  (0.25)
+8.	Is the literature review supported with at least five citations? (0.25) 
+9.	Is there a **Methods** section which describes how the research was conducted?  (0.25)
+10.	Does the **Methods** section include a discussion of the _sample_, _measures_, and _procedures_. (0.50)
+11.	Is there an **Implications/Predicted Results** section that discusses real implications linked to possible results? (0.25)
 
 A well written paper that convinces you the author can fill a gap in the existing scholarship, has a title that is a concise statement of the main topic and identifies the actual variables under investigation and the relationship between them, has an introduction supported with at least five references, has a Methods section that describes the sample, measures, and procedures, and has a section that discusses real implications linked to possible results should receive a 3.  A submission that satisfies two of the three criteria perfectly or most but not all of the three criteria should receive a 2.  A submission that satisfies only one of the three criteria should receive a 1.  If the submission does not render or the submitter did not submit the correct assignment, they should receive a 0.
