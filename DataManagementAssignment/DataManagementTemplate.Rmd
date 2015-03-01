@@ -216,7 +216,7 @@ Tweaking the last graph.
 
 ```{r}
 g1 +
-  labs(x = "", y = "", title = "Percent of young adult smokers with and without\n nicotine dependence by depression status") + 
+  labs(x = "", y = "", title = "Fraction of young adult smokers with and without\n nicotine dependence by depression status") + 
   scale_fill_discrete(name="Tobacco Addiction\nStatus") 
 ```
 
@@ -227,7 +227,7 @@ g2 <- ggplot(data = na.omit(nesarc.sub), aes(x = SmokingFreq, fill = TobaccoDepe
 g2
  g3 <- g2 + facet_grid(Sex ~ .) +
   theme(axis.text.x  = element_text(angle = 85, vjust = 0.5)) +
-  labs(x = "", y = "", title = "Percent of young adult smokers with and without\n nicotine dependence by smoking frequency") + 
+  labs(x = "", y = "", title = "Fraction of young adult smokers with and without\n nicotine dependence by smoking frequency") + 
   scale_fill_discrete(name="Tobacco Addiction\nStatus")
  g3
 ```
@@ -238,7 +238,7 @@ ggplot(data = na.omit(nesarc.sub), aes(x = CigsSmokedFac, fill = TobaccoDependen
   geom_bar(position = "fill") + 
   theme_bw() + facet_grid(Sex ~ Depression) +
   theme(axis.text.x  = element_text(angle = 85, vjust = 0.5)) +
-  labs(x = "Estimated Number of Cigarettes Smoked per Month", y = "", title = "Percent of young adult smokers with and without\n nicotine dependence by smoking quantity") + 
+  labs(x = "Estimated Number of Cigarettes Smoked per Month", y = "", title = "Fraction of young adult smokers with and without\n nicotine dependence by smoking quantity") + 
   scale_fill_discrete(name="Tobacco Addiction\nStatus") 
 ```
  
