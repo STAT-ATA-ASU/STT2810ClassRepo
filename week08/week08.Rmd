@@ -1,0 +1,14 @@
+---
+title: "week8"
+output: html_document
+---
+
+* Read Chapter 9 PDS and watch all videos in the chapter
+
+ - [Graphing 2 Video](https://www.youtube.com/watch?v=Yf121fdtjDA&index=55&list=PLDEF0B9CBD27AD37E)
+ - [Graphing Rules](https://www.youtube.com/watch?v=JVq2VKib0vw&index=21&list=PLDEF0B9CBD27AD37E)
+ - [Common Graphing Mistakes](https://www.youtube.com/watch?v=iY_t31-R_xU&index=25&list=PLDEF0B9CBD27AD37E)
+ 
+* Work on **Bivariate Graphing Assignment / Data Managment** page 52 PDS
+* **Bivariate Graphing Assignment / Data Managment** see page 52 PDS due NLT 5 PM February 27.  Submit assignment
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (create assignment here)
