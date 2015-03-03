@@ -242,8 +242,15 @@ ggplot(data = na.omit(nesarc.sub), aes(x = CigsSmokedFac, fill = TobaccoDependen
   scale_fill_discrete(name="Tobacco Addiction\nStatus") 
 ```
  
+### Using Mosaic Plots
 
-
+```{r fig.width = 12, fig.height =12}
+library(vcd)
+mosaic(~TobaccoDependence + Depression, data = nesarc.sub) 
+mosaic(~TobaccoDependence + Depression, data = nesarc.sub, shade = TRUE) 
+mosaic(~TobaccoDependence + Depression + Sex, data = nesarc.sub, shade = TRUE)
+mosaic(~TobaccoDependence + Depression + Sex + CigsSmokedFac, data = nesarc.sub, shade = TRUE)  
+```
 
 ### Some Statistics (We have not discussed this yet)
 
