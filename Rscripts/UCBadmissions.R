@@ -12,6 +12,9 @@ prop.table(T1)
 # Table of Gender by Admit
 T2 <- xtabs(Freq ~ Gender + Admit, data = UCB)
 T2
+# are the events Gender and Admit mathematically independent?
+chisq.test(T2)$exp
+chisq.test(T2)
 prop.table(T2, 1)
 # Of all male applicants, 44% admitted. 30 % of female applicants admitted.
 # Gender discrimination?
@@ -22,6 +25,10 @@ mosaic(M1)
 mosaic(M1, shade = TRUE)
 M2 <- matrix(c(10, 40, 30, 20), nrow = 2, byrow = 2)
 M2
+E <- chisq.test(M2)$exp
+E
+(M2 - E)^2/E
+chisq.test(M2, correct = FALSE)
 mosaic(M2)
 mosaic(M2, shade = TRUE)
 # Revisit T2

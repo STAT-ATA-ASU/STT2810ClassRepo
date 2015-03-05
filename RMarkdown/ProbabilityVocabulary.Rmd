@@ -1,0 +1,32 @@
+---
+title: "Probability"
+author: "Alan T. Arnholt"
+date: "March 5, 2015"
+output: html_document
+---
+
+* Each time we observe a random phenomenon is called a **trial** or **experiment**.  The value of the trial is the **outcome**.  If we combine outcomes, we have an **event**.  The set of all events possible is the **sample space**, $S$ or $\Omega$.
+
+* The **probability** of an event is its long term relative frequency.  $P(A) = \frac{\text{Number of outcomes in A}}{\text{Number of possible outcomes in } S}$
+
+**Example:** Arrive at the 105 intersection with Wendy's.
+
+* Look at the signal = ?
+* See a red light = ?
+* What can you see? 
+* Define the event E "keep going".  E = ?
+
+**Probability Axioms**
+
+1. For any event $A$, $0 \le P(A) \le 1$.
+2. $P(S) = 1$ where $S$ is the sample space.
+3. $P(A) + P(A^c) = 1$ so $P(A^c) = 1 - P(A)$.
+4. $P(A \cup B) = P(A) + P(B) - P(A\cap B)$.  If $P(A\cap B) =0$, then $P(A \cup B) = P(A) + P(B)$.
+5. $P(A \cap B)= P(A) \times P(B)$ if and only if $A$ and $B$ are independent.
+
+If $P(A \cap B)=0$, events are disjoint.
+
+**Example:** Roll a fair die.  Define the event $E$ to be outcomes less than 4.  Define the event $F$ to be outcomes that are even.  Are the events $E$ and $F$ independent?
+
+**Example:** Draw a card from a deck of cards.  Define the event $E$ to be getting a heart.  Define the event $F$ to be getting a King.  Are the events $E$ and $F$ independent?
+
