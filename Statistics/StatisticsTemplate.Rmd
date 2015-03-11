@@ -1,5 +1,5 @@
 ---
-title: "Data Management Template"
+title: "Project Template"
 author: "Alan T. Arnholt"
 date: "March 11, 2015"
 output: html_document
@@ -88,15 +88,20 @@ nesarc.sub$MAJORDEPLIFE <- factor(nesarc.sub$MAJORDEPLIFE,
                               labels = c("No Depression", "Yes Depression"))
 nesarc.sub$S3AQ3B1 <- factor(nesarc.sub$S3AQ3B1, 
                          labels = c("Every Day", "5 to 6 Days/week", 
-                                    "3 to 4 Days/week",   "1 to 2 Days/week", "2 to 3 Days/month", 
+                                    "3 to 4 Days/week",   "1 to 2 Days/week", 
+                                    "2 to 3 Days/month", 
                                     "Once a month or less"))
 nesarc.sub$S3AQ3B1 <- factor(nesarc.sub$S3AQ3B1, 
-                         levels = c("Once a month or less", "2 to 3 Days/month", "1 to 2 Days/week",  "3 to 4 Days/week", "5 to 6 Days/week", "Every Day"))
+                         levels = c("Once a month or less", "2 to 3 Days/month", 
+                                    "1 to 2 Days/week",  "3 to 4 Days/week", 
+                                    "5 to 6 Days/week", "Every Day"))
 nesarc.sub$TAB12MDX <- factor(nesarc.sub$TAB12MDX, 
                          labels = c("No Nicotine Dependence", "Nicotine Dependence"))
 nesarc.sub$TAB12MDX <- factor(nesarc.sub$TAB12MDX, 
                          levels = c("Nicotine Dependence", "No Nicotine Dependence"))
-nesarc.sub$ETHRACE2A <- factor(nesarc.sub$ETHRACE2A, labels = c("Caucasian", "African American", "Native American", "Asian", "Hispanic"))
+nesarc.sub$ETHRACE2A <- factor(nesarc.sub$ETHRACE2A, 
+                               labels = c("Caucasian", "African American", 
+                                          "Native American", "Asian", "Hispanic"))
 nesarc.sub$SEX <- factor(nesarc.sub$SEX, labels = c("Male", "Female"))
 table(nesarc.sub$SEX)
 nesarc.sub$SEX <- factor(nesarc.sub$SEX, levels = c("Female", "Male"))
@@ -107,7 +112,9 @@ summary(nesarc.sub)
 
 ```{r}
 nesarc.sub <- nesarc.sub %>% 
-  rename(Depression = MAJORDEPLIFE, TobaccoDependence = TAB12MDX, SmokingFreq = S3AQ3B1, DailyCigsSmoked = S3AQ3C1, Ethnicity = ETHRACE2A, Sex = SEX, Age = AGE)
+  rename(Depression = MAJORDEPLIFE, TobaccoDependence = TAB12MDX, 
+         SmokingFreq = S3AQ3B1, DailyCigsSmoked = S3AQ3C1, Ethnicity = ETHRACE2A, 
+         Sex = SEX, Age = AGE)
 head(nesarc.sub)
 ```
 
@@ -215,8 +222,8 @@ g1
 Tweaking the last graph.  
 
 ```{r}
-g1 +
-  labs(x = "", y = "", title = "Fraction of young adult smokers with and without\n nicotine dependence by depression status") + 
+g1 + labs(x = "", y = "", 
+          title = "Fraction of young adult smokers with and without\n nicotine dependence by depression status") + 
   scale_fill_discrete(name="Tobacco Addiction\nStatus") 
 ```
 
