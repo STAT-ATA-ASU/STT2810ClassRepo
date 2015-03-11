@@ -1,12 +1,12 @@
 ---
 title: "Data Management Template"
 author: "Alan T. Arnholt"
-date: "March 1, 2015"
+date: "March 11, 2015"
 output: html_document
 ---
 
 ```{r, echo = FALSE, message = FALSE}
-knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center", cache = TRUE)
 ```
 
 ### Purpose of Study: (Note: This is the last paragraph of the research proposal used to remind the reader of the research objectives.)
@@ -252,7 +252,67 @@ mosaic(~TobaccoDependence + Depression + Sex, data = nesarc.sub, shade = TRUE)
 mosaic(~TobaccoDependence + Depression + Sex + CigsSmokedFac, data = nesarc.sub, shade = TRUE)  
 ```
 
-### Some Statistics (We have not discussed this yet)
+### Some Statistics
+
+Note `nesarc.sub` is not the same data set discussed in the book.  In the book, the subset is smaller since it includes only people who have smoked every day (`S3AQ41`).  This subset has $(n = `r dim(nesarc.sub)[1]`)$ compared to the one in the book which has $n = 1320$. 
+
+```{r}
+ggplot(data = nesarc.sub, aes(x = DailyCigsSmoked)) + 
+   geom_density(fill = "gray") + 
+   facet_grid(Depression~.) +
+   theme_bw()
+tapply(nesarc.sub$DailyCigsSmoked, list(nesarc.sub$Depression), sd, na.rm = TRUE) 
+ ggplot(data = nesarc.sub, aes(x = Depression, y = DailyCigsSmoked, fill = Depression)) + geom_violin() + 
+   theme_bw()
+```
+
+```{r}
+t.test(DailyCigsSmoked ~ Depression, data = nesarc.sub)
+t.test(TotalCigsSmoked ~ Depression, data = nesarc.sub)
+t.test(TotalCigsSmoked ~ Depression, data = nesarc.sub, var.equal = TRUE) # assumptions not really met here
+summary(aov(TotalCigsSmoked ~ Depression, data = nesarc.sub))
+# OR
+mod <- lm(TotalCigsSmoked ~ Depression, data = nesarc.sub)
+anova(mod)
+``` 
+
+### Taking a permuation approach
+
+You should add your own notes here when I explain this in class.
+
+```{r}
+set.seed(123)
+SIMS <- 10000 - 1
+stat <- numeric(SIMS)
+TS <- t.test(DailyCigsSmoked ~ Depression, data = nesarc.sub)$stat
+for(i in 1:SIMS){
+  stat[i] <- t.test(DailyCigsSmoked ~ sample(Depression), data = nesarc.sub)$stat
+}
+ggplot(data = data.frame(stat = stat), aes(x = stat)) + 
+  geom_density(fill = "pink") + 
+  theme_bw() + 
+  stat_function(fun = dt, arg = list(df = 733), color = "red", linetype = "dashed") + geom_vline(x = c(TS, -TS), linetype = "dashed", color = "blue")
+TS
+pv <- (sum(stat >= abs(TS))*2 + 1) / SIMS
+pv
+# ANOVA
+set.seed(123)
+SIMS <- 10000 - 1
+stat <- numeric(SIMS)
+TSF <- anova(lm(DailyCigsSmoked ~ Depression, data = nesarc.sub))[1, 4]
+for(i in 1:SIMS){
+  stat[i] <- anova(lm(DailyCigsSmoked ~ sample(Depression), data = nesarc.sub))[1, 4]
+}
+ggplot(data = data.frame(stat = stat), aes(x = stat)) + 
+  geom_density(fill = "pink") + 
+  theme_bw() + 
+  stat_function(fun = df, arg = list(df1 = 1, df2 = 1695), color = "red", linetype = "dashed") + geom_vline(x = TSF, linetype = "dashed", color = "blue") + ylim(0, 1)
+TSF
+pvF <- (sum(stat >= TSF) + 1) / SIMS
+pvF
+```
+
+
 
 
 ```{r results='asis', echo = TRUE}
