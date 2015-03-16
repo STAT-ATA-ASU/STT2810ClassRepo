@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r, echo = FALSE, message = FALSE}
-knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center", cache = TRUE)
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
 ```
 
 ### Purpose of Study: (Note: This is the last paragraph of the research proposal used to remind the reader of the research objectives.)
