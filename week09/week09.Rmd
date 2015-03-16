@@ -1,0 +1,30 @@
+---
+title: "week09"
+output: html_document
+---
+
+* Read Chapter 10 PDS and watch all videos in the chapter
+* Read the documents `SamplingDistributions.html` and `StatisticsTemplate.html` in the `/Statistics` folder.
+
+ 
+* Work on **Bivariate Graphing Assignment / Data Managment** page 52 PDS
+* **Bivariate Graphing Assignment / Data Managment** see page 52 PDS due NLT 5 PM March 20.  Submit assignment
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/911)
+
+**Revised Bivariate Graphing Assignment** 
+
+This is a continuation of the material submitted for the **Bivariate Graphing Assignment** submitted in week08.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
+
+**Grading Rubric:**
+
+Does the document have sections that explain the `Purpose of the Study` (0.25), the `Variables` used in the study (0.25), and how the data was managed (0.25)? 
+
+Are there graphs for at least two of the categorical variables? (0.25) Is there a sentence or two describing what the reader is viewing? (0.25)  
+
+Is there either a histogram or density plot of one of the numeric variables proposed in the study? (0.25)
+
+Is there a bivariate graph of the principal constructs the researcher is proposing to study? (0.25)  Is there a sentence or two describing what the reader is viewing? (0.25)
+
+Is there a multivariate graph of the principal constructs the researcher is proposing to study? (0.25) Is there a sentence or two describing what the reader is viewing? (0.25)
+
+Do all graphs have the $x$- and $y$- axes labelled appropriately? (0.25). Do all graphs have descriptive titles? (0.25)
