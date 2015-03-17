@@ -10,6 +10,8 @@ NS
 xtabs(~xbar, data = NS)
 library(MASS)
 fractions(xtabs(~xbar, data = NS)/(N^n))
+Pxbar <- fractions(xtabs(~xbar, data = NS)/(N^n))
+Pxbar
 MU <- sum(stuff)/N
 VAR <- sum((stuff - MU)^2)*1/N
 fractions(c(MU, VAR))
@@ -19,4 +21,7 @@ fractions(c(MUxbar, VARxbar))
 # Formula Approach
 VARxbar2 <- sum((xbar - MUxbar)^2)*1/(N^n)
 fractions(VARxbar2)
-
+# MU
+sum(unique(xbar)*Pxbar)
+# VAR again
+sum((unique(xbar) - MUxbar)^2*Pxbar)
