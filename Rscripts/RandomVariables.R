@@ -1,5 +1,7 @@
-stuff <- c(1, 2, 3)
-N <- length(stuff)
+### Alan Arnholt
+### 3/17/15
+N <- 3
+stuff <- 1:N
 n <- 2
 omega <- expand.grid(draw1 = stuff, draw2 = stuff)
 omega
@@ -25,3 +27,4 @@ fractions(VARxbar2)
 sum(unique(xbar)*Pxbar)
 # VAR again
 sum((unique(xbar) - MUxbar)^2*Pxbar)
+
