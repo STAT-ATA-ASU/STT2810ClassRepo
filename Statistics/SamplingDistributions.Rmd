@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
 ```
 
-A **sampling distribution** is the distribution of a *statistic* is its probability distribution.  In other words, the sampling distribution of a statistic summarizes a data set, and represents how the statistic varies across random data sets.
+A **sampling distribution** of a *statistic* is its probability distribution.  In other words, the sampling distribution of a statistic summarizes a data set, and represents how the statistic varies across random data sets.
 
 The standard deviation of a statistic *T* is written $\sigma_{T} = SE[T]$.  An estimate for the standard deviation of a statistic *T* is written $\hat{\sigma}_{T} = \widehat{SE[T]}$.
 
