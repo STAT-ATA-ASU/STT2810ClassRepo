@@ -1,0 +1,176 @@
+---
+title: "ANOVA"
+author: "Alan Arnholt"
+date: "3/18/2015"
+output: html_document
+---
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+```
+
+
+This document follows the [PDS video](https://www.youtube.com/watch?v=XRKrSJAwGUo&list=PLDEF0B9CBD27AD37E&index=56).
+
+$H_0:\mu_{Business} = \mu_{English}=\mu_{Math} =\mu_{Psych}$ versus
+$H_1:\mu_{Business} \neq \mu_{English} \neq \mu_{Math} \neq \mu_{Psych}$
+
+Look at the data.
+
+```{r}
+library(PDS)
+head(frustration)
+summary(frustration)
+str(frustration)
+tapply(frustration$Frustration.Score, frustration$Major, mean)
+tapply(frustration$Frustration.Score, frustration$Major, sd)
+```
+
+Graph the data with side-by-side boxplots and violin-plots.
+
+```{r}
+library(ggplot2)
+ggplot(data = frustration, aes(x = Major, y = Frustration.Score, fill = Major)) +
+  geom_boxplot() +
+  theme_bw() + 
+  guides(fill = FALSE) + 
+  labs(x = "Academic Major", y = "Frustration Score")
+ggplot(data = frustration, aes(x = Major, y = Frustration.Score, fill = Major)) +
+  geom_violin() +
+  theme_bw() +
+  guides(fill = FALSE) + 
+  labs(x = "Academic Major", y = "Frustration Score")
+```
+
+## Using `aov`, `summary`, and `lm`
+
+```{r}
+mod1 <- aov(Frustration.Score ~ Major, data = frustration)
+mod1
+summary(mod1)
+# Model Checks
+par(mfrow = c(2, 2))
+plot(mod1)
+par(mfrow=c(1, 1))
+mod2 <- lm(Frustration.Score ~ Major, data = frustration)
+mod2
+anova(mod2)
+CIS <- TukeyHSD(mod1)
+CIS
+opar <- par(no.readonly = TRUE)  # copy of current settings
+par(mar =c(1, 11, 2, 1)) 
+plot(CIS, las = 1)
+par(opar)                        # restore original settings
+```
+
+## Using the NESARC smoking example
+
+### Managing the Data
+
+```{r}
+nesarc.subset <- NESARC[!is.na(NESARC$CHECK321)  & !is.na(NESARC$AGE) &
+                          NESARC$CHECK321 == 1 & NESARC$AGE <=25,]
+dim(nesarc.subset)
+# OR this is much faster and easier to read...
+library(dplyr)
+nesarc.subset <- NESARC %>% 
+  filter(!is.na(CHECK321) & !is.na(AGE) & CHECK321 == 1 & AGE <= 25)
+dim(nesarc.subset)
+library(Hmisc)
+label(nesarc.subset$TAB12MDX) <- "Tobacco Dependence past 12 Months"
+label(nesarc.subset$CHECK321) <- "Smoked Cigarettes in the Past 12 Months"
+label(nesarc.subset$S3AQ3B1) <- "Usual Smoking Quantity"
+label(nesarc.subset$S3AQ3C1) <- "Usual Smoking Frequency"
+# Code in missing data (NA)
+nesarc.subset$S3AQ3B1[nesarc.subset$S3AQ3B1==9] <- NA
+nesarc.subset$S3AQ3C1[nesarc.subset$S3AQ3C1==99] <- NA
+# Re-label variables with more logical values
+USFREQ <- rep(NA, 1706)  # Reverse categories
+USFREQ[nesarc.subset$S3AQ3B1 == 1] <- 6
+USFREQ[nesarc.subset$S3AQ3B1 == 2] <- 5
+USFREQ[nesarc.subset$S3AQ3B1 == 3] <- 4
+USFREQ[nesarc.subset$S3AQ3B1 == 4] <- 3
+USFREQ[nesarc.subset$S3AQ3B1 == 5] <- 2
+USFREQ[nesarc.subset$S3AQ3B1 == 6] <- 1
+USFREQ <- as.factor(USFREQ)
+nesarc.subset$USFREQ <- USFREQ
+USFREQMO <- rep(NA, 1706) # Make quantitative version of "Usual Smoking Frequency"
+USFREQMO[nesarc.subset$S3AQ3B1 == 1] <- 30
+USFREQMO[nesarc.subset$S3AQ3B1 == 2] <- 22
+USFREQMO[nesarc.subset$S3AQ3B1 == 3] <- 14
+USFREQMO[nesarc.subset$S3AQ3B1 == 4] <- 6
+USFREQMO[nesarc.subset$S3AQ3B1 == 5] <- 2.5
+USFREQMO[nesarc.subset$S3AQ3B1 == 6] <- 1
+nesarc.subset$USFREQMO <- as.factor(USFREQMO)
+# Creating secondary variables
+NUMCIGMO_EST <- USFREQMO * nesarc.subset$S3AQ3C1
+nesarc.subset$NUMCIGMO_EST <- NUMCIGMO_EST
+PACKSPERMONTH <- NUMCIGMO_EST/20
+nesarc.subset$PACKSPERMONTH <- PACKSPERMONTH
+SMOKEGRP <- rep(NA, 1706)
+SMOKEGRP[nesarc.subset$TAB12MDX == 1] <- 1
+SMOKEGRP[nesarc.subset$TAB12MDX == 0 & !is.na(nesarc.subset$S3AQ3B1) & nesarc.subset$S3AQ3B1 == 1] <- 2
+SMOKEGRP[nesarc.subset$TAB12MDX == 0 & !is.na(nesarc.subset$S3AQ3B1) & nesarc.subset$S3AQ3B1 != 1] <- 3
+nesarc.subset$SMOKEGRP <- as.factor(SMOKEGRP)
+USQUAN <- rep(NA, 1706)
+USQUAN[nesarc.subset$S3AQ3C1 <= 5] <- 3
+USQUAN[nesarc.subset$S3AQ3C1 > 5 & nesarc.subset$S3AQ3C1 <= 10] <- 8
+USQUAN[nesarc.subset$S3AQ3C1 > 10 & nesarc.subset$S3AQ3C1 <= 15] <- 13
+USQUAN[nesarc.subset$S3AQ3C1 > 15 & nesarc.subset$S3AQ3C1 <= 20] <- 18
+USQUAN[nesarc.subset$S3AQ3C1 > 20] <- 37
+USQUAN[nesarc.subset$S3AQ3B1!=1] <- 0  # Non-daily smokers get 0
+nesarc.subset$USQUAN <- as.factor(USQUAN)
+# Creating categories
+AGEGROUP <- rep(NA, 1706)
+AGEGROUP[nesarc.subset$AGE <= 20] <- 1
+AGEGROUP[nesarc.subset$AGE > 20 & nesarc.subset$AGE <= 22] <- 2
+AGEGROUP[nesarc.subset$AGE >22] <- 3
+nesarc.subset$AGEGROUP <- as.factor(AGEGROUP)
+PACKCATEGORY <- rep(NA, 1706)
+PACKCATEGORY[nesarc.subset$PACKSPERMONTH <= 5] <- 3
+PACKCATEGORY[nesarc.subset$PACKSPERMONTH > 5 & nesarc.subset$PACKSPERMONTH <= 10] <- 7
+PACKCATEGORY[nesarc.subset$PACKSPERMONTH > 10 & nesarc.subset$PACKSPERMONTH <= 20] <- 15
+PACKCATEGORY[nesarc.subset$PACKSPERMONTH > 20 & nesarc.subset$PACKSPERMONTH <= 30] <- 25
+PACKCATEGORY[nesarc.subset$PACKSPERMONTH > 30] <- 58
+nesarc.subset$PACKCATEGORY <- as.factor(PACKCATEGORY)
+DAILY <- rep(NA, 1706)
+DAILY[!is.na(nesarc.subset$S3AQ3B1) & nesarc.subset$S3AQ3B1 == 1] <- 1
+DAILY[!is.na(nesarc.subset$S3AQ3B1) & nesarc.subset$S3AQ3B1 != 1] <- 0
+nesarc.subset$DAILY <- as.factor(DAILY)
+```
+
+## Running the Test
+
+```{r}
+ggplot(data = nesarc.subset, aes(x = MAJORDEPLIFE, y = NUMCIGMO_EST, fill = MAJORDEPLIFE)) + 
+  geom_violin() +
+  theme_bw() +
+  guides(fill = FALSE)
+# A nonparametric approach
+wilcox.test(NUMCIGMO_EST ~ MAJORDEPLIFE, data = nesarc.subset)
+kruskal.test(NUMCIGMO_EST ~ MAJORDEPLIFE, data = nesarc.subset)
+# ANOVA
+numcig.aov <- aov(NUMCIGMO_EST ~ MAJORDEPLIFE, data = nesarc.subset)
+summary(numcig.aov)
+Fobs <- summary(numcig.aov)[[1]][1,4]
+Fobs
+# Since assumptions are not really satisfied....
+set.seed(123)
+sims <- 5000
+FR <- numeric(sims)
+for(i in 1:sims){
+  FR[i] <- summary(aov(NUMCIGMO_EST ~ sample(MAJORDEPLIFE), data = nesarc.subset))[[1]][1, 4]
+}
+pv <- (sum(FR >= Fobs) + 1)/(sims + 1)
+pv
+# Run follow-up descriptive statistics
+by(nesarc.subset$NUMCIGMO_EST, nesarc.subset$MAJORDEPLIFE, mean, na.rm = TRUE)
+# I like tapply instead of by()
+tapply(nesarc.subset$NUMCIGMO_EST, nesarc.subset$MAJORDEPLIFE, mean, na.rm = TRUE)
+# ANOVA with multi-level explanatory variable
+numcig.eth.aov <- aov(NUMCIGMO_EST ~ ETHRACE2A, data=nesarc.subset)
+summary(numcig.eth.aov)
+# Run follow-up descriptive statistics
+by(nesarc.subset$NUMCIGMO_EST, nesarc.subset$ETHRACE2A, mean, na.rm = TRUE)
+# Tukey's post-hoc test 
+TukeyHSD(numcig.eth.aov)
+```

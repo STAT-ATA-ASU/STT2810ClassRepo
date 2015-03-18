@@ -319,8 +319,50 @@ pvF <- (sum(stat >= TSF) + 1) / SIMS
 pvF
 ```
 
+## Another Example
 
+```{r}
+ggplot(data = nesarc.sub, aes(x = Ethnicity, y = TotalCigsSmoked, fill = Ethnicity)) + 
+  geom_boxplot() +
+  guides(fill = FALSE) +
+  theme_bw() + 
+  labs(x = "", y = "Estimated Number of Cigarettes Smoked per Month\n")
+ggplot(data = nesarc.sub, aes(x = Ethnicity, y = TotalCigsSmoked, fill = Ethnicity)) + 
+  geom_violin() +
+  guides(fill = FALSE) +
+  theme_bw() + 
+  labs(x = "", y = "Estimated Number of Cigarettes Smoked per Month\n")
+```
 
+$H_0:\mu_{\text{Caucassian}} = \mu_{\text{African American}}=\mu_{\text{Native American}} =\mu_{\text{Asian}} =\mu_{\text{Hispanic}}$ versus
+$H_1:\mu_{\text{Caucassian}} \neq \mu_{\text{African American}} \neq \mu_{\text{Native American}} \neq \mu_{\text{Asian}} \neq \mu_{\text{Hispanic}}$
+
+```{r}
+eth.aov <- aov(TotalCigsSmoked ~ Ethnicity, data = nesarc.sub)
+summary(eth.aov)
+CIs <- TukeyHSD(eth.aov)
+CIs
+opar <- par(no.readonly = TRUE)  # copy of current settings
+par(mar =c(1, 15, 2, 1)) 
+plot(CIs, las = 1)
+par(opar)                        # restore original settings
+```
+
+Evidence (*p* = `r summary(eth.aov)[[1]][1,5]`) suggests a strong relationship between ethnicity and the estimated number of cigarettes an individual smokes per month. Post hoc comparisons suggest mean differences in the number of cigarettes smoked per month for African American and Caucasian, Asian and Caucasian, and Hispanic and Caucasian.
+
+## Chi Square Tests
+
+```{r}
+library(vcd)
+mosaic(~TobaccoDependence + Depression, data = nesarc.sub, shade = TRUE)
+xtabs(~TobaccoDependence + Depression, data = nesarc.sub)
+T1 <- prop.table(xtabs(~TobaccoDependence + Depression, data = nesarc.sub), 1)
+T1
+CR <- chisq.test(nesarc.sub$TobaccoDependence, nesarc.sub$Depression)
+CR
+```
+
+A Chi Square test of independence suggest that among young adult smokers, those with past year nicotine dependence were more likely to have experiences major depression in thier lifetime (`r T1[1, 2]*100`%) compared to those withou past year nicotine dependence (`r T1[2, 2]*100`%), $\chi^2 = `r CR$stat`$, 1 df, *p* < 0.0001.
 
 ```{r results='asis', echo = TRUE}
 library(moonBook)
