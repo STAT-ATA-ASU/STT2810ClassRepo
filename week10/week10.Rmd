@@ -1,0 +1,36 @@
+---
+title: "week10"
+output: html_document
+---
+
+* Read Chapter 11 PDS and watch all videos in the chapter
+* Read the documents `SamplingDistributions.html`, `StatisticsTemplate.html`, and `ANOVA.html` in the `/Statistics` folder.
+
+ 
+* Work on **ANOVA assignment** page 69 PDS
+* **ANOVA assignment** see page 52 PDS due NLT 5 PM March 27.  Submit assignment
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/929)
+
+**ANOVA assignment** 
+
+This is a continuation of the material submitted for the **Bivariate Graphing Assignment** submitted in week09.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
+
+**Grading Rubric:**
+
+Does the document have sections that explain the `Purpose of the Study` (0.1), the `Variables` used in the study (0.1), and how the data was managed (0.1)? 
+
+Are there graphs for at least two of the categorical variables? (0.1) Is there a sentence or two describing what the reader is viewing? (0.1)  
+
+Is there either a histogram or density plot of one of the numeric variables proposed in the study? (0.1)
+
+Is there a bivariate graph of the principal constructs the researcher is proposing to study? (0.1)  Is there a sentence or two describing what the reader is viewing? (0.1)
+
+Is there a multivariate graph of the principal constructs the researcher is proposing to study? (0.1) Is there a sentence or two describing what the reader is viewing? (0.1)
+
+Do all graphs have the $x$- and $y$- axes labelled appropriately? (0.1). Do all graphs have descriptive titles? (0.1)
+
+Is there a null and alternative hypothesis appropriate for the data? (0.6)
+
+Is there code an output for testing the null hypothesis with an ANOVA? (0.6)
+
+Is there an appropriate explanation of the results including a post hoc test with interpretation if the results from the ANOVA are significant? (0.6)
