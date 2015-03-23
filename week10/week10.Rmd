@@ -31,6 +31,6 @@ Do all graphs have the $x$- and $y$- axes labelled appropriately? (0.1). Do all 
 
 Is there a null and alternative hypothesis appropriate for the data? (0.6)
 
-Is there code an output for testing the null hypothesis with an ANOVA? (0.6)
+Is there code and output for testing the null hypothesis with an ANOVA? (0.6)
 
 Is there an appropriate explanation of the results including a post hoc test with interpretation if the results from the ANOVA are significant? (0.6)
