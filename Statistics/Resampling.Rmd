@@ -27,6 +27,8 @@ Fschis <- schis %>%
   filter(gender == "Female")
 Fschis
 t.test(worms ~ group, data = Fschis)
+TOBS <- t.test(worms ~ group, data = Fschis)$stat
+TOBS
 OM <- tapply(Fschis$worms, Fschis$group, mean)
 OM
 OV <- tapply(Fschis$worms, Fschis$group, var)
@@ -39,12 +41,16 @@ tapply(Fschis$worms, sample(Fschis$group), mean)
 set.seed(123)
 sims <- 10000 - 1
 meandiff <- numeric(sims)
+st <- numeric(sims)
 for(i in 1:sims){
   ans <- tapply(Fschis$worms, sample(Fschis$group), mean)
   meandiff[i] <- ans[1] -ans[2]
+  st[i] <- t.test(worms ~ sample(group), data = Fschis)
 }
-pvalue <- (sum(meandiff > obsdiff) + 1)/(sims + 1)
-pvalue
+pvalue1 <- (sum(meandiff > obsdiff) + 1)/(sims + 1)
+pvalue1
+pvalue2 <- (sum(st > TOBS) + 1)/(sims + 1)
+pvalue2
 ```
 
 
