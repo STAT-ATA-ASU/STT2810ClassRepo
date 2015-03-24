@@ -48,7 +48,7 @@ Where $\Phi$ is the cdf of the standard normal distribution.  The central limit 
 
 #### Note:  If you one is sampling from a normal distribution, then the resulting sampling distribution of the sample mean is exactly normal.  It is always the case that $\mu_{\bar{X}} = \mu$ and $\sigma_{\bar{X}} = \sigma/\sqrt{n}$ regardless of the population one is sampling from.
 
-## Just how large is ''sufficiently large''?
+## Just how large is ``sufficiently large''?
 
 Consider the following simulations
 
