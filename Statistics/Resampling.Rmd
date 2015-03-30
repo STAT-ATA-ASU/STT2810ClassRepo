@@ -1,0 +1,66 @@
+---
+title: "Resampling"
+author: "Alan Arnholt"
+date: "3/24/2015"
+output: html_document
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+```
+
+
+
+```{r F1}
+gender <- c(rep("Female", 10), rep("Male", 10)) 
+group <- rep(rep(c("Treatment", "Control"), each = 5), 2)
+worms <- c(1, 2, 2, 10, 7, 16, 10, 10, 7, 17, 3, 5, 9, 10, 6, 31, 26, 28, 13, 47)
+schis <- data.frame(gender, group, worms)
+rm(gender, group, worms)
+head(schis, n = 3)
+schis
+```
+
+```{r}
+library(dplyr)
+Fschis <- schis %>% 
+  filter(gender == "Female")
+Fschis
+t.test(worms ~ group, data = Fschis)
+TOBS <- t.test(worms ~ group, data = Fschis)$stat
+TOBS
+OM <- tapply(Fschis$worms, Fschis$group, mean)
+OM
+OV <- tapply(Fschis$worms, Fschis$group, var)
+OV
+tobs <- (OM[1] -OM[2])/(sqrt(OV[1]/5 + OV[2]/5))
+tobs
+obsdiff <- OM[1] - OM[2]
+obsdiff
+tapply(Fschis$worms, sample(Fschis$group), mean)
+set.seed(123)
+sims <- 10000 - 1
+meandiff <- numeric(sims)
+st <- numeric(sims)
+for(i in 1:sims){
+  ans <- tapply(Fschis$worms, sample(Fschis$group), mean)
+  meandiff[i] <- ans[1] -ans[2]
+  st[i] <- t.test(worms ~ sample(group), data = Fschis)
+}
+pvalue1 <- (sum(meandiff > obsdiff) + 1)/(sims + 1)
+pvalue1
+pvalue2 <- (sum(st > TOBS) + 1)/(sims + 1)
+pvalue2
+```
+
+
+Create a histogram or density plot of the mean differences.
+
+```{r}
+hist(meandiff, col = "pink", breaks = "Scott")
+library(ggplot2)
+ggplot(data = data.frame(x = meandiff), aes(x = x)) + 
+  geom_density(fill = "pink", alpha = 0.2) + 
+  theme_bw() +
+  geom_vline(x = obsdiff, linetype = "dashed", color = "red") +
+  labs(x = expression(bar(x) - bar(y)))
