@@ -377,7 +377,7 @@ CR
 ```
 
 The Chi Square test of independence suggest there is an association between smoking frequency and tobacco dependence.
-To determine if there are significant differences among the six levels of smoking frequency requires one to examine $\binom{6}{2} =$ `r choose(6, 2)` possible differences with an appropriate $\alpha$ value to account for the multiple comparisons.  Use the Bonferroni approach where $\alpha = 0.05/(2*15) = `r 0.05/30` to control the experiment-wise error rate.
+To determine if there are significant differences among the six levels of smoking frequency requires one to examine $\binom{6}{2} =$ `r choose(6, 2)` possible differences with an appropriate $\alpha$ value to account for the multiple comparisons.  Use the Bonferroni approach where $\alpha = 0.05/(15) = `r 0.05/15` to control the experiment-wise error rate.
 
 ```{r}
 chisq.test(TA[, c(1, 2)]) # not significant

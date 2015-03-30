@@ -647,7 +647,7 @@ CR</code></pre>
 
 data:  nesarc.sub$TobaccoDependence and nesarc.sub$SmokingFreq
 X-squared = 165.2732, df = 5, p-value &lt; 2.2e-16</code></pre>
-<p>The Chi Square test of independence suggest there is an association between smoking frequency and tobacco dependence. To determine if there are significant differences among the six levels of smoking frequency requires one to examine <span class="math">\(\binom{6}{2} =\)</span> 15 possible differences with an appropriate <span class="math">\(\alpha\)</span> value to account for the multiple comparisons. Use the Bonferroni approach where $= 0.05/(2*15) = 0.0016667 to control the experiment-wise error rate.</p>
+<p>The Chi Square test of independence suggest there is an association between smoking frequency and tobacco dependence. To determine if there are significant differences among the six levels of smoking frequency requires one to examine <span class="math">\(\binom{6}{2} =\)</span> 15 possible differences with an appropriate <span class="math">\(\alpha\)</span> value to account for the multiple comparisons. Use the Bonferroni approach where $= 0.05/(15) = 0.0033333 to control the experiment-wise error rate.</p>
 <pre class="r"><code>chisq.test(TA[, c(1, 2)]) # not significant</code></pre>
 <pre><code>
     Pearson's Chi-squared test with Yates' continuity correction
