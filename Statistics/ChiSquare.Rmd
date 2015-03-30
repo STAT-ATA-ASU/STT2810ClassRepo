@@ -1,0 +1,218 @@
+---
+title: "Chi-Square"
+author: "Alan T. Arnholt"
+date: "March 29, 2015"
+output: html_document
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+```
+
+
+## Using the NESARC smoking example
+
+### Managing the Data
+
+```{r}
+library(PDS)
+library(dplyr)
+nesarc.subset <- NESARC %>% 
+  filter(!is.na(CHECK321) & !is.na(AGE) & CHECK321 == 1 & AGE <= 25)
+dim(nesarc.subset)
+library(Hmisc)
+label(nesarc.subset$TAB12MDX) <- "Tobacco Dependence past 12 Months"
+label(nesarc.subset$CHECK321) <- "Smoked Cigarettes in the Past 12 Months"
+label(nesarc.subset$S3AQ3B1) <- "Usual Smoking Quantity"
+label(nesarc.subset$S3AQ3C1) <- "Usual Smoking Frequency"
+# Code in missing data (NA)
+nesarc.subset$S3AQ3B1[nesarc.subset$S3AQ3B1 == 9] <- NA
+nesarc.subset$S3AQ3C1[nesarc.subset$S3AQ3C1 == 99] <- NA
+# Re-label variables with more logical values
+dim(nesarc.subset)
+USFREQ <- rep(NA, 1706)  # Reverse categories
+USFREQ[nesarc.subset$S3AQ3B1 == 1] <- 6
+USFREQ[nesarc.subset$S3AQ3B1 == 2] <- 5
+USFREQ[nesarc.subset$S3AQ3B1 == 3] <- 4
+USFREQ[nesarc.subset$S3AQ3B1 == 4] <- 3
+USFREQ[nesarc.subset$S3AQ3B1 == 5] <- 2
+USFREQ[nesarc.subset$S3AQ3B1 == 6] <- 1
+USFREQ <- as.factor(USFREQ)
+nesarc.subset$USFREQ <- USFREQ
+USFREQMO <- rep(NA, 1706) # Make quantitative version of "Usual Smoking Frequency"
+USFREQMO[nesarc.subset$S3AQ3B1 == 1] <- 30
+USFREQMO[nesarc.subset$S3AQ3B1 == 2] <- 22
+USFREQMO[nesarc.subset$S3AQ3B1 == 3] <- 14
+USFREQMO[nesarc.subset$S3AQ3B1 == 4] <- 6
+USFREQMO[nesarc.subset$S3AQ3B1 == 5] <- 2.5
+USFREQMO[nesarc.subset$S3AQ3B1 == 6] <- 1
+nesarc.subset$USFREQMO <- as.factor(USFREQMO)
+# Creating secondary variables
+NUMCIGMO_EST <- USFREQMO * nesarc.subset$S3AQ3C1
+nesarc.subset$NUMCIGMO_EST <- NUMCIGMO_EST
+PACKSPERMONTH <- NUMCIGMO_EST/20
+nesarc.subset$PACKSPERMONTH <- PACKSPERMONTH
+SMOKEGRP <- rep(NA, 1706)
+SMOKEGRP[nesarc.subset$TAB12MDX == 1] <- 1
+SMOKEGRP[nesarc.subset$TAB12MDX == 0 & !is.na(nesarc.subset$S3AQ3B1) & nesarc.subset$S3AQ3B1 == 1] <- 2
+SMOKEGRP[nesarc.subset$TAB12MDX == 0 & !is.na(nesarc.subset$S3AQ3B1) & nesarc.subset$S3AQ3B1 != 1] <- 3
+nesarc.subset$SMOKEGRP <- as.factor(SMOKEGRP)
+USQUAN <- rep(NA, 1706)
+USQUAN[nesarc.subset$S3AQ3C1 <= 5] <- 3
+USQUAN[nesarc.subset$S3AQ3C1 > 5 & nesarc.subset$S3AQ3C1 <= 10] <- 8
+USQUAN[nesarc.subset$S3AQ3C1 > 10 & nesarc.subset$S3AQ3C1 <= 15] <- 13
+USQUAN[nesarc.subset$S3AQ3C1 > 15 & nesarc.subset$S3AQ3C1 <= 20] <- 18
+USQUAN[nesarc.subset$S3AQ3C1 > 20] <- 37
+USQUAN[nesarc.subset$S3AQ3B1!=1] <- 0  # Non-daily smokers get 0
+nesarc.subset$USQUAN <- as.factor(USQUAN)
+# Creating categories
+AGEGROUP <- rep(NA, 1706)
+AGEGROUP[nesarc.subset$AGE <= 20] <- 1
+AGEGROUP[nesarc.subset$AGE > 20 & nesarc.subset$AGE <= 22] <- 2
+AGEGROUP[nesarc.subset$AGE >22] <- 3
+nesarc.subset$AGEGROUP <- as.factor(AGEGROUP)
+PACKCATEGORY <- rep(NA, 1706)
+PACKCATEGORY[nesarc.subset$PACKSPERMONTH <= 5] <- 3
+PACKCATEGORY[nesarc.subset$PACKSPERMONTH > 5 & nesarc.subset$PACKSPERMONTH <= 10] <- 7
+PACKCATEGORY[nesarc.subset$PACKSPERMONTH > 10 & nesarc.subset$PACKSPERMONTH <= 20] <- 15
+PACKCATEGORY[nesarc.subset$PACKSPERMONTH > 20 & nesarc.subset$PACKSPERMONTH <= 30] <- 25
+PACKCATEGORY[nesarc.subset$PACKSPERMONTH > 30] <- 58
+nesarc.subset$PACKCATEGORY <- as.factor(PACKCATEGORY)
+DAILY <- rep(NA, 1706)
+DAILY[!is.na(nesarc.subset$S3AQ3B1) & nesarc.subset$S3AQ3B1 == 1] <- 1
+DAILY[!is.na(nesarc.subset$S3AQ3B1) & nesarc.subset$S3AQ3B1 != 1] <- 0
+nesarc.subset$DAILY <- as.factor(DAILY)
+nesarc.subset <- nesarc.subset %>% 
+  select(DAILY, PACKCATEGORY, PACKSPERMONTH, AGEGROUP, USQUAN, SMOKEGRP, PACKSPERMONTH, NUMCIGMO_EST, USFREQMO, USFREQ, TAB12MDX)
+head(nesarc.subset)
+```
+
+## Create some Graphs
+
+```{r}
+T1 <- xtabs(~TAB12MDX + USFREQMO, data = nesarc.subset)
+T1
+T2 <- prop.table(T1, 2)
+T2
+barplot(T2)
+library(ggplot2)
+ggplot(data = na.omit(nesarc.subset), aes(x = USFREQMO, fill = TAB12MDX)) + 
+  geom_bar(position = "fill") + 
+  theme_bw()
+chisq.test(T1)
+```
+
+## More
+
+```{r}
+# Chi-Square Test of Independence
+ND.chisq <- chisq.test(nesarc.subset$TAB12MDX, nesarc.subset$USFREQMO)
+ND.chisq  # Overall summary
+ND.chisq$observed   # Observed cell counts
+ND.chisq$expected   # Expected (due to chance) cell counts
+ND.chisq$residuals  # Pearson residuals (like z-scores; magnitude > 2 means a cell has a higher/lower cell count than is expected by chance)
+# Post-hoc tests
+.05/15  # Bonferroni correction for 15 pairwise comparisons is .003
+ND.chisq.1vs2 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 1 | 
+          nesarc.subset$USFREQMO == 2.5], 
+          nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 1 | 
+          nesarc.subset$USFREQMO == 2.5])
+ND.chisq.1vs2
+
+ND.chisq.1vs6 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 1 | 
+                                                     nesarc.subset$USFREQMO == 6], 
+                            nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 1 | 
+                                                     nesarc.subset$USFREQMO == 6])
+ND.chisq.1vs6
+
+ND.chisq.1vs14 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 1 | 
+                                                     nesarc.subset$USFREQMO == 14], 
+                            nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 1 | 
+                                                     nesarc.subset$USFREQMO == 14])
+ND.chisq.1vs14
+ND.chisq.1vs14$residuals
+
+ND.chisq.1vs22 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 1 | 
+                                                     nesarc.subset$USFREQMO == 22], 
+                            nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 1 | 
+                                                     nesarc.subset$USFREQMO == 22])
+ND.chisq.1vs22
+ND.chisq.1vs22$residuals
+
+ND.chisq.1vs30 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 1 | 
+                                                      nesarc.subset$USFREQMO == 30], 
+                             nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 1 | 
+                                                      nesarc.subset$USFREQMO == 30])
+ND.chisq.1vs30
+ND.chisq.1vs30$residuals
+
+ND.chisq.2vs6 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 2.5 | 
+                                                      nesarc.subset$USFREQMO == 6], 
+                             nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 2.5 | 
+                                                      nesarc.subset$USFREQMO == 6])
+ND.chisq.2vs6
+
+ND.chisq.2vs14 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 2.5 | 
+                                                      nesarc.subset$USFREQMO == 14], 
+                             nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 2.5 | 
+                                                      nesarc.subset$USFREQMO == 14])
+ND.chisq.2vs14
+
+ND.chisq.2vs22 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 2.5 | 
+                                                      nesarc.subset$USFREQMO == 22], 
+                             nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 2.5 | 
+                                                      nesarc.subset$USFREQMO == 22])
+ND.chisq.2vs22
+
+ND.chisq.2vs30 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 2.5 | 
+                                                      nesarc.subset$USFREQMO == 30], 
+                             nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 2.5 | 
+                                                      nesarc.subset$USFREQMO == 30])
+ND.chisq.2vs30
+ND.chisq.2vs30$residuals
+
+ND.chisq.2vs14 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 2.5 | 
+                                                      nesarc.subset$USFREQMO == 14], 
+                             nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 2.5 | 
+                                                      nesarc.subset$USFREQMO == 14])
+ND.chisq.2vs14
+
+ND.chisq.6vs14 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 6 | 
+                                                      nesarc.subset$USFREQMO == 14], 
+                             nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 6 | 
+                                                      nesarc.subset$USFREQMO == 14])
+ND.chisq.6vs14
+
+ND.chisq.6vs22 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 6 | 
+                                                      nesarc.subset$USFREQMO == 22], 
+                             nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 6 | 
+                                                      nesarc.subset$USFREQMO == 22])
+ND.chisq.6vs22
+
+ND.chisq.6vs30 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 6 | 
+                                                      nesarc.subset$USFREQMO == 30], 
+                             nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 6 | 
+                                                      nesarc.subset$USFREQMO == 30])
+ND.chisq.6vs30
+
+ND.chisq.14vs22 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 14 | 
+                                                      nesarc.subset$USFREQMO == 22], 
+                             nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 14 | 
+                                                      nesarc.subset$USFREQMO == 22])
+ND.chisq.14vs22
+
+ND.chisq.14vs30 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 14 | 
+                                                       nesarc.subset$USFREQMO == 30], 
+                              nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 14 | 
+                                                       nesarc.subset$USFREQMO == 30])
+ND.chisq.14vs30
+ND.chisq.14vs30$residuals
+
+ND.chisq.22vs30 <- chisq.test(nesarc.subset$TAB12MDX[nesarc.subset$USFREQMO == 22 | 
+                                                       nesarc.subset$USFREQMO == 30], 
+                              nesarc.subset$USFREQMO[nesarc.subset$USFREQMO == 22 | 
+                                                       nesarc.subset$USFREQMO == 30])
+ND.chisq.22vs30
+ND.chisq.22vs30$residuals
+```
+
