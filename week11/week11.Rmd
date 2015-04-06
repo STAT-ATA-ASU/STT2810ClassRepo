@@ -1,0 +1,46 @@
+---
+title: "week11"
+output: html_document
+---
+
+* Read Chapter 12 PDS and watch the embedded videos 
+* Read/re-read the documents `StatisticsTemplate.html`, and `ChiSquare.html` in the `/Statistics` folder.
+
+ 
+* Work on **Chi-Square assignment** page 78 PDS
+* **Chi-Square assignment** see page 78 PDS due NLT 5 PM April 3.  Submit assignment
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is ( 	https://www.crowdgrader.org/crowdgrader/venues/view_venue/940)
+
+**Chi-Square assignment** 
+
+This is a continuation of the material submitted for the **ANOVA assignment** submitted in week10.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
+
+**Grading Rubric:**
+
+Does the document have sections that explain the `Purpose of the Study` (0.1), the `Variables` used in the study (0.1), and how the data was managed (0.1)? 
+
+Are there graphs for at least two of the categorical variables? (0.1) Is there a sentence or two describing what the reader is viewing? (0.1)  
+
+Is there either a histogram or density plot of one of the numeric variables proposed in the study? (0.1)
+
+Is there a bivariate graph of the principal constructs the researcher is proposing to study? (0.1)  Is there a sentence or two describing what the reader is viewing? (0.1)
+
+Is there a multivariate graph of the principal constructs the researcher is proposing to study? (0.1) Is there a sentence or two describing what the reader is viewing? (0.1)
+
+Do all graphs have the $x$- and $y$- axes labeled appropriately? (0.1). Do all graphs have descriptive titles? (0.1)
+
+Is there a null and alternative hypothesis appropriate for the ANOVA? (0.1)
+
+Is there code and output for testing the null hypothesis with an ANOVA? (0.1)
+
+Is there an appropriate explanation of the results including a post-hoc test with interpretation if the results from the ANOVA are significant? (0.1)
+
+Is there a null an alternative hypothesis for a Chi-Square test of independence? (0.5)
+
+Is there code and output for testing the null hypothesis with a Chi-Square test of independence? (0.5)
+
+Are there appropriate post-hoc tests if the Chi-Square test resulted in a significant *p-value*? (0.2)
+
+Is there a sentence or two describing the results of the Chi-Square test(s)? (0.3)
+
+

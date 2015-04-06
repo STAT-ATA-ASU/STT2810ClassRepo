@@ -1,0 +1,85 @@
+---
+title: "Correlation"
+author: "Alan Arnholt"
+date: "4/3/2015"
+output: html_document
+---
+
+```{r, label = "Setup", echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+```
+
+## $Q \longrightarrow Q$ Correlation Coefficient ($r$) 
+
+Consider the data frame `signdist` in the `PDS` package used in chapter 13.
+
+```{r}
+library(PDS)
+head(signdist)
+plot(Distance ~ Age, data = signdist)
+mod <- lm(Distance ~ Age, data = signdist)
+summary(mod)
+abline(mod)
+cor(signdist$Distance, signdist$Age)
+cor.test(signdist$Distance, signdist$Age)
+```
+
+Doing similar things with `ggplot2`.
+
+```{r}
+library(ggplot2)
+ggplot(data = signdist, aes(x = Age, y = Distance)) + 
+  geom_point() +
+  theme_bw() +
+  geom_smooth(method = "lm")
+```
+
+Discuss:
+
+1.  Direction
+2.  Form
+3.  Strength
+4.  Outliers
+
+$$r = \frac{1}{n-1}\sum_{i=1}^{n}\frac{x_i - \bar{x}}{s_x}\cdot \frac{y_i - \bar{y}}{s_y}$$
+
+```{r}
+x <- signdist$Age
+y <- signdist$Distance
+xbar <- mean(x)
+sx <- sd(x)
+ybar <- mean(y)
+sy <- sd(y)
+xMINUSxbar <- x - xbar
+yMINUSybar <- y - ybar
+zx <- xMINUSxbar/sx
+zy <- yMINUSybar/sy
+r <- 1/(dim(signdist)[1] - 1)*sum(zx*zy)
+c(xbar, sx, ybar, sy, r)
+cbind(x, xMINUSxbar, zx, y, yMINUSybar, zy)
+cor(x, y)
+```
+
+Some examples from `gapminder`.
+
+```{r}
+ggplot(data = gapminder, aes(x = urbanrate, y = internetuserate)) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_smooth(method = "lm")
+cor(gapminder$urbanrate, gapminder$internetuserate, use = "complete.obs")  # note there are missing values
+```
+
+
+```{r}
+ggplot(data = gapminder, aes(x = incomeperperson, y = internetuserate)) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_smooth()
+#
+ggplot(data = gapminder, aes(x = log(incomeperperson), y = internetuserate)) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_smooth(method = "lm")
+cor(log(gapminder$incomeperperson), gapminder$internetuserate, use = "complete.obs")  # note there are missing values
+```

@@ -1,7 +1,7 @@
 ---
 title: "Project Template"
 author: "Alan T. Arnholt"
-date: "March 11, 2015"
+date: "March 30, 2015"
 output: html_document
 ---
 
@@ -230,7 +230,9 @@ g1 + labs(x = "", y = "",
 ```{r}
 g2 <- ggplot(data = na.omit(nesarc.sub), aes(x = SmokingFreq, fill = TobaccoDependence)) +
   geom_bar(position = "fill") + 
-  theme_bw()
+  theme_bw() + 
+  theme(axis.text.x  = element_text(angle = 75, vjust = 0.5)) +
+  labs(x = "")
 g2
  g3 <- g2 + facet_grid(Sex ~ .) +
   theme(axis.text.x  = element_text(angle = 85, vjust = 0.5)) +
@@ -251,7 +253,7 @@ ggplot(data = na.omit(nesarc.sub), aes(x = CigsSmokedFac, fill = TobaccoDependen
  
 ### Using Mosaic Plots
 
-```{r fig.width = 12, fig.height =12}
+```{r fig.width = 8, fig.height =8}
 library(vcd)
 mosaic(~TobaccoDependence + Depression, data = nesarc.sub) 
 mosaic(~TobaccoDependence + Depression, data = nesarc.sub, shade = TRUE) 
@@ -289,7 +291,7 @@ You should add your own notes here when I explain this in class.
 
 ```{r}
 set.seed(123)
-SIMS <- 10000 - 1
+SIMS <- 1000 - 1
 stat <- numeric(SIMS)
 TS <- t.test(DailyCigsSmoked ~ Depression, data = nesarc.sub)$stat
 for(i in 1:SIMS){
@@ -304,7 +306,7 @@ pv <- (sum(stat >= abs(TS))*2 + 1) / SIMS
 pv
 # ANOVA
 set.seed(123)
-SIMS <- 10000 - 1
+SIMS <- 1000 - 1
 stat <- numeric(SIMS)
 TSF <- anova(lm(DailyCigsSmoked ~ Depression, data = nesarc.sub))[1, 4]
 for(i in 1:SIMS){
@@ -335,7 +337,7 @@ ggplot(data = nesarc.sub, aes(x = Ethnicity, y = TotalCigsSmoked, fill = Ethnici
 ```
 
 $H_0:\mu_{\text{Caucassian}} = \mu_{\text{African American}}=\mu_{\text{Native American}} =\mu_{\text{Asian}} =\mu_{\text{Hispanic}}$ versus
-$H_1:\mu_{\text{Caucassian}} \neq \mu_{\text{African American}} \neq \mu_{\text{Native American}} \neq \mu_{\text{Asian}} \neq \mu_{\text{Hispanic}}$
+$H_1:\mu_{i} \neq \mu_{j}$ for some $(i, j)$.
 
 ```{r}
 eth.aov <- aov(TotalCigsSmoked ~ Ethnicity, data = nesarc.sub)
@@ -352,7 +354,7 @@ Evidence (*p* = `r summary(eth.aov)[[1]][1,5]`) suggests a strong relationship b
 
 ## Chi Square Tests
 
-```{r}
+```{r fig.width = 10, fig.height = 10}
 library(vcd)
 mosaic(~TobaccoDependence + Depression, data = nesarc.sub, shade = TRUE)
 xtabs(~TobaccoDependence + Depression, data = nesarc.sub)
@@ -362,7 +364,41 @@ CR <- chisq.test(nesarc.sub$TobaccoDependence, nesarc.sub$Depression)
 CR
 ```
 
-A Chi Square test of independence suggest that among young adult smokers, those with past year nicotine dependence were more likely to have experiences major depression in thier lifetime (`r T1[1, 2]*100`%) compared to those withou past year nicotine dependence (`r T1[2, 2]*100`%), $\chi^2 = `r CR$stat`$, 1 df, *p* < 0.0001.
+A Chi Square test of independence suggest that among young adult smokers, those with past year nicotine dependence were more likely to have experiences major depression in their lifetime (`r T1[1, 2]*100`%) compared to those without past year nicotine dependence (`r T1[2, 2]*100`%), $\chi^2 = `r CR$stat`$, 1 df, *p* < 0.0001.
+
+```{r}
+mosaic(~TobaccoDependence + SmokingFreq, data = nesarc.sub, shade = TRUE)
+TA <- xtabs(~TobaccoDependence + SmokingFreq, data = nesarc.sub)
+TA
+T1 <- prop.table(xtabs(~TobaccoDependence + SmokingFreq, data = nesarc.sub), 1)
+T1
+CR <- chisq.test(nesarc.sub$TobaccoDependence, nesarc.sub$SmokingFreq)
+CR
+```
+
+The Chi Square test of independence suggest there is an association between smoking frequency and tobacco dependence.
+To determine if there are significant differences among the six levels of smoking frequency requires one to examine $\binom{6}{2} =$ `r choose(6, 2)` possible differences with an appropriate $\alpha$ value to account for the multiple comparisons.  Use the Bonferroni approach where $\alpha = 0.05/(15) = `r 0.05/15` to control the experiment-wise error rate.
+
+```{r}
+chisq.test(TA[, c(1, 2)]) # not significant
+chisq.test(TA[, c(1, 3)]) # not significant
+chisq.test(TA[, c(1, 4)]) # significant
+chisq.test(TA[, c(1, 5)]) # significant
+chisq.test(TA[, c(1, 6)]) # significant
+chisq.test(TA[, c(2, 3)]) # not significant
+chisq.test(TA[, c(2, 4)]) # not significant
+chisq.test(TA[, c(2, 5)]) # not significant 
+chisq.test(TA[, c(2, 6)]) # significant
+chisq.test(TA[, c(3, 4)]) # not significant
+chisq.test(TA[, c(3, 5)]) # not significant
+chisq.test(TA[, c(3, 6)]) # significant
+chisq.test(TA[, c(4, 5)]) # not significant
+chisq.test(TA[, c(4, 6)]) # significant
+chisq.test(TA[, c(5, 6)]) # significant
+```
+
+There are significant differences between the percent of subjects that have nicotine dependence while smoking once a month or less and 3 to 4 Days/week, 5 to 6 Days/week, and Every Day.  There are significant differences between  percent of subjects that have nicotine dependence while smoking Every day and each of the less frequent smoking modes.
+
 
 ```{r results='asis', echo = TRUE}
 library(moonBook)

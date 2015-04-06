@@ -1,0 +1,75 @@
+---
+title: "Moderation"
+author: "Alan Arnholt"
+date: "4/3/2015"
+output: html_document
+---
+
+```{r, label = "Setup", echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+```
+
+## Moderation
+
+Create some artificial data:
+
+```{r}
+weight <- data.frame(
+  Exercise = as.factor(c(rep("Cardio", 10), rep("Weights", 11))), 
+  Diet = as.factor(c(rep("A", 5), rep("B", 5), rep("A", 6), rep("B", 5))), 
+  WeightLoss = c(17.4, 21.5, 23.6, 21.9, 20.5, 5.9, 4.8, 6.4, 6.8, 6.9, 
+                 10.9, 4.2, 9.4, 10, 9.2, 10.1, 9.8, 12.7, 14.4, 11.6, 8.3))
+head(weight)
+tapply(weight$WeightLoss, list(weight$Exercise, weight$Diet), mean)
+weight.aov <- aov(WeightLoss ~ Exercise + Diet + Exercise:Diet, data = weight)
+summary(weight.aov)
+TukeyHSD(weight.aov)
+interaction.plot(weight$Diet, weight$Exercise, weight$WeightLoss)
+# Do the same thing with ggplot2 now
+library(ggplot2)
+p1 <- ggplot(data = weight, aes(x = Diet, y = WeightLoss, colour = Exercise, group = Exercise, linetype = Exercise)) + 
+  stat_summary(fun.y = mean, geom = "point") +
+  stat_summary(fun.y = mean, geom = "line") +
+  theme_bw() + 
+  scale_colour_manual(values = c("purple", "skyblue1")) + 
+  labs(y = "Weight Loss (lbs.)")
+p1
+p2 <- ggplot(data = weight, aes(x = Exercise, y = WeightLoss, colour = Diet, group = Diet, linetype = Diet)) + 
+  stat_summary(fun.y = mean, geom = "point") +
+  stat_summary(fun.y = mean, geom = "line") +
+  theme_bw() + 
+  scale_colour_manual(values = c("purple", "skyblue1")) + 
+  labs(y = "Weight Loss (lbs.)")
+p2
+# Different approach now "Moderation"
+weight.aov.cardio <- aov(WeightLoss ~ Diet, data = subset(weight, subset = Exercise == "Cardio"))
+summary(weight.aov.cardio)
+# Same as:
+weight.aov.cardio <- aov(WeightLoss ~ Diet, data = weight[weight$Exercise == "Cardio", ])
+summary(weight.aov.cardio)
+by(weight$WeightLoss[weight$Exercise == "Cardio"], weight$Diet[weight$Exercise == "Cardio"], mean)
+TukeyHSD(weight.aov.cardio)
+#
+weight.aov.weights <- aov(WeightLoss ~ Diet, data = weight[weight$Exercise == "Weights", ])
+summary(weight.aov.weights)
+by(weight$WeightLoss[weight$Exercise == "Weights"], weight$Diet[weight$Exercise == "Weights"], mean)
+TukeyHSD(weight.aov.weights)
+```
+
+
+```{r}
+by(weight, weight$Exercise, function(x)list(summary(aov(WeightLoss ~ Diet, data = x)), TukeyHSD(aov(WeightLoss ~ Diet, data = x))))
+```
+
+
+```{r}
+library(dplyr)
+DF <- summarise(group_by(weight, Diet, Exercise), MeanWeightLoss = mean(WeightLoss))
+DF
+ggplot(data = DF, aes(x = Exercise, y = MeanWeightLoss, fill = Diet)) + 
+  geom_bar(position = "dodge", stat = "identity") + 
+  theme_bw() + 
+  scale_fill_manual(values = c("purple", "skyblue1")) + 
+  labs(title="Exercise Type Moderates the Relationship\nBetween Diet Type and Weight Loss", x = "", y = "Weight Loss (lbs.)")
+```
+

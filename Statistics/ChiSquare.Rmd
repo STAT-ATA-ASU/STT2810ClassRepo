@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
 ```
 
+The following code follows the [PDS](https://www.youtube.com/watch?v=eLAFK_XovnE&index=57&list=PLDEF0B9CBD27AD37E) video about Chi-Square tests.
 
 ## Using the NESARC smoking example
 
@@ -216,3 +217,9 @@ ND.chisq.22vs30
 ND.chisq.22vs30$residuals
 ```
 
+## More Mosaic Plots
+
+```{r}
+library(vcd)
+mosaic(T1, shade = TRUE)
+```
