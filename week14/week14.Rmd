@@ -1,0 +1,29 @@
+---
+title: "week14"
+output: html_document
+---
+
+* Read Chapters 16 and 17 in PDS and watch the embedded videos. 
+* Read the document `Regression.html` in the `/Regression` folder. 
+* Work on your poster.
+
+ 
+* Work on the **Regression assignment** page 110 PDS
+* **Regression assignment** see page110 PDS due NLT 5 PM April 24.  Submit assignment
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is ()
+
+**Regression assignment** 
+
+This is a continuation of the material submitted for the **Correlation/Moderation** submitted in week13.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
+
+**Grading Rubric:**
+
+Is there a section for the Regression assignment? (0.5)
+
+Is there code and output for testing appropriate models? (1.5)
+
+Does the author describe their results appropriately? (1)
+
+
+
+
