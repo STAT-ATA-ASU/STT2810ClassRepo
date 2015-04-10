@@ -1,0 +1,134 @@
+---
+title: "Regression"
+author: "Alan T. Arnholt"
+date: "April 10, 2015"
+output: html_document
+---
+
+```{r, label = "Setup", echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+```
+
+
+Consider the data frame `signdist` in the `PDS` package used in chapter 13.
+
+```{r}
+library(PDS)
+head(signdist)
+plot(Distance ~ Age, data = signdist)
+mod <- lm(Distance ~ Age, data = signdist)
+summary(mod)
+abline(mod)
+cor(signdist$Distance, signdist$Age)
+cor.test(signdist$Distance, signdist$Age)
+```
+
+Doing similar things with `ggplot2`.
+
+```{r}
+library(ggplot2)
+ggplot(data = signdist, aes(x = Age, y = Distance)) + 
+  geom_point() +
+  theme_bw() +
+  geom_smooth(method = "lm") + 
+  annotate("text", x = 60, y = 550, label="widehat(Distance)==576.6819 -3.0068*Age", parse = TRUE) +
+  geom_segment(aes(x = 60, y = 280, xend = 60, yend = 576.6819 -3.0068*60), linetype = "dashed") + 
+  geom_segment(x = 60, y = 576.6819 -3.0068*60, xend = 10, yend = 576.6819 -3.0068*60, linetype = "dashed")
+```
+
+```{r}
+predict(mod, newdata = data.frame(Age = 60), interval = "confidence", level = 0.90)
+plot(mod, which = 1)
+plot(mod, which = 2)
+NDF <- fortify(mod)
+head(NDF)
+ggplot(data = NDF, aes(x = .fitted, y = .resid)) +
+  geom_point(color = "blue", size = 3) + 
+  theme_bw() + 
+  geom_hline(y = 0, linetype = "dashed") + 
+  labs(x = "Fitted values", y = "Residuals")
+```
+
+## Classification
+(Example taken from *An Introduction to Statistical Learning*)
+
+> Goal:  Predict whether an individual will default on his or her credit card payment.
+
+```{r}
+library(ISLR)
+head(Default)
+ggplot(data = Default, aes(x = balance, y = income, colour = default)) + 
+  geom_point(alpha = 0.8) + 
+  theme_bw() + 
+  scale_color_brewer(palette=7)
+```
+
+```{r}
+ggplot(data = Default, aes(x = default, y = balance, fill = default)) + 
+  geom_boxplot() + 
+  theme_bw() + 
+  guides(fill = FALSE) + 
+  scale_fill_brewer(palette=7)
+ggplot(data = Default, aes(x = default, y = income, fill = default)) + 
+  geom_boxplot() + 
+  theme_bw() + 
+  guides(fill = FALSE) + 
+  scale_fill_brewer(palette=7)
+```
+
+> Why not regression?
+
+```{r}
+Default$defaultN <- ifelse(Default$default == "No", 0, 1)
+summary(Default$defaultN)
+ggplot(data = Default, aes(x = balance, y = defaultN)) + 
+  geom_point(alpha = 0.5) + 
+  theme_bw() + 
+  stat_smooth(method = "lm") +
+  labs(y = "Probability of Default")
+```
+
+Some estimated probabilities are negative! For balances close to zero, we predict a negative probability of default.  For very large balances, we get values greater than 1. 
+
+## Logistic regression
+
+What we need is a function of $X$ that returns values between 0 and 1.  Consider the *logistic function*
+
+$$p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}$$
+
+which will always produce an *S-shaped* curve regardless of the value of $X$.
+
+
+Let $y = \beta_0 + \beta_1X$, then
+
+$p(X)=\frac{e^y}{1 + e^y} \rightarrow p(X) + e^{y}p(X) = e^{y} \rightarrow
+p(X) = e^{y} - e^{y}p(X) \rightarrow \frac{p(X)}{1 - p(X)}=e^{y} = e^{\beta_0 + \beta_1X}$
+
+$$\text{log}\left(\frac{p(X)}{1 - p(X)}\right) = \beta_0 + \beta_1X$$
+
+The quantity $\text{log}\left(\frac{p(X)}{1 - p(X)}\right)$ is called the *log-odds* or *logit*, and the quantity $\frac{p(X)}{1 - p(X)}$ is called the odds.  
+
+NOTE:  In regression, $\beta_1$ gives the average change in $Y$ associated with a one-unit increase in $X$.  In a logistic regression model, increasing $X$ by one unit changes the log odds by $\beta_1$, or equivalently it multiplies the odds by $e^{\beta_1}$.
+
+```{r}
+ggplot(data = Default, aes(x = balance, y = defaultN)) + 
+  geom_point(alpha = 0.5) + 
+  theme_bw() + 
+  stat_smooth(method = "glm", family = "binomial") +
+  labs(y = "Probability of Default")
+```
+
+The probability of default geven `balance` can be written as P(default = Yes | balance).
+
+```{r}
+log.mod <- glm(defaultN ~ balance, data = Default, family = "binomial")
+summary(log.mod)
+```
+
+From the output note that $\hat{\beta} = `r summary(log.mod)$coef[2, 1]`$.  This value indicates that an increase in `balance` is associated with an increase in the log odds of `default` by `r summary(log.mod)$coef[2, 1]` units.
+
+## Making predictions
+
+Using the estimated coeffficients, the predicted probability of default for an individual with a balance of $1,500 is
+
+$$\hat{p}(X) =  \frac{e^{\hat{\beta_0} + \hat{\beta}_1X}}{1 + e^{\hat{\beta_0} + \hat{\beta_1}X}} $$
