@@ -80,7 +80,9 @@ ggplot(data = Default, aes(x = default, y = income, fill = default)) +
 
 ```{r}
 Default$defaultN <- ifelse(Default$default == "No", 0, 1)
+Default$studentN <- ifelse(Default$student =="No", 0, 1)
 summary(Default$defaultN)
+head(Default)
 ggplot(data = Default, aes(x = balance, y = defaultN)) + 
   geom_point(alpha = 0.5) + 
   theme_bw() + 
@@ -131,4 +133,50 @@ From the output note that $\hat{\beta} = `r summary(log.mod)$coef[2, 1]`$.  This
 
 Using the estimated coeffficients, the predicted probability of default for an individual with a balance of $1,500 is
 
-$$\hat{p}(X) =  \frac{e^{\hat{\beta_0} + \hat{\beta}_1X}}{1 + e^{\hat{\beta_0} + \hat{\beta_1}X}} $$
+$$\hat{p}(X) =  \frac{e^{\hat{\beta_0} + \hat{\beta}_1X}}{1 + e^{\hat{\beta_0} + \hat{\beta_1}X}} = \frac{e^{`r summary(log.mod)$coef[1, 1]`+ `r summary(log.mod)$coef[2, 1]` \times 1500}}{1 + e^{`r summary(log.mod)$coef[1, 1]`+ `r summary(log.mod)$coef[2, 1]` \times 1500}} = `r exp(predict(log.mod, newdata = data.frame(balance = 1500)))/(1 + exp(predict(log.mod, newdata = data.frame(balance = 1500))))`.$$
+
+For an individual with a `balance` of $2,500, the probability of default is
+
+$$p(X) = `r exp(predict(log.mod, newdata = data.frame(balance = 2500)))/(1 + exp(predict(log.mod, newdata = data.frame(balance = 2500))))`$$.
+
+Are students more likely to default than non-students?
+
+```{r}
+mod2 <- glm(default ~ studentN, data = Default, family = "binomial")
+summary(mod2)
+```
+
+Note that the coefficient associated with `studentN` is positive, and the associated p-value is statistically significant.  This indicates that students tend to have higher default probabilities than non-students:
+
+$$\widehat{Pr}(\text{default = Yes }|\text{ student = Yes}) = \frac{e^{`r summary(mod2)$coef[1, 1]`+ `r summary(mod2)$coef[2, 1]` \times 1}}{1 + e^{`r summary(mod2)$coef[1, 1]`+ `r summary(mod2)$coef[2, 1]` \times 1}} = `r exp(predict(mod2, newdata = data.frame(studentN = 1)))/(1 + exp(predict(mod2, newdata = data.frame(studentN = 1))))`,$$
+
+$$\widehat{Pr}(\text{default = Yes }|\text{ student = No}) = \frac{e^{`r summary(mod2)$coef[1, 1]`+ `r summary(mod2)$coef[2, 1]` \times 0}}{1 + e^{`r summary(mod2)$coef[1, 1]`+ `r summary(mod2)$coef[2, 1]` \times 1}} = `r exp(predict(mod2, newdata = data.frame(studentN = 0)))/(1 + exp(predict(mod2, newdata = data.frame(studentN = 0))))`.$$
+
+
+## Multiple Logistic Regression
+
+Consider a model that uses `balance`, `income`, and `studentN` to predict `default`.
+
+```{r}
+mlog.mod <- glm(default ~ balance + income + studentN, data = Default, family = "binomial")
+summary(mlog.mod)
+```
+
+There is a surprising result here.  The p-value associated with `balance` and the `studentN` are very small, indicating that each of these variables is associated with the probability of `default`.  However, the coefficient for `studentN` is negative, indicating that students are less likely to default tha non-students.  Yet, the coefficient in `mod2` for `studentN` was positive.  How is it possible for the variable `studentN` to be associated with an *increase* in probability in `mod2` and a *decrease* in probability in `mlog.mod`?
+
+
+```{r}
+Default$PrDef <- exp(predict(mlog.mod))/(1 + exp(predict(mlog.mod)))
+ggplot(data = Default, aes(x = balance, y = defaultN, color = student)) + 
+  geom_line(aes(x = balance, y = PrDef)) + 
+  scale_color_brewer(palette=7) + 
+  theme_bw()
+tail(Default) 
+library(dplyr)
+Default <- Default %>% 
+  arrange(balance) %>% 
+  mutate(balanceFAC = cut(balance, breaks = seq(0, 2700, 100), include.lower = TRUE))
+head(Default)
+T1 <- xtabs(~balanceFAC + default, data = Default)
+T1
+```
