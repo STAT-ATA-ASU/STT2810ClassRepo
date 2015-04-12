@@ -49,7 +49,7 @@ ggplot(data = NDF, aes(x = .fitted, y = .resid)) +
   labs(x = "Fitted values", y = "Residuals")
 ```
 
-## Classification
+## Dichotomous Response Variable (Logistic Regression)
 (Example taken from *An Introduction to Statistical Learning*)
 
 > Goal:  Predict whether an individual will default on his or her credit card payment.
