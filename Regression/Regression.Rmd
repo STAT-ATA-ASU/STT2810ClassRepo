@@ -217,12 +217,14 @@ $$\text{OR}=\frac{\frac{p(1)}{1 - p(1)}}{\frac{p(0)}{1 - p(0)}}.$$
 
 Substituting  
 $$\frac{e^{\beta_0 + \beta_1}}{1 + e^{\beta_0 + \beta_1}}$$ for $p(X=1)$, and
-$$\frac{e^{\beta_0}}{1 + e^{\beta_0}}$$ for $p(X=0)$, repsectively, one can show that
+$$\frac{e^{\beta_0}}{1 + e^{\beta_0}}$$ for $p(X=0)$, respectively, one can show that
 $$\text{OR} = e^{\beta_1}.$$
 
 The odds ratio is widely used as a measure of association as it approximates how much more likely or unlikely (in terms of odds) it is for the outcome to be present among those subjects with $X = 1$ as compared to those subjects with $X = 0$.  
 
-Using the `mlog.mod` model, the response variable $Y$  is `default`, which denotes whether a credit card holder has defaulted (Yes/1) or not defaulted (No/0) on his/her current payment. The independent variable $X$  is `student`, which denotes whether the individual is a student (Yes/1) or is not a student (No/1).  An odds ratio in this scenario of 2 is interpreted to mean that the odds of default among students is two times greater than the odds of default among non-students.  An estimate of the odds ratio is
+Using the `mlog.mod` model, the response variable $Y$  is `default`, which denotes whether a credit card holder has defaulted (Yes/1) or not defaulted (No/0) on his/her current payment. The independent variable $X$  is `student`, which denotes whether the individual is a student (Yes/1) or is not a student (No/1).  A hypothetical odds ratio in this scenario of 2 is interpreted to mean that the odds of default among students is two times greater than the odds of default among non-students.  
+
+An estimate of the odds ratio is
 
 $$\widehat{\text{OR}} = e^{-0.6467758} = `r exp(coef(summary(mlog.mod))[4,1])`.$$
 
