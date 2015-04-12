@@ -175,8 +175,19 @@ tail(Default)
 library(dplyr)
 Default <- Default %>% 
   arrange(balance) %>% 
-  mutate(balanceFAC = cut(balance, breaks = seq(0, 2700, 100), include.lower = TRUE))
+  mutate(balanceFAC = cut(balance, breaks = seq(500, 2655, length.out = 10), include.lower = TRUE))
 head(Default)
-T1 <- xtabs(~balanceFAC + default, data = Default)
-T1
+T1 <- xtabs(~balanceFAC + default, data = Default, subset = student == "Yes")
+T2 <- xtabs(~balanceFAC + default, data = Default, subset = student == "No")
+SDR  <- T1[, 2]/apply(T1[, 1:2], 1, sum)
+NSDR <- T2[, 2]/apply(T2[, 1:2], 1, sum)
+BalanceM <- c(500+120, 739+120, 979+120, 1220+120, 1460+120, 1700+120, 1940+120, 2180+120, 2420+120)
+DF <- data.frame(SDR, NSDR, BalanceM)
+DF
+ggplot(data = DF, aes(x = BalanceM, y = NSDR)) +
+  geom_line(color = "red") + 
+  geom_line(aes(x = BalanceM, y = SDR), color = "green") + 
+  theme_bw() +
+  labs(y = "Default Rate", x = "Credit Card Balance")
+
 ```
