@@ -93,17 +93,17 @@ cor.test(~balance + income, data = Default, subset = default =="No")
 
 ```{r}
 library(PASWR2)
-T1 <- xtabs(~pclass + survived, data = TITANIC3)
+T1 <- xtabs(~survived + pclass, data = TITANIC3)
 T1
 chisq.test(T1)
-by(TITANIC3, TITANIC3$sex, function(x)list(chisq.test(x$pclass, x$survived),
-                                               chisq.test(x$pclass, x$survived)$residuals))
+by(TITANIC3, TITANIC3$sex, function(x)list(chisq.test(x$survived, x$pclass),
+                                               chisq.test(x$survived, x$pclass)$residuals))
 # Or
-T1a <- xtabs(~pclass + survived, data = subset(TITANIC3, subset = sex == "female"))
+T1a <- xtabs(~survived + pclass, data = subset(TITANIC3, subset = sex == "female"))
 T1a
 chisq.test(T1a)
 chisq.test(T1a)$res
-T1b <- xtabs(~pclass + survived, data = subset(TITANIC3, subset = sex == "male"))
+T1b <- xtabs(~survived + pclass, data = subset(TITANIC3, subset = sex == "male"))
 T1b
 chisq.test(T1b)
 chisq.test(T1b)$res
