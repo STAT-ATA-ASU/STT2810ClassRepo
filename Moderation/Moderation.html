@@ -83,6 +83,12 @@ head(weight)</code></pre>
 4   Cardio    A       21.9
 5   Cardio    A       20.5
 6   Cardio    B        5.9</code></pre>
+<pre class="r"><code>tapply(weight$WeightLoss, list(weight$Diet), mean)</code></pre>
+<pre><code>       A        B 
+14.42727  8.76000 </code></pre>
+<pre class="r"><code>tapply(weight$WeightLoss, list(weight$Exercise), mean)       </code></pre>
+<pre><code>  Cardio  Weights 
+13.57000 10.05455 </code></pre>
 <pre class="r"><code>tapply(weight$WeightLoss, list(weight$Exercise, weight$Diet), mean)</code></pre>
 <pre><code>                A     B
 Cardio  20.980000  6.16

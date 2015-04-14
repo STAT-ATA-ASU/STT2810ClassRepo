@@ -20,6 +20,8 @@ weight <- data.frame(
   WeightLoss = c(17.4, 21.5, 23.6, 21.9, 20.5, 5.9, 4.8, 6.4, 6.8, 6.9, 
                  10.9, 4.2, 9.4, 10, 9.2, 10.1, 9.8, 12.7, 14.4, 11.6, 8.3))
 head(weight)
+tapply(weight$WeightLoss, list(weight$Diet), mean)
+tapply(weight$WeightLoss, list(weight$Exercise), mean)       
 tapply(weight$WeightLoss, list(weight$Exercise, weight$Diet), mean)
 weight.aov <- aov(WeightLoss ~ Exercise + Diet + Exercise:Diet, data = weight)
 summary(weight.aov)
