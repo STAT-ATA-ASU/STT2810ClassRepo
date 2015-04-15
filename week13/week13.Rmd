@@ -10,7 +10,7 @@ output: html_document
  
 * Work on **Correlation/Moderation assignment** pages 84 and 89 PDS
 * **Correlation/Moderation assignment** see pages 84 and 89 PDS due NLT 5 PM April 17.  Submit assignment
-via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is ()
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/1000)
 
 **Correlation/Moderation assignment** 
 
