@@ -1,0 +1,216 @@
+---
+title: "Regression Example"
+author: "Alan T. Arnholt"
+date: "February 21, 2015"
+output: html_document
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+```
+
+This example walks through creating a regression model using the `Boston` data frame from the `MASS` package.
+
+```{r}
+library(MASS)
+names(Boston)
+str(Boston)
+```
+
+We would like to create a model that predicts the median value of owner occupied homes (`medv`).  Start by viewing the relationship between `medv` and the other variables in the `Boston` data frame.  We will use the package `car`. If you do not have `car` installed on your machine, install it now.
+
+```{r fig.height = 10, fig.width = 10}
+library(car)  
+scatterplotMatrix(~ medv + lstat + black + ptratio + tax + rad + dis + age + rm + nox + chas + indus + zn + crim, data = Boston)
+```
+
+Comment about scatter plot
+
+## Simple Linear Model
+
+```{r}
+simple.lm <- lm(medv ~ lstat, data = Boston)
+simple.lm
+summary(simple.lm)
+anova(simple.lm)
+```
+
+## Basic Regression Plots
+
+```{r}
+par(mfrow=c(2, 2))
+plot(simple.lm)
+par(mfrow=c(1, 1))
+```
+
+## Ggplot2 Graph
+
+```{r}
+library(ggplot2)
+ggplot(data = Boston, aes(x = lstat, y = medv)) +
+  geom_point() + 
+  theme_bw() + 
+  stat_smooth(method = "lm")
+```
+
+## Two Independent Variables
+
+```{r}
+twoiv.lm <- lm(medv ~ lstat + rm, data = Boston)
+summary(twoiv.lm)
+```
+
+## Plane of Best Fit
+
+```{r echo = FALSE}
+library(scatterplot3d)
+s3d <- scatterplot3d(x = Boston$lstat, y = Boston$rm, 
+              z = Boston$medv, xlab = "Lower Status of Population", 
+              ylab = "Average Number of Rooms", zlab = "Median Value of Owner Occupied Home",
+              box = TRUE, pch = 20, color = "white",
+              cex.symbols = 0.75, angle = 50, grid = FALSE)
+s3d$plane3d(hsw.lm <- lm(medv ~ lstat + rm, data = Boston), 
+            lty = "dotted", lty.box = "solid")
+orig <- s3d$xyz.convert(x = Boston$lstat, y = Boston$rm, 
+              z = Boston$medv)
+plane <- s3d$xyz.convert(x = Boston$lstat, y = Boston$rm, 
+              fitted(hsw.lm))
+i.negpos <- 1 + (resid(hsw.lm) > 0)
+segments(orig$x, orig$y, plane$x, plane$y,
+         col = c("darkblue", "lightblue3")[i.negpos])
+s3d$points3d(x = Boston$lstat, y = Boston$rm, 
+              z = Boston$medv,
+             col = c("darkblue", "lightblue3")[i.negpos],
+             pch = 20)
+```
+
+## More Graphs Again
+
+```{r}
+par(mfrow=c(2, 2))
+plot(twoiv.lm)
+par(mfrow=c(1, 1))
+```
+
+## Forward and Backward Selection
+
+The functions `add1` and `update` can be used to create a model with forward selection.
+
+```{r ForwardSelection}
+SCOPE <- (~ . + crim + zn + indus + chas + nox + rm + age + dis + rad + tax + ptratio + black + lstat)
+mod.fs <- lm(medv ~ 1, data = Boston)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, . ~ . + lstat)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, . ~ . + rm)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, . ~ . + ptratio)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, . ~ . + dis)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, . ~ . + nox)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, . ~ . + chas)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, . ~ . + black)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, . ~ . + zn)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, . ~ . + crim)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, . ~ . + rad)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, . ~ . + tax)
+add1(mod.fs, scope = SCOPE, test = "F")
+summary(mod.fs)
+```
+
+## Backward Elimination
+
+Backward elimination starts with all of the variables in the model and removes the least significant variable one at a time.
+
+```{r modelall}
+mod.be <- lm(medv ~ . , data = Boston)
+drop1(mod.be, test = "F")  # single term deletions
+mod.be <- update(mod.be, . ~ . - age)
+drop1(mod.be, test = "F")  # single term deletions
+mod.be <- update(mod.be, . ~ . - indus)
+drop1(mod.be, test = "F")  # single term deletions
+mod.be <- update(mod.be, . ~ . - age)
+summary(mod.be)
+
+
+## Criterion Based Selection
+
+```{r}
+library(leaps)
+models <- regsubsets(medv ~ ., data = Boston, nvmax = 11)
+summary(models)
+R2adj <- summary(models)$adjr2
+R2adj
+which.max(R2adj)
+MCP <- summary(models)$cp  # Mallow's C_p
+MCP
+BIC <- summary(models)$bic
+BIC
+which.min(BIC)
+which.min(MCP)
+```
+
+Comment on model selected with $R^2_{adj}$, Mallow's $C_p$, and the Bayesian Information Criterion (BIC).
+
+```{r fig.show='hold', fig.width = 10}
+plot(models, scale = "adjr2")
+plot(models, scale = "Cp")
+plot(models, scale = "bic")
+```
+
+## Diagnostic Plots Again
+
+```{r}
+par(mfrow=c(2, 2))
+plot(mod.be)
+par(mfrow=c(1, 1))
+```
+
+## More Diagnostic Stuff
+
+```{r}
+library(car)
+influenceIndexPlot(mod.be, id.n = 3)
+outlierTest(mod.be)
+influencePlot(mod.be)
+InflMea <- influence.measures(mod.be)
+summary(InflMea)  # Which observations are influential
+```
+
+## Transformations
+
+```{r}
+boxCox(mod.be)
+boxCox(mod.be, lambda = seq(-0.1, 0.3, 0.01))
+mod.log <- lm(log(medv) ~ crim + zn + chas + nox + rm + dis + rad + tax + ptratio + black + lstat, data = Boston)
+boxCox(mod.log)
+```
+
+```{r}
+par(mfrow=c(2, 2))
+plot(mod.log)
+par(mfrow=c(1, 1))
+plot(mod.log, which = 1)
+```
+
+```{r}
+library(car)
+residualPlots(mod.log)
+```
+
+```{r}
+mod2 <- lm(medv ~ crim + zn + chas + nox + rm + I(rm^2) + dis + rad + tax + ptratio + black + lstat + I(lstat^2), data = Boston)
+summary(mod.log)
+summary(mod2)
+boxCox(mod2)
+mod3 <- lm(medv ~ crim + zn + chas + nox + rm + I(rm^2) + dis + rad + tax + ptratio + black + lstat, data = Boston)
+summary(mod3)
+boxCox(mod3)
+```
