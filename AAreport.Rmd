@@ -1,0 +1,36 @@
+---
+title: "AA report"
+author: "Alan T. Arnholt"
+date: "May 5, 2015"
+output: html_document
+---
+
+* What are the three things you liked the best about this course?
+
+* If you had designed this course, what are three things you would have done differently?
+
+
+* What were the three most challenging aspects of this course?
+
+
+* What percent of the course readings did you complete?
+
+* Typically, how many times did you read a particular assignment?
+
+* What percent of the course videos did you watch?
+
+* Typically, how many times did you view an assigned video?
+
+* Typically, how many times did you read the assigned text before coming to class? 0, 1, 2, more than 3.
+
+* Typically, how many times did you read the assigned text before an assignment was due? 0, 1, 2, more than 3.
+
+* Did you make use of the supplemental materials or web sites on the README.md page?  If so, which ones did you find most helpful?
+
+* Would a one to three question quiz at the beginning of the week over the assigned reading provide sufficient motivation to read the assigned material before attending class?
+
+* Please list any other ideas you may have to make this a better course.
+
+
+
+
