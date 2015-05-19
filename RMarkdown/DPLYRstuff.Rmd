@@ -7,6 +7,7 @@ output: html_document
 
 ```{r, echo = FALSE, message = FALSE}
 knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+library(devtools)
 library(dplyr)
 library(ggplot2)
 library(PASWR2)
