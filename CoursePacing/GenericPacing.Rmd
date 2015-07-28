@@ -1,7 +1,7 @@
 ---
 title: "Course Pacing"
 author: "Alan Arnholt"
-date: "7/28/2015"
+date: "`r Sys.Date()`"
 output: html_document
 ---
 
