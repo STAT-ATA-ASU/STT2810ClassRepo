@@ -5,6 +5,18 @@ date: "7/28/2015"
 output: html_document
 ---
 
+General Notes:
+
+1.  Direct links for [CrowdGrader](http://www.crowdgrader.org/) assignments will be updated during the course and the updated information will be available in [piazza](https://piazza.com/class/iaawd0uzg2193) as well as on this page.
+
+2.  All due dates are 5 PM Friday for CrowdGrader assignments.
+
+3.  All CrowdGrader peer reviews must be completed by 11 PM on Tuesdays.
+
+4.  Peer review feedback will close for CrowdGrader assignments Wednesdays at 8 AM.
+
+5. Grading rubrics will be updated/tweaked throughout the semester.
+
 ### Week 1:
 
 * This week you will sign-up for free accounts on [GitHub](https://github.com), [Rpubs](https://rpubs.com), and [Shiny](http://www.shinyapps.io). 
@@ -49,6 +61,10 @@ Watch the following videos:
 
 * This week you will work on your personal Code Book.  You will show the instructor your folder in class.  The instructor will record your folder in the grade book as either a GO or NOGO.  
 
+* Read Chapters 4-5 PDS.
+
+* Watch the first 22 minutes of [Speaking Analytics: RStudio, Shiny, and RMarkdown Webinar](https://www.rstudio.com/resources/webinars/)
+
 * This week you will work on the citation assignment from page 18 of PDS.
 
 * [Fork](https://help.github.com/articles/fork-a-repo/) this repository.  
@@ -58,14 +74,14 @@ Watch the following videos:
 * Clone the repository to your local machine using RStudio by following these instructions:
 1. Copy the clone URL to the clipboard.
 2. Click `File > New Project > Version Control > Git`
-3. Paste the clone URL (`https://github.com/YourUserName/STT2810-SP15/STT2810ClassRepoSP15.git`) in the `Repository URL:` box.
+3. Paste the clone URL (`https://github.com/YourUserName/STT2810-ASU/STT2810ClassRepo.git`) in the `Repository URL:` box.
 4. Type a name (suggestion `UserNameSTT2810`) in the `Project directory name:` box.
 5. Change if needed the location in the `Create project as subdirectory of:` box.
 6. Click the `Create Project` box.  You should now have a local copy of the forked repository on your local machine.  Congratulations!  
 
 * Set the upstream remote in your fork to this repository with the command
 ```
-git remote add upstream https://github.com/STT2810-SP15/STT2810ClassRepoSP15.git
+git remote add upstream https://github.com/STT2810-ASU/STT2810ClassRepo.git
 ```
 * Verify with
 ```
@@ -85,11 +101,11 @@ git pull upstream master
 
 * You may find these [videos helpful.](https://www.youtube.com/watch?v=dto4gARbsi0&list=PLJBNI3mCp9g0wsSDK111qgimqVF1dwPXO) 
 
-* Please read pages 13-25 in PDS and take notes as needed.
+* Read Chapters 4-5 in PDS and take notes as needed.
 
 * Students will continue to work on the Literature Review / Citation assignment.
 
-* Submit the Literature Review / Citation assignment to [http://www.crowdgrader.org](http://www.crowdgrader.org) no later than 5 pm January 30.  The direct link for this assignment is [http://www.crowdgrader.org/crowdgrader/venues/view_venue/759](http://www.crowdgrader.org/crowdgrader/venues/view_venue/759)
+* Submit the Literature Review / Citation assignment to [http://www.crowdgrader.org](http://www.crowdgrader.org) no later than 5 pm Friday (Put acutal date here).  The direct link for this assignment is [http://www.crowdgrader.org/crowdgrader/venues/view_venue/759](http://www.crowdgrader.org/crowdgrader/venues/view_venue/759)
 
 * In the YAML, use the title **Literature Review / Citation Assignment**, and leave the author field blank. 
 ```
@@ -109,12 +125,10 @@ A well written paper that convinces you the author has reviewed the literature, 
 ### Week 4:
 
 * Work on **Research Plan Assignment** page 26 PDS.
-* Peer reviews for **Citation Assignment** due NLT 5 PM February 6.
-* **Research Plan Assignment** see page 26 PDS due NLT 5 PM February 6.  Submit assignment
+* Peer reviews for **Citation Assignment** due NLT 5 PM Friday (put acutal date here).
+* **Research Plan Assignment** see page 26 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is [http://www.crowdgrader.org/crowdgrader/venues/view_venue/771](http://www.crowdgrader.org/crowdgrader/venues/view_venue/771)
-* Read/review pages 18-26 PDS as needed.           
-
-
+* Read/review Chapters 4-5 of PDS as needed.           
 
 ## Grading Rubric
 
@@ -134,22 +148,24 @@ A well written paper that convinces you the author can fill a gap in the existin
 
 ### Week 5:
 
-* Read/review pages 26-32 PDS as needed.
+* Read/review Chapters 6-7 of PDS as needed.
 * This week you will "work with data".
+* Watch the [Data Wrangling with R and RStudio (55 minutes)](https://www.rstudio.com/resources/webinars/archives/) video
+* Watch the first 30 minutes of [The Grammar of Graphics and Data Science](https://www.rstudio.com/resources/webinars/archives/)
 * Watch the [Working with Data video](https://www.youtube.com/watch?v=d9TgAspq9bA&index=52&list=PLDEF0B9CBD27AD37E) (41 min)
 * Watch the [Data Management video](https://www.youtube.com/watch?v=thGk4CUEXQ8&list=PLDEF0B9CBD27AD37E&index=53) (39 min)
-* Complete you peer grading evaluations for the **Research Plan Assignment** NLT 5 PM February 13.
-* Submit via [http://www.crowdgrader.org](http://www.crowdgrader.org) the **Data Management Assignment** NLT 5 PM February 20. Directions: Select three secondary categorical variables from the data set you are using.  Recode your data to create factors with appropriate labels.  Create a barplot for each of your factors and write a sentence or two explaining each barplot.  Show all `R` code used to manage and create your barplots by using `R` code chunks in your `*.Rmd` file.  Submit the resulting `*.html` file to crowdgrader.
+* Complete you peer grading evaluations for the **Research Plan Assignment** NLT 5 PM Friday (put acutal date here).
+* Submit via [http://www.crowdgrader.org](http://www.crowdgrader.org) the **Data Management Assignment** NLT 5 PM Friday (put acutal date here). Directions: Select three secondary categorical variables from the data set you are using.  Recode your data to create factors with appropriate labels.  Create a barplot for each of your factors and write a sentence or two explaining each barplot.  Show all `R` code used to manage and create your barplots by using `R` code chunks in your `*.Rmd` file.  Submit the resulting `*.html` file to crowdgrader.
 The direct link for the **Data Management Assignment** is [http://www.crowdgrader.org/crowdgrader/venues/view_venue/804](http://www.crowdgrader.org/crowdgrader/venues/view_venue/804).   
 
 
 ### Week 6:
 
-* Read/review pages 26-33 PDS as needed.
+* Read/review Chapter 7 of PDS as needed.
 * This week you will "Manage your Data" based on your research proposal.
-* Submit via [http://www.crowdgrader.org](http://www.crowdgrader.org) the **Data Management Assignment** NLT 5 PM February 20. Directions: Select three _secondary_ categorical variables from the data set you are using.  Recode your data to create factors with appropriate labels.  Create a barplot for each of your factors and write a sentence or two explaining each barplot.  Show all `R` code used to manage your data and used to create your barplots with `R` code chunks in your `*.Rmd` file.  Submit the resulting `*.html` file to crowdgrader.
+* Submit via [http://www.crowdgrader.org](http://www.crowdgrader.org) the **Data Management Assignment** NLT 5 PM Friday (put acutal datae here). Directions: Select three _secondary_ categorical variables from the data set you are using.  Recode your data to create factors with appropriate labels.  Create a barplot for each of your factors and write a sentence or two explaining each barplot.  Show all `R` code used to manage your data and used to create your barplots with `R` code chunks in your `*.Rmd` file.  Submit the resulting `*.html` file to crowdgrader.
 The direct link for the **Data Management Assignment** is [http://www.crowdgrader.org/crowdgrader/venues/view_venue/804](http://www.crowdgrader.org/crowdgrader/venues/view_venue/804).   
-* Push your "Research Proposal" to your private repository NLT 5 PM February 20.  The folder for your research proposal should contain your `*.Rmd`, `*.bib`, and resulting `*.html` files.
+* Push your "Research Proposal" to your private repository NLT 5 PM Friday (put acutal datae here).  The folder for your research proposal should contain your `*.Rmd`, `*.bib`, and resulting `*.html` files.
 
 I will use the same grading rubric (below) you used in the peer evaluation phase of the research proposals.  I will also check to make sure the document compiles based on the `*.Rmd` and `*.bib` files in your **Research Proposal** folder.  
 
@@ -172,10 +188,10 @@ A well written paper that convinces you the author can fill a gap in the existin
 
 ### Week 7:
 
-* Read Chapter 8 PDS
+* Read Chapter 8 of PDS
 * Watch [Graphing 1 Video](https://www.youtube.com/watch?v=7_b6Rd9Vad8&list=PLDEF0B9CBD27AD37E&index=54)
 * Work on **Univariate Graphing Assignment / Data Managment** page 46 PDS
-* **Univariate Graphing Assignment / Data Managment** see page 46 PDS due NLT 5 PM February 27.  Submit assignment
+* **Univariate Graphing Assignment / Data Managment** see page 46 PDS due NLT 5 PM Friday (put acutal datae here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/848).
 
 * Grading Rubric for **Univariate Graphing Assignment/ Data Managment** 
@@ -199,7 +215,7 @@ When describing the distribution of the reported histogram or density plot, does
  - [Common Graphing Mistakes](https://www.youtube.com/watch?v=iY_t31-R_xU&index=25&list=PLDEF0B9CBD27AD37E)
  
 * Work on **Bivariate Graphing Assignment / Data Managment** page 52 PDS
-* **Bivariate Graphing Assignment / Data Managment** see page 52 PDS due NLT 5 PM February 27.  Submit assignment
+* **Bivariate Graphing Assignment / Data Managment** see page 52 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (http://www.crowdgrader.org/crowdgrader/venues/view_venue/864)
 
 **Bivariate Graphing Assignment** 
@@ -227,12 +243,12 @@ Do all graphs have the $x$- and $y$- axes labelled appropriately? (0.25). Do all
 
  
 * Work on **Bivariate Graphing Assignment / Data Managment** page 52 PDS
-* **Bivariate Graphing Assignment / Data Managment** see page 52 PDS due NLT 5 PM March 20.  Submit assignment
+* **Bivariate Graphing Assignment / Data Managment** see page 52 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/911)
 
 **Revised Bivariate Graphing Assignment** 
 
-This is a continuation of the material submitted for the **Bivariate Graphing Assignment** submitted in week08.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
+This is a continuation of the material submitted for the **Bivariate Graphing Assignment** submitted in week 08.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
 
 **Grading Rubric:**
 
@@ -256,12 +272,12 @@ Do all graphs have the $x$- and $y$- axes labelled appropriately? (0.25). Do all
 
  
 * Work on **ANOVA assignment** page 69 PDS
-* **ANOVA assignment** see page 52 PDS due NLT 5 PM March 27.  Submit assignment
+* **ANOVA assignment** see page 52 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/929)
 
 **ANOVA assignment** 
 
-This is a continuation of the material submitted for the **Bivariate Graphing Assignment** submitted in week09.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
+This is a continuation of the material submitted for the **Bivariate Graphing Assignment** submitted in week 09.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
 
 **Grading Rubric:**
 
@@ -291,12 +307,12 @@ Is there an appropriate explanation of the results including a post hoc test wit
 
  
 * Work on **Chi-Square assignment** page 78 PDS
-* **Chi-Square assignment** see page 78 PDS due NLT 5 PM April 3.  Submit assignment
+* **Chi-Square assignment** see page 78 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is ( 	https://www.crowdgrader.org/crowdgrader/venues/view_venue/940)
 
 **Chi-Square assignment** 
 
-This is a continuation of the material submitted for the **ANOVA assignment** submitted in week10.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
+This is a continuation of the material submitted for the **ANOVA assignment** submitted in week 10.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
 
 **Grading Rubric:**
 
@@ -335,12 +351,12 @@ Is there a sentence or two describing the results of the Chi-Square test(s)? (0.
 
  
 * Work on **Correlation/Moderation assignment** pages 84 and 89 PDS
-* **Correlation/Moderation assignment** see pages 84 and 89 PDS due NLT 5 PM April 17.  Submit assignment
-via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is ()
+* **Correlation/Moderation assignment** see pages 84 and 89 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (http://www.crowdgrader.org)
 
 **Correlation/Moderation assignment** 
 
-This is a continuation of the material submitted for the **Chi Square assignment** submitted in week11.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
+This is a continuation of the material submitted for the **Chi Square assignment** submitted in week 11.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
 
 **Grading Rubric:**
 
@@ -377,12 +393,12 @@ Does the author explain their results? (graphs should be used in the explanation
 
  
 * Work on **Correlation/Moderation assignment** pages 84 and 89 PDS
-* **Correlation/Moderation assignment** see pages 84 and 89 PDS due NLT 5 PM April 17.  Submit assignment
+* **Correlation/Moderation assignment** see pages 84 and 89 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/1000)
 
 **Correlation/Moderation assignment** 
 
-This is a continuation of the material submitted for the **Chi Square assignment** submitted in week11.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
+This is a continuation of the material submitted for the **Chi Square assignment** submitted in week 11.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
 
 **Grading Rubric:**
 
@@ -418,7 +434,7 @@ Does the author explain their results? (graphs should be used in the explanation
 
  
 * Work on the **Regression assignment** page 110 PDS
-* **Regression assignment** see page110 PDS due NLT 5 PM April 24.  Submit assignment
+* **Regression assignment** see page110 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is ( 	https://www.crowdgrader.org/crowdgrader/venues/view_venue/1013)
 
 **Regression assignment** 
@@ -437,7 +453,7 @@ Does the author describe their results appropriately? (1)
 
 * Work on your poster.
 * Print out your poster.
-* Present your poster April 30.
+* Present your poster (put date here....reserve room in Student Union).
 * Celebrate!
 
 
