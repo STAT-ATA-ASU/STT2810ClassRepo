@@ -19,10 +19,10 @@ output: html_document
 Watch the following videos:
 
 * [Creating RStudio projects from Github Repos (5 min)](https://www.youtube.com/watch?v=YxZ8J2rqhEM)    
-* [Basics of Git and GitHub (51 min)](https://www.youtube.com/watch?v=U8GBXvdmHT4)      
-* [RStudio Reproducible Reporting (60 minutes)](http://www.rstudio.com/resources/webinars/) 
+* [Colaboration and time travel: version control with git, github and RStudio (48 minutes)](https://www.rstudio.com/resources/webinars/archives/)      
+* [Reproducible Reporting (58 minutes)](https://www.rstudio.com/resources/webinars/archives/) 
 
-* Read pages 1-25 in Passion Driven Statistics (PDS) and watch all linked videos in PDS.
+* Read Chapters 1-3 in Passion Driven Statistics (PDS) and watch all linked videos in PDS.
 
 * Test drive RStudio by following the directions from [Jenny Bryan's STAT 545 course](http://stat545-ubc.github.io/git05_first-use-git-rstudio.html).
 
@@ -31,7 +31,7 @@ Watch the following videos:
 * Complete the Medical Record Assignment and push your excel spreadsheet to your GitHub account. 
 
 #### Optional
-* You may want to install [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), [zotero](https://www.zotero.org), and optionally [$LaTeX$](http://www.ctan.org/starter) on your personal computer. If you do, you will want to follow Jenny Bryan's excellent advice for [installing R and RStudio](http://stat545-ubc.github.io/block000_r-rstudio-install.html) and [installing Git](http://stat545-ubc.github.io/git01_git-install.html). Note: these tools are all installed on the [Appstate RStudio](https://mathr.math.appstate.edu/) server with the exception of zotero.
+* You may want to install [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), [zotero](https://www.zotero.org), and optionally [$LaTeX$](http://www.ctan.org/starter) on your personal computer. If you do, you will want to follow Jenny Bryan's excellent advice for [installing R and RStudio](http://stat545-ubc.github.io/block000_r-rstudio-install.html) and [installing Git](http://stat545-ubc.github.io/git01_git-install.html). Note: [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), and [$LaTeX$](http://www.ctan.org/starter) are installed on the [Appstate RStudio](https://mathr.math.appstate.edu/) server.
 
 * Watch the following videos as appropriate:
 
@@ -47,7 +47,7 @@ Watch the following videos:
 
 * Using zotero will be covered the first part of the week.
 
-* This week you will work on your personal Code Book.  You will show the instructor your folder in class on **Thursday, 20 January**.  The instructor will record your folder in the grade book as either a GO or NOGO.  
+* This week you will work on your personal Code Book.  You will show the instructor your folder in class.  The instructor will record your folder in the grade book as either a GO or NOGO.  
 
 * This week you will work on the citation assignment from page 18 of PDS.
 
