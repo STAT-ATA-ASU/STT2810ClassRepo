@@ -34,7 +34,7 @@ Watch the following videos:
 * [Colaboration and time travel: version control with git, github and RStudio (48 minutes)](https://www.rstudio.com/resources/webinars/archives/)      
 * [Reproducible Reporting (58 minutes)](https://www.rstudio.com/resources/webinars/archives/) 
 
-* Read Chapters 1-3 in Passion Driven Statistics (PDS) and watch all linked videos in PDS.
+* Read Chapters 1-3 in Passion Driven Statistics (Light Weight) (PDSLW) and watch all linked videos in PDSLW.  The PDSLW text is available [here](https://github.com/alanarnholt/PDS-Book).
 
 * Test drive RStudio by following the directions from [Jenny Bryan's STAT 545 course](http://stat545-ubc.github.io/git05_first-use-git-rstudio.html).
 
@@ -61,11 +61,11 @@ Watch the following videos:
 
 * This week you will work on your personal Code Book.  You will show the instructor your folder in class.  The instructor will record your folder in the grade book as either a GO or NOGO.  
 
-* Read Chapters 4-5 PDS.
+* Read Chapters 4-5 PDSLW.
 
 * Watch the first 22 minutes of [Speaking Analytics: RStudio, Shiny, and RMarkdown Webinar](https://www.rstudio.com/resources/webinars/)
 
-* This week you will work on the citation assignment from page 18 of PDS.
+* This week you will work on the citation assignment.
 
 * [Fork](https://help.github.com/articles/fork-a-repo/) this repository.  
 
@@ -101,7 +101,7 @@ git pull upstream master
 
 * You may find these [videos helpful.](https://www.youtube.com/watch?v=dto4gARbsi0&list=PLJBNI3mCp9g0wsSDK111qgimqVF1dwPXO) 
 
-* Read Chapters 4-5 in PDS and take notes as needed.
+* Read Chapters 4-5 in PDSLW and take notes as needed.
 
 * Students will continue to work on the Literature Review / Citation assignment.
 
@@ -124,11 +124,11 @@ A well written paper that convinces you the author has reviewed the literature, 
 
 ### Week 4:
 
-* Work on **Research Plan Assignment** page 26 PDS.
+* Work on **Research Plan Assignment** PDSLW.
 * Peer reviews for **Citation Assignment** due NLT 5 PM Friday (put acutal date here).
-* **Research Plan Assignment** see page 26 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
+* **Research Plan Assignment** PDSLW due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is [http://www.crowdgrader.org/crowdgrader/venues/view_venue/771](http://www.crowdgrader.org/crowdgrader/venues/view_venue/771)
-* Read/review Chapters 4-5 of PDS as needed.           
+* Read/review Chapters 4-5 of PDSLW as needed.           
 
 ## Grading Rubric
 
@@ -148,7 +148,7 @@ A well written paper that convinces you the author can fill a gap in the existin
 
 ### Week 5:
 
-* Read/review Chapters 6-7 of PDS as needed.
+* Read/review Chapters 6-7 of PDSLW as needed.
 * This week you will "work with data".
 * Watch the [Data Wrangling with R and RStudio (55 minutes)](https://www.rstudio.com/resources/webinars/archives/) video
 * Watch the first 30 minutes of [The Grammar of Graphics and Data Science](https://www.rstudio.com/resources/webinars/archives/)
@@ -161,7 +161,7 @@ The direct link for the **Data Management Assignment** is [http://www.crowdgrade
 
 ### Week 6:
 
-* Read/review Chapter 7 of PDS as needed.
+* Read/review Chapter 7 of PDSLW as needed.
 * This week you will "Manage your Data" based on your research proposal.
 * Submit via [http://www.crowdgrader.org](http://www.crowdgrader.org) the **Data Management Assignment** NLT 5 PM Friday (put acutal datae here). Directions: Select three _secondary_ categorical variables from the data set you are using.  Recode your data to create factors with appropriate labels.  Create a barplot for each of your factors and write a sentence or two explaining each barplot.  Show all `R` code used to manage your data and used to create your barplots with `R` code chunks in your `*.Rmd` file.  Submit the resulting `*.html` file to crowdgrader.
 The direct link for the **Data Management Assignment** is [http://www.crowdgrader.org/crowdgrader/venues/view_venue/804](http://www.crowdgrader.org/crowdgrader/venues/view_venue/804).   
@@ -188,10 +188,10 @@ A well written paper that convinces you the author can fill a gap in the existin
 
 ### Week 7:
 
-* Read Chapter 8 of PDS
+* Read Chapter 8 of PDSLW
 * Watch [Graphing 1 Video](https://www.youtube.com/watch?v=7_b6Rd9Vad8&list=PLDEF0B9CBD27AD37E&index=54)
-* Work on **Univariate Graphing Assignment / Data Managment** page 46 PDS
-* **Univariate Graphing Assignment / Data Managment** see page 46 PDS due NLT 5 PM Friday (put acutal datae here).  Submit assignment
+* Work on **Univariate Graphing Assignment / Data Managment** PDSLW
+* **Univariate Graphing Assignment / Data Managment** due NLT 5 PM Friday (put acutal datae here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/848).
 
 * Grading Rubric for **Univariate Graphing Assignment/ Data Managment** 
@@ -208,14 +208,14 @@ When describing the distribution of the reported histogram or density plot, does
 
 ### Week 8:
 
-* Read Chapter 9 PDS and watch all videos in the chapter
+* Read Chapter 9 PDSLW and watch all videos in the chapter
 
  - [Graphing 2 Video](https://www.youtube.com/watch?v=Yf121fdtjDA&index=55&list=PLDEF0B9CBD27AD37E)
  - [Graphing Rules](https://www.youtube.com/watch?v=JVq2VKib0vw&index=21&list=PLDEF0B9CBD27AD37E)
  - [Common Graphing Mistakes](https://www.youtube.com/watch?v=iY_t31-R_xU&index=25&list=PLDEF0B9CBD27AD37E)
  
-* Work on **Bivariate Graphing Assignment / Data Managment** page 52 PDS
-* **Bivariate Graphing Assignment / Data Managment** see page 52 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
+* Work on **Bivariate Graphing Assignment / Data Managment** 
+* **Bivariate Graphing Assignment / Data Managment** due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (http://www.crowdgrader.org/crowdgrader/venues/view_venue/864)
 
 **Bivariate Graphing Assignment** 
@@ -238,12 +238,12 @@ Do all graphs have the $x$- and $y$- axes labelled appropriately? (0.25). Do all
 
 ### Week 9:
 
-* Read Chapter 10 PDS and watch all videos in the chapter
+* Read Chapter 10 PDSLW and watch all videos in the chapter
 * Read the documents `SamplingDistributions.html` and `StatisticsTemplate.html` in the `/Statistics` folder.
 
  
-* Work on **Bivariate Graphing Assignment / Data Managment** page 52 PDS
-* **Bivariate Graphing Assignment / Data Managment** see page 52 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
+* Work on **Bivariate Graphing Assignment / Data Managment** 
+* **Bivariate Graphing Assignment / Data Managment**  due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/911)
 
 **Revised Bivariate Graphing Assignment** 
@@ -267,12 +267,12 @@ Do all graphs have the $x$- and $y$- axes labelled appropriately? (0.25). Do all
 
 ### Week 10:
 
-* Read Chapter 11 PDS and watch all videos in the chapter
+* Read Chapter 11 PDSLW and watch all videos in the chapter
 * Read the documents `SamplingDistributions.html`, `StatisticsTemplate.html`, and `ANOVA.html` in the `/Statistics` folder.
 
  
-* Work on **ANOVA assignment** page 69 PDS
-* **ANOVA assignment** see page 52 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
+* Work on **ANOVA assignment** 
+* **ANOVA assignment** due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/929)
 
 **ANOVA assignment** 
@@ -302,12 +302,12 @@ Is there an appropriate explanation of the results including a post hoc test wit
 
 ### Week 11:
 
-* Read Chapter 12 PDS and watch the embedded videos 
+* Read Chapter 12 PDSLW and watch the embedded videos 
 * Read/re-read the documents `StatisticsTemplate.html`, and `ChiSquare.html` in the `/Statistics` folder.
 
  
-* Work on **Chi-Square assignment** page 78 PDS
-* **Chi-Square assignment** see page 78 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
+* Work on **Chi-Square assignment** page 78 PDSLW
+* **Chi-Square assignment** due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is ( 	https://www.crowdgrader.org/crowdgrader/venues/view_venue/940)
 
 **Chi-Square assignment** 
@@ -345,13 +345,13 @@ Is there a sentence or two describing the results of the Chi-Square test(s)? (0.
 
 ### Week 12:
 
-* Read Chapters 13 and 18 in PDS and watch the embedded videos. 
+* Read Chapters 13 and 18 in PDSLW and watch the embedded videos. 
 * Read/re-read the documents `StatisticsTemplate.html` in the `/Statistics` folder and `Correlation` in the `/Correlation` folder.
 * Work on your poster.
 
  
-* Work on **Correlation/Moderation assignment** pages 84 and 89 PDS
-* **Correlation/Moderation assignment** see pages 84 and 89 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
+* Work on **Correlation/Moderation assignment** 
+* **Correlation/Moderation assignment** due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (http://www.crowdgrader.org)
 
 **Correlation/Moderation assignment** 
@@ -376,7 +376,7 @@ Is there a section for the Correlation assignment describing the two numeric var
 
 Is there code and output for computing the correlation coeffiecient? (0.3)
 
-Does the author explain their results following the example on page 85 of PDS? (0.3)
+Does the author explain their results following the example in PDSLW? (0.3)
 
 Is there a section for the Moderation assignment describing the potential moderator? (0.3)
 
@@ -392,8 +392,8 @@ Does the author explain their results? (graphs should be used in the explanation
 * Work on your poster.
 
  
-* Work on **Correlation/Moderation assignment** pages 84 and 89 PDS
-* **Correlation/Moderation assignment** see pages 84 and 89 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
+* Work on **Correlation/Moderation assignment** 
+* **Correlation/Moderation assignment**  due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/1000)
 
 **Correlation/Moderation assignment** 
@@ -428,13 +428,13 @@ Does the author explain their results? (graphs should be used in the explanation
 
 ### Week 14: 
 
-* Read Chapters 16 and 17 in PDS and watch the embedded videos. 
+* Read Chapters 16 and 17 in PDSLW and watch the embedded videos. 
 * Read the document `Regression.html` in the `/Regression` folder. 
 * Work on your poster.
 
  
-* Work on the **Regression assignment** page 110 PDS
-* **Regression assignment** see page110 PDS due NLT 5 PM Friday (put acutal date here).  Submit assignment
+* Work on the **Regression assignment** 
+* **Regression assignment** see page110 PDSLW due NLT 5 PM Friday (put acutal date here).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is ( 	https://www.crowdgrader.org/crowdgrader/venues/view_venue/1013)
 
 **Regression assignment** 
