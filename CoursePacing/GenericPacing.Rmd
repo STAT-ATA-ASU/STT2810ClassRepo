@@ -387,7 +387,7 @@ Does the author explain their results? (graphs should be used in the explanation
 
 ### Week 13:
 
-* Read Chapters 14 and 15 in PDS and watch the embedded videos. 
+* Read Chapters 14 and 15 in PDSLW and watch the embedded videos. 
 * Read/re-read the documents `StatisticsTemplate.html` in the `/Statistics` folder, `Correlation` in the `/Correlation` folder, and `Moderation` in the `/Moderation` folder.
 * Work on your poster.
 
@@ -418,7 +418,7 @@ Is there a section for the Correlation assignment describing the two numeric var
 
 Is there code and output for computing the correlation coeffiecient? (0.3)
 
-Does the author explain their results following the example on page 85 of PDS? (0.3)
+Does the author explain their results following the example in PDSLW? (0.3)
 
 Is there a section for the Moderation assignment describing the potential moderator? (0.3)
 
