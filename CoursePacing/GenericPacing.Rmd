@@ -25,9 +25,9 @@ General Notes:
 
 * Once you have a GitHub account, send an email to arnholtat@appstate.edu with a Subject line of **STT 2810 - GitHub Username** and tell me in the body of your email your first name, last name, and your GitHub username.  I will then manually add you as a team member to the repository in the STT2810-SP15 organization that has your name (**Last_name-First_name**).  This repository will be where you store all of your work for this course.  I will also change your repository to a private repository.
 
-* Become familiar with the Appstate [RStudio server](https://mathr.math.appstate.edu/). You will use your Appstate user name and password to log into the server.  You must be registered in the class to access the server.
+* Become familiar with the Appstate [RStudio server](https://mathr.math.appstate.edu/). You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
 
-* Read Chapters 1-3 in Passion Driven Statistics (Light Weight) (PDS) and watch all linked videos in PDS.  The PDS text is maintained at [this repository](https://github.com/alanarnholt/PDS-Book).  There is also a copy on [RPubs](http://rpubs.com/arnholt/97944) (but it may not be as current as the repository).
+* Read Chapters 1-3 in Passion Driven Statistics (Light Weight) (PDS), and watch all linked videos in PDS.  The PDS text is maintained at [this repository](https://github.com/alanarnholt/PDS-Book).  There is also a copy on [RPubs](http://rpubs.com/arnholt/97944) (but it may not be as current as the repository).
 
 Watch the following videos:
 
@@ -39,10 +39,10 @@ Watch the following videos:
 
 * Select a data set you will work with and update your GitHub repository **README** with your chosen data set.  
 
-* Complete the Medical Record Assignment and push your excel spreadsheet to your GitHub account. 
+* Complete the Medical Record Assignment, and push your excel spreadsheet to your GitHub account. 
 
 #### Optional
-* Read chapters 1-2 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+* Read chapters 1-2 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 * You may want to install [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), [zotero](https://www.zotero.org), and optionally [$LaTeX$](http://www.ctan.org/starter) on your personal computer. If you do, you will want to follow Jenny Bryan's excellent advice for [installing R and RStudio](http://stat545-ubc.github.io/block000_r-rstudio-install.html) and [installing Git](http://stat545-ubc.github.io/git01_git-install.html). Note: [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), and [$LaTeX$](http://www.ctan.org/starter) are installed on the [Appstate RStudio](https://mathr.math.appstate.edu/) server.
 
 * Watch the following videos as appropriate:
@@ -61,13 +61,13 @@ Watch the following videos:
 
 * This week you will work on your personal Code Book.  You will show the instructor your folder in class.  The instructor will record your folder in the grade book as either a GO or NOGO.  
 
-* Watch the first 22 minutes of [Speaking Analytics: RStudio, Shiny, and RMarkdown Webinar](https://www.rstudio.com/resources/webinars/)
+* Watch the first 22 minutes of [Speaking Analytics: RStudio, Shiny, and RMarkdown Webinar](https://www.rstudio.com/resources/webinars/).
 
 * This week you will work on the citation assignment.
 
 * [Fork](https://help.github.com/articles/fork-a-repo/) this repository.  
 
-* [Creating RStudio projects from Github Repos (5 min)](https://www.youtube.com/watch?v=YxZ8J2rqhEM) 
+* Watch [Creating RStudio projects from Github Repos (5 min)](https://www.youtube.com/watch?v=YxZ8J2rqhEM).
 
 * Clone the repository to your local machine using RStudio by following these instructions:
 1. Copy the clone URL to the clipboard.
@@ -89,20 +89,20 @@ git remote -v
 ```
 git pull upstream master
 ```
-* If there are conflicts you will need to resolve them before proceeding.
+* If there are conflicts, you will need to resolve them before proceeding.
 
 #### Optional
-* Read chapter 3 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+* Read chapter 3 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
 ### Week 3 (Sep 1, **No Class Sep 3---Convocation**)
 
 * Read/reread Chapters 4-5 of PDS and take notes as needed.
 
-* Practice with [https://www.crowdgrader.org/crowdgrader/venues/view_venue/762](http://www.crowdgrader.org/)
+* Practice with [https://www.crowdgrader.org/crowdgrader/venues/view_venue/762](http://www.crowdgrader.org/).
 
 * Integrating [zotero](www.zotero.com) with [RMarkdown](http://rmarkdown.rstudio.com) will be discussed during the first part of the week.  Example document will be stored in this folder.
 
-* You may find these [videos helpful.](https://www.youtube.com/watch?v=dto4gARbsi0&list=PLJBNI3mCp9g0wsSDK111qgimqVF1dwPXO) 
+* You may find these [videos helpful:](https://www.youtube.com/watch?v=dto4gARbsi0&list=PLJBNI3mCp9g0wsSDK111qgimqVF1dwPXO). 
 
 
 * Students will continue to work on the Literature Review / Citation assignment.
@@ -123,18 +123,18 @@ author:
 
 3. Does the author have at least five references? 0/1
 
-A well written paper that convinces you the author has reviewed the literature, has a topic that will expand the knowledge in the area, and has used at least five references should receive a 3.  A submission that satisfies two of the three criteria perfectly or most but not all of the three criteria should receive a 2.  A submission that satisfies only one of the three criteria should receive a 1.  If the submission does not render or the submitter did not submit the correct assignment, they should receive a 0.
+A well-written paper that convinces you the author has reviewed the literature, has a topic that will expand the knowledge in the area, and has used at least five references should receive a 3.  A submission that satisfies two of the three criteria perfectly or most but not all of the three criteria should receive a 2.  A submission that satisfies only one of the three criteria should receive a 1.  If the submission does not render or the submitter did not submit the correct assignment, they should receive a 0.
 
 #### Optional
-* Read chapter 4 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+* Read chapter 4 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
 ### Week 4: (Sep 8, 10)
 
 * Read/review Chapters 4-5 of PDS as needed.  
 * Work on **Research Plan Assignment** PDS.
-* Peer reviews for **Literature Review / Citation Assignment** due NLT 11 PM Tuesday.
-* **Research Plan Assignment** PDS due NLT 5 PM Friday (Sep 11).  Submit assignment
-via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is [http://www.crowdgrader.org/](http://www.crowdgrader.org/)
+* Peer reviews for **Literature Review / Citation Assignment** are due NLT 11 PM Tuesday.
+* **Research Plan Assignment** PDS is due NLT 5 PM Friday (Sep 11).  Submit assignment
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Research Plan Assignment** is [http://www.crowdgrader.org/](http://www.crowdgrader.org/)
          
 
 #### Grading Rubric for **Research Plan Assignment** (PR#2)
@@ -147,38 +147,37 @@ via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link f
 6.	Does the literature review justify the proposed research by identifying a hole in existing scholarship?  (0.25)
 7.	Does the introduction build to and conclude with the research questions or study objectives the author proposes to address?  (0.25)
 8.	Is the literature review supported with at least five citations? (0.25) 
-9.	Is there a **Methods** section which describes how the research was conducted?  (0.25)
+9.	Is there a **Methods** section that describes how the research was conducted?  (0.25)
 10.	Does the **Methods** section include a discussion of the _sample_, _measures_, and _procedures_. (0.50)
 11.	Is there an **Implications/Predicted Results** section that discusses real implications linked to possible results? (0.25)
 
-A well written paper that convinces you the author can fill a gap in the existing scholarship, has a title that is a concise statement of the main topic and identifies the actual variables under investigation and the relationship between them, has an introduction supported with at least five references, has a Methods section that describes the sample, measures, and procedures, and has a section that discusses real implications linked to possible results should receive a 3.  A submission that satisfies two of the three criteria perfectly or most but not all of the three criteria should receive a 2.  A submission that satisfies only one of the three criteria should receive a 1.  If the submission does not render or the submitter did not submit the correct assignment, they should receive a 0.
+A well-written paper that convinces you the author can fill a gap in the existing scholarship, has a title that is a concise statement of the main topic and identifies the actual variables under investigation and the relationship between them, has an introduction supported with at least five references, has a Methods section that describes the sample, measures, and procedures, and has a section that discusses real implications linked to possible results should receive a 3.  A submission that satisfies two of the three criteria perfectly or most but not all of the three criteria should receive a 2.  A submission that satisfies only one of the three criteria should receive a 1.  If the submission does not render or the submitter did not submit the correct assignment, they should receive a 0.
 
 #### Optional
-* Read chapter 5 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+* Read chapter 5 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
 ### Week 5: (Sep 14, 16)
 
 * Read Chapters 6 and 7 of PDS (Working with Data and Data Management).
 * This week you will "work with data".
-* Complete peer reviews of Research Plan Assignment by 11 PM Tuesday
-* Revise you Research Plan Assignment as needed 
-* Watch the [Data Wrangling with R and RStudio (55 minutes)](https://www.rstudio.com/resources/webinars/archives/) video
-* Watch the first 30 minutes of [The Grammar of Graphics and Data Science](https://www.rstudio.com/resources/webinars/archives/)
-* Watch the [Working with Data video](https://www.youtube.com/watch?v=d9TgAspq9bA&index=52&list=PLDEF0B9CBD27AD37E) (41 min)
-* Watch the [Data Management video](https://www.youtube.com/watch?v=thGk4CUEXQ8&list=PLDEF0B9CBD27AD37E&index=53) (39 min)
-* Complete you peer grading evaluations for the **Research Plan Assignment** NLT 11 PM Tuesday
+* Complete your required peer reviews of the **Research Plan Assignment** by 11 PM Tuesday.
+* Revise your Research Plan Assignment as needed. 
+* Watch the [Data Wrangling with R and RStudio (55 minutes)](https://www.rstudio.com/resources/webinars/archives/) video.
+* Watch the first 30 minutes of [The Grammar of Graphics and Data Science](https://www.rstudio.com/resources/webinars/archives/).
+* Watch the [Working with Data video](https://www.youtube.com/watch?v=d9TgAspq9bA&index=52&list=PLDEF0B9CBD27AD37E) (41 min).
+* Watch the [Data Management video](https://www.youtube.com/watch?v=thGk4CUEXQ8&list=PLDEF0B9CBD27AD37E&index=53) (39 min).
+* Complete you peer grading evaluations for the **Research Plan Assignment** NLT 11 PM Tuesday.
 
 **The Data Management Assignment is Challenging and will require many hours of your time---so please start now --- not next week when it is due**
 
 #### Optional
-* Read chapter 6 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+* Read chapter 6 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
 ### Week 6: (Sep 22, 24)
 
 * Read/review Chapters 6 and 7 of PDS as needed.
 * This week you will "Manage your Data" based on your research proposal.
-* Submit via [http://www.crowdgrader.org](http://www.crowdgrader.org) the **Data Management Assignment** NLT 5 PM Friday (Sep 25). Directions: Select three _secondary_ categorical variables from the data set you are using.  Recode your data to create factors with appropriate labels.  Create a barplot for each of your factors and write a sentence or two explaining each barplot.  Show all `R` code used to manage your data and used to create your barplots with `R` code chunks in your `*.Rmd` file.  Submit the resulting `*.html` file to crowdgrader.
-The direct link for the **Data Management Assignment** is [http://www.crowdgrader.org/](http://www.crowdgrader.org/).  
+* Submit via [http://www.crowdgrader.org](http://www.crowdgrader.org) the **Data Management Assignment** NLT 5 PM Friday (Sep 25). Directions: Select three _secondary_ categorical variables from the data set you are using.  Recode your data to create factors with appropriate labels.  Create a barplot for each of your factors, and write a sentence or two explaining each barplot.  Show all `R` code used to manage your data and used to create your barplots with `R` code chunks in your `*.Rmd` file.  Submit the resulting `*.html` file to crowdgrader.  The direct link for the **Data Management Assignment** is [http://www.crowdgrader.org/](http://www.crowdgrader.org/).  
 
 #### Grading Rubric for **Data Management Assignment** (PR#3)
 
@@ -208,18 +207,18 @@ I will use the same grading rubric (below) you used in the peer evaluation phase
 11.	Is there an **Implications/Predicted Results** section that discusses real implications linked to possible results? (0.25)
 
 
-A well written paper that convinces you the author can fill a gap in the existing scholarship, has a title that is a concise statement of the main topic and identifies the actual variables under investigation and the relationship between them, has an introduction supported with at least five references, has a Methods section that describes the sample, measures, and procedures, and has a section that discusses real implications linked to possible results should receive a 3.  A submission that satisfies two of the three criteria perfectly or most but not all of the three criteria should receive a 2.  A submission that satisfies only one of the three criteria should receive a 1.  If the submission does not render or the submitter did not submit the correct assignment, they should receive a 0.
+A well-written paper that convinces you the author can fill a gap in the existing scholarship, has a title that is a concise statement of the main topic and identifies the actual variables under investigation and the relationship between them, has an introduction supported with at least five references, has a Methods section that describes the sample, measures, and procedures, and has a section that discusses real implications linked to possible results should receive a 3.  A submission that satisfies two of the three criteria perfectly or most but not all of the three criteria should receive a 2.  A submission that satisfies only one of the three criteria should receive a 1.  If the submission does not render or the submitter did not submit the correct assignment, they should receive a 0.
 
 #### Optional
-* Read chapter 7 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+* Read chapter 7 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
 ### Week 7: (Sep 29, Oct 1)
 
-* Read Chapter 8 of PDS (Graphing One Variable at a Time)
-* Watch [Graphing 1 Video](https://www.youtube.com/watch?v=7_b6Rd9Vad8&list=PLDEF0B9CBD27AD37E&index=54)
-* Work on **Univariate Graphing Assignment** PDS
-* **Univariate Graphing Assignment** due NLT 5 PM Friday (Oct 2).  Submit assignment
-via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Univariate Graphing Assignment is (http://www.crowdgrader.org/).
+* Read Chapter 8 of PDS (Graphing One Variable at a Time).
+* Watch [Graphing 1 Video](https://www.youtube.com/watch?v=7_b6Rd9Vad8&list=PLDEF0B9CBD27AD37E&index=54).
+* Work on **Univariate Graphing Assignment** PDS.
+* The **Univariate Graphing Assignment** is due NLT 5 PM Friday (Oct 2).  Submit assignment.
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Univariate Graphing Assignment** is (http://www.crowdgrader.org/).
 
 #### Grading Rubric for **Univariate Graphing Assignment**  (PR#4)
 
@@ -227,24 +226,24 @@ Does the document have sections that explain the `Purpose of the Study` (0.25), 
 
 Have the variables proposed for use in the project been labeled and renamed? (0.25)
 
-Are there graphs for at least two of the categorical variables? (0.25) Is there a sentence or two describing what the reader is viewing? (0.25)  Have the `x-` and `y-` axes been labeled appropriately? (0.25)
+Are there graphs for at least two of the categorical variables? (0.25) Is there a sentence or two describing what the reader is viewing? (0.25)  Have the *x-* and *y-*axes been labeled appropriately? (0.25)
 
 Is there either a histogram or density plot of one of the numeric variables proposed in the study? 0.5
 
 When describing the distribution of the reported histogram or density plot, does the author describe the shape (0.25) and use appropriate statistics to characterize the center (0.25) and spread (0.25)?
 
 #### Optional
-* Read chapter 8 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+* Read chapter 8 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
 ### Week 8: (Oct 6, 8)
 
-* Read Chapter 9 of PDS (Graphing Relationships) and watch all videos in the chapter
+* Read Chapter 9 of PDS (Graphing Relationships), and watch all videos in the chapter.
 
  - [Graphing 2 Video](https://www.youtube.com/watch?v=Yf121fdtjDA&index=55&list=PLDEF0B9CBD27AD37E)
  - [Graphing Rules](https://www.youtube.com/watch?v=JVq2VKib0vw&index=21&list=PLDEF0B9CBD27AD37E)
  - [Common Graphing Mistakes](https://www.youtube.com/watch?v=iY_t31-R_xU&index=25&list=PLDEF0B9CBD27AD37E)
  
-* Work on **Bivariate Graphing Assignment** 
+* Work on **Bivariate Graphing Assignment**. 
 * **Bivariate Graphing Assignment** due NLT 5 PM Friday (Oct 9).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Bivariate Graphing Assignment** is (http://www.crowdgrader.org/)
 
@@ -264,31 +263,30 @@ Is there a bivariate graph of the principal constructs the researcher is proposi
 
 Is there a multivariate graph of the principal constructs the researcher is proposing to study? (0.50)
 
-Do all graphs have the $x$- and $y$- axes labelled appropriately? (0.25). Do all graphs have descriptive titles? (0.25)
+Do all graphs have the *x-* and *y-*axes labeled appropriately? (0.25). Do all graphs have descriptive titles? (0.25)
 
 #### Optional
-* Read chapter 9 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+* Read chapter 9 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
 ### Week 9: (Oct 13 --- Fall Break Oct 15, 16)
 
-* Read Chapter 10 of PDS (Hypothesis Testing) and watch all videos in the chapter
+* Read Chapter 10 of PDS (Hypothesis Testing), and watch all videos in the chapter.
 * Read the documents `SamplingDistributions.html` and `StatisticsTemplate.html` in the `/Statistics` folder.
 
  
 You should revise your assignment from last week as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
 
 #### Optional
-* Read chapter 10 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+* Read chapter 10 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
 ### Week 10: (Oct 20, 22)
 
-* Read Chapter 11 of PDS (Analysis of Variance) and watch all videos in the chapter
+* Read Chapter 11 of PDS (Analysis of Variance), and watch all videos in the chapter,
 * Read the document `ANOVA.html` in the `/Statistics` folder.
 
  
-* Work on **ANOVA assignment** 
-* **ANOVA assignment** due NLT 5 PM Friday (Oct 23).  Submit assignment
-via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Analysis of Variance Assignment is (http://www.crowdgrader.org/)
+* Work on the **ANOVA assignment**.
+* The **ANOVA assignment** is due NLT 5 PM Friday (Oct 23).  Submit the assignment via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **ANOVA Assignment** is (http://www.crowdgrader.org/).
 
 **ANOVA Assignment** 
 
@@ -306,7 +304,7 @@ Is there a bivariate graph of the principal constructs the researcher is proposi
 
 Is there a multivariate graph of the principal constructs the researcher is proposing to study? (0.1) Is there a sentence or two describing what the reader is viewing? (0.1)
 
-Do all graphs have the $x$- and $y$- axes labelled appropriately? (0.1). Do all graphs have descriptive titles? (0.1)
+Do all graphs have the *x-* and *y-*axes labeled appropriately? (0.1). Do all graphs have descriptive titles? (0.1)
 
 Is there a null and alternative hypothesis appropriate for the data? (0.6)
 
@@ -315,16 +313,16 @@ Is there code and output for testing the null hypothesis with an ANOVA? (0.6)
 Is there an appropriate explanation of the results including a post hoc test with interpretation if the results from the ANOVA are significant? (0.6)
 
 #### Optional
-* Read chapter 11 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+* Read chapter 11 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
 ### Week 11: (Oct 27, 29)
 
-* Read Chapter 12 of PDS (Chi-Square Test of Independence) and watch the embedded videos 
+* Read Chapter 12 of PDS (Chi-Square Test of Independence), and watch the embedded videos. 
 * Read the document `ChiSquare.html` in the `/Statistics` folder.
 
-* Work on the **Chi-Square Assignment** 
-* **Chi-Square assignment** due NLT 5 PM Friday (put acutal date here).  Submit assignment
-via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Chi-Square Assignment is (http://www.crowdgrader.org/)
+* Work on the **Chi-Square Assignment**. 
+* The **Chi-Square assignment** is due NLT 5 PM Friday (Oct 30).  Submit assignment
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Chi-Square Assignment** is (http://www.crowdgrader.org/).
 
 **Chi-Square Assignment** 
 
@@ -342,7 +340,7 @@ Is there a bivariate graph of the principal constructs the researcher is proposi
 
 Is there a multivariate graph of the principal constructs the researcher is proposing to study? (0.1) Is there a sentence or two describing what the reader is viewing? (0.1)
 
-Do all graphs have the $x$- and $y$- axes labeled appropriately? (0.1). Do all graphs have descriptive titles? (0.1)
+Do all graphs have the *x-* and *y-* axes labeled appropriately? (0.1). Do all graphs have descriptive titles? (0.1)
 
 Is there a null and alternative hypothesis appropriate for the ANOVA? (0.1)
 
@@ -359,17 +357,16 @@ Are there appropriate post-hoc tests if the Chi-Square test resulted in a signif
 Is there a sentence or two describing the results of the Chi-Square test(s)? (0.3)
 
 #### Optional
-* Read chapter 12 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+* Read chapter 12 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
 ### Week 12: (Nov 3, 5)
 
-* Read Chapters 13 and 18 in PDS (Correlation Coefficient and Poster Presentation) and watch the embedded videos. 
+* Read Chapters 13 and 18 in PDS (Correlation Coefficient and Poster Presentation), and watch the embedded videos. 
 * Work on your poster.
 
  
-* Work on **Correlation assignment** 
-* **Correlation assignment** due NLT 5 PM Friday (Nov 6).  Submit assignment
-via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (http://www.crowdgrader.org)
+* Work on the **Correlation Assignment**. 
+* The **Correlation Assignment** is due NLT 5 PM Friday (Nov 6).  Submit the assignment via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Correlation Assignment** is (http://www.crowdgrader.org).
 
 **Correlation Assignment** 
 
@@ -387,7 +384,7 @@ Is there a bivariate graph of the principal constructs the researcher is proposi
 
 Is there a multivariate graph of the principal constructs the researcher is proposing to study? (0.1) Is there a sentence or two describing what the reader is viewing? (0.1)
 
-Do all graphs have the $x$- and $y$- axes labeled appropriately? (0.1). Do all graphs have descriptive titles? (0.1)
+Do all graphs have the *x-* and *y-*axes labeled appropriately? (0.1). Do all graphs have descriptive titles? (0.1)
 
 Is there a section for the Correlation assignment describing the two numeric variables the author uses? (0.5)
 
@@ -398,23 +395,24 @@ Does the author explain their results following the example in PDS? (0.3)
 Does the author explain their results? (graphs should be used in the explanation) (0.3)
 
 #### Optional
-* Read chapter 13 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+
+* Read chapter 13 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
 
 ### Week 13: (Nov 10, 12)
 
-* Read Chapters 15 and 17 in PDS (Linear Regression and Confounding and Multivariate Models) and watch the embedded videos. 
+* Read Chapters 15 and 17 in PDS (Linear Regression and Confounding and Multivariate Models), and watch the embedded videos. 
 * Read the document `Regression.html` in the `/Regression` folder. 
 * Work on your poster.
 
  
-* Work on the **Regression Assignment** 
-* **Regression Assignment** due NLT 5 PM Friday (put acutal date here).  Submit assignment
-via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the Research Plan Assignment is (http://www.crowdgrader.org/)
+* Work on the the **Regression Assignment** 
+* The **Regression Assignment** is due NLT 5 PM Friday (Nov 13).  Submit the assignment
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Regression Assignment** is (http://www.crowdgrader.org/).
 
 **Regression Assignment** 
 
-This is a continuation of the material submitted for the **Correlation** submitted in week13.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
+This is a continuation of the material submitted for the **Correlation** submitted in week 13.  You should revise your assignment as needed based on peer comments.  I encourage everyone to make an appointment with the writing center and to have the writing center review your current assignment.
 
 #### Grading Rubric for **Regression Assignment** (PR#9)
 
@@ -425,11 +423,12 @@ Is there code and output for testing appropriate models? (1.5)
 Does the author describe their results appropriately? (1)
 
 #### Optional
-* Read chapter 14 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book)
+
+* Read chapter 14 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
 ### Week 14: (Nov 17, 19)
 
-* Read Chapters 16 and 18 in PDS (Sampling and Designing Studies and Poster Presentation) and watch the embedded videos. 
+* Read Chapters 16 and 18 in PDS (Sampling and Designing Studies and Poster Presentation), and watch the embedded videos. 
 * Work on your poster.
 
  
