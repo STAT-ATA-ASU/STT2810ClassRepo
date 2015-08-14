@@ -57,7 +57,7 @@ Watch the following videos:
 
 * Read Chapters 4 and 5 of PDS (Conducting a Literature Review and Writing About Empirical Research).
 
-* Using zotero will be covered the first part of the week.
+* Using [zotero](https://www.zotero.org/) will be covered the first part of the week.
 
 * This week you will work on your personal Code Book.  You will show the instructor your folder in class.  The instructor will record your folder in the grade book as either a GO or NOGO.  
 
