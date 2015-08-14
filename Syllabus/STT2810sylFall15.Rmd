@@ -2,7 +2,7 @@
 title: "STT 2810 Syllabus - Fall 2015"
 author: ''
 date: '`r Sys.Date()`'
-output: pdf_document
+output: html_document
 ---
 
 **Instructor:**  Dr. Alan T. Arnholt    
@@ -26,8 +26,8 @@ This course covers data management; descriptive statistics; inferential statisti
 
 **Course Objectives:**
 
-1.  Teach students to use a reproducible research work flow.
-2.  Improve the technology expertise of all students.
+1.  Students will learn to use a reproducible research work flow.
+2.  Students will improve their technology expertise.
 3.  Students will learn to work with large data sets.
 4.  Students will learn to create and present graphs for both univariate and multivariate data.
 5.  Students will learn how to construct and test hypotheses.
