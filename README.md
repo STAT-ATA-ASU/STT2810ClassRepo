@@ -5,6 +5,19 @@ Welcome to STT 2810!
 If you would like to render an `.html` file you find in this repo, click on the `raw` button, and copy the url that appears in your browser.  Open the url [http://htmlpreview.github.io](http://htmlpreview.github.io), and paste the copied url in the 
 `Enter the HTML file to preview:` box. Then, click the `>>` to view the file.
 
+* The text *Passion Driven Statistics (Light Weight)* is maintained in the [PDS-Book](https://github.com/alanarnholt/PDS-Book) repository.
+
+* The `R` package `PDS` is maintained in the [PDS](https://github.com/alanarnholt/PDS) repository.
+
+* A version (possibly dated) of *Passion Driven Statistics (Light Weight)* is viewable on [RPubs](https://rpubs.com/arnholt/97944).
+
+* Daily/weekly assignments will be updated and maintained in the `CoursePacing` directory of this repository. 
+
+* The course syllabus is stored in the `Syllabus` directory of this repository.
+
+* Questions related to class materials should be addressed with the [piazza account for STT 2810](https://piazza.com/class/iaawd0uzg2193).
+
+
 # Resources you may find helpful
 
 ## John Chambers recounts the history of S and R
