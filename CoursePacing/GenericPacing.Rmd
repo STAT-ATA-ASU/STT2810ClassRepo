@@ -1,8 +1,8 @@
 ---
 title: "Tentative Course Schedule STT 2810"
 author: "Alan Arnholt"
-date: "`r Sys.Date()`"
-output: html_document
+date: '`r Sys.Date()`'
+output: pdf_document
 ---
 
 General Notes:
