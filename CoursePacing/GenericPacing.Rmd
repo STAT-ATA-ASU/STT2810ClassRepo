@@ -70,12 +70,14 @@ Watch the following videos:
 * Watch [Creating RStudio projects from Github Repos (5 min)](https://www.youtube.com/watch?v=YxZ8J2rqhEM).
 
 * Clone the repository to your local machine using RStudio by following these instructions:
-1. Copy the clone URL to the clipboard.
-2. Click `File > New Project > Version Control > Git`
-3. Paste the clone URL (`https://github.com/YourUserName/STT2810-ASU/STT2810ClassRepo.git`) in the `Repository URL:` box.
-4. Type a name (suggestion `UserNameSTT2810`) in the `Project directory name:` box.
-5. Change if needed the location in the `Create project as subdirectory of:` box.
-6. Click the `Create Project` box.  You should now have a local copy of the forked repository on your local machine.  Congratulations!  
+
+1. Fork the repository (to your public account).
+2. Copy the clone URL to the clipboard.
+3. Click `File > New Project > Version Control > Git`
+4. Paste the clone URL (`https://github.com/YourUserName/STAT-ATA-ASU/STT5811ClassRepo.git`) in the `Repository URL:` box.
+5. Type a name (suggestion `UserNameSTT5811`) in the `Project directory name:` box.
+6. Change if needed the location in the `Create project as subdirectory of:` box.
+7. Click the `Create Project` box.  You should now have a local copy of the forked repository on your local machine.  Congratulations!  
 
 * Set the upstream remote in your fork to this repository with the command
 ```
