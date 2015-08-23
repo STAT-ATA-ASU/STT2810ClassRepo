@@ -2,7 +2,7 @@
 title: "Tentative Course Schedule STT 2810"
 author: "Alan Arnholt"
 date: '`r Sys.Date()`'
-output: pdf_document
+output: html_document
 ---
 
 General Notes:
@@ -109,23 +109,24 @@ git pull upstream master
 
 * Students will continue to work on the Literature Review / Citation assignment.
 
-* Submit the Literature Review / Citation assignment to [http://www.crowdgrader.org](http://www.crowdgrader.org) no later than 5 pm Friday (Sep 4).  The direct link for this assignment is [http://www.crowdgrader.org/](http://www.crowdgrader.org/)
+* Submit the Citation assignment to [http://www.crowdgrader.org](http://www.crowdgrader.org) no later than 5 pm Friday (Sep 4).  The direct link for this assignment is [http://www.crowdgrader.org/](http://www.crowdgrader.org/)
 
-* In the YAML, use the title **Literature Review / Citation Assignment**, and leave the author field blank. 
+* In the YAML, use the title **Citation Assignment**, and leave the author field blank. 
 ```
-title: "Literature Review / Citation Assignment"
+title: "Citation Assignment"
 author: 
 ```
 
-#### Grading Rubric for **Literature Review / Citation Assignment** (PR#1)
+#### Grading Rubric for **Citation Assignment** (PR#1)
 
-1. Does the document open without problems?  Is the grammar and punctuation acceptable? 0/1
+Field      | Excellent          |  Competent      |  Needs Work
+-----------|--------------------|-----------------|-------------------
+Document (*.html) opens without issue and was created using an *Rmd file | Document opens without issue and no author name is present (1) | Document opens but author's name is visible (0.7) | Document does not open (0.1)
+Clarity | Few errors of grammar and usage; any minor errors do not interfere with meaning.  Language style and word choice are highly effective and enhance meaning.  Style and word choice are appropriate for the assignment. (1) | Some errors of grammar and usage; errors do not interfere with meaning.  Language style and word choice are for the most part effective and appropriate for the assignment. (0.7)  | Major errors of grammar and usage make meaning unclear.  Language style and word choice are ineffective and/or inappropriate. (0.1) 
+Sources | five or more sources less than 10 years old --- references are automatically generated from a Zotero BibTeX file (1) | two or more sources less than 10 years old --- references are automatically generated from a Zotero BibTeX file (0.7) | fewer than two sources that are less than 10 years old --- references are not automatically generated from a Zotero BibTeX file (0.1)
 
-2. How convincing is the written document that further work can be performed on the chosen topic? 0/1
 
-3. Does the author have at least five references? 0/1
-
-A well-written paper that convinces you the author has reviewed the literature, has a topic that will expand the knowledge in the area, and has used at least five references should receive a 3.  A submission that satisfies two of the three criteria perfectly or most but not all of the three criteria should receive a 2.  A submission that satisfies only one of the three criteria should receive a 1.  If the submission does not render or the submitter did not submit the correct assignment, they should receive a 0.
+A well-written paper (without a visible name) that convinces you the author has reviewed the literature, has a topic that will expand the knowledge in the area, and has used at least five references (less than 10 years old---preferably less than five years old---automatically generated from a Zotero BibTeX file) should receive a 3.
 
 #### Optional
 * Read chapter 4 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
@@ -134,7 +135,7 @@ A well-written paper that convinces you the author has reviewed the literature, 
 
 * Read/review Chapters 4-5 of PDS as needed.  
 * Work on **Research Plan Assignment** PDS.
-* Peer reviews for **Literature Review / Citation Assignment** are due NLT 11 PM Tuesday.
+* Peer reviews for **Citation Assignment** are due NLT 11 PM Tuesday.
 * **Research Plan Assignment** PDS is due NLT 5 PM Friday (Sep 11).  Submit assignment
 via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Research Plan Assignment** is [http://www.crowdgrader.org/](http://www.crowdgrader.org/)
          
