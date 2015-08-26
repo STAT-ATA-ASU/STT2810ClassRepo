@@ -109,7 +109,7 @@ git pull upstream master
 
 * Students will continue to work on the Literature Review / Citation assignment.
 
-* Submit the Citation assignment to [http://www.crowdgrader.org](http://www.crowdgrader.org) no later than 5 pm Friday (Sep 4).  The direct link for this assignment is [http://www.crowdgrader.org/](http://www.crowdgrader.org/)
+* Submit the Citation assignment to [http://www.crowdgrader.org](http://www.crowdgrader.org) no later than 5 pm Friday (Sep 4).  The direct link for this assignment is [https://www.crowdgrader.org/crowdgrader/venues/view_venue/1296](https://www.crowdgrader.org/crowdgrader/venues/view_venue/1296)
 
 * In the YAML, use the title **Citation Assignment**, and leave the author field blank. 
 ```
