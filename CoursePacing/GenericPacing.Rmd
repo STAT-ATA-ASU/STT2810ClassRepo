@@ -79,7 +79,7 @@ Watch the following videos:
 6. Change if needed the location in the `Create project as subdirectory of:` box.
 7. Click the `Create Project` box.  You should now have a local copy of the forked repository on your local machine.  Congratulations!  
 
-* Set the upstream remote in your fork to this repository with the command
+* In the shell, set the upstream remote in your fork to this repository with the command
 ```
 git remote add upstream https://github.com/STT2810-ASU/STT2810ClassRepo.git
 ```
