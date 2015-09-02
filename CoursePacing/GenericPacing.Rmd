@@ -165,6 +165,7 @@ A well-written paper that convinces you the author can fill a gap in the existin
 * Watch the first 30 minutes of [The Grammar of Graphics and Data Science](https://www.rstudio.com/resources/webinars/archives/).
 * Watch the [Working with Data video](https://www.youtube.com/watch?v=d9TgAspq9bA&index=52&list=PLDEF0B9CBD27AD37E) (41 min).
 * Watch the [Data Management video](https://www.youtube.com/watch?v=thGk4CUEXQ8&list=PLDEF0B9CBD27AD37E&index=53) (39 min).
+* Read the vignette in the `PDS` package.
 * Complete you peer grading evaluations for the **Research Plan Assignment** NLT 11 PM Tuesday.
 
 
