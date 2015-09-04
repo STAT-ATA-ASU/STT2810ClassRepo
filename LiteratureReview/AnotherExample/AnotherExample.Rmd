@@ -1,0 +1,34 @@
+---
+title: "Multiple Bibliography Files"
+author: "Alan Arnholt"
+date: "9/4/2015"
+output: html_document
+bibliography: 
+- ./MultipleReferences/BrotherBear.bib
+- ./MultipleReferences/ReproducibleResearch.bib
+- ./MultipleReferences/SmokingExample.bib
+nocite: |  
+  @riggs_adolescent_2007, @hu_developmental_2008, @caraballo_linking_2009, @rose_nicotine_2010, @van_de_ven_patterns_2010, @chen_relationships_1997, @dierker_association_2007, @dierker_importance_2008
+csl: ./CSLstyles/modern-language-association.csl
+---
+
+To specify multiple `*.bib` files, one might use one of the two specifications below in the `YAML`.
+
+```
+bibliography: 
+- ./MultipleReferences/BrotherBear.bib
+- ./MultipleReferences/ReproducibleResearch.bib
+- ./MultipleReferences/SmokingExample.bib
+```
+
+OR
+
+```
+bibliography: ["./MultipleReferences/BrotherBear.bib", "./MultipleReferences/ReproducibleResearch.bib", "./MultipleReferences/SmokingExample.bib"]
+```
+
+My little brother has been busy making tools [@arnholt_third_2002] and fixing people up [@abadie_dysgenesis_2010; @lopez_safety_2007].
+
+Reproducible research is critical to science [@peng_reproducible_2006; @fomel_reproducible_2009; @leveqije_reproducible_2012; @peng_reproducible_2011; @hutton_towards_2015].
+
+## References
