@@ -7,9 +7,10 @@ bibliography:
 - ./MultipleReferences/BrotherBear.bib
 - ./MultipleReferences/ReproducibleResearch.bib
 - ./MultipleReferences/SmokingExample.bib
+- ./MultipleReferences/PackagesUsed.bib
 nocite: |  
   @riggs_adolescent_2007, @hu_developmental_2008, @caraballo_linking_2009, @rose_nicotine_2010, @van_de_ven_patterns_2010, @chen_relationships_1997, @dierker_association_2007, @dierker_importance_2008
-csl: ./CSLstyles/modern-language-association.csl
+csl: ./CSLstyles/chicago-author-date.csl
 ---
 
 To specify multiple `*.bib` files, one might use one of the two specifications below in the `YAML`.
@@ -19,16 +20,43 @@ bibliography:
 - ./MultipleReferences/BrotherBear.bib
 - ./MultipleReferences/ReproducibleResearch.bib
 - ./MultipleReferences/SmokingExample.bib
+- ./MultipleReferences/PackagesUsed.bib
 ```
 
 OR
 
 ```
-bibliography: ["./MultipleReferences/BrotherBear.bib", "./MultipleReferences/ReproducibleResearch.bib", "./MultipleReferences/SmokingExample.bib"]
+bibliography: ["./MultipleReferences/BrotherBear.bib", "./MultipleReferences/ReproducibleResearch.bib", "./MultipleReferences/SmokingExample.bib", "./MultipleReferences/PackagesUsed.bib"]
 ```
 
 My little brother has been busy making tools [@arnholt_third_2002] and fixing people up [@abadie_dysgenesis_2010; @lopez_safety_2007].
 
 Reproducible research is critical to science [@peng_reproducible_2006; @fomel_reproducible_2009; @leveqije_reproducible_2012; @peng_reproducible_2011; @hutton_towards_2015].
+
+## Automagic Generation of `R` Package References
+
+Suppose the following `R` packages are used for a project: `PASWR2`, `PDS`, `ggplot2`, `knitr`, and `rmarkdown`.  
+
+1. Create an object named `PackagesUsed`.
+2. Write the packages used to a `*.bib` file.
+3. Load the packages with `lapply()`.
+
+```
+PackagesUsed <- c("PASWR2", "PDS", "ggplot2", "knitr", "rmarkdown")
+# Write bib information
+knitr::write_bib(PackagesUsed, file = "./MultipleReferences/PackagesUsed.bib")
+# Load packages
+lapply(PackagesUsed, library, character.only = TRUE)
+```
+
+```{r, echo = FALSE, message = FALSE, results = 'hide'}
+PackagesUsed <- c("PASWR2", "PDS", "ggplot2", "knitr", "rmarkdown")
+# Write bib information
+knitr::write_bib(PackagesUsed, file = "./MultipleReferences/PackagesUsed.bib")
+# Load packages
+lapply(PackagesUsed, library, character.only = TRUE)
+```
+
+This document uses (not really) `ggplot2` by @R-ggplot2, `PDS` by @R-PDS, `PASWR2` by @R-PASWR2, `rmarkdown` by @R-rmarkdown, and `knitr` by @R-knitr.
 
 ## References

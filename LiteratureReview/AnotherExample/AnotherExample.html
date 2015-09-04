@@ -71,29 +71,50 @@ img {
 <pre><code>bibliography: 
 - ./MultipleReferences/BrotherBear.bib
 - ./MultipleReferences/ReproducibleResearch.bib
-- ./MultipleReferences/SmokingExample.bib</code></pre>
+- ./MultipleReferences/SmokingExample.bib
+- ./MultipleReferences/PackagesUsed.bib</code></pre>
 <p>OR</p>
-<pre><code>bibliography: [&quot;./MultipleReferences/BrotherBear.bib&quot;, &quot;./MultipleReferences/ReproducibleResearch.bib&quot;, &quot;./MultipleReferences/SmokingExample.bib&quot;]</code></pre>
-<p>My little brother has been busy making tools <span class="citation">(Arnholt and Mair)</span> and fixing people up <span class="citation">(Abadie, Arnholt, and Miller; Lopez and Arnholt)</span>.</p>
-<p>Reproducible research is critical to science <span class="citation">(Peng, Dominici, and Zeger; Fomel and Claerbout; LeVeqije, Mitchell, and Stodden; Peng; Hutton and Henderson)</span>.</p>
+<pre><code>bibliography: [&quot;./MultipleReferences/BrotherBear.bib&quot;, &quot;./MultipleReferences/ReproducibleResearch.bib&quot;, &quot;./MultipleReferences/SmokingExample.bib&quot;, &quot;./MultipleReferences/PackagesUsed.bib&quot;]</code></pre>
+<p>My little brother has been busy making tools <span class="citation">(J. L. Arnholt and Mair 2002)</span> and fixing people up <span class="citation">(Abadie, Arnholt, and Miller 2010; Lopez and Arnholt 2007)</span>.</p>
+<p>Reproducible research is critical to science <span class="citation">(Peng, Dominici, and Zeger 2006; Fomel and Claerbout 2009; LeVeqije, Mitchell, and Stodden 2012; Peng 2011; Hutton and Henderson 2015)</span>.</p>
+<div id="automagic-generation-of-r-package-references" class="section level2">
+<h2>Automagic Generation of <code>R</code> Package References</h2>
+<p>Suppose the following <code>R</code> packages are used for a project: <code>PASWR2</code>, <code>PDS</code>, <code>ggplot2</code>, <code>knitr</code>, and <code>rmarkdown</code>.</p>
+<ol style="list-style-type: decimal">
+<li>Create an object named <code>PackagesUsed</code>.</li>
+<li>Write the packages used to a <code>*.bib</code> file.</li>
+<li>Load the packages with <code>lapply()</code>.</li>
+</ol>
+<pre><code>PackagesUsed &lt;- c(&quot;PASWR2&quot;, &quot;PDS&quot;, &quot;ggplot2&quot;, &quot;knitr&quot;, &quot;rmarkdown&quot;)
+# Write bib information
+knitr::write_bib(PackagesUsed, file = &quot;./MultipleReferences/PackagesUsed.bib&quot;)
+# Load packages
+lapply(PackagesUsed, library, character.only = TRUE)</code></pre>
+<p>This document uses (not really) <code>ggplot2</code> by <span class="citation">Wickham and Chang (2015)</span>, <code>PDS</code> by <span class="citation">A. T. Arnholt (2015)</span>, <code>PASWR2</code> by <span class="citation">A. T. Arnholt (2014)</span>, <code>rmarkdown</code> by <span class="citation">Allaire et al. (2015)</span>, and <code>knitr</code> by <span class="citation">Xie (2015)</span>.</p>
 <div class="references">
 <h2>References</h2>
-<p>Abadie, Wesley M., Jonathan L. Arnholt, and Lee A. Miller. “Dysgenesis of the Middle Turbinate: A Unique Cause of Nasal Airway Obstruction.” <em>Otolaryngology – Head and Neck Surgery</em> 143.2 (2010): 317–318. Web. 23 Aug. 2015.</p>
-<p>Arnholt, Jonathan L., and Eric A. Mair. “A ‘Third Hand’ for Endoscopic Skull Base Surgery.” <em>The Laryngoscope</em> 112.12 (2002): 2244–2249. Web. 23 Aug. 2015.</p>
-<p>Caraballo, Ralph S., Scott P. Novak, and Katherine Asman. “Linking Quantity and Frequency Profiles of Cigarette Smoking to the Presence of Nicotine Dependence Symptoms Among Adolescent Smokers: Findings from the 2004 National Youth Tobacco Survey.” <em>Nicotine &amp; Tobacco Research</em> (2009): ntn008. Web. 14 Jan. 2015.</p>
-<p>Chen, Kevin, Denise B Kandel, and Mark Davies. “Relationships Between Frequency and Quantity of Marijuana Use and Last Year Proxy Dependence Among Adolescents and Adults in the United States.” <em>Drug and Alcohol Dependence</em> 46.1–2 (1997): 53–67. Web. 14 Jan. 2015.</p>
-<p>Dierker, Lisa C. et al. “The Association Between Cigarette Smoking and DSM-IV Nicotine Dependence Among First Year College Students.” <em>Drug and Alcohol Dependence</em> 86.2–3 (2007): 106–114. Web. 14 Jan. 2015.</p>
-<p>Dierker, Lisa et al. “The Importance of Timing of Transitions for Risk of Regular Smoking and Nicotine Dependence.” <em>Annals of Behavioral Medicine: A Publication of the Society of Behavioral Medicine</em> 36.1 (2008): 87–92. Web.</p>
-<p>Fomel, Sergey, and Jon F. Claerbout. “Reproducible Research.” <em>Computing in Science &amp; Engineering</em> 11.1 (2009): 5–7. Web. 21 Aug. 2015.</p>
-<p>Hu, Mei-Chen et al. “Developmental Trajectories of Criteria of Nicotine Dependence in Adolescence.” <em>Drug and Alcohol Dependence</em> 98.1–2 (2008): 94–104. Web. 14 Jan. 2015.</p>
-<p>Hutton, L., and T. Henderson. “Towards Reproducibility in Online Social Network Research.” <em>IEEE Transactions on Emerging Topics in Computing</em> PP.99 (2015): 1–1. Web.</p>
-<p>LeVeqije, R.J., I.M. Mitchell, and V. Stodden. “Reproducible Research for Scientific Computing: Tools and Strategies for Changing the Culture.” <em>Computing in Science Engineering</em> 14.4 (2012): 13–17. Web.</p>
-<p>Lopez, Manuel A., and Jonathan L. Arnholt. “Safety of Definitive In-Theater Repair of Facial Fractures.” <em>Archives of Facial Plastic Surgery</em> 9.6 (2007): 400–405. Web. 23 Aug. 2015.</p>
-<p>Peng, Roger D. “Reproducible Research in Computational Science.” <em>Science (New York, N.y.)</em> 334.6060 (2011): 1226–1227. Web. 21 Aug. 2015.</p>
-<p>Peng, Roger D., Francesca Dominici, and Scott L. Zeger. “Reproducible Epidemiologic Research.” <em>American Journal of Epidemiology</em> 163.9 (2006): 783–789. Web. 21 Aug. 2015.</p>
-<p>Riggs, Nathaniel R. et al. “Adolescent to Emerging Adulthood Smoking Trajectories: When Do Smoking Trajectories Diverge, and Do They Predict Early Adulthood Nicotine Dependence?” <em>Nicotine &amp; Tobacco Research: Official Journal of the Society for Research on Nicotine and Tobacco</em> 9.11 (2007): 1147–1154. Web.</p>
-<p>Rose, Jennifer S., Lisa C. Dierker, and Eric Donny. “Nicotine Dependence Symptoms Among Recent Onset Adolescent Smokers.” <em>Drug and alcohol dependence</em> 106.2-3 (2010): 126. Web. 14 Jan. 2015.</p>
-<p>Van De Ven, M. O. M. et al. “Patterns of Adolescent Smoking and Later Nicotine Dependence in Young Adults: A 10-Year Prospective Study.” <em>Public Health</em> 124.2 (2010): 65–70. Web. 14 Jan. 2015.</p>
+<p>Abadie, Wesley M., Jonathan L. Arnholt, and Lee A. Miller. 2010. “Dysgenesis of the Middle Turbinate: A Unique Cause of Nasal Airway Obstruction.” <em>Otolaryngology – Head and Neck Surgery</em> 143 (2): 317–18. doi:<a href="http://dx.doi.org/10.1016/j.otohns.2010.02.020">10.1016/j.otohns.2010.02.020</a>.</p>
+<p>Allaire, JJ, Joe Cheng, Yihui Xie, Jonathan McPherson, Winston Chang, Jeff Allen, Hadley Wickham, Aron Atkins, and Rob Hyndman. 2015. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="http://CRAN.R-project.org/package=rmarkdown" class="uri">http://CRAN.R-project.org/package=rmarkdown</a>.</p>
+<p>Arnholt, Alan T. 2014. <em>PASWR2: Probability and Statistics with R, Second Edition</em>. <a href="http://CRAN.R-project.org/package=PASWR2" class="uri">http://CRAN.R-project.org/package=PASWR2</a>.</p>
+<p>———. 2015. <em>PDS: Data Sets for Passion Driven Statistics</em>.</p>
+<p>Arnholt, Jonathan L., and Eric A. Mair. 2002. “A ‘Third Hand’ for Endoscopic Skull Base Surgery.” <em>The Laryngoscope</em> 112 (12): 2244–49. doi:<a href="http://dx.doi.org/10.1097/00005537-200212000-00021">10.1097/00005537-200212000-00021</a>.</p>
+<p>Caraballo, Ralph S., Scott P. Novak, and Katherine Asman. 2009. “Linking Quantity and Frequency Profiles of Cigarette Smoking to the Presence of Nicotine Dependence Symptoms Among Adolescent Smokers: Findings from the 2004 National Youth Tobacco Survey.” <em>Nicotine &amp; Tobacco Research</em>, January, ntn008. doi:<a href="http://dx.doi.org/10.1093/ntr/ntn008">10.1093/ntr/ntn008</a>.</p>
+<p>Chen, Kevin, Denise B Kandel, and Mark Davies. 1997. “Relationships Between Frequency and Quantity of Marijuana Use and Last Year Proxy Dependence Among Adolescents and Adults in the United States.” <em>Drug and Alcohol Dependence</em> 46 (1–2): 53–67. doi:<a href="http://dx.doi.org/10.1016/S0376-8716(97)00047-1">10.1016/S0376-8716(97)00047-1</a>.</p>
+<p>Dierker, Lisa C., Eric Donny, Stephen Tiffany, Suzanne M. Colby, Nicholas Perrine, and Richard R. Clayton. 2007. “The Association Between Cigarette Smoking and DSM-IV Nicotine Dependence Among First Year College Students.” <em>Drug and Alcohol Dependence</em> 86 (2–3): 106–14. doi:<a href="http://dx.doi.org/10.1016/j.drugalcdep.2006.05.025">10.1016/j.drugalcdep.2006.05.025</a>.</p>
+<p>Dierker, Lisa, Jianping He, Amanda Kalaydjian, Joel Swendsen, Louisa Degenhardt, Meyer Glantz, Kevin Conway, et al. 2008. “The Importance of Timing of Transitions for Risk of Regular Smoking and Nicotine Dependence.” <em>Annals of Behavioral Medicine: A Publication of the Society of Behavioral Medicine</em> 36 (1): 87–92. doi:<a href="http://dx.doi.org/10.1007/s12160-008-9051-x">10.1007/s12160-008-9051-x</a>.</p>
+<p>Fomel, Sergey, and Jon F. Claerbout. 2009. “Reproducible Research.” <em>Computing in Science &amp; Engineering</em> 11 (1): 5–7. doi:<a href="http://dx.doi.org/10.1109/MCSE.2009.14">10.1109/MCSE.2009.14</a>.</p>
+<p>Hu, Mei-Chen, Bengt Muthén, Christine Schaffran, Pamela C. Griesler, and Denise B. Kandel. 2008. “Developmental Trajectories of Criteria of Nicotine Dependence in Adolescence.” <em>Drug and Alcohol Dependence</em> 98 (1–2): 94–104. doi:<a href="http://dx.doi.org/10.1016/j.drugalcdep.2008.04.017">10.1016/j.drugalcdep.2008.04.017</a>.</p>
+<p>Hutton, L., and T. Henderson. 2015. “Towards Reproducibility in Online Social Network Research.” <em>IEEE Transactions on Emerging Topics in Computing</em> PP (99): 1–1. doi:<a href="http://dx.doi.org/10.1109/TETC.2015.2458574">10.1109/TETC.2015.2458574</a>.</p>
+<p>LeVeqije, R.J., I.M. Mitchell, and V. Stodden. 2012. “Reproducible Research for Scientific Computing: Tools and Strategies for Changing the Culture.” <em>Computing in Science Engineering</em> 14 (4): 13–17. doi:<a href="http://dx.doi.org/10.1109/MCSE.2012.38">10.1109/MCSE.2012.38</a>.</p>
+<p>Lopez, Manuel A., and Jonathan L. Arnholt. 2007. “Safety of Definitive In-Theater Repair of Facial Fractures.” <em>Archives of Facial Plastic Surgery</em> 9 (6): 400–405. doi:<a href="http://dx.doi.org/10.1001/archfaci.9.6.400">10.1001/archfaci.9.6.400</a>.</p>
+<p>Peng, Roger D. 2011. “Reproducible Research in Computational Science.” <em>Science (New York, N.y.)</em> 334 (6060): 1226–27. doi:<a href="http://dx.doi.org/10.1126/science.1213847">10.1126/science.1213847</a>.</p>
+<p>Peng, Roger D., Francesca Dominici, and Scott L. Zeger. 2006. “Reproducible Epidemiologic Research.” <em>American Journal of Epidemiology</em> 163 (9): 783–89. doi:<a href="http://dx.doi.org/10.1093/aje/kwj093">10.1093/aje/kwj093</a>.</p>
+<p>Riggs, Nathaniel R., Chih-Ping Chou, Chaoyang Li, and Mary Ann Pentz. 2007. “Adolescent to Emerging Adulthood Smoking Trajectories: When Do Smoking Trajectories Diverge, and Do They Predict Early Adulthood Nicotine Dependence?” <em>Nicotine &amp; Tobacco Research: Official Journal of the Society for Research on Nicotine and Tobacco</em> 9 (11): 1147–54. doi:<a href="http://dx.doi.org/10.1080/14622200701648359">10.1080/14622200701648359</a>.</p>
+<p>Rose, Jennifer S., Lisa C. Dierker, and Eric Donny. 2010. “Nicotine Dependence Symptoms Among Recent Onset Adolescent Smokers.” <em>Drug and Alcohol Dependence</em> 106 (2-3): 126. doi:<a href="http://dx.doi.org/10.1016/j.drugalcdep.2009.08.012">10.1016/j.drugalcdep.2009.08.012</a>.</p>
+<p>Van De Ven, M. O. M., P. A. Greenwood, R. C. M. E. Engels, C. A. Olsson, and G. C. Patton. 2010. “Patterns of Adolescent Smoking and Later Nicotine Dependence in Young Adults: A 10-Year Prospective Study.” <em>Public Health</em> 124 (2): 65–70. doi:<a href="http://dx.doi.org/10.1016/j.puhe.2009.11.009">10.1016/j.puhe.2009.11.009</a>.</p>
+<p>Wickham, Hadley, and Winston Chang. 2015. <em>Ggplot2: An Implementation of the Grammar of Graphics</em>. <a href="http://CRAN.R-project.org/package=ggplot2" class="uri">http://CRAN.R-project.org/package=ggplot2</a>.</p>
+<p>Xie, Yihui. 2015. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="http://CRAN.R-project.org/package=knitr" class="uri">http://CRAN.R-project.org/package=knitr</a>.</p>
+</div>
 </div>
 
 
