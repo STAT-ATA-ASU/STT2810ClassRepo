@@ -1,7 +1,7 @@
 ---
 title: "Multiple Bibliography Files"
 author: "Alan Arnholt"
-date: "9/4/2015"
+date: "`r Sys.Date()`"
 output: html_document
 bibliography: 
 - ./MultipleReferences/BrotherBear.bib
