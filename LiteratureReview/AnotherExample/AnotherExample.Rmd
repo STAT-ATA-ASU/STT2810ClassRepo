@@ -29,7 +29,7 @@ OR
 bibliography: ["./MultipleReferences/BrotherBear.bib", "./MultipleReferences/ReproducibleResearch.bib", "./MultipleReferences/SmokingExample.bib", "./MultipleReferences/PackagesUsed.bib"]
 ```
 
-My little brother has been busy making tools [@arnholt_third_2002] and fixing people up [@abadie_dysgenesis_2010; @lopez_safety_2007].
+My little brother has been busy making tools [@arnholt_third_2002] and helping people [@abadie_dysgenesis_2010; @lopez_safety_2007].
 
 Reproducible research is critical to science [@peng_reproducible_2006; @fomel_reproducible_2009; @leveqije_reproducible_2012; @peng_reproducible_2011; @hutton_towards_2015].
 
