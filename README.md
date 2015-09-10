@@ -33,6 +33,13 @@ Welcome to STT 2810!
 * [Free Code School intro R Course](https://www.codeschool.com/courses/try-r)
 * [swirl](swirlstat.com) "swirl teaches you R programming and data science interactively, at your own pace, and right in the R console"
 
+## RStudio Cheatsheets
+* [Cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+* [Data Visualization](https://www.rstudio.com/wp-content/uploads/2015/08/ggplot2-cheatsheet.pdf)
+* [Data Wrangling](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+* [R markdown](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+* [R markdown reference](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+
 ## Graphics
 
 * [`ggplot2` documentation](http://docs.ggplot2.org/current/)
