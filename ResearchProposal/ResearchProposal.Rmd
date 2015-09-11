@@ -4,7 +4,7 @@ title: Research Proposal Template Using [RMarkdown](http://rmarkdown.rstudio.com
   Major Depression at Different Levels of Smoking Exposure
 author: "STT 2810"
 date: "Spring 2015"
-output: pdf_document
+output: html_document
 bibliography: ResearchProposal.bib
 ---
 
