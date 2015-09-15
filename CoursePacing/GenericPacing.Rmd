@@ -155,7 +155,7 @@ A well-written paper that convinces you the author can fill a gap in the existin
 #### Optional
 * Read chapter 5 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
 
-### Week 5: (Sep 14, 16)
+### Week 5: (Sep 15, 17)
 
 * Read Chapters 6 and 7 of PDS (Working with Data and Data Management).
 * This week you will "work with data".
