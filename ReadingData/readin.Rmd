@@ -1,0 +1,30 @@
+---
+title: "Reading Data"
+author: "R-Man"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+Download the `csv` files you need from [http://nces.ed.gov/ipeds/datacenter/DataFiles.aspx](http://nces.ed.gov/ipeds/datacenter/DataFiles.aspx).  As an example, I have downloaded the files `ic2013_rv.csv` and `hd2013.csv`. The files are stored one level down from this `Rmarkdown` document in a directory named `Data`.  To read a file, use the `read.csv` function.  Note that these `csv` files use a `.` to denote a missing value. 
+
+```{r}
+IC2013 <- read.csv(file = "./Data/ic2013_rv.csv", na.strings = ".")
+IC2013[1:6, 1:8]
+IC2013 <- dplyr::tbl_df(IC2013)
+IC2013
+dim(IC2013)
+HD2013 <- read.csv(file = "./Data/hd2013.csv", na.strings = ".")
+dim(HD2013)
+HD2013 <- dplyr::tbl_df(HD2013)
+HD2013
+HD2013[1:6, 1:2]
+```
+
+To merge the two files, use the `full_join` function from `dplyr`.
+
+```{r}
+MERGED <- dplyr::full_join(IC2013, HD2013, by = "UNITID")
+dim(MERGED)
+MERGED[1:6, 200:205]
+MERGED
+```

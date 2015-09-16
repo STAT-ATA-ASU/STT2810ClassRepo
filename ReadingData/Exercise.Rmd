@@ -1,0 +1,46 @@
+---
+title: "Exercise"
+author: "R-Man"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+* Create a variable named `HeightIn` that stores the height in inches of the subjects from the AddHealth Wave I data set.
+
+```{r message = FALSE, warning = FALSE}
+library(PDS)
+library(dplyr)
+AH <- tbl_df(AddHealth) %>% 
+  mutate(HeightIn = H1GH59A*12 + H1GH59B) 
+summary(AH$HeightIn)
+```
+
+It seems there are problems with the data.  A closer inspection of the code book reveals that values 96, 98, and 99 should be coded as `NA`'s.
+
+```{r}
+AddHealth$H1GH59A[AddHealth$H1GH59A == 96 | AddHealth$H1GH59A == 98] <- NA
+AddHealth$H1GH59B[AddHealth$H1GH59B == 98 | AddHealth$H1GH59B == 99] <- NA
+AddHealth <- tbl_df(AddHealth) %>% 
+  mutate(HeightIn = H1GH59A*12 + H1GH59B)
+summary(AddHealth$HeightIn)
+```
+
+```{r warning = FALSE}
+library(ggplot2)
+ggplot(data = AddHealth, aes(x = HeightIn)) + 
+  geom_density(fill = "pink") +
+  theme_bw() + 
+  labs(x = "Height in Inches")
+```
+
+```{r warning = FALSE, message = FALSE}
+AddHealth$H1GH60[AddHealth$H1GH60 == 996 | AddHealth$H1GH60 ==998 | AddHealth$H1GH60 == 999] <- NA
+AddHealth <- AddHealth %>% 
+  rename(Weight = H1GH60)
+summary(AddHealth$Weight)
+ggplot(data = AddHealth, aes(y = Weight, x = HeightIn)) +
+  geom_point(color = "blue") +
+  theme_bw() + 
+  labs(y = "Weight in Pounds", x = "Height in Inches") + 
+  geom_smooth()
+```
