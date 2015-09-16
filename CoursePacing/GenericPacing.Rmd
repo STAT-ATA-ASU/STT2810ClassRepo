@@ -178,7 +178,7 @@ A well-written paper that convinces you the author can fill a gap in the existin
 
 * Read/review Chapters 6 and 7 of PDS as needed.
 * This week you will "Manage your Data" based on your research proposal.
-* Submit via [http://www.crowdgrader.org](http://www.crowdgrader.org) the **Data Management Assignment** NLT 5 PM Friday (Sep 25). Directions: Select three _secondary_ categorical variables from the data set you are using.  Recode your data to create factors with appropriate labels.  Create a barplot for each of your factors, and write a sentence or two explaining each barplot.  Show all `R` code used to manage your data and used to create your barplots with `R` code chunks in your `*.Rmd` file.  Submit the resulting `*.html` file to crowdgrader.  The direct link for the **Data Management Assignment** is [http://www.crowdgrader.org/](http://www.crowdgrader.org/).  
+* Submit via [http://www.crowdgrader.org](http://www.crowdgrader.org) the **Data Management Assignment** NLT 5 PM Friday (Sep 25). Directions: Select three _secondary_ categorical variables from the data set you are using.  Recode your data to create factors with appropriate labels.  Create a barplot for each of your factors, and write a sentence or two explaining each barplot.  Show all `R` code used to manage your data and used to create your barplots with `R` code chunks in your `*.Rmd` file.  Submit the resulting `*.html` file to crowdgrader.  The direct link for the **Data Management Assignment** is [https://www.crowdgrader.org/crowdgrader/venues/view_venue/1394](https://www.crowdgrader.org/crowdgrader/venues/view_venue/1394).  
 
 #### Grading Rubric for **Data Management Assignment** (PR#3)
 
