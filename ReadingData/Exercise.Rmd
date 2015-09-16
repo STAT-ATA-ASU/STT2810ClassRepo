@@ -44,3 +44,29 @@ ggplot(data = AddHealth, aes(y = Weight, x = HeightIn)) +
   labs(y = "Weight in Pounds", x = "Height in Inches") + 
   geom_smooth()
 ```
+
+Create a gender variable named `Gender`.
+
+```{r}
+summary(AddHealth$BIO_SEX)
+AddHealth$BIO_SEX[AddHealth$BIO_SEX == 6] <- NA
+AddHealth$BIO_SEX <- factor(AddHealth$BIO_SEX, labels = c("Male", "Female"))
+AddHealth <- dplyr::rename(AddHealth, Gender = BIO_SEX)
+xtabs(~Gender, data = AddHealth)
+```
+
+```{r warning = FALSE, message = FALSE}
+ggplot(data = AddHealth, aes(y = Weight, x = HeightIn, color = Gender)) +
+  geom_point(alpha = 0.2) +
+  theme_bw() + 
+  labs(y = "Weight in Pounds", x = "Height in Inches") + 
+  geom_smooth()
+```
+
+```{r warning = FALSE, message = FALSE}
+ggplot(data = na.omit(AddHealth[, c("HeightIn", "Weight", "Gender")]), aes(x = HeightIn, color = Gender, fill = Gender)) + 
+  geom_density() +
+  theme_bw() + 
+  labs(x = "Height in Inches") + 
+  facet_grid(Gender ~ .)
+```
