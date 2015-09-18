@@ -1,0 +1,110 @@
+---
+title: "Displaying Categorical Data"
+author: "R-Man"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+library(knitr)
+knitr::opts_chunk$set(comment = NA, fig.show = 'as.is', prompt = TRUE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75))
+```
+
+
+## Who sailed on the Titanic?
+
+The data set `TITANIC3` from the `PASWR2` package contains survival status of individual passengers on the Titanic but no information for the crew.  Start by creating simple univariate barcharts of the passengers.
+
+```{r}
+library(PASWR2)
+library(ggplot2)
+TITANIC3[1:5, 1:3]  # first five rows and three variables
+# Create a factor out of the survived variable
+TITANIC3$survived <- factor(TITANIC3$survived, labels = c("No", "Yes"))
+TITANIC3[1:5, 1:3]  # first five rows and three variables
+p1 <- ggplot(data = TITANIC3, aes(x = pclass)) + 
+  geom_bar(fill = "purple") + 
+  theme_bw()
+p1 
+p2 <- ggplot(data = TITANIC3, aes(x = sex, fill = sex)) + 
+  geom_bar() + 
+  theme_bw() + 
+  scale_fill_manual(values = c("pink", "blue"), guide = FALSE)
+p2
+p3 <- ggplot(data = TITANIC3, aes(x = survived, fill = survived)) + 
+  geom_bar() + 
+  theme_bw() + 
+  scale_fill_manual(values = c("gray", "green"), guide = FALSE)
+p3
+```
+
+Let us arrange all three barplots on the same page.
+
+```{r}
+gridExtra::grid.arrange(p1, p2, p3, nrow = 1, widths = c(3, 2, 2))
+```
+
+Suppose we would like to look at the same graphs for the subset of passengers that were between ages 20 and 30 includsive.
+
+```{r}
+library(dplyr)
+age2030 <- TITANIC3 %>% 
+  filter(age >= 20, age <= 30)
+p123 <- ggplot(data = age2030, aes(x = pclass)) + 
+  geom_bar(fill = "purple") + 
+  theme_bw()
+p223 <- ggplot(data = age2030, aes(x = sex, fill = sex)) + 
+  geom_bar() + 
+  theme_bw() + 
+  scale_fill_manual(values = c("pink", "blue"), guide = FALSE)
+p323 <- ggplot(data = age2030, aes(x = survived, fill = survived)) + 
+  geom_bar() + 
+  theme_bw() + 
+  scale_fill_manual(values = c("gray", "green"), guide = FALSE)
+gridExtra::grid.arrange(p123, p223, p323, nrow = 1, widths = c(3, 2, 2))
+```
+
+Next we will create a factor variable for the various values in `age`
+
+```{r}
+TITANIC3$agef <- cut(TITANIC3$age, breaks = c(0, 15, 30, 60, 80))
+summary(TITANIC3$agef)
+pf1 <- ggplot(data = TITANIC3, aes(x = pclass)) + 
+  geom_bar(fill = "purple") + 
+  theme_bw() + 
+  facet_grid(agef ~ .)
+pf2 <- ggplot(data = TITANIC3, aes(x = sex, fill = sex)) + 
+  geom_bar() + 
+  theme_bw() + 
+  scale_fill_manual(values = c("pink", "blue"), guide = FALSE) + 
+  facet_grid(agef ~ .)
+pf3 <- ggplot(data = TITANIC3, aes(x = survived, fill = survived)) + 
+  geom_bar() + 
+  theme_bw() + 
+  scale_fill_manual(values = c("gray", "green"), guide = FALSE) + 
+  facet_grid(agef ~ .)
+gridExtra::grid.arrange(pf1, pf2, pf3, nrow = 1)
+```
+
+## Studying Multivariate Categorical Data
+
+```{r}
+ggplot(data = TITANIC3, aes(x = pclass, fill = survived)) + 
+  geom_bar(position = "dodge") + 
+  facet_grid(agef~ sex) + 
+  theme_bw()
+```
+
+## Doubledecker Plots
+
+```{r}
+vcd::doubledecker(survived ~ sex, data = TITANIC3)
+vcd::doubledecker(survived ~ sex + pclass, data = TITANIC3)
+```
+
+## Mosaic Plots
+
+```{r}
+vcd::mosaic(survived ~ sex + pclass, data = TITANIC3)
+vcd::mosaic(~ sex + survived + pclass, data = TITANIC3, shade = TRUE)
+```
