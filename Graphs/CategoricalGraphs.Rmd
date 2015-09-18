@@ -113,3 +113,14 @@ vcd::doubledecker(survived ~ sex + pclass, data = TITANIC3)
 vcd::mosaic(survived ~ sex + pclass, data = TITANIC3)
 vcd::mosaic(~ sex + survived + pclass, data = TITANIC3, shade = TRUE)
 ```
+
+## Themes from `ggthemes`
+
+```{r}
+library(ggthemes)
+ggplot(data = iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) + 
+  geom_point() + 
+  theme(legend.position = "top") + 
+  labs(x = "Petal Length (cm)", y = "Petal Width (cm)") + 
+  scale_color_colorblind() 
+```
