@@ -24,24 +24,27 @@ TITANIC3$survived <- factor(TITANIC3$survived, labels = c("No", "Yes"))
 TITANIC3[1:5, 1:3]  # first five rows and three variables
 p1 <- ggplot(data = TITANIC3, aes(x = pclass)) + 
   geom_bar(fill = "purple") + 
-  theme_bw()
+  theme_bw() + 
+  labs(x = "Ticket Class of Passenger", y = "", 
+       title = "Your Informative Title\n Goes Here")
 p1 
 p2 <- ggplot(data = TITANIC3, aes(x = sex, fill = sex)) + 
   geom_bar() + 
   theme_bw() + 
   scale_fill_manual(values = c("pink", "blue"), guide = FALSE)
 p2
-p3 <- ggplot(data = TITANIC3, aes(x = survived, fill = survived)) + 
-  geom_bar() + 
+p3 <- ggplot(data = TITANIC3, aes(x = sex, fill = survived)) + 
+  geom_bar(position = "fill") + 
   theme_bw() + 
-  scale_fill_manual(values = c("gray", "green"), guide = FALSE)
+  scale_fill_manual(values = c("gray", "green")) + 
+  labs(y = "Fraction")
 p3
 ```
 
 Let us arrange all three barplots on the same page.
 
 ```{r}
-gridExtra::grid.arrange(p1, p2, p3, nrow = 1, widths = c(3, 2, 2))
+gridExtra::grid.arrange(p1, p2, p3, nrow = 1, widths = c(3, 2, 3))
 ```
 
 Suppose we would like to look at the same graphs for the subset of passengers that were between ages 20 and 30 includsive.
@@ -57,11 +60,12 @@ p223 <- ggplot(data = age2030, aes(x = sex, fill = sex)) +
   geom_bar() + 
   theme_bw() + 
   scale_fill_manual(values = c("pink", "blue"), guide = FALSE)
-p323 <- ggplot(data = age2030, aes(x = survived, fill = survived)) + 
-  geom_bar() + 
+p323 <- ggplot(data = age2030, aes(x = sex, fill = survived)) + 
+  geom_bar(position = "fill") + 
   theme_bw() + 
-  scale_fill_manual(values = c("gray", "green"), guide = FALSE)
-gridExtra::grid.arrange(p123, p223, p323, nrow = 1, widths = c(3, 2, 2))
+  scale_fill_manual(values = c("gray", "green")) + 
+  labs(y = "Fraction")
+gridExtra::grid.arrange(p123, p223, p323, nrow = 1, widths = c(3, 2, 3))
 ```
 
 Next we will create a factor variable for the various values in `age`
@@ -78,12 +82,13 @@ pf2 <- ggplot(data = TITANIC3, aes(x = sex, fill = sex)) +
   theme_bw() + 
   scale_fill_manual(values = c("pink", "blue"), guide = FALSE) + 
   facet_grid(agef ~ .)
-pf3 <- ggplot(data = TITANIC3, aes(x = survived, fill = survived)) + 
-  geom_bar() + 
+pf3 <- ggplot(data = TITANIC3, aes(x = sex, fill = survived)) + 
+  geom_bar(position = "fill") + 
   theme_bw() + 
-  scale_fill_manual(values = c("gray", "green"), guide = FALSE) + 
+  scale_fill_manual(values = c("gray", "green")) + 
+  labs(y = "Fraction") + 
   facet_grid(agef ~ .)
-gridExtra::grid.arrange(pf1, pf2, pf3, nrow = 1)
+gridExtra::grid.arrange(pf1, pf2, pf3, nrow = 1, main = "Your Informative Title\n Goes Here", widths = c(2, 2, 3))
 ```
 
 ## Studying Multivariate Categorical Data
