@@ -247,19 +247,15 @@ via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link f
 
 This is a continuation of the material submitted for the **Univariate Graphing Assignment** assignment submitted in week07.  You should revise your assignment as needed from last week and add one bivariate graph of your principal constructs and one one multivariate graph of your principal constructs.
 
-#### Grading Rubric for **Bivariate Graphing Assignment** (PR#5)
+#### Grading Rubric for **Bivariate Graphing Assignment**  (PR#5)
 
-Does the document have sections that explain the `Purpose of the Study` (0.25), the `Variables` used in the study (0.25), and how the data was managed (0.25)? 
-
-Are there graphs for at least two of the categorical variables? (0.25) Is there a sentence or two describing what the reader is viewing? (0.25)  
-
-Is there either a histogram or density plot of one of the numeric variables proposed in the study? (0.25)
-
-Is there a bivariate graph of the principal constructs the researcher is proposing to study? (0.50)
-
-Is there a multivariate graph of the principal constructs the researcher is proposing to study? (0.50)
-
-Do all graphs have the *x-* and *y-*axes labeled appropriately? (0.25). Do all graphs have descriptive titles? (0.25)
+Field      | Excellent          |  Competent      |  Needs Work
+-----------|--------------------|-----------------|-------------------
+The document (*.html) opens without issue and was created using an *Rmd file. | The document opens without issue and no author name is present. (0.3) | The document opens but author's name is visible (0.2) | The document does not open. (0.1)
+Purpose/Variables | The purpose and goals of the study are clearly explained. The variables (names) and data set (name) the author is working with are described. (0.3) |  The purpose or goals of the study are unclear. Only one of either the variables (names) or the data set (name) are discussed. (0.2) | No discussion of the purpose or goals of the study.  Neither the variables (names) or data set (name) are discussed. (0.1)
+Clarity | Few errors of grammar and usage; any minor errors do not interfere with meaning.  Language style and word choice are highly effective and enhance meaning.  Style and word choice are appropriate for the assignment. (0.3) | Some errors of grammar and usage; errors do not interfere with meaning.  Language style and word choice are for the most part effective and appropriate for the assignment.  (0.2)  | Major errors of grammar and usage make meaning unclear.  Language style and word choice are ineffective and/or inappropriate. (0.1) 
+DataManagement | Clear explanation of the selected group and how the data was managed. Missing values are properly coded, variable names are recoded to readable names, and factors are given informative labels.  (0.3) | Unclear explanation of the selected group or how the data was managed. Missing values are properly coded, variable names from the data set are renamed, and factors are given informative labels.  (0.2)| Unclear explanation of the selected group or how the data was managed. Missing values are not properly coded, variable names from the data set are not renamed, and factors are not given informative labels.  (0.1)
+Graphs | There are at least two different bar plots of categorical variables with appropriate labels and R code.  A sentence or two explains each barplot mentioning features that may be present such as unexpected results, uneven distributions, extra categories, unbalanced experiments, missing values, etc.  There is a least one histogram or density plot of a numeric variable proposed in the study.  When describing the distribution of the numeric variable, the author describes the shape and uses appropriate statistics to characterize the center and spread of the distribution.  There are at least two bivariate/multivariate graphs of the principal constructs the researcher is proposing to study. (1.8) | There is only one bar plot of a categorical variable with appropriate labels and R code.  A sentence or two explains the barplot mentioning features that may be present such as unexpected results, uneven distributions, extra categories, unbalanced experiments, missing values, etc.  There is a least one histogram or density plot of a numeric variable proposed in the study.  When describing the distribution of the numeric variable, the author describes the shape and uses inappropriate statistics to characterize the center and spread of the distribution.  There is only one bivariate/multivariate graph of the principal constructs the researcher is proposing to study. (1.4) | No barplots, histograms, density plots, or bivariate/multivariate graphs are shown in the document.  (0.1)
 
 #### Optional
 * Read chapter 9 of [Reproducible Research with R and RStudio](https://github.com/christophergandrud/Rep-Res-Book).
