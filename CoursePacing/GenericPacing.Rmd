@@ -189,7 +189,7 @@ Document (*.html) opens without issue and was created using an *Rmd file | Docum
 Purpose/Variables | The purpose and goals of the study are clearly explained. The variables (names) and data set (name) the author is working with are described (0.5) |  The purpose or goals of the study are unclear. Only one of either the variables (names) or the data set (name) are discussed. (0.3) | No discussion of the purpose or goals of the study.  Neither the variables (names) or data set (name) are discussed. (0.1)
 Clarity | Few errors of grammar and usage; any minor errors do not interfere with meaning.  Language style and word choice are highly effective and enhance meaning.  Style and word choice are appropriate for the assignment. (0.5) | Some errors of grammar and usage; errors do not interfere with meaning.  Language style and word choice are for the most part effective and appropriate for the assignment.  (0.3)  | Major errors of grammar and usage make meaning unclear.  Language style and word choice are ineffective and/or inappropriate. (0.1) 
 DataManagement | Clear explanation of the selected group and how the data was managed. Missing values are properly coded, variable names are recoded to readable names, and factors are given informative labels.  (1.0) | Unclear explanation of the selected group or how the data was managed. Missing values are properly coded, variable names from the data set are renamed, and factors are given informative labels.  (0.7)| Unclear explanation of the selected group or how the data was managed. Missing values are not properly coded, variable names from the data set are not renamed, and factors are not given informative labels.  (0.1)
-Graphs | There are barplots for three different categorical variables with appropriate labels and R code.  A sentence or two explains each barplot mentioning features that may be present such as unexpected results, uneven distributions, extra categories, unbalanced experiments, missing values, etc.  (0.6) | There are barplots for three different categorical variables but the barplots do not have appropriate labels or R code is not shown. A sentence or two explains each barplot mentioning features that may be present such as unexpected results, uneven distributions, extra categories, unbalanced experiments, missing values, etc. (0.4) | No barplots are shown in the document.  (0.1)
+Graphs | There are barplots for three different categorical variables with appropriate labels and R code.  A sentence or two explains each barplot mentioning features that may be present such as unexpected results, uneven distributions, extra categories, unbalanced experiments, missing values, etc.  (0.5) | There are barplots for three different categorical variables but the barplots do not have appropriate labels or R code is not shown. A sentence or two explains each barplot mentioning features that may be present such as unexpected results, uneven distributions, extra categories, unbalanced experiments, missing values, etc. (0.4) | No barplots are shown in the document.  (0.1)
 
 
 * Revise and push your **Research Plan Assignment** to a folder named **ResearchPlan** in your private repository no later than 5:00 PM Friday.  I will grade your **Research Plan Assignment** using the Grading Rubric for **Research Plan Assignment** (PR#2).  I will also check to make sure the document compiles based on the `*.Rmd` and `*.bib` files in your **ResearchPlan** folder.  
@@ -214,7 +214,7 @@ Sources | five or more sources less than 10 years old --- references are automat
 * Watch [Graphing 1 Video](https://www.youtube.com/watch?v=7_b6Rd9Vad8&list=PLDEF0B9CBD27AD37E&index=54).
 * Work on **Univariate Graphing Assignment** PDS.
 * The **Univariate Graphing Assignment** is due NLT 5 PM Friday (Oct 2).  Submit assignment.
-via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Univariate Graphing Assignment** is (http://www.crowdgrader.org/).
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Univariate Graphing Assignment** is [https://www.crowdgrader.org/crowdgrader/venues/view_venue/1428](https://www.crowdgrader.org/crowdgrader/venues/view_venue/1428).
 
 #### Grading Rubric for **Univariate Graphing Assignment**  (PR#4)
 
@@ -241,7 +241,7 @@ Graphs | There are at least two different bar plots of categorical variables wit
  
 * Work on **Bivariate Graphing Assignment**. 
 * **Bivariate Graphing Assignment** due NLT 5 PM Friday (Oct 9).  Submit assignment
-via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Bivariate Graphing Assignment** is (http://www.crowdgrader.org/)
+via [https://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Bivariate Graphing Assignment** is [https://www.crowdgrader.org/crowdgrader/venues/view_venue/1429](https://www.crowdgrader.org/crowdgrader/venues/view_venue/1429)
 
 **Bivariate Graphing Assignment** 
 
