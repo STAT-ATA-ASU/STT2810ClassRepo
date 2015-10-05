@@ -28,7 +28,7 @@ p + geom_density(fill = "pink") +
 
 The mean is `r mean(DF$x)` and the standard deviation is `r sd(DF$x)`.
 
-```{r}
+```{r, fig.width = 10, fig.height = 10}
 DF <- data.frame(x = ej)
 p <- ggplot(data = DF, aes(x = x))
 p +  geom_histogram(fill = "lightblue") + 
