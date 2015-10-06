@@ -129,7 +129,8 @@ ggplot(data = nesarc, aes(x = bymedian, y = NumberNicotineSymptoms, fill = bymed
 ggplot(data = nesarc, aes(x = bymedian, y = NumberNicotineSymptoms, fill = bymedian)) + 
   geom_violin() + 
   theme_bw() + 
-  labs(x= "", y = "Number of Nicotine Symptoms", fill = "Ethnicity")
+  labs(x= "", y = "Number of Nicotine Symptoms", fill = "Ethnicity") +
+  theme(axis.text.x  = element_text(angle = 85, vjust = 0.5)) 
 ####  Scatterplot
 ####
 library(PASWR2)
