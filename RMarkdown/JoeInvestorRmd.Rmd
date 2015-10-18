@@ -1,0 +1,66 @@
+---
+title: "Stock Market"
+author: "Joe Investor"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+UNC Growth agressive fund: American Funds EuroPacific Growth Fund-R6 (`RERGX`) 13%, Cohen & Steers Institutional Realty Shares (`CSRSX`) 5%, Eagle Small Cap Growth Fund Class R6 (`HSRUX`) 3%, Goldman Sachs Small Cap Value Fund Institutional Class (`GSSMX`) 3%, JPMorgan Core Bond Fund R6 (`JCBUX`) 10%, John Hancock Disciplined Value Fund Class R5 (`JDVVX`) 15%, MFS International Value Fund Class R5 (`MINJX`) 12%, MFS Mid Cap Value Fund Class R5 (`MVCKX`) 7%, MassMutual Select Mid Cap Growth Equity II Fund Class I (`MEFZX`), Metropolitan West Total Return Bond Plan Class Shares (`MWTSX`) 10%, and T. Rowe Price Institutional Large Cap Growth (`TRLGX`) 15%. 
+
+
+```{r message = FALSE, warining = FALSE, echo = FALSE}
+library(quantmod)
+library(xts)
+RERGX<- getSymbols("RERGX", auto.assign = FALSE)
+chartSeries(RERGX, theme = chartTheme("white", bg.col = "white"))
+```
+
+```{r echo = FALSE}
+CSRSX <- getSymbols("CSRSX", auto.assign = FALSE)
+chartSeries(CSRSX, theme = chartTheme("white", bg.col = "white"))
+```
+
+```{r echo = FALSE}
+# HSRUX <- getSymbols("HSRUX ", auto.assign = FALSE)
+# chartSeries(HSRUX , theme = chartTheme("white", bg.col = "white"))
+```
+
+```{r echo = FALSE}
+GSSMX <- getSymbols("GSSMX", auto.assign = FALSE)
+chartSeries(GSSMX, theme = chartTheme("white", bg.col = "white"))
+```
+
+```{r echo = FALSE}
+JCBUX <- getSymbols("JCBUX", auto.assign = FALSE)
+chartSeries(JCBUX, theme = chartTheme("white", bg.col = "white"))
+```
+
+```{r echo = FALSE}
+JDVVX <- getSymbols("JDVVX", auto.assign = FALSE)
+chartSeries(JDVVX, theme = chartTheme("white", bg.col = "white"))
+```
+
+```{r echo = FALSE}
+MINJX <- getSymbols("MINJX", auto.assign = FALSE)
+chartSeries(MINJX, theme = chartTheme("white", bg.col = "white"))
+```
+
+```{r echo = FALSE}
+# MVCKX <- getSymbols("MVCKX ", auto.assign = FALSE)
+# chartSeries(MVCKX , theme = chartTheme("white", bg.col = "white"))
+```
+
+```{r echo = FALSE}
+MEFZX <- getSymbols("MEFZX", auto.assign = FALSE)
+chartSeries(MEFZX, theme = chartTheme("white", bg.col = "white"))
+```
+
+```{r echo = FALSE}
+# MWTSX <- getSymbols("MWTSX ", auto.assign = FALSE)
+# chartSeries(MWTSX , theme = chartTheme("white", bg.col = "white"))
+```
+
+```{r echo = FALSE}
+TRLGX <- getSymbols("TRLGX", auto.assign = FALSE)
+chartSeries(TRLGX, theme = chartTheme("white", bg.col = "white"))
+```

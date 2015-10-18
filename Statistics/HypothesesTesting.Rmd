@@ -1,0 +1,92 @@
+---
+title: "Hypotheses Testing"
+author: "Alan Arnholt"
+date: "`r Sys.Date()`"
+output: html_document
+params:
+  seed: 2345
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, message = FALSE, warning = FALSE, fig.align = "center")
+```
+
+Generating some random data:
+
+```{r}
+set.seed(params$seed)
+score <- c(rnorm(25, 95, 15), rnorm(25, 105, 15))
+school <- gl(n = 2, k = 25, labels = c("Blowing Rock", "Hardin Park"))
+DF <- data.frame(score = score, school = school)
+```
+
+Test whether the mean IQ score is the same for Blowing Rock and Hardin Park.
+
+$$H_0: \mu_{Blowing Rock} = \mu_{Hardin Park}$$ versus $$H_1: \mu_{Blowing Rock} \neq \mu_{Hardin Park}$$
+
+Graphs first:
+
+```{r}
+library(ggplot2)
+ggplot(data = DF, aes(x = school, y = score)) +
+  geom_boxplot() + 
+  theme_bw()
+```
+
+Test next:
+
+```{r}
+TR <- t.test(score ~ school, data = DF, var.equal = TRUE)
+TR
+```
+
+* Statistical conclusion: `r ifelse(TR$p.value < 0.05, "reject the null hypothesis.", "fail to reject the null hypothesis.")` 
+* English conclusion: `r ifelse(TR$p.value < 0.05, "evidence suggests the average IQ scores are different.", "insufficient evidence to suggest the average IQ scores are different.")`
+
+Same test with ANOVA:
+
+```{r}
+mod <- aov(score ~ school, data = DF)
+AR <- summary(mod)
+AR
+```
+
+* Statistical conclusion: `r ifelse(AR[[1]][1, 5] < 0.05, "reject the null hypothesis.", "fail to reject the null hypothesis.")`
+* English conclusion: `r ifelse(AR[[1]][1, 5] < 0.05, "evidence suggests an association between average IQ and school district.", "not enought evidence to suggest an association between average IQ and school district.")`
+
+
+Generating `DF2`:
+
+```{r}
+set.seed(params$seed)
+score <- c(rnorm(25, 95, 15), rnorm(25, 100, 15), rnorm(25, 105, 15))
+school <- gl(n = 3, k = 25, labels = c("Two Rivers", "Blowing Rock", "Hardin Park"))
+DF2 <- data.frame(score = score, school = school)
+```
+
+Graphs first:
+
+```{r}
+ggplot(data = DF2, aes(x = school, y = score)) + 
+  geom_boxplot() + 
+  theme_bw()
+```
+
+```{r}
+mod <- aov(score ~ school, data = DF2)
+AR <- summary(mod)
+AR
+```
+
+* Statistical conclusion: `r ifelse(AR[[1]][1, 5] < 0.05, "reject the null hypothesis.", "fail to reject the null hypothesis.")`
+* English conclusion: `r ifelse(AR[[1]][1, 5] < 0.05, "evidence suggests an association between average IQ and school district.", "not enought evidence to suggest an association between average IQ and school district.")`
+
+Post Hoc Tests:
+
+```{r}
+TukeyHSD(mod)
+opar <- par(no.readonly = TRUE)
+par(mar = c(5.1, 11.1, 4.1, 2.1), las = 1) # Enlarge left margin
+plot(TukeyHSD(mod))
+par(opar)  # return to defaults
+```

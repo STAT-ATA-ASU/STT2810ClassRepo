@@ -278,7 +278,7 @@ You should revise your assignment from last week as needed based on peer comment
 
  
 * Work on the **ANOVA assignment**.
-* The **ANOVA assignment** is due NLT 5 PM Friday (Oct 23).  Submit the assignment via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **ANOVA Assignment** is (http://www.crowdgrader.org/).
+* The **ANOVA assignment** is due NLT 5 PM Friday (Oct 23).  Submit the assignment via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **ANOVA Assignment** is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/1508).
 
 **ANOVA Assignment** 
 
