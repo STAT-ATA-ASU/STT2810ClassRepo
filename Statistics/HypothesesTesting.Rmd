@@ -4,8 +4,8 @@ author: "Alan Arnholt"
 date: "`r Sys.Date()`"
 output: html_document
 params:
-  seed: 136
-  alt: "less"
+  seed: 154
+  alt: "two.sided"
   alpha: 0.05
 ---
 
