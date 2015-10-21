@@ -6,7 +6,7 @@ output: html_document
 params:
   seed: 154
   alt: "two.sided"
-  alpha: 0.05
+  alpha: 0.10
 ---
 
 ```{r, echo = FALSE, message = FALSE}

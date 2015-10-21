@@ -1,7 +1,7 @@
 ---
 title: "Sampling Distributions"
 author: "Alan T. Arnholt"
-date: "March 16, 2015"
+date: "`r Sys.Date()`"
 output: html_document
 ---
 
@@ -250,15 +250,21 @@ Statistical Inference Through a Randomization Test
 ==================================================
 
 Whether they take the form of significance tests or confidence intervals, inferential procedures rest on the **fundamental question for inference:** "What would happen if we did this many times?" Let's unpack this question in the context of the female mice schistosomiasis.  We observed a difference in means of 7.6 = 12 - 4.4 worms between the control and treatment groups.  While we expect that this large difference reflects the effectiveness of the drug, it is possible that chance alone could explain this difference.  This "chance alone" position is usually called the null hypothesis and includes the following assumptions:
+
 * The number of parasitic worms found in the liver naturally varies from mouse to mouse.
+
 * Whether or not the drug is effective, there clearly is variability in the responses of mice to the infestation of schistosomes.
+
 * Each group exhibits this variability, and even if the drug is not effective, some mice do better than others.
+
 * The only explanation for the observed difference of 7.6 worms in the means is that the random allocation randomly placed mice with  larger numbers of worms in the control group and mice with smaller numbers of worms in the treatment group.
 
 In this study, the **null hypothesis** is that the treatment has no effect on the average worm count, and it is denoted as 
 
 > $H_0:\mu_{control} = \mu_{treatment}$
+
 Another way to write this hypothesis is 
+
 > $H_0: \text{the treatment has no effect on average worm count}$
 
 Alternative hypotheses can be "one-sided, greater-than" (as in this investigation), "one-sided, less-than" (the treatment causes an increase in worm count), or "two-sided" (the treatment is different, in one direction or the other, from the mean).  We chose to test a one-sided hypothesis because there is a clear research interest in one direction.  In other words, we will take action (start using the drug) only if we can show that K11777 reduces worm count.
@@ -298,6 +304,7 @@ While physical simulations (such as the index cards activity) help us understand
 Two-Sample Permutation Test
 =============================
 > Pool the _m + n_ values.
+
 * **repeat**
   * Draw a resample of size _m_ without replacement.
   * Use the remaining _n_ observations for the other sample.
@@ -403,3 +410,25 @@ ggplot(data = data.frame(x = ts), aes(x = x)) +
 ```
 
 ## Add more notes here
+
+### Explain in your own words
+
+```{r}
+gusano <- ND$worms
+gusano
+OBS <- mean(gusano[6:10]) - mean(gusano[1:5])
+OBS
+ANS <- t(combn(10, 5))
+head(ANS)
+dim(ANS)
+np <- dim(ANS)[1]
+np
+means <- numeric(np)
+for(i in 1:np){
+  means[i] <- mean(gusano[ANS[i, ]]) - mean(gusano[-ANS[i, ]])
+}
+sort(means)
+sum(means >= OBS)
+pvalue <- sum(means >= OBS)/np
+pvalue
+```
