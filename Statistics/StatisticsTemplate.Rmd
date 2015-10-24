@@ -350,7 +350,7 @@ plot(CIs, las = 1)
 par(opar)                        # restore original settings
 ```
 
-Evidence (*p* = `r summary(eth.aov)[[1]][1,5]`) suggests a strong relationship between ethnicity and the estimated number of cigarettes an individual smokes per month. Post hoc comparisons suggest mean differences in the number of cigarettes smoked per month for African American and Caucasian, Asian and Caucasian, and Hispanic and Caucasian.
+Evidence (p-value = $`r summary(eth.aov)[[1]][1,5]`$) suggests a strong relationship between ethnicity and the estimated number of cigarettes an individual smokes per month. Post hoc comparisons suggest mean differences in the number of cigarettes smoked per month for African American and Caucasian, Asian and Caucasian, and Hispanic and Caucasian ethnic groups.
 
 ## Chi Square Tests
 
