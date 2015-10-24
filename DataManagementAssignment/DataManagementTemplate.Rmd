@@ -139,7 +139,7 @@ g1
 g2 <- ggplot(data = na.omit(nesarc.sub), aes(x = CigsSmokedFac)) +
   geom_bar(fill = "brown")
 g2
-g3 <- ggplot(data = na.omit(nesarc.sub), aes(SmokingFreq)) +
+g3 <- ggplot(data = na.omit(nesarc.sub[ , "SmokingFreq", drop = FALSE]), aes(SmokingFreq)) +
   geom_bar(fill = "gray") +
   labs(x = "", y = "Total Number", title = "Smoking Frequency for Young Adults") +
   theme_bw() + 
@@ -221,25 +221,47 @@ g1 +
 ```
 
 ```{r}
-g2 <- ggplot(data = na.omit(nesarc.sub), aes(x = SmokingFreq, fill = TobaccoDependence)) +
+g2 <- ggplot(data = nesarc.sub, aes(x = SmokingFreq, fill = TobaccoDependence)) +
   geom_bar(position = "fill") + 
   theme_bw()
 g2
- g3 <- g2 + facet_grid(Sex ~ .) +
+g3 <- g2 + facet_grid(Sex ~ .) +
   theme(axis.text.x  = element_text(angle = 85, vjust = 0.5)) +
   labs(x = "", y = "", title = "Fraction of young adult smokers with and without\n nicotine dependence by smoking frequency") + 
   scale_fill_discrete(name="Tobacco Addiction\nStatus")
- g3
+g3
+# Note
+summary(nesarc.sub[ , c("SmokingFreq", "TobaccoDependence", "Sex")])
+summary(na.omit(nesarc.sub[ , c("SmokingFreq", "TobaccoDependence", "Sex")]))
+# Compare to 
+summary(na.omit(nesarc.sub))
+#
+g2 <- ggplot(data = na.omit(nesarc.sub[ , c("SmokingFreq", "TobaccoDependence", "Sex"), drop = FALSE]), aes(x = SmokingFreq, fill = TobaccoDependence)) +
+  geom_bar(position = "fill") + 
+  theme_bw()
+g2
+g3 <- g2 + facet_grid(Sex ~ .) +
+  theme(axis.text.x  = element_text(angle = 85, vjust = 0.5)) +
+  labs(x = "", y = "", title = "Fraction of young adult smokers with and without\n nicotine dependence by smoking frequency") + 
+  scale_fill_discrete(name="Tobacco Addiction\nStatus")
+g3
 ```
 
 
 ```{r}
-ggplot(data = na.omit(nesarc.sub), aes(x = CigsSmokedFac, fill = TobaccoDependence)) +
+ggplot(data = nesarc.sub, aes(x = CigsSmokedFac, fill = TobaccoDependence)) +
   geom_bar(position = "fill") + 
   theme_bw() + facet_grid(Sex ~ Depression) +
   theme(axis.text.x  = element_text(angle = 85, vjust = 0.5)) +
   labs(x = "Estimated Number of Cigarettes Smoked per Month", y = "", title = "Fraction of young adult smokers with and without\n nicotine dependence by smoking quantity") + 
   scale_fill_discrete(name="Tobacco Addiction\nStatus") 
+# Compare to 
+ggplot(data = na.omit(nesarc.sub[ , c("CigsSmokedFac", "TobaccoDependence", "Sex", "Depression"), drop = FALSE]), aes(x = CigsSmokedFac, fill = TobaccoDependence)) +
+  geom_bar(position = "fill") + 
+  theme_bw() + facet_grid(Sex ~ Depression) +
+  theme(axis.text.x  = element_text(angle = 85, vjust = 0.5)) +
+  labs(x = "Estimated Number of Cigarettes Smoked per Month", y = "", title = "Fraction of young adult smokers with and without\n nicotine dependence by smoking quantity") + 
+  scale_fill_discrete(name="Tobacco Addiction\nStatus")                     
 ```
  
 ### Using Mosaic Plots
