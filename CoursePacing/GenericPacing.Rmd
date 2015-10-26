@@ -314,7 +314,7 @@ Is there an appropriate explanation of the results including a post hoc test wit
 
 * Work on the **Chi-Square Assignment**. 
 * The **Chi-Square assignment** is due NLT 5 PM Friday (Oct 30).  Submit assignment
-via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Chi-Square Assignment** is (http://www.crowdgrader.org/).
+via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Chi-Square Assignment** is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/1550).
 
 **Chi-Square Assignment** 
 
