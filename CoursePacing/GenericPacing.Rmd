@@ -358,7 +358,7 @@ Is there a sentence or two describing the results of the Chi-Square test(s)? (0.
 
  
 * Work on the **Correlation Assignment**. 
-* The **Correlation Assignment** is due NLT 5 PM Friday (Nov 6).  Submit the assignment via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Correlation Assignment** is (http://www.crowdgrader.org).
+* The **Correlation Assignment** is due NLT 5 PM Friday (Nov 6).  Submit the assignment via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Correlation Assignment** is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/1580).
 
 **Correlation Assignment** 
 
@@ -378,13 +378,11 @@ Is there a multivariate graph of the principal constructs the researcher is prop
 
 Do all graphs have the *x-* and *y-*axes labeled appropriately? (0.1). Do all graphs have descriptive titles? (0.1)
 
-Is there a section for the Correlation assignment describing the two numeric variables the author uses? (0.5)
+Is there a section for the Correlation assignment describing the two numeric variables the author uses? (0.6)
 
-Is there code and output for computing the correlation coeffiecient? (0.4)
+Is there code and output for computing and testing the correlation coefficient?  Is there a scatterplot with appropriate labels? (0.6)
 
-Does the author explain their results following the example in PDS? (0.3)
-
-Does the author explain their results? (graphs should be used in the explanation) (0.3)
+Does the author explain their results following the example in PDS (direction, form, strength, and outliers)? (0.6)
 
 #### Optional
 
