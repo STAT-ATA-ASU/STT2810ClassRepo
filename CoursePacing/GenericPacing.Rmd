@@ -397,8 +397,7 @@ Does the author explain their results following the example in PDS (direction, f
 
  
 * Work on the the **Regression Assignment** 
-* The **Regression Assignment** is due NLT 5 PM Friday (Nov 13).  Submit the assignment
-via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Regression Assignment** is (http://www.crowdgrader.org/).
+* The **Regression Assignment** is due NLT 5 PM Friday (Nov 13).  Submit the assignment via [http://www.crowdgrader.org](http://www.crowdgrader.org).  The direct link for the **Regression Assignment** is (https://www.crowdgrader.org/crowdgrader/venues/view_venue/1592).
 
 **Regression Assignment** 
 
@@ -406,11 +405,15 @@ This is a continuation of the material submitted for the **Correlation** submitt
 
 #### Grading Rubric for **Regression Assignment** (PR#9)
 
+Does the document have sections that explain the Purpose of the Study (0.3), the Variables used in the study (0.3), and how the data was managed (0.4)?
+
+Is all of the data management done near the beginning of the document (0.5)? 
+
 Is there a section for the Regression assignment? (0.5)
 
-Is there code and output for testing appropriate models? (1.5)
+Is there code and output for testing appropriate regression models? (0.5)
 
-Does the author describe their results appropriately? (1)
+Does the author describe their regression results appropriately? (0.5)
 
 #### Optional
 
