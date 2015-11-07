@@ -35,7 +35,7 @@ Watch the following videos:
 * [Colaboration and time travel: version control with git, github and RStudio (48 minutes)](https://www.rstudio.com/resources/webinars/archives/)      
 * [Reproducible Reporting (58 minutes)](https://www.rstudio.com/resources/webinars/archives/) 
 
-* Test drive RStudio by following the directions from [Jenny Bryan's STAT 545 course](http://stat545-ubc.github.io/git05_first-use-git-rstudio.html).
+* Test drive RStudio by following the directions from [Jenny Bryan's STAT 545 course](https://stat545-ubc.github.io/git07_git-github-rstudio.html).
 
 * Select a data set you will work with and update your GitHub repository **README** with your chosen data set.  
 
