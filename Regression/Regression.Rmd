@@ -2,7 +2,10 @@
 title: "Regression"
 author: "Alan T. Arnholt"
 date: "April 10, 2015"
-output: html_document
+output: 
+  html_document: 
+    highlight: zenburn
+    theme: readable
 ---
 
 ```{r, label = "Setup", echo = FALSE, message = FALSE}
