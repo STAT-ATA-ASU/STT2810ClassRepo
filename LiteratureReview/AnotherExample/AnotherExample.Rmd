@@ -2,7 +2,7 @@
 title: "Multiple Bibliography Files"
 author: "Alan Arnholt"
 date: '`r Sys.Date()`'
-output: html_document
+output: word_document
 nocite: |
   @riggs_adolescent_2007, @hu_developmental_2008, @caraballo_linking_2009, @rose_nicotine_2010, @van_de_ven_patterns_2010, @chen_relationships_1997, @dierker_association_2007, @dierker_importance_2008
 csl: ./CSLstyles/chicago-author-date.csl
