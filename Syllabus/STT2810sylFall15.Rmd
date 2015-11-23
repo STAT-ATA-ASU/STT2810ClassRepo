@@ -1,7 +1,7 @@
 ---
 title: "STT 2810 Syllabus - Fall 2015"
 author: ''
-date: '`r Sys.Date()`'
+date: 'Fall 2015'
 output: html_document
 ---
 
@@ -37,7 +37,7 @@ This course covers data management; descriptive statistics; inferential statisti
 
 **Course Text:**
 
-The course will rely primarily on the text [_Passion Driven Statistics (Light Weight)_](https://github.com/alanarnholt/PDS-Book) also available on [Rpubs](http://rpubs.com/arnholt/97944). Students may find the excellent text [_Reproducible Research with R and RStudio, Second Edition_](http://christophergandrud.github.io/RepResR-RStudio/) by Christopher Gandrud helpful.
+The course will rely primarily on the text [_Passion Driven Statistics (Light Weight)_](https://github.com/alanarnholt/PDS-Book) also available on [Rpubs](http://rpubs.com/arnholt/126376). Students may find the excellent text [_Reproducible Research with R and RStudio, Second Edition_](http://christophergandrud.github.io/RepResR-RStudio/) by Christopher Gandrud helpful.
 
 **Course Grading:**
 
