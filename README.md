@@ -6,7 +6,7 @@ Welcome to STT 2810!
 
 * The `R` package `PDS` is maintained in the [PDS](https://github.com/alanarnholt/PDS) repository.
 
-* A version (possibly dated) of *Passion Driven Statistics (Light Weight)* is viewable on [RPubs](https://rpubs.com/arnholt/97944).
+* A version (possibly dated) of *Passion Driven Statistics (Light Weight)* is viewable on [RPubs](http://rpubs.com/arnholt/126376).
 
 * Daily/weekly assignments will be updated and maintained in the `CoursePacing` directory of this repository. 
 
