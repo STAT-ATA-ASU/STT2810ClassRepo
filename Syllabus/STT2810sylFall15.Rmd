@@ -1,8 +1,8 @@
 ---
 title: "STT 2810 Syllabus - Fall 2015"
 author: ''
-date: 'Fall 2015'
-output: html_document
+date: "Fall 2015"
+output: pdf_document
 ---
 
 **Instructor:**  Dr. Alan T. Arnholt    
