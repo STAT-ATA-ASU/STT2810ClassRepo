@@ -11,11 +11,11 @@ output:
 
 * [MyPearson](http://www.pearsonmylabandmastering.com/northamerica/)
 * [Course Information](./CourseInfo)
-* [Chapter 1-5 files](./Chapters01-05)
-* [Chapters 6-8, 11, 13-15](./Chapters06-08_11_13-15)
-* [Chapters 17-22](./Chapters17-22)
-* [Final Exam Information](./FinalExamInfo)
-* [Stat Crunch & Sucess Helps](./StatCrunch)
+* [Chapter 1-5 files](https://github.com/STAT-ATA-ASU/STT2810ClassRepo/tree/gh-pages/Fichero/Chapters01-05)
+* [Chapters 6-8, 11, 13-15](https://github.com/STAT-ATA-ASU/STT2810ClassRepo/tree/gh-pages/Fichero/Chapters06-08_11_13-15)
+* [Chapters 17-22](https://github.com/STAT-ATA-ASU/STT2810ClassRepo/tree/gh-pages/Fichero/Chapters17-22)
+* [Final Exam Information](https://github.com/STAT-ATA-ASU/STT2810ClassRepo/tree/gh-pages/Fichero/FinalExamInfo)
+* [Stat Crunch & Sucess Helps](https://github.com/STAT-ATA-ASU/STT2810ClassRepo/tree/gh-pages/Fichero/StatCrunch)
 * [Concordant Example](http://support.minitab.com/en-us/minitab/17/topic-library/basic-statistics-and-graphs/tables/data-and-table-layouts/what-are-concordant-and-discordant-pairs/)
 
 ***
