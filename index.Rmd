@@ -3,7 +3,7 @@ title: "Welcome"
 ---
 
 
-* The course syllabus is stored in the [`Syllabus`](./Syllabus/STT2810sylFall15.html) directory of the STT 2810 repository.
+* The course syllabus is stored in the [`Syllabus`](./Syllabus/STT2810sylFall16.html) directory of the STT 2810 repository.
 
 * Course pacing and assignments are stored in the [`CoursePacing`](./CoursePacing/GenericPacing.html) directory of the STT 2810 repository.
 

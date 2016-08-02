@@ -1,0 +1,177 @@
+---
+title: "STT 2810 Syllabus - Fall 2016"
+author: ''
+date: ''
+output:
+  html_document:
+    css: ../asu.css
+    highlight: textmate
+    theme: cosmo
+---
+
+**Instructor:**  Dr. Alan T. Arnholt    
+**Office:** Walker Hall 340      
+**Office Hours:** 10-11:30 M, W, and F
+
+Make an appointment to see me by clicking https://arnholtat.youcanbook.me/.
+
+
+**Course Description:**  
+
+An introduction to statistical problem solving and methodology. Topics include tabulation and graphical representations of univariate and bivariate data; probability, statistical distributions, confidence intervals and hypothesis testing. Emphasis will be on conceptual understanding and interpretation of results rather than theoretical development. Statistical software will be utilized in the analysis of data and in the development of statistical and probabilistic concepts. STT 2810 is not open to students with credit for STT 1810, STT 2820, STT 3850, or STT 4811. Prerequisite: MAT 1010 or equivalent. 
+
+**[Course Objectives](./STT2810SDRequired.pdf)**
+
+###PHYSICAL REQUIREMENTS
+
+**Course Text:** *Stats: Data and Models* by Richard D. De Veaux, Paul F. Velleman, and David E. Bock 4th ed. (available on MyPearson once you have an account)
+
+**My Stat Labs:** This is the course management system for this class. You may purchase an access code from the bookstore or directly from the site. http://www.pearsonmylabandmastering.com
+
+**Time:** At least six hours outside of class **EACH AND EVERY WEEK** to spend working in the computer lab, reading material, visiting office hours, watching videos, doing homework, and studying.
+
+**Basics:** You must have a dedicated statistics notebook and a pencil in class every day. Even though we do most of our work on the computer, you will want to take notes every class meeting.
+
+###GRADE COMPOSITION
+
++----------------------------------+-------+
+|Quizzes/Attendance/Participation: |   20% | 
++----------------------------------+-------+
+|Homework/Reading:                 |   35% | 
++----------------------------------+-------+
+|Tests:                            |   30% |
++----------------------------------+-------+
+|Final:                            |   20% |
++----------------------------------+-------+
+|Total:                            |  105% |
++----------------------------------+-------+
+
+Quizzes show up as 20% on MyPearson because attendance (about 5% extra credit) is part of the quiz score. Also, to find your actual grade, you should multiply the percent given by 105, because the computer only understands scores up to 100%.
+
+
+### EXPOSITION OF GRADE COMPOSITION
+
+**Reading:** Part of the homework points include reading MyPearson slides related to the day’s lecture. You must complete the reading before you will be allowed to start the homework.
+
+**Homework:** Homework will be assigned daily and is generally due before the next lecture day at 9 a.m. Often, there will be opportunities to work on homework problems during class time. This time is valuable, so leaving early will negatively affect participation. Homework should be completed with an 85% or higher before a quiz is started, but I suggest you make it 100%, as this is the part of your grade which is the easiest to make excellent. If you wish to attempt a quiz more than once, you must have higher than 85% on all your homework for any chapter. If you do not complete your homework by its due date and time, you may continue to work on it for 72% of what you would have earned if you had done it on time until 11 p.m. on the last day of class. (Note that it is IMPOSSIBLE to complete all of an assignment late and take a quiz more than once.)
+
+**Quizzes:** Quizzes will be on MyPearson and may not be done more than once until all the homework for the chapter is completed with a grade of 85% or higher. If you do not start your homework in a timely manner, you may not be able to get an 85%, and you will forfeit the right to take the quiz more than once for that chapter. You will have three attempts to score well on your quizzes, so do not guess. If you score poorly on your first attempt, figure out why…do not try to “guess” a better grade. Quizzes must be completed by 6 p.m. the day the next chapter will be covered. Late quizzes will be assigned a grade of zero, so make sure you attempt your quiz at least once before its due date.
+
+**Tests and Final:**  The tests and final will be administered through MyPearson. You may bring 93.5 in^2^ of notes to any test (8 ½ by 11 inch paper’s front or 5 ½ by 8 ½ inch two sided, for example) as well as a calculator. Bags, backpacks, notebooks, etc. should be off your work area and out of the aisles. Tests are timed by MyPearson and will be submitted when time runs out, finished or not. You must complete each test within the allotted class period. Extended testing time will be provided only for students submitting documentation to me from the Office of Disability Services. If you find it difficult to complete a test within the allotted time period, you have not mastered the material at the level necessary to prepare you for the test. The last test may be during the last week of classes.
+
+The final will be cumulative and given according to the University Calendar for this class. (Dates on the Pearson site under “show all announcements.”)
+
+**Attendance and Participation:** You have the opportunity to earn approximately 5 points with your attendance and participation during the semester. MyPearson does not allow more than 100% for a grade, so attendance and participation percents will be computed before grades are submitted to the registrar. (Your percent showing on MyPearson after the final will be multiplied by 1.05 to compute your final grade.)
+
+Each day, there will be an “attendance” quiz on MyPearson that requires a password. I will write the password on the board at the beginning of class, and you should do that quiz as soon as you arrive. Sharing the password with students who are not in class is an honor code violation. To avoid the appearance of password sharing, you should NOT have your cell phone out AT ALL once you enter the classroom.
+
+Any phone that is visible may be removed to the front desk until the end of the period.
+
+If you inform me by E-MAIL before you miss (or by midnight on the day you miss) that you will not be in class, I will “omit” that day’s attendance quiz from your final grade. If you do not inform me before a zero is entered why you have missed class, the zero will stand. Completing the common topics review assignment at the end of the semester also counts in your participation.
+
+Disrupting class with talking, cell phone visible presence/ringing, food or drink near the computers, coming late or leaving early, or other unpleasantness, will cause your participation percent to decrease at the discretion of the instructor, typically by having attendance scores set to zero instead of 100%.
+
+Cell phone use, texting, browsing the web, checking e-mail, having headphones on, and any other non-statistics related activities that occur during class will also cause the participation portion of your grade to decrease. Grade changes because of disruptive or dishonest behavior are entirely at the discretion of the instructor.
+
+**COMPUTER ERRORS:** In this class, we are working with computers. As I am sure you know, they are marvelous when they work and when they are correctly programmed. Sometimes, the web site we use will mark problems incorrect that are correct (not often). If that happens on a homework problem with rounding issues, you are expected to rework the problem before the due date (as you can work homework problems as often as you wish). If it happens on your best attempt on a quiz, you may e-mail me with why what you put is correct, and if you are right and the computer is wrong, I’ll adjust your score positively. Likewise, on tests, if you understand something the computer has marked wrong, you may come to me for score adjustments. If one of the problems this semester turns out to be “not working at all” for a significant number of students, I will post the problem number on MyPearson, and I will adjust everyone’s grade at the end of the semester to make up for that problem.
+
+### GENERAL POLICIES
+
+* Students are to arrive on time to class. If you arrive after I have started lecturing, you are late. If you are late, you are expected to enter the classroom silently. Do NOT disturb your neighbor as you are seated.
+
+* Once you get to class, you are expected to continue working until you are dismissed. Packing up before class is over disrupts the learning of your fellow students. If you have finished ALL of the assignments that are due by the NEXT class period, you may check out of class by showing me your gradebook. If you leave before a personal or general dismissal, your attendance for the day will likely be set to a zero.
+
+* Missed work earns a zero except for University directives. All your work for the semester (except tests and attendance quizzes) is available right now and can be completed online. Be sure to start your readings and homeworks in a timely manner so that you can score high enough to take your quizzes. Ideally, you start your homework that is due for the next class the day of lecture so that you can come to office hours, math lab, or write e-mail to get help in time to do well. No extensions are granted during the semester, so plan the time to do well. Tests or other assignments that will be missed because of a University excused absence must be completed before the following class meeting. (For example, if you are on a sporting team that is leaving for an away event on Thursday and a test will be Friday, you would be responsible for taking the test the Wednesday BEFORE the Friday you will miss; if the test is to be Monday, and you will be back Monday night, you could take the test on Tuesday.)
+
+* You are responsible for ALL content and work if you miss a class. Because ALL your assignments are available from the first day, there is no excuse for not completing them by their due dates (especially if you know you will be absent on certain dates now). Be sure to contact me before any class you must miss by e-mail to have an absence excused. Excused absences include religious observances, ASU sporting events, illness, death in the family, and possibly other circumstances that keep you out of class. If you do not inform me why you are missing from class before midnight on the day of the absence, no accommodation of any type is available to keep you from earning a zero on whatever was done or due during class that day. CONSIDERATION COUNTS!
+
+* All final course grades will be computed as described in this syllabus. Concern about your grade (passing the course, graduating) should be addressed by you, your behavior, and your continued effort throughout the semester, starting on the first day of class. At the end of the semester, your grade is a mathematical formula and will be computed as described in the syllabus. This syllabus is a legal contract.
+
+* Cell phones may not be out during class AT ALL. Having a cell phone out is an honor code violation for this class and will result in an immediate zero on your attendance for that day. You MUST have a separate calculator for statistics or use the one on the computer under the accessories menu. (Exceptions can be made for rescue personnel, single parents, or genuine emergencies which you discuss with me before class starts.)
+
+* No cell phones or beepers are to make noise during class. No exceptions! (If you are in one of the “exception” categories for having a cell phone out, it should be set to vibrate.) If your cell phone or beeper sounds during class, your participation total decreases. SILENCE YOUR PHONES!
+
+* No headphones that project noise are to be worn during class. Noise cancelling headphones are allowed as an ODS accommodation. (It is hard to concentrate on statistics with other noise playing in your ears!)
+
+* Please make an appointment to come to office hours. This allows me to make sure that I will be free and available when you want to come. If you have not made an appointment to see me, I may or may not be able to help you right then.
+
+* A 5-minute chat with your instructor in the first few weeks is beneficial. I will have a sign-up sheet next week for you to schedule that chat. This will help me learn your names faster and to understand better what you hope to gain from this course. The interview counts as one of your attendance quizzes. You are expected to attend the appointment you make. There is space for each student to make ONE appointment. If you make and miss an appointment, your attendance for the interview grade will be a zero. If you do not make an interview appointment, your “interview” attendance will be set to “omit.”
+
+* No food or drink is allowed near the computers…EVER…FOR ANY REASON…it is very bad for the computers to drink and eat. If you must have food or liquid during class, partake away from the computers. This includes water bottles, hard candy, and anything else that remotely resembles food. Eating or drinking near the computers will result in a loss of participation points.
+
+* Class time is for working on statistics. Only MyPearson and statistical software should be open once class starts. If other software is open on your machine, close it. If you use software other than what is needed to do your statistics, your participation grade will be decreased and you may be asked to leave class. (If I see you checking e-mail, looking at facebook, or doing other non-statistics work on your computer, your participation grade will decrease.)
+
+* Disruptive students may be asked to leave class for talking, beeper or cell phone buzzing, or generally unpleasant behaviors of any kind.
+
+* The Academic Integrity Code is in force at all times.
+
+### GUIDELINES FOR SUCCESS
+
+* Attend all classes. Be ON TIME with readings performed and homework complete.
+
+* Start slides and homework problems the day of lecture. This keeps the material fresh in your mind and gives you time to have your questions answered either by me or at math lab.
+
+* Ask questions on problems as soon as you need help. (The “Ask My Instructor” button on MyPearson sends me the problem with which you are having difficulty and shows me your answers, so it is very helpful in answering questions as they occur.) It is much easier to fix misconceptions or problems in understanding when they occur rather than days or weeks later.
+
+* Expect to read all material at least twice: once before it is covered in class and once after at a MINIMUM! It is also helpful to have time to reread before a test. You can view the schedule of when assignments are due, so whether I specifically assign a chapter reading or not, you are responsible for reading the next chapter before you come to class.
+
+* Visit office hours with questions on at least specific sections. It is your responsibility to know what sort of problem or what concept is giving you trouble. Be sure to have read all of the text, “help me solve this”, and “show me an example” explanations that cover your area of difficulty as well as having watched all the multimedia presentations before you come to see me.
+
+* Become familiar with the software. Keep a running reference sheet of commands/menus/spreadsheets and their uses.
+
+* Learn terms as they occur. Statistics has its own language in some respects, and a running definition/formula sheet will be most helpful.
+
+* Be considerate of your instructor and your fellow students. Whispering during lecture, working on problems rather than taking notes during lecture, playing ipod music while you work on homework that others can hear, listening to music during lecture, coming late or leaving early, and other disrespectful behavior will not create a positive atmosphere and will all make it harder to learn statistics.
+
+* **Summary of policies and guidelines: Be respectful of your instructor and your fellow students!**
+
+### GENERAL NOTES
+
+* We are in a professional environment in college. Practicing appropriate professional behavior in class will help you after you graduate at least as much as learning statistics will. 
+
+* I am here to help you. My style of teaching presents material rather quickly and then allows you to work problems. There will always be a day before a test for you to ask questions. I strongly believe that until you have worked MANY problems correctly that you will not understand statistics.
+
+* Read the pages that are linked from the site: http://www.how-to-study.com/study-skills/en/ where you think you could use some help before coming to class for the next period. Do this BEFORE reading any statistics.
+
+* Read all of http://www.cse.buffalo.edu/~rapaport/howtostudy.html about how to study. It is an excellent and amusing resource, and the first sections about outside commitments are VERY important. (The link on “how to be punctual” at http://www.wikihow.com/Be-Punctual is important for this class.)
+
+* Your attitude will greatly affect your ability to succeed in this course. It will also affect your classmates' attitudes in class. Always consider this fact carefully before you speak or act. If your comments or actions in class are deemed by the instructor to adversely affect other students' attitudes, they are considered disruptive.
+
+* Also considered disruptive are (1) conversations among students while information is being presented, (2) rude comments or remarks directed toward other students or the instructor, (3) raised voices or confrontational comments, and (4) failure to follow instructions given by the instructor.
+
+* If your actions in class are deemed by the instructor to be disruptive and you do not cease and desist from those actions immediately upon request, you will be asked to leave class. (Disrupting a class is unlawful in North Carolina.) If you do not comply, the police will be called to remove you. You may be permitted to return to future class meetings, but only after consultation with the instructor. Additionally, you may be required to arrange a conference with a university administrator before returning to class. Continued disruption and/or violations may result in an “F” for the course and your permanent removal from the course.
+
+* HOW TO STUDY STATISTICS reprinted from http://pegasus.cc.ucf.edu/~ccutchin/study.htm:
+
+Many students have trouble learning statistics because they never develop the particular study habits that are conducive to success in statistics. If you practice the following suggestions, they should prove invaluable to you.
+
+1.  READ CAREFULLY AND DELIBERATELY. The way in which you should read in statistics is quite different from the way you may read a history book, newspaper, or a novel. In statistics, you must read slowly, absorbing each word. It is sometimes necessary to read a textbook discussion or problem many times before it begins to "make sense" to you. In some types of reading, such as a novel, it is desirable to skim and read rapidly, because there are usually a few thoughts "sprinkled" among many words. However, in reading statistics, each word or symbol is important because there are many thoughts condensed into a few statements. Keep in mind that the little words mean a lot in statistics.
+
+2. THINK WITH PENCIL AND SCRATCH PAPER. Always have pencil in hand and scratch paper ready and use them when you read and study statistics. Test out the ideas on paper that the authors are discussing. When they propose a question, try to answer it before going on. Even though an example may be worked out completely in the text, work it out for yourself on scratch paper. This will help to clinch the ideas and procedures in your mind before starting the exercises. After you have read and reread a problem carefully, if your still don't see what to do, don't just sit and look at it. Get your pencil going on scratch paper and try to “dig it out.” If, in attempting to solve a problem, you have nothing written on paper, then, generally, you have not yet exerted enough effort to justify seeking help.
+
+3. BE INDEPENDENT. Try to complete each lesson without assistance. If you seek help needlessly, either from your professor, a classmate, the solutions manual, or the math lab, you will not gain the maximum benefit from your work. It takes exercise, you know, to become strong. You cannot learn statistics through someone else's exercise. However, you must ask questions when necessary. Sometimes little things cause considerable confusion. Do not be afraid that your question may sound “dumb.” The only “dumb” action is to fail to ask about a topic that you have really tried to grasp and still do not understand. Some people seek help too soon and some wait too long. You will have to use good common sense in this matter.
+
+4. LISTEN IN CLASS. Many of the finer points, fundamental principles and modes of thought will be developed in class. You must pay careful attention to these activities in order really to understand what is going on. If you miss class, you miss an opportunity to learn.
+
+5. PERSEVERE. Do not become frustrated if a topic or problem may completely baffle you at first. STICK WITH IT! An extremely interesting characteristic of learning statistics is that at one moment the learner can feel totally at a loss, and then suddenly have a burst of insight that enables him to understand the situation perfectly. Learning is not an "all" or "nothing" process! If you don't seem to be making any progress after working on a problem for some time, put it aside and attack it again later. Many times, you will then see the solution immediately even though you have not been consciously thinking about the problem in the meantime. There is a tremendous sense of satisfaction in having been persistent enough and creative enough to independently solve a problem that had given you a great deal of trouble.
+
+6. TAKE TIME TO REFLECT. To learn statistics well, you must take time to do some reflective thinking about the material covered during the last few days or weeks. It takes time for some ideas in statistics to “soak in.” You may have to live with them awhile and do reflective thinking about them before they become a part of you.
+
+7. CONCENTRATE ON FUNDAMENTALS. Do not try to learn statistics by memorizing illustrative examples. You will soon become overwhelmed by this approach, and the further you go the less successful you will be. The field of statistics is based on a surprisingly small number of fundamental principles and definitions. Most of these must be memorized. But if you concentrate on these fundamentals and try to see how each new topic is just an application and/or extension of them, very little additional memorization will be necessary.
+
+8. BE NEAT AND ACCURATE. These are habits that will save you many “headaches” in any field of endeavor. Most people must deliberately practice neatness and accuracy before they become a habit. Keep your work organized. Have a special section in your notebook for statistics. Keep each assignment (along with old tests, notes, etc.) in a centrally located place so that you can refer to them when necessary.
+
+9. TAKE TIME TO DO YOUR WORK AND DO IT ON TIME. You must do your assignments regularly and make up the work missed when absent. Do not wait until the last minute to do your work and then rush through it. If you spend just enough time on your lesson to get the "answers" and do not take time to really understand the underlying principles, you will soon become confused. Statistics can be enjoyable as long as you are "on top of it" and understand what is going on; otherwise, it is very frustrating.
+
+Learning statistics is not an activity for the intellectually lazy. It requires a strong, steady effort. There is no other successful way. Neither is statistics a spectator sport, you must become very actively involved. Do not expect to sit idly by and watch your professor do the work. This may keep the professor in good condition, but it won't do you much good.
+
+There will be no extra compensation given for working hard or conscientiously doing your homework. This is something you are expected to do as a matter of course. The “reward” you get will be the statistics that you learn.
+
+**University Policies**
+
+This course conforms with all Appalachian State University policies with respect to academic integrity, disability services, and class attendance.  The details of the policies may be found at <http://academicaffairs.appstate.edu/resources/syllabi>.
+
+
+***
+
+
