@@ -1,0 +1,21 @@
+---
+title: "Work Books & Review Sheets"
+author: ""
+output:
+  html_document:
+    css: ../asu.css
+    highlight: textmate
+    theme: cosmo
+---
+
+
+* [MyPearson](http://www.pearsonmylabandmastering.com/northamerica/)
+* [Course Information](./CourseInfo)
+* [Chapter 1-5 files](./Chapters01-05)
+* [Chapters 6-8, 11, 13-15](./Chapters06-08_11_13-15)
+* [Chapters 17-22](./Chapters17-22)
+* [Final Exam Information](./FinalExamInfo)
+* [Stat Crunch & Sucess Helps](./StatCrunch)
+* [Concordant Example](http://support.minitab.com/en-us/minitab/17/topic-library/basic-statistics-and-graphs/tables/data-and-table-layouts/what-are-concordant-and-discordant-pairs/)
+
+***
