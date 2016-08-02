@@ -1,0 +1,20 @@
+name: "my-website"
+output_dir: "."
+navbar:
+  title: "STT 2810"
+  left:
+    - text: "Resources"
+      href: https://alanarnholt.github.io/web/resources.html
+    - text: "For Students"
+      href: https://alanarnholt.github.io/web/for-students.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/STAT-ATA-ASU/STT2810ClassRepo/         
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    include:
+      after_body: footer.html
+    css: styles.css  
+      

@@ -1,8 +1,12 @@
 ---
 title: "STT 2810 Syllabus - Fall 2015"
 author: ''
-date: "Fall 2015"
-output: pdf_document
+date: ''
+output:
+  html_document:
+    css: ../asu.css
+    highlight: textmate
+    theme: cosmo
 ---
 
 **Instructor:**  Dr. Alan T. Arnholt    
@@ -66,8 +70,12 @@ This course will use the RStudio server  (https://mathr.math.appstate.edu/) that
 
 You must have an active internet connection and be registered in the course to access the server. To access the server, point any web browser to <https://mathr.math.appstate.edu/>.  You will need to acknowledge the connection is unsecure and possibly add a security exception to your web browser. Use your Appstate Username and Password to access the server.  A screen shot of the RStudio server is shown below.
 
-![LogIn](RStudioLogIn.png)
+<center>
+![](RStudioLogIn.png)
+</center>
 
 If you have problems with your Appstate Username or Password visit [IT Support Services](http://support.appstate.edu/) or call 262-6266.  
+
+***
 
 
