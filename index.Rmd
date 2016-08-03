@@ -5,7 +5,7 @@ title: "Welcome"
 
 * The course syllabus is stored in the [`Syllabus`](./Syllabus/STT2810sylFall16.html) directory of the STT 2810 repository.
 
-* Course pacing and assignments are stored in the [`CoursePacing`](./CoursePacing/GenericPacing.html) directory of the STT 2810 repository.
+* Course pacing and assignments are stored in the [`CoursePacing`](./CoursePacing/HWKscheduleF2016.pdf) directory of the STT 2810 repository.
 
 
 * The `Bookdown` version of [*Passion Driven Statistics*](https://alanarnholt.github.io/PDS-BookDown/BookDownTry/book/overview.html) modified for use at Appalachian State University is maintained in the [PDS-BookDown](https://github.com/alanarnholt/PDS-BookDown) repository.
