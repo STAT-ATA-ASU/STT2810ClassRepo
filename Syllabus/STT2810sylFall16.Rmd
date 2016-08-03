@@ -26,7 +26,9 @@ An introduction to statistical problem solving and methodology. Topics include t
 
 **Course Text:** *Stats: Data and Models* by Richard D. De Veaux, Paul F. Velleman, and David E. Bock 4th ed. (available on MyPearson once you have an account)
 
-**My Stat Labs:** This is the course management system for this class. You may purchase an access code from the bookstore or directly from the site. http://www.pearsonmylabandmastering.com
+**My Stat Labs:** This is the course management system for this class. You may purchase an access code from the bookstore or directly from the site. http://www.pearsonmylabandmastering.com 
+
+**MyPearson Course ID:** arnholt47694
 
 **Time:** At least six hours outside of class **EACH AND EVERY WEEK** to spend working in the computer lab, reading material, visiting office hours, watching videos, doing homework, and studying.
 
