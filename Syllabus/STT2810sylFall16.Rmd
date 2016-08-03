@@ -51,6 +51,16 @@ An introduction to statistical problem solving and methodology. Topics include t
 Quizzes show up as 20% on MyPearson because attendance (about 5% extra credit) is part of the quiz score. Also, to find your actual grade, you should multiply the percent given by 105, because the computer only understands scores up to 100%.
 
 
+### IMPORTANT DATES
+
+* Test 1---Chapters 1-5---9/15/16
+* Test 2---Chapters 6-8, 11, 13-15---10/20/16
+* Test 3---Chapters 17-22---11/22/16
+* Final Exam---12/08/16---12:00pm-2:30pm
+
+Note: *All assignments and their due dates are visible in MyPearson and also may be viewed in the [CoursePacing](../CoursePacing/HWKscheduleF2016.pdf) directory.*
+
+
 ### EXPOSITION OF GRADE COMPOSITION
 
 **Reading:** Part of the homework points include reading MyPearson slides related to the day’s lecture. You must complete the reading before you will be allowed to start the homework.
