@@ -18,3 +18,4 @@ STT2810ClassRepo.Rproj
 *.blg
 *.log
 *.out
+.RData

@@ -1,0 +1,143 @@
+---
+title: "Displaying Categorical Data"
+author: "R-Man"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+library(knitr)
+knitr::opts_chunk$set(comment = NA, fig.show = 'as.is', prompt = TRUE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75))
+```
+
+## What features might categorical variables have?^[http://www.gradaanwr.net/]
+
+**Unexpected patterns of results-** There may be many more of some categories than others.  Some categories may be missing completely.
+
+**Uneven distributions-** Observational studies may exhibit some form of bias, perhaps too many males.  In medical meta analyses many trials are analyzed together, although it can turn out that most of the trials were small and that the results are dominated by the one or two major trials.
+
+**Extra categories-** Gender may be recorded as `M` and `F`, but also as `m` and `f`, `male` and `female`.  In a study of patients with two medical conditions, there may be some patients with a third condition.
+
+**Unbalanced experiments-** Although experiments are usually carefully designed and carried out, there is always the chance that some data are missing or unusable.  It is important to know if this occurs and leads to unequal group sizes.
+
+**Large number of categories-** In studies including ope-ended questions (e.g., "Who is your favorite politician?") there may be far more names mentioned than you expected.
+
+**Don't knows, refusals, errors, missings, $\ldots$-** Data may not be available for a wide variety of reasons, and plots summarizing how many cases of each type have arisen can be helpful both in deciding how to handle the data and in properly qualifying the results from the data that are available.  Opinion polls are an example.
+
+## Who sailed on the Titanic?
+
+The data set `TITANIC3` from the `PASWR2` package contains survival status of individual passengers on the Titanic but no information for the crew.  Start by creating simple univariate barcharts of the passengers.
+
+```{r}
+library(PASWR2)
+library(ggplot2)
+TITANIC3[1:5, 1:3]  # first five rows and three variables
+summary(TITANIC3$survived)
+# Create a factor out of the survived variable
+TITANIC3$survived <- factor(TITANIC3$survived, labels = c("No", "Yes"))
+TITANIC3[1:5, 1:3]  # first five rows and three variables
+p1 <- ggplot(data = TITANIC3, aes(x = pclass)) + 
+  geom_bar(fill = "purple") + 
+  theme_bw() + 
+  labs(x = "Ticket Class of Passenger", y = "", 
+       title = "Your Informative Title\n Goes Here")
+p1 
+p2 <- ggplot(data = TITANIC3, aes(x = sex, fill = sex)) + 
+  geom_bar() + 
+  theme_bw() + 
+  scale_fill_manual(values = c("pink", "blue"), guide = FALSE)
+p2
+p3 <- ggplot(data = TITANIC3, aes(x = sex, fill = survived)) + 
+  geom_bar(position = "fill") + 
+  theme_bw() + 
+  scale_fill_manual(values = c("gray", "green")) + 
+  labs(y = "Fraction")
+p3
+T3 <- xtabs(~survived + sex, data = TITANIC3)
+T3
+prop.table(T3, 2)
+```
+
+Let us arrange all three barplots on the same page.
+
+```{r}
+gridExtra::grid.arrange(p1, p2, p3, nrow = 1, widths = c(3, 2, 3))
+```
+
+Suppose we would like to look at the same graphs for the subset of passengers that were between ages 20 and 30 inclusive.
+
+```{r}
+library(dplyr)
+age2030 <- TITANIC3 %>% 
+  filter(age >= 20, age <= 30)
+p123 <- ggplot(data = age2030, aes(x = pclass)) + 
+  geom_bar(fill = "purple") + 
+  theme_bw()
+p223 <- ggplot(data = age2030, aes(x = sex, fill = sex)) + 
+  geom_bar() + 
+  theme_bw() + 
+  scale_fill_manual(values = c("pink", "blue"), guide = FALSE)
+p323 <- ggplot(data = age2030, aes(x = sex, fill = survived)) + 
+  geom_bar(position = "fill") + 
+  theme_bw() + 
+  scale_fill_manual(values = c("gray", "green")) + 
+  labs(y = "Fraction")
+gridExtra::grid.arrange(p123, p223, p323, nrow = 1, widths = c(3, 2, 3))
+```
+
+Next we will create a factor variable for the various values in `age`
+
+```{r}
+TITANIC3$agef <- cut(TITANIC3$age, breaks = c(0, 15, 30, 60, 80))
+summary(TITANIC3$agef)
+pf1 <- ggplot(data = TITANIC3, aes(x = pclass)) + 
+  geom_bar(fill = "purple") + 
+  theme_bw() + 
+  facet_grid(agef ~ .)
+pf2 <- ggplot(data = TITANIC3, aes(x = sex, fill = sex)) + 
+  geom_bar() + 
+  theme_bw() + 
+  scale_fill_manual(values = c("pink", "blue"), guide = FALSE) + 
+  facet_grid(agef ~ .)
+pf3 <- ggplot(data = TITANIC3, aes(x = sex, fill = survived)) + 
+  geom_bar(position = "fill") + 
+  theme_bw() + 
+  scale_fill_manual(values = c("gray", "green")) + 
+  labs(y = "Fraction") + 
+  facet_grid(agef ~ .)
+gridExtra::grid.arrange(pf1, pf2, pf3, nrow = 1, main = "Your Informative Title\n Goes Here", widths = c(2, 2, 3))
+```
+
+## Studying Multivariate Categorical Data
+
+```{r}
+ggplot(data = TITANIC3, aes(x = pclass, fill = survived)) + 
+  geom_bar(position = "dodge") + 
+  facet_grid(agef~ sex) + 
+  theme_bw()
+```
+
+## Doubledecker Plots
+
+```{r}
+vcd::doubledecker(survived ~ sex, data = TITANIC3)
+vcd::doubledecker(survived ~ sex + pclass, data = TITANIC3)
+```
+
+## Mosaic Plots
+
+```{r}
+vcd::mosaic(survived ~ sex + pclass, data = TITANIC3)
+vcd::mosaic(~ sex + survived + pclass, data = TITANIC3, shade = TRUE)
+```
+
+## Themes from `ggthemes`
+
+```{r}
+library(ggthemes)
+ggplot(data = iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) + 
+  geom_point() + 
+  theme(legend.position = "top") + 
+  labs(x = "Petal Length (cm)", y = "Petal Width (cm)") + 
+  scale_color_colorblind() 
+```

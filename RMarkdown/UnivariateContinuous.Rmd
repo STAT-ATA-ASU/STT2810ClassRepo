@@ -1,0 +1,40 @@
+---
+title: "Three SSS"
+author: "Joe TeXer"
+date: "9/29/2015"
+output: html_document
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+library(knitr)
+knitr::opts_chunk$set(comment = NA, fig.show = 'as.is', fig.align = 'center', fig.height = 4, fig.width = 4, prompt = TRUE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75, cache = TRUE))
+```
+
+```{r}
+sims <- 10000
+nj <- rnorm(sims, 100, 15)
+ej <- rexp(sims, 0.01)
+```
+
+```{r}
+library(ggplot2)
+DF <- data.frame(x = nj)
+p <- ggplot(data = DF, aes(x = x))
+p +  geom_histogram(fill = "lightblue") + 
+  theme_bw()
+p + geom_density(fill = "pink") + 
+  theme_bw()
+```
+
+The mean is `r mean(DF$x)` and the standard deviation is `r sd(DF$x)`.
+
+```{r, fig.width = 10, fig.height = 10}
+DF <- data.frame(x = ej)
+p <- ggplot(data = DF, aes(x = x))
+p +  geom_histogram(fill = "lightblue") + 
+  theme_bw()
+p + geom_density(fill = "pink") + 
+  theme_bw()
+```
+
+The median is `r median(DF$x)` and the IQR is `r IQR(DF$x)`.

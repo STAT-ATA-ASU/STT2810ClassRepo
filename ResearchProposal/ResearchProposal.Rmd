@@ -1,5 +1,7 @@
 ---
-title: "Research Proposal Template Using [RMarkdown](http://rmarkdown.rstudio.com) and [Zotero](www.zotero.org) --- The Association between Nicotine Dependence and Major Depression at Different Levels of Smoking Exposure"
+title: Research Proposal Template Using [RMarkdown](http://rmarkdown.rstudio.com)
+  and [Zotero](www.zotero.org) --- The Association between Nicotine Dependence and
+  Major Depression at Different Levels of Smoking Exposure
 author: "STT 2810"
 date: "Spring 2015"
 output: html_document
@@ -11,11 +13,11 @@ bibliography: ResearchProposal.bib
 One of the most potent risk factors consistently implicated in both the etiology of smoking behavior as well as the subsequent development of nicotine dependence is major depression. Evidence for this association comes from longitudinal investigations in which depression has been shown to increase risk of later smoking [@breslau_major_1998; @dierker_association_2001].   This temporal ordering suggests the possibility of a causal relationship. In fact, the vast majority of research to date has focused on the role of major depression in increasing the probability and amount of smoking [@dierker_defining_2004; @rohde_psychiatric_2004; @rohde_psychiatric_2003].
 
 
-While it is true that smoking exposure is a necessary requirement for nicotine dependence, frequency and quantity of smoking are markedly imperfect indices for determining an individual’s probability of developing nicotine dependence [@kandel_extent_2000; @stanton_antecedents_1995]. For example, a substantial number of individuals reporting daily and/or heavy smoking do not meet criteria for nicotine dependence [@kandel_extent_2000]. Conversely, nicotine dependence has been seen among population subgroups reporting relatively low levels of daily and non daily smoking [@kandel_extent_2000].
+While it is true that smoking exposure is a necessary requirement for nicotine dependence, frequency and quantity of smoking are markedly imperfect indices for determining an individual's probability of developing nicotine dependence [@kandel_extent_2000; @stanton_antecedents_1995]. For example, a substantial number of individuals reporting daily and/or heavy smoking do not meet criteria for nicotine dependence [@kandel_extent_2000]. Conversely, nicotine dependence has been seen among population subgroups reporting relatively low levels of daily and non daily smoking [@kandel_extent_2000].
 
-A complementary or alternate role that major depression may play is as a cause or signal of greater sensitivity to nicotine dependence, over and above an individual’s level of smoking exposure. While major depression has been shown to increase an individual’s probability of smoking initiation, regular use and nicotine dependence, it remains unclear whether it may signal greater sensitivity for nicotine dependence regardless of smoking quantity.
+A complementary or alternate role that major depression may play is as a cause or signal of greater sensitivity to nicotine dependence, over and above an individual's level of smoking exposure. While major depression has been shown to increase an individual's probability of smoking initiation, regular use and nicotine dependence, it remains unclear whether it may signal greater sensitivity for nicotine dependence regardless of smoking quantity.
 
-The present study will examine young adults from the National Epidemiologic Survey of Alcohol and Related Conditions (NESARC). The goals of the analysis will include 1) establishing the relationship between major depression and nicotine dependence; and 2) determining whether or not the relationship between major depression and nicotine dependence exists above and beyond smoking quantity.
+The present study will examine young adults from the National Epidemiologic Survey of Alcohol and Related Conditions (NESARC). The goals of the analysis will include 1) establishing the relationship between major depression and nicotine dependence;  and 2) determining whether or not the relationship between major depression and nicotine dependence exists above and beyond smoking.
 ￼
 
 # Methods:
@@ -26,7 +28,7 @@ The sample from the first wave of the National Epidemiologic Survey on Alcohol a
 
 ## Procedure
 
-One adult was selected for interview in each household, and face-to- face computer assisted interviews were conducted in respondents’ homes following informed consent procedures.
+One adult was selected for interview in each household, and face-to- face computer assisted interviews were conducted in respondents' homes following informed consent procedures.
 
 ## Measures
 

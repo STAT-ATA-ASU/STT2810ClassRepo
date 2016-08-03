@@ -10,7 +10,7 @@
 
 <meta name="author" content="Alan T. Arnholt" />
 
-<meta name="date" content="2015-03-16" />
+<meta name="date" content="2015-10-21" />
 
 <title>Sampling Distributions</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Sampling Distributions</h1>
 <h4 class="author"><em>Alan T. Arnholt</em></h4>
-<h4 class="date"><em>March 16, 2015</em></h4>
+<h4 class="date"><em>2015-10-21</em></h4>
 </div>
 
 
@@ -333,10 +333,20 @@ Male   12.186058  2.880972</code></pre>
 </div>
 <div id="statistical-inference-through-a-randomization-test" class="section level1">
 <h1>Statistical Inference Through a Randomization Test</h1>
-<p>Whether they take the form of significance tests or confidence intervals, inferential procedures rest on the <strong>fundamental question for inference:</strong> “What would happen if we did this many times?” Let’s unpack this question in the context of the female mice schistosomiasis. We observed a difference in means of 7.6 = 12 - 4.4 worms between the control and treatment groups. While we expect that this large difference reflects the effectiveness of the drug, it is possible that chance alone could explain this difference. This “chance alone” position is usually called the null hypothesis and includes the following assumptions: * The number of parasitic worms found in the liver naturally varies from mouse to mouse. * Whether or not the drug is effective, there clearly is variability in the responses of mice to the infestation of schistosomes. * Each group exhibits this variability, and even if the drug is not effective, some mice do better than others. * The only explanation for the observed difference of 7.6 worms in the means is that the random allocation randomly placed mice with larger numbers of worms in the control group and mice with smaller numbers of worms in the treatment group.</p>
+<p>Whether they take the form of significance tests or confidence intervals, inferential procedures rest on the <strong>fundamental question for inference:</strong> “What would happen if we did this many times?” Let’s unpack this question in the context of the female mice schistosomiasis. We observed a difference in means of 7.6 = 12 - 4.4 worms between the control and treatment groups. While we expect that this large difference reflects the effectiveness of the drug, it is possible that chance alone could explain this difference. This “chance alone” position is usually called the null hypothesis and includes the following assumptions:</p>
+<ul>
+<li><p>The number of parasitic worms found in the liver naturally varies from mouse to mouse.</p></li>
+<li><p>Whether or not the drug is effective, there clearly is variability in the responses of mice to the infestation of schistosomes.</p></li>
+<li><p>Each group exhibits this variability, and even if the drug is not effective, some mice do better than others.</p></li>
+<li><p>The only explanation for the observed difference of 7.6 worms in the means is that the random allocation randomly placed mice with larger numbers of worms in the control group and mice with smaller numbers of worms in the treatment group.</p></li>
+</ul>
 <p>In this study, the <strong>null hypothesis</strong> is that the treatment has no effect on the average worm count, and it is denoted as</p>
 <blockquote>
-<p><span class="math">\(H_0:\mu_{control} = \mu_{treatment}\)</span> Another way to write this hypothesis is <span class="math">\(H_0: \text{the treatment has no effect on average worm count}\)</span></p>
+<p><span class="math">\(H_0:\mu_{control} = \mu_{treatment}\)</span></p>
+</blockquote>
+<p>Another way to write this hypothesis is</p>
+<blockquote>
+<p><span class="math">\(H_0: \text{the treatment has no effect on average worm count}\)</span></p>
 </blockquote>
 <p>Alternative hypotheses can be “one-sided, greater-than” (as in this investigation), “one-sided, less-than” (the treatment causes an increase in worm count), or “two-sided” (the treatment is different, in one direction or the other, from the mean). We chose to test a one-sided hypothesis because there is a clear research interest in one direction. In other words, we will take action (start using the drug) only if we can show that K11777 reduces worm count.</p>
 <blockquote>
@@ -373,8 +383,16 @@ Male   12.186058  2.880972</code></pre>
 <div id="two-sample-permutation-test" class="section level1">
 <h1>Two-Sample Permutation Test</h1>
 <blockquote>
-<p>Pool the <em>m + n</em> values. * <strong>repeat</strong> * Draw a resample of size <em>m</em> without replacement. * Use the remaining <em>n</em> observations for the other sample. * Calculate the difference in means or another test statistic that compares samples. * <strong>until</strong> * we have enough samples</p>
+<p>Pool the <em>m + n</em> values.</p>
 </blockquote>
+<ul>
+<li><strong>repeat</strong></li>
+<li>Draw a resample of size <em>m</em> without replacement.</li>
+<li>Use the remaining <em>n</em> observations for the other sample.</li>
+<li>Calculate the difference in means or another test statistic that compares samples.</li>
+<li><strong>until</strong></li>
+<li>we have enough samples</li>
+</ul>
 <p>Calculate the <em>p</em>-value as the fraction of times the random statistics are more or as extreme as the original statistic. Optionally, plot a histogram of the random statistic values.</p>
 <p><strong>Definition 3.2</strong> A <em>test statistic</em> is a numerical function of the data whose value determines the result of the test. The function itself is generally denoted <em>T=T(X)</em>, where <strong>X</strong> represents the data. After being evaluated for the sample data <strong>x</strong>, the result is called an <em>observed test statistic</em> and is written in lowercase, <em>t=T(x)</em>.</p>
 </div>
@@ -470,7 +488,7 @@ p + geom_area(data = subset(df.dens, x &gt;= 7.6 &amp; x &lt;= max(DF$x)), aes(x
     Welch Two Sample t-test
 
 data:  worms by group
-t = 2.9231, df = 7.929, p-value = 0.01939
+t = 2.9231, df = 7.9289, p-value = 0.01939
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
   1.595022 13.604978
@@ -495,6 +513,57 @@ pv</code></pre>
 </div>
 <div id="add-more-notes-here" class="section level2">
 <h2>Add more notes here</h2>
+<div id="explain-in-your-own-words" class="section level3">
+<h3>Explain in your own words</h3>
+<pre class="r"><code>gusano &lt;- ND$worms
+gusano</code></pre>
+<pre><code> [1]  1  2  2 10  7 16 10 10  7 17</code></pre>
+<pre class="r"><code>OBS &lt;- mean(gusano[6:10]) - mean(gusano[1:5])
+OBS</code></pre>
+<pre><code>[1] 7.6</code></pre>
+<pre class="r"><code>ANS &lt;- t(combn(10, 5))
+head(ANS)</code></pre>
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    2    3    4    5
+[2,]    1    2    3    4    6
+[3,]    1    2    3    4    7
+[4,]    1    2    3    4    8
+[5,]    1    2    3    4    9
+[6,]    1    2    3    4   10</code></pre>
+<pre class="r"><code>dim(ANS)</code></pre>
+<pre><code>[1] 252   5</code></pre>
+<pre class="r"><code>np &lt;- dim(ANS)[1]
+np</code></pre>
+<pre><code>[1] 252</code></pre>
+<pre class="r"><code>means &lt;- numeric(np)
+for(i in 1:np){
+  means[i] &lt;- mean(gusano[ANS[i, ]]) - mean(gusano[-ANS[i, ]])
+}
+sort(means)</code></pre>
+<pre><code>  [1] -8.8 -7.6 -7.6 -7.6 -7.6 -7.6 -7.6 -6.4 -6.4 -6.4 -5.6 -5.6 -5.6 -5.6
+ [15] -5.6 -5.6 -5.2 -5.2 -5.2 -5.2 -5.2 -4.8 -4.8 -4.4 -4.4 -4.4 -4.4 -4.4
+ [29] -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.0 -4.0 -4.0 -4.0 -4.0 -4.0 -4.0
+ [43] -4.0 -4.0 -3.6 -3.6 -3.6 -3.2 -3.2 -3.2 -3.2 -2.8 -2.8 -2.8 -2.8 -2.4
+ [57] -2.4 -2.4 -2.4 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0
+ [71] -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6
+ [85] -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.2 -1.2 -1.2
+ [99] -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8
+[113] -0.8 -0.8 -0.4 -0.4 -0.4 -0.4 -0.4 -0.4 -0.4 -0.4 -0.4  0.0  0.0  0.0
+[127]  0.0  0.0  0.0  0.4  0.4  0.4  0.4  0.4  0.4  0.4  0.4  0.4  0.8  0.8
+[141]  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  1.2  1.2  1.2  1.2  1.2  1.2
+[155]  1.2  1.2  1.2  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6
+[169]  1.6  1.6  1.6  1.6  1.6  1.6  1.6  2.0  2.0  2.0  2.0  2.0  2.0  2.0
+[183]  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.4  2.4  2.4
+[197]  2.4  2.8  2.8  2.8  2.8  3.2  3.2  3.2  3.2  3.6  3.6  3.6  4.0  4.0
+[211]  4.0  4.0  4.0  4.0  4.0  4.0  4.0  4.4  4.4  4.4  4.4  4.4  4.4  4.4
+[225]  4.4  4.4  4.4  4.4  4.4  4.8  4.8  5.2  5.2  5.2  5.2  5.2  5.6  5.6
+[239]  5.6  5.6  5.6  5.6  6.4  6.4  6.4  7.6  7.6  7.6  7.6  7.6  7.6  8.8</code></pre>
+<pre class="r"><code>sum(means &gt;= OBS)</code></pre>
+<pre><code>[1] 7</code></pre>
+<pre class="r"><code>pvalue &lt;- sum(means &gt;= OBS)/np
+pvalue</code></pre>
+<pre><code>[1] 0.02777778</code></pre>
+</div>
 </div>
 </div>
 

@@ -1,0 +1,62 @@
+---
+title: "Practice"
+output: 
+  html_document: 
+    highlight: zenburn
+    theme: readable
+date: "`r Sys.Date()`"
+---
+
+An article in the *Journal of Statistics Education* reported the price of diamonds of different sizes in Singapore dollars (SGD).  The following data frame (`DF`) contains a data set that is consistent with this data, adjusted to US dollars in 2004:
+
+```{r}
+USdollars <- c(494.82, 768.03, 1105.03, 1508.88, 1826.18, 2096.89, 688.24, 944.90, 1071.75, 1504.44, 1908.28, 2409.76, 748.10, 1076.18, 1289.20, 1597.63, 2038.09)
+Carat <- c(0.12, 0.17, 0.20, 0.25, 0.28, 0.33, 0.15, 0.18, 0.21, 0.26, 0.29, 0.35, 0.16, 0.19, 0.23, 0.27, 0.32)
+DF <- data.frame(USdollars = USdollars, Carat = Carat)
+rm("Carat", "USdollars")
+head(DF)
+```
+
+1.  Make a scatterplot and describe the association between the size of the diamond (carat) and the cost (in US dollars).
+
+2.  Create a model to predict diamond costs from the size of the diamond.
+
+3. Do you think a linear model is appropriate here?  Explain.
+
+4.  Interpret the slope of your model in context.
+
+5.  Interpret the intercept of your model in context.
+
+6.  What is the correlation between cost and size?
+
+7.  Explain the meaning of $R^2$ in the context of this problem.
+
+8.  Would it be better for a customer buying a diamond to have a negative residual or a positive residual from this model?  Explain.
+
+-----------
+
+Of the 23 first year male students at State U. admitted for Jim Thorpe High School, 8 were offered baseball scholarships and 7 were offered football scholarships.  The University admissions committee looked at the students' composite ACT scores wondering if the University was lowering their standards for athletes.  Assuming that this group of students is representative of all admitted students, what do you think?
+
+```{r}
+Baseball <- c(25, 22, 19, 25, 24, 25, 24, 23)
+NonAthletes <- c(21, 27, 29, 26, 30, 27, 26, 23)
+Football <- c(22, 21, 24, 27, 19, 23, 17, NA)
+DF2 <- stack(data.frame(Baseball, NonAthletes, Football))
+colnames(DF2) <- list("ACT", "Sport")
+head(DF2)
+```
+
+1. Test an appropriate hypothesis and state your conclusion.  Specify the null and alternative hypotheses with both mathematical symbols and with a verbal (English) description.
+
+
+2.  Are the two sports teams mean ACT scores different?
+
+------------------
+
+Use the data frame `Snore` from the `BSDA` package to determine if snoring and heart-disease are related.  
+
+1.  Write the null and alternative hypotheses.
+
+2.  Test your null hypothesis and state your conclusion?  
+
+3. Do you need to run any post-hoc tests?  If so, how many post-hoc tests do you need to examine?  If indicated, perform the post-hoc tests and interpret your findings.

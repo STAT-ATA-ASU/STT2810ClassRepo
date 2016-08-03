@@ -122,6 +122,8 @@ PT2
 barplot(PT2)
 ```
 
+Note: Using `na.omit(nesarc.sub)` deletes 9 rows of obervations.  If you have many `NA`s in your data frame be very wary of using `na.omit` in this fashion.
+
 ```{r fig.width = 10, fig.height = 10}
 library(ggplot2)
 ggplot(data = na.omit(nesarc.sub), aes(x = SmokingFreq, fill = TobacoDependence)) + 
