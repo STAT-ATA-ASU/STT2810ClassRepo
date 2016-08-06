@@ -28,7 +28,7 @@ An introduction to statistical problem solving and methodology. Topics include t
 
 **My Stat Labs:** This is the course management system for this class. You may purchase an access code from the bookstore or directly from the site. http://www.pearsonmylabandmastering.com 
 
-**MyPearson Course ID:** arnholt12561
+**MyPearson Course ID:** [arnholt12561](./registrationArnholt12561.pdf)
 
 **Time:** At least six hours outside of class **EACH AND EVERY WEEK** to spend working in the computer lab, reading material, visiting office hours, watching videos, doing homework, and studying.
 
