@@ -1,0 +1,72 @@
+---
+title: "Time Series"
+author: "Alan Arnholt"
+date: "8/30/2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, message = FALSE, fig.align='center')
+```
+
+Read in the data:
+
+```{r}
+library(readr)
+ages <- read_csv("Ch4Eg.csv")
+ages
+```
+
+
+Create side-by-side boxplots:
+
+```{r}
+library(tidyr)
+NDF <- gather(ages, Gender, Age, -Year)
+NDF
+library(ggplot2)
+ggplot(data = NDF, aes(x = Gender, y = Age, fill = Gender)) + geom_boxplot() + 
+  theme_bw()
+```
+
+Density plots:
+
+```{r}
+ggplot(data = NDF, aes(x = Age, color = Gender)) + 
+  geom_density() + 
+  theme_bw()
+```
+
+Summary information:
+
+```{r}
+library(dplyr)
+SI <- NDF %>%
+  group_by(Gender) %>%
+  summarise(av_age = mean(Age), md_age = median(Age), sd_age = sd(Age))
+SI
+```
+
+Create a time-series plot:
+
+```{r, fig.cap = "Time Series Plot"}
+ggplot(data = ages, aes(x = Year, y = Women)) + 
+  geom_line(color = "purple") + 
+  geom_point(color = "purple") + 
+  geom_smooth(color = "pink") + 
+  geom_line(aes(x = Year, y = Men), color = "blue") + 
+  geom_point(aes(x = Year, y = Men), color = "blue") + 
+  geom_smooth(aes(x = Year, y = Men), color = "lightblue") +
+  labs(y = "Age") +
+  theme_bw()
+```
+
+Another one using `NDF`:
+
+```{r}
+ggplot(data = NDF, aes(x = Year, y = Age, color = Gender)) + 
+  geom_point() + 
+  geom_line() +
+  geom_smooth() +
+  theme_bw() 
+```
