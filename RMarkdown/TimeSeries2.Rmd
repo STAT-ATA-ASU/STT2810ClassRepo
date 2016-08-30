@@ -7,7 +7,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, comment = NA, message = FALSE, fig.align='center')
+knitr::opts_chunk$set(echo = FALSE, results = "hide", comment = NA, message = FALSE, fig.align='center')
 ```
 
 Read in the data:
@@ -35,7 +35,7 @@ ggplot(data = NDF, aes(x = Gender, y = Age, fill = Gender)) + geom_boxplot() +
 
 # View the Data {-}
 
-```{r, label = "T1"}
+```{r, label = "T1", results='markup'}
 knitr::kable(
   head(NDF, 10), booktabs = TRUE, align = c('c','c','c'),
   caption = 'A table of the first 10 rows of the NDF data.'
@@ -71,7 +71,7 @@ SI <- NDF %>%
 SI
 ```
 
-```{r,echo = FALSE}
+```{r,echo = FALSE, results='markup'}
 library(DT)
 datatable(SI)
 ```
