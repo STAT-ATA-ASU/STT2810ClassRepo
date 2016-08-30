@@ -32,8 +32,8 @@ ggplot(data = NDF, aes(x = Gender, y = Age, fill = Gender)) + geom_boxplot() +
 Density plots:
 
 ```{r}
-ggplot(data = NDF, aes(x = Age, color = Gender)) + 
-  geom_density() + 
+ggplot(data = NDF, aes(x = Age, fill = Gender)) + 
+  geom_density(alpha = 0.35) + 
   theme_bw()
 ```
 
