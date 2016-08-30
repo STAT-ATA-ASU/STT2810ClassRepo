@@ -2,7 +2,8 @@
 title: "Time Series"
 author: "Alan Arnholt"
 date: "8/30/2016"
-output: bookdown::html_document2
+output: 
+    bookdown::html_document2
 ---
 
 ```{r setup, include=FALSE}
@@ -15,6 +16,8 @@ Read in the data:
 library(readr)
 ages <- read_csv("Ch4Eg.csv")
 ages
+str(ages)
+summary(ages)
 ```
 
 
@@ -23,18 +26,39 @@ Create side-by-side boxplots:
 ```{r}
 library(tidyr)
 NDF <- gather(ages, Gender, Age, -Year)
-NDF
+str(NDF)
+summary(NDF)
 library(ggplot2)
 ggplot(data = NDF, aes(x = Gender, y = Age, fill = Gender)) + geom_boxplot() + 
   theme_bw()
+```
+
+# View the Data {-}
+
+```{r, label = "T1"}
+knitr::kable(
+  head(NDF, 10), booktabs = TRUE, align = c('c','c','c'),
+  caption = 'A table of the first 10 rows of the NDF data.'
+)
+```
+
+Look at the output from Table \@ref(tab:T1).
+
+# Changing Colors {-} 
+
+```{r}
+ggplot(data = NDF, aes(x = Gender, y = Age, fill = Gender)) + geom_boxplot() + 
+  theme_bw() +
+  scale_fill_manual(values = c("blue", "pink"))
 ```
 
 Density plots:
 
 ```{r}
 ggplot(data = NDF, aes(x = Age, fill = Gender)) + 
-  geom_density(alpha = 0.35) + 
-  theme_bw()
+  geom_density(alpha = 0.5) + 
+  theme_bw() + 
+  scale_fill_manual(values = c("blue", "pink"))
 ```
 
 Summary information:
@@ -57,22 +81,25 @@ Create a time-series plot (see Figure \@ref(fig:TimeSeries)):
 
 ```{r, label = "TimeSeries", fig.cap = "Time Series Plot"}
 ggplot(data = ages, aes(x = Year, y = Women)) + 
-  geom_line(color = "purple") + 
-  geom_point(color = "purple") + 
+  geom_line(color = "pink") + 
+  geom_point(color = "pink") + 
   geom_smooth(color = "pink") + 
   geom_line(aes(x = Year, y = Men), color = "blue") + 
   geom_point(aes(x = Year, y = Men), color = "blue") + 
-  geom_smooth(aes(x = Year, y = Men), color = "lightblue") +
+  geom_smooth(aes(x = Year, y = Men), color = "blue") +
   labs(y = "Age") +
   theme_bw()
 ```
 
 Another one using `NDF`:
 
-```{r}
+```{r, label = "FG", fig.cap = "Time series plot of male and female average age when first married"}
 ggplot(data = NDF, aes(x = Year, y = Age, color = Gender)) + 
   geom_point() + 
   geom_line() +
   geom_smooth() +
-  theme_bw() 
+  theme_bw() + 
+  scale_color_manual(values = c("blue", "pink")) 
 ```
+
+Say something about Figure \@ref(fig:TimeSeries) or Figure \@ref(fig:FG).
