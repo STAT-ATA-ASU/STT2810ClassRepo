@@ -3,6 +3,7 @@ title: "Time Series"
 author: "Alan Arnholt"
 date: "8/30/2016"
 output:
+  word_document: default
   pdf_document:
     keep_tex: yes
   html_document: default

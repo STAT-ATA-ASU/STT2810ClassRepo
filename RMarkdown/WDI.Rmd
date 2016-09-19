@@ -67,3 +67,14 @@ ggplot(data = MOJOmini, aes(x = year, y = EN.ATM.CO2E.PC, color = country)) +
   theme_bw() + 
   labs(y = "CO2 emissions (metric tons per capita)")
 ```
+
+```{r}
+HRP <- WDI(country = "all", indicator = c("SP.POP.TOTL", "NY.GDP.MKTP.CD", "SP.DYN.LE00.IN", "NY.GDP.PCAP.PP.CD", "SP.DYN.TFRT.IN", "SI.POV.2DAY"),
+    start = 1960, end = 2015, extra = FALSE, cache = NULL)
+HRP <- HRP %>%
+  rename(Population = SP.POP.TOTL, GDPinUS = NY.GDP.MKTP.CD, LifeExpectancy = SP.DYN.LE00.IN, GDPpci = NY.GDP.PCAP.PP.CD, FertilityRate = SP.DYN.TFRT.IN, Poverty = SI.POV.2DAY)
+head(HRP)
+dim(HRP)
+```
+
+Some ideas for googleVis charts at: https://www.r-bloggers.com/analyzing-world-bank-data-with-wdi-googlevis-motion-charts/

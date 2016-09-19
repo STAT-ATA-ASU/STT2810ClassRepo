@@ -49,14 +49,14 @@ Look at the output from Table \@ref(tab:T1).
 ```{r}
 ggplot(data = NDF, aes(x = Gender, y = Age, fill = Gender)) + geom_boxplot() + 
   theme_bw() +
-  scale_fill_manual(values = c("blue", "pink"))
+  scale_fill_manual(values = c("orange", "purple"))
 ```
 
 Density plots:
 
 ```{r}
 ggplot(data = NDF, aes(x = Age, fill = Gender)) + 
-  geom_density(alpha = 0.5) + 
+  geom_density(alpha = .2) + 
   theme_bw() + 
   scale_fill_manual(values = c("blue", "pink"))
 ```
