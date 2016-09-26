@@ -1,0 +1,168 @@
+---
+title: "Leverage and Influential Points in Regression"
+author: "Alan Arnholt"
+date: "9/26/2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center", fig.height = 7, fig.width = 7)
+library(ggplot2)
+```
+
+## Example data set
+
+```{r, echo = FALSE}
+set.seed(12)
+y <- round(sort(rnorm(30, 80, 5)), 1)
+x <- round(sort(rnorm(30, 80, 5)), 1)
+DF <- data.frame(x = x, y = y)
+rm(x, y)
+DF[11, ] = c(round(mean(DF$x), 1), round(mean(DF$y) - 8, 1))
+DF[12, ] = c(round(mean(DF$x), 1), round(mean(DF$y) + 8, 1))
+DF[13, ] = c(93, 85)
+DF[14, ] = c(95, round(predict(lm(y~x, data = DF), newdata = data.frame(x = 95)),1))
+DT::datatable(DF)
+```
+
+```{r, echo = FALSE}
+ggplot(data = DF, aes(x = x, y = y)) +
+  geom_point() + 
+  theme_bw() + 
+  lims(x = c(68, 98), y = c(70, 100)) + 
+  geom_point(aes(x = DF$x[11], y = DF$y[11]), color = "red", size = 2) +
+  geom_text(aes(x = DF$x[11], y = DF$y[11]), color = "red", size = 5, label = "11", vjust = 0, hjust = 1) + 
+  geom_point(aes(x = DF$x[12], y = DF$y[12]), color = "blue", size = 2) + 
+  geom_text(aes(x = DF$x[12], y = DF$y[12]), color = "blue", size = 5, label = "12", vjust = 0, hjust = 1) + 
+  geom_point(aes(x = DF$x[13], y = DF$y[13]), color = "green", size = 2) + 
+  geom_text(aes(x = DF$x[13], y = DF$y[13]), color = "green", size = 5, label = "13", vjust = 0, hjust = 1) + 
+  geom_point(aes(x = DF$x[14], y = DF$y[14]), color = "purple", size = 2) +
+  geom_text(aes(x = DF$x[14], y = DF$y[14]), color = "purple", size = 5, label = "14", vjust = 0, hjust = 1) 
+```
+
+```{r, echo = FALSE}
+modALL <- lm(y ~ x, data = DF)
+knitr::kable(summary(modALL)$coef, caption = "All data points")
+```
+
+```{r, echo = FALSE}
+ggplot(data = DF, aes(x = x, y = y)) +
+  geom_point() + 
+  theme_bw() + 
+  lims(x = c(68, 98), y = c(70, 100)) + 
+  geom_point(aes(x = DF$x[11], y = DF$y[11]), color = "red", size = 2) + 
+  geom_point(aes(x = DF$x[12], y = DF$y[12]), color = "blue", size = 2) + 
+  geom_point(aes(x = DF$x[13], y = DF$y[13]), color = "green", size = 2) + 
+  geom_point(aes(x = DF$x[14], y = DF$y[14]), color = "purple", size = 2) + 
+  geom_smooth(method = "lm", color = "gray", se = FALSE) 
+```
+
+```{r, echo = FALSE, fig.height = 7}
+car::influencePlot(modALL, id.n = 3)
+```
+
+```{r, echo = FALSE}
+modRED <- lm(y ~ x, data = DF[-11, ])
+knitr::kable(summary(modRED)$coef, caption = "All data points minus red point")
+```
+
+```{r, echo = FALSE}
+ggplot(data = DF, aes(x = x, y = y)) +
+  geom_point() + 
+  theme_bw() + 
+  lims(x = c(68, 98), y = c(70, 100)) + 
+  geom_point(aes(x = DF$x[11], y = DF$y[11]), color = "red", size = 2) + 
+  geom_point(aes(x = DF$x[12], y = DF$y[12]), color = "blue", size = 2) + 
+  geom_point(aes(x = DF$x[13], y = DF$y[13]), color = "green", size = 2) + 
+  geom_point(aes(x = DF$x[14], y = DF$y[14]), color = "purple", size = 2) + 
+  geom_smooth(method = "lm", color = "gray", se = FALSE) + 
+  geom_smooth(data = DF[-11, ], method = "lm", color = "red", se = FALSE, size = 0.5) 
+```
+
+```{r, echo = FALSE, fig.height = 7}
+car::influencePlot(modRED, id.n = 3)
+```
+
+```{r, echo = FALSE}
+modBLUE <- lm(y ~ x, data = DF[-12, ])
+knitr::kable(summary(modBLUE)$coef, caption = "All data points minus blue point")
+```
+
+```{r, echo = FALSE}
+ggplot(data = DF, aes(x = x, y = y)) +
+  geom_point() + 
+  theme_bw() + 
+  lims(x = c(68, 98), y = c(70, 100)) + 
+  geom_point(aes(x = DF$x[11], y = DF$y[11]), color = "red", size = 2) + 
+  geom_point(aes(x = DF$x[12], y = DF$y[12]), color = "blue", size = 2) + 
+  geom_point(aes(x = DF$x[13], y = DF$y[13]), color = "green", size = 2) + 
+  geom_point(aes(x = DF$x[14], y = DF$y[14]), color = "purple", size = 2) + 
+  geom_smooth(method = "lm", color = "gray", se = FALSE) + 
+  geom_smooth(data = DF[-12, ], method = "lm", color = "blue", se = FALSE, size = 0.5)
+```
+
+```{r, echo = FALSE, fig.height = 7}
+car::influencePlot(modBLUE, id.n = 3)
+```
+
+```{r, echo = FALSE}
+modGREEN <- lm(y ~ x, data = DF[-13, ])
+knitr::kable(summary(modGREEN)$coef, caption = "All data points minus green point")
+```
+
+```{r, echo = FALSE}
+ggplot(data = DF, aes(x = x, y = y)) +
+  geom_point() + 
+  theme_bw() + 
+  lims(x = c(68, 98), y = c(70, 100)) + 
+  geom_point(aes(x = DF$x[11], y = DF$y[11]), color = "red", size = 2) + 
+  geom_point(aes(x = DF$x[12], y = DF$y[12]), color = "blue", size = 2) + 
+  geom_point(aes(x = DF$x[13], y = DF$y[13]), color = "green", size = 2) + 
+  geom_point(aes(x = DF$x[14], y = DF$y[14]), color = "purple", size = 2) + 
+  geom_smooth(method = "lm", color = "gray", se = FALSE) + 
+  geom_smooth(data = DF[-13, ], method = "lm", color = "green", se = FALSE, size = 0.5) 
+```
+
+```{r, echo = FALSE, fig.height = 7}
+car::influencePlot(modGREEN, id.n = 3)
+```
+
+```{r, echo = FALSE}
+modPURPLE <- lm(y ~ x, data = DF[-14, ])
+knitr::kable(summary(modPURPLE)$coef, caption = "All data points minus purple point")
+```
+
+```{r, echo = FALSE}
+ggplot(data = DF, aes(x = x, y = y)) +
+  geom_point() + 
+  theme_bw() + 
+  lims(x = c(68, 98), y = c(70, 100)) + 
+  geom_point(aes(x = DF$x[11], y = DF$y[11]), color = "red", size = 2) + 
+  geom_point(aes(x = DF$x[12], y = DF$y[12]), color = "blue", size = 2) + 
+  geom_point(aes(x = DF$x[13], y = DF$y[13]), color = "green", size = 2) + 
+  geom_point(aes(x = DF$x[14], y = DF$y[14]), color = "purple", size = 2) + 
+  geom_smooth(method = "lm", color = "gray", se = FALSE) + 
+  geom_smooth(data = DF[-14, ], method = "lm", color = "purple", se = FALSE, size = 0.5)
+```
+
+```{r, echo = FALSE, fig.height = 7}
+car::influencePlot(modPURPLE, id.n = 3)
+```
+
+## All Together
+
+```{r, echo = FALSE}
+ggplot(data = DF, aes(x = x, y = y)) +
+  geom_point() + 
+  theme_bw() + 
+  lims(x = c(68, 98), y = c(70, 100)) + 
+  geom_point(aes(x = DF$x[11], y = DF$y[11]), color = "red", size = 2) + 
+  geom_point(aes(x = DF$x[12], y = DF$y[12]), color = "blue", size = 2) + 
+  geom_point(aes(x = DF$x[13], y = DF$y[13]), color = "green", size = 2) + 
+  geom_point(aes(x = DF$x[14], y = DF$y[14]), color = "purple", size = 2) + 
+  geom_smooth(method = "lm", color = "gray", se = FALSE) + 
+  geom_smooth(data = DF[-12, ], method = "lm", color = "blue", se = FALSE, size = 0.5) + 
+  geom_smooth(data = DF[-11, ], method = "lm", color = "red", se = FALSE, size = 0.5) + 
+  geom_smooth(data = DF[-13, ], method = "lm", color = "green", se = FALSE, size = 0.5) +
+  geom_smooth(data = DF[-14, ], method = "lm", color = "purple", se = FALSE, size = 0.5)
+```
