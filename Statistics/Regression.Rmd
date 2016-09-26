@@ -1,0 +1,43 @@
+---
+title: "Regression"
+author: "Alan Arnholt"
+date: "9/26/2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center")
+library(ggplot2)
+```
+
+## Example data set
+
+```{r, echo = FALSE}
+set.seed(13)
+y <- round(sort(rnorm(10, 80, 5)), 1)
+x <- round(sort(rnorm(10, 80, 5)), 1)
+DF <- data.frame(x = x, y = y)
+rm(x, y)
+
+DF[11, ] = c(95, round(predict(lm(y~x, data = DF), newdata = data.frame(x = 95)),1))
+DF[12, ] = c(95, 80)
+DF[13, ] = c(round(mean(DF$x), 1), round(mean(DF$y) + 8, 1))
+DT::datatable(DF)
+```
+
+```{r, echo = FALSE}
+
+ggplot(data = DF, aes(x = x, y = y)) +
+  geom_point() + 
+  theme_bw() + 
+  lims(x = c(60, 100), y = c(60, 100)) + 
+  geom_point(aes(x = DF$x[11], y = DF$y[11]), color = "red") + 
+  geom_point(aes(x = DF$x[12], y = DF$y[12]), color = "blue") + 
+  geom_point(aes(x = DF$x[13], y = DF$y[13]), color = "green") + 
+  geom_smooth(method = "lm", color = "gray", se = FALSE) + 
+  geom_smooth(data = DF[-12, ], method = "lm", color = "blue", se = FALSE) + 
+  geom_smooth(data = DF[-11, ], method = "lm", color = "red", se = FALSE) + 
+  geom_smooth(data = DF[-13, ], method = "lm", color = "green", se = FALSE) 
+```
+
+```
