@@ -9,7 +9,7 @@ title: "Welcome"
 
 * [StatCrunch](http://www.statcrunch.com/)
 
-* The `Bookdown` version of [*Passion Driven Statistics*](https://alanarnholt.github.io/PDS-BookDown/BookDownTry/book/overview.html) modified for use at Appalachian State University is maintained in the [PDS-BookDown](https://github.com/alanarnholt/PDS-BookDown) repository.
+* The `Bookdown` version of [*Passion Driven Statistics*](https://alanarnholt.github.io/PDS-Bookdown2/) modified for use at Appalachian State University is maintained in the [PDS-Bookdown2](https://github.com/alanarnholt/PDS-Bookdown2/) repository.
 
 * The `R` package `PDS` is maintained in the [PDS](https://github.com/alanarnholt/PDS) repository.
 
