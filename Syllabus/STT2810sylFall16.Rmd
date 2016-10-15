@@ -6,7 +6,7 @@ output:
   html_document:
     css: ../asu.css
     highlight: textmate
-    theme: cosmo
+    theme: yeti
 ---
 
 **Instructor:**  Dr. Alan T. Arnholt    

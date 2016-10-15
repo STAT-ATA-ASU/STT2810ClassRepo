@@ -5,7 +5,7 @@ output:
   html_document:
     css: ../asu.css
     highlight: textmate
-    theme: cosmo
+    theme: yeti
 ---
 
 General Notes:
