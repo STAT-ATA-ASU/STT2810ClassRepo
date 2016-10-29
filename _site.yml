@@ -4,9 +4,9 @@ navbar:
   title: "STT 2810"
   left:
     - text: "Resources"
-      href: https://alanarnholt.github.io/web/resources.html
+      href: https://alanarnholt.github.io/resources.html
     - text: "For Students"
-      href: https://alanarnholt.github.io/web/for-students.html
+      href: https://alanarnholt.github.io/for-students.html
   right:
     - icon: fa-github fa-lg
       href: https://github.com/STAT-ATA-ASU/STT2810ClassRepo/         
