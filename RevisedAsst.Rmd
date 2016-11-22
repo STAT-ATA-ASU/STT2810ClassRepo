@@ -1,0 +1,40 @@
+---
+title: "Research Proposal-The Association Between Family History of Alcoholism and Alcoholism"
+author: "STT 2810"
+date: "9/10/2015"
+output: html_document
+bibliography: Final2.bib
+nocite: |
+  @kohnke_approach_2008, @ball_genetics_2006, @edenberg_review:_2006, @agrawal_association_2006, @ra_co-occurring_2005, @kalsi_unraveling_2009
+---
+
+# Introduction:
+
+The question I'm wanting to answer with my research is does being raised by alcoholic parents make you more susceptible to alcoholism. I also want to explore if this is purely due to environmental factors or is there a genetic trait linked to alcoholism.
+
+There are many different views on how alcoholism in parents affects childrens tendency to become alcoholic. Two sources claim that it's a mixture of genetics and environment (@kohnke_approach_2008;@ball_genetics_2006). One source states that >50% of the risk of alcohol dependence stems from genetic susceptibility (@kalsi_unraveling_2009). 
+
+While it is true that alcoholism does seem to have a correlation with genetics, that is only one factor that contributes to alcoholism. Environmental factors also play a huge role on alcoholism. David Ball clearly states that nature and nurture are not exclusive (@ball_genetics_2006).
+
+The hole in the current research that I am trying to fill is none of the articles cover alcoholism being a sex linked trait. Based off the National Epidemiologic Survey of Alcohol and Related Conditions (NESARC), 1751 people surveyed said that their sons were alcoholic but only 886 listed their daughters as alcoholics. Since their sons and daughters grew up in the same environment I conclude that there must be a sex linked gene which is influencing alcoholism.
+
+
+# Methods:
+
+## Sample
+
+The sample from the first wave of the National Epidemiologic Survey on Alcohol and Related Conditions (NESARC) represents the civilian, non-institutionalized adult population of the United States, and includes persons living in households, military personnel living off base, and persons residing in the following group quarters: boarding or rooming houses, non-transient hotels and motels, shelters, facilities for housing workers, college quarters, and group homes. The NESARC included over sampling of Blacks, Hispanics and young adults aged 18 to 24 years. The sample included 43,093 participants.
+
+## Procedure
+
+I used the listed references to research the link between alcoholism and genetics and then crossed referenced that with NESARC to find a hole in the research. 
+
+## Measures
+
+I evaluated sections 2B: Alcohol Abuse/Dependence, and 2D: Family History of Alcoholism to obtain my data. Section 2D provided me with the most viable information on gender variation in alcoholism. It revealed that more people identified their fathers and sons as alcoholics than their mothers and daughters. 
+
+## Implications
+
+If alcoholism is found to be a sex linked gene this would allow us to better target the campaign against alcoholism and may enable us to better understand alcoholism as a disease so that we can better combat it. We could also test people to see if they possess the gene so that they can be better informed before making discussions about alcohol consumption.
+
+# References
