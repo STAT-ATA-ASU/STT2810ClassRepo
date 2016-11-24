@@ -25,4 +25,8 @@ title: "Welcome"
 
 * [Test 1 Results](./RMarkdown/Test1.html)
 
+* [Test 2 Results](./RMarkdown/Test2.html)
+
+* [Test 3 Results](./RMarkdown/Test3.html)
+
 ***

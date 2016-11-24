@@ -1,7 +1,7 @@
 ---
-title: "STT 2810 Test 1 Results"
+title: "STT 2810 Test 2 Results"
 author: ""
-date: "9/15/2016"
+date: "10/20/2016"
 output: html_document
 ---
 
@@ -10,13 +10,13 @@ knitr::opts_chunk$set(echo = TRUE, comment = NA)
 ```
 
 ```{r, echo = FALSE}
-DF <- read.csv("test.csv")
+DF <- read.csv("test2.csv")
 stem(DF$x)
 library(ggplot2)
 ggplot(data = DF, aes(x = x)) +
   geom_histogram(binwidth = 5, fill = "purple", color = "black") + 
   theme_bw() + 
-  labs(y = "", x = "Scores on first test")
+  labs(y = "", x = "Scores on second test")
 ```
 
 The first, second, and third quartiles of the exam were `r fivenum(DF$x)[2]`, `r fivenum(DF$x)[3]`, and `r fivenum(DF$x)[4]`, respectively.
