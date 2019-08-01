@@ -1,0 +1,161 @@
+\documentclass[8pt]{article}
+\usepackage[noheadfoot]{geometry}
+\geometry{left=0.75in,right=0.45in,top=0.45in,bottom=0.45in}
+\nofiles
+
+\usepackage{mathptmx}
+\usepackage{termcal}
+\usepackage{color,comment}
+\usepackage{etoolbox} %has boolean stuff
+
+%\newcommand{\varspace}{\ifblank{\caltext}}{\vspace{2.5ex}}{\vspace{.5ex}}
+%\raisebox{lift}[depth][height]{contents}
+\renewcommand{\calprintdate}{\framebox{\monthname\ \ordinaldate}}
+\newcommand{\tc}[1]{\emph{\textcolor{blue}{#1}}}
+\newcounter{attnum}
+\newbool{testday}
+\newcommand{\todo}[3]{\caltexton{#1}{#2\newline\rule{5em}{.5pt}\newline#3}}
+\newcommand{\fol}[2]{\caltextnext{\begin{minipage}[b]{.2\calwidth}\vspace{.5ex}#1\newline\rule{5em}{.5pt}\newline #2\newline\ifbool{testday}{}{\textbf{Att \arabic{attnum}}\stepcounter{attnum}}\end{minipage}}}
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+\pagestyle{empty}
+
+\definecolor{Light}{gray}{.90}
+\renewcommand{\calprintclass}{\small\fcolorbox{black}{Light}{Day \theclassnum}}
+
+
+%\subsection*{Fall Semester, 2015}
+
+\begin{calendar}{8/20/2018}{17} %must be a MONDAY!!!
+\setlength{\calboxdepth}{.8in}
+
+\calday[Monday]{\classday} % Monday is first day of week --- it was a European author
+\calday[Tuesday]{\noclassday}
+\calday[Wednesday]{\classday}
+\calday[Thursday]{\noclassday}
+\calday[Friday]{\classday}
+\skipday %Sat
+\skipday %Sun
+
+%%
+%Lecture Topics
+\todo{1}{Why Stats?\\Syllabus\\Get Pearson Acct\\Info Sheets}{{\bfseries STT 2810}}
+
+\setcounter{attnum}{2}
+
+\fol{Intro Video\\Ch 1 Slides\\Orientation HW\\GET ACCT!}{Lect Ch 1}
+
+\fol{Nothing Due}{Lect Ch 2\#1}
+\fol{Ch 1\\Orientation HW\\Ch 2 Slides, Videos, \&\\HW\#1  DUE}{Lect Ch 2\#2}
+
+\fol{Ch 2\\ HW\#2\\Quiz  DUE}{Lect Ch 3\#1}
+
+\fol{Ch 3\\Slides\\ HW\#1 DUE}{Lect Ch 3\#2}
+\fol{Ch 3\\HW\#2 \\Quiz DUE}{Lect Ch 4}
+
+\fol{Ch 4\\Slides, HW, Quiz\\DUE}{Lect Ch 5\#1}
+\fol{Ch 5\\ Slides\\HW\#1  DUE}{Lect Ch 5\#2}
+
+\fol{Ch 5\\ HW\#2\\Quiz  DUE}{Answer ???}
+\fol{{\bfseries Test \#1}\\}{\setbool{testday}{true} Read Ch 6 for HW}
+
+\fol{No HW DUE\\}{Lect Ch 6\#1}
+\fol{Ch 6\\ Slides\\HW\#1  DUE}{Lect Ch 6\#2}
+
+\fol{Ch 6\\ HW\#2\\Quiz  DUE}{Lect Ch 7\#1}
+\fol{Ch 7\\ Slides\\HW\#1  DUE}{Lect Ch 7\#2}
+
+\fol{Ch 7\\ HW\#2\\Quiz  DUE}{Lect Ch 8}
+
+\fol{Ch 8\\ Slides, HW, Quiz\\DUE}{Lect Ch 11\#1}
+\fol{Ch 11\\ Slides\\HW\#1  DUE}{Lect Ch 11\#2}
+
+\fol{Ch 11\\ HW\#2\\Quiz  DUE}{Lect Ch 13}
+\fol{Work Day Ch 13}{Work}
+\fol{Ch 13\\ Slides, HW, Quiz\\DUE}{Lect Ch 14}
+\fol{Work Day Ch 14}{Work}
+\fol{Ch 14\\ Slides, HW, Quiz\\DUE}{Lect Ch 15}
+
+\fol{Work on Ch 15\\Make Info Sheet}{}
+\fol{Ch 15\\Slides, HW, Quiz\\DUE}{Answer Questions}
+\fol{{\bfseries Test \#2}}{\setbool{testday}{true} Read Ch 17}
+
+\fol{No HW Due\\}{Lect Ch 17\#1}
+\fol{Ch 17\\ Slides\\HW\#1  DUE}{Lect Ch 17\#2}
+\fol{Work on Ch 17}{Lect Ch 17\#3}
+
+\fol{Ch 17\\ HW\#2\\Quiz  DUE}{Lect Ch 18\#1}
+\fol{Ch 18\\ Slides\\HW\#1  DUE}{Lect Ch 18\#2}
+\fol{Ch 18\\ HW\#2\\Quiz  DUE}{Lect Ch 19}
+\fol{Ch 19\\Slides, HW, Quiz\\DUE}{Lect Ch 20}
+\fol{Nothing Due}{Work on Ch 20}
+\fol{Ch 20\\Slides, HW, Quiz\\DUE}{Lect Ch 21}
+\fol{Ch 21\\Slides, HW, Quiz\\DUE}{Lect Ch 22\#1}
+\fol{Ch 22\\Slides\\HW\#1 DUE}{Lect Ch 22\#2}
+\fol{Ch 22\\HW\#2\\ Quiz DUE}{Answer Questions}
+
+%\caltext{4/23/2015}{Practice Test \#3 Due at noon}
+\fol{{\bfseries Test \#3}\\}{\setbool{testday}{true}}
+\fol{CTR\\}{CTR}
+\fol{CTR\\}{CTR}
+\fol{CTR\\}{Answer Questions}
+%%
+
+
+\options{8/20/2018}{\noclassday}
+
+
+\caltext{8/21/2018}{\tc{First day of classes}}
+\caltext{8/27/2018}{\tc{Last day to add a class}}
+
+\options{9/3/2018}{\noclassday}
+\caltext{9/3/2018}{\tc{State Holiday}}
+
+
+\options{10/11/2018}{\noclassday}
+\options{10/12/2018}{\noclassday}
+
+\caltext{10/11/2018}{\tc{Fall Break}}
+\caltext{10/12/2018}{\tc{Fall Break}}
+
+
+\caltext{10/25/2018}{\tc{Last Day to Drop}}
+
+
+\options{11/21/2018}{\noclassday}
+\caltext{11/21/2018}{\tc{University Break}}
+
+\options{11/22/2018}{\noclassday}
+\options{11/23/2018}{\noclassday}
+\caltext{11/22/2018}{\tc{State Holiday}}
+\caltext{11/23/2018}{\tc{State Holiday}}
+
+
+
+
+\caltext{12/5/2018}{\tc{Last Day of Class}}
+
+\options{12/6/2018}{\noclassday}
+\caltext{12/6/2018}{\tc{Reading Day}}
+
+% Finals Week
+\options{12/7/2018}{\noclassday}
+\options{12/10/2018}{\noclassday}
+\options{12/11/2018}{\noclassday}
+\options{12/12/2018}{\noclassday}
+\options{12/13/2018}{\noclassday}
+
+\caltext{12/7/2018}{\tc{Final 8a in WA 307B; 8-10:30a}}
+\caltext{12/12/2018}{\tc{Final 10a in WA 307B; 8-10:30a}}
+\caltext{12/7/2018}{\tc{Final 11a in WA 210; 11a-1:30p }}
+
+
+\caltext{12/14/2018}{\tc{\\Last Day to submit final grades 12/17}}
+
+
+\end{calendar}
+
+
+\end{document}
+\end
