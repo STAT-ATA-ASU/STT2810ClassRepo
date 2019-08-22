@@ -11,6 +11,6 @@ title: "Welcome"
 
 * [Misc Class Files](./Fichero/frontfile.html)
 
-* [Tables and Barplots](https://github.com/STAT-ATA-ASU/STATS_DATA_AND_MODELS/tree/master/Rmarkdown/CHAP2.html)
+* [Tables and Barplots](https://stat-ata-asu.github.io/STATS_DATA_AND_MODELS/Rmarkdown/CHAP2.html)
 
 ***
