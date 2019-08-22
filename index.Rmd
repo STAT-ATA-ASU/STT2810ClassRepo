@@ -3,30 +3,14 @@ title: "Welcome"
 ---
 
 
-* The course syllabus is stored in the [`Syllabus`](./Syllabus/STT2810sylFall16.html) directory of the STT 2810 repository.
+* This course is taught using the CMS [MyStatLab](https://www.pearsonmylabandmastering.com/northamerica/?cc)
 
-* Course pacing and assignments are stored in the [`CoursePacing`](./CoursePacing/HWKscheduleF2016.pdf) directory of the STT 2810 repository.
+* Pertinent course information for enrolled students can be accessed on [ASULEARN](https://asulearn.appstate.edu)
 
 * [StatCrunch](http://www.statcrunch.com/)
 
-* The `Bookdown` version of [*Passion Driven Statistics*](https://alanarnholt.github.io/PDS-Bookdown2/) modified for use at Appalachian State University is maintained in the [PDS-Bookdown2](https://github.com/alanarnholt/PDS-Bookdown2/) repository.
-
-* The `R` package `PDS` is maintained in the [PDS](https://github.com/alanarnholt/PDS) repository.
-
-* A version (possibly dated) of *Passion Driven Statistics* is viewable on [RPubs](http://rpubs.com/arnholt/193630).
-
-
-* Questions related to PDS materials should be addressed with the [piazza account for STT 2810](https://piazza.com/class/iaawd0uzg2193).
-
-
-* [Class RStudio Server](https://mathr.math.appstate.edu) (you must be registered in the course to access the server)
-
 * [Misc Class Files](./Fichero/frontfile.html)
 
-* [Test 1 Results](./RMarkdown/Test1.html)
-
-* [Test 2 Results](./RMarkdown/Test2.html)
-
-* [Test 3 Results](./RMarkdown/Test3.html)
+* [Tables and Barplots](https://github.com/STAT-ATA-ASU/STATS_DATA_AND_MODELS/tree/master/Rmarkdown/CHAP2.html)
 
 ***
